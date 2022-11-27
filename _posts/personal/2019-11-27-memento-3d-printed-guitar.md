@@ -3,10 +3,13 @@ layout: post
 title: 3d printed guitar
 blogid: personal
 sticky: false
+published: true
+tags: [3d printing, guitar, passion]
 ---
 
 My father was a passionate guitarist.
 I remember him playing on holidays, and weekends, for our family friends. Especially on summer days, we used to gather in the park with family and friends. In the sizzling air of Kyiv summer my father played, and my mother was singing. I was playing football and beach volleyball on the grass with other kids. I loved to hear the sound of the guitar. The rhythmic beat of my father's hands created a clanging melody out of thin air. 
+
 His guitar was old, sunburned, and covered in small cracks. 
 When I was in the 3rd grade, my parents signed me up for guitar lessons.
 I hated guitar lessons.
