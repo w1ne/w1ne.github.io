@@ -3,7 +3,7 @@ layout: post
 title: 3d printed guitar
 blogid: personal
 sticky: false
-published: true
+published: false
 tags: [3d printing, guitar, passion]
 ---
 
