@@ -52,7 +52,7 @@ It even sounds like a mediocre Fender.
 I enjoyed building the guitar more than playing it!
 
 The lesson of the story will be:
-Do not force your passion. Some people like to play(my fathet), others like to build instruments, like myself. 
+Do not force your passion. Some people like to play(my father), others like to build instruments, like myself. 
 To find what you like takes failures and experimentation.
 
 You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip)
