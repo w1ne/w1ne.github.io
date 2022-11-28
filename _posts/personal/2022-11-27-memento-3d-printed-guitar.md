@@ -3,7 +3,7 @@ layout: post
 title: 3d printed guitar
 blogid: personal
 sticky: false
-published: false
+published: true
 tags: [3d printing, guitar, passion]
 ---
 
@@ -35,9 +35,20 @@ After the performance, I put my father's guitar in the bag and never took it out
 20 years later, when COVID struck, I decided to teach myself to play the guitar. But I did not have any instruments to practice!
 Instead of buying a new one, I designed the body in the Fusion360, and 3d printed it on my Anycubic Mega S out of PETG. 
 The neck and other gear are cheap Aliexpress parts. The project cost me less than 100USD,  a lot of time for gluing, tuning, and fitting parts together.
+
 It even sounds like a mediocre Fender.
 
-To my surprise, I enjoyed building the guitar more than playing it!
+![3d printedguitar top view]({{"/images/img/2022-11-28-guitar/1.jpg"|relative_url}}){: .center-image }
+![3d printedguitar body view]({{"/images/img/2022-11-28-guitar/2.jpg"|relative_url}}){: .center-image }
+![3d printedguitar top view, angle]({{"/images/img/2022-11-28-guitar/3.jpg"|relative_url}}){: .center-image }
+![3d printedguitar back view]({{"/images/img/2022-11-28-guitar/4.jpg"|relative_url}}){: .center-image }
 
+I enjoyed building the guitar more than playing it!
+
+The lesson of the story will be:
 Do not force your passion. Some people like to play(my fathet), others like to build instruments, like myself. 
 To find what you like takes failures and experimentation.
+
+You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip)
+Mounting holes are designed to accept M3 knurled inserts to mound hardware.
+
