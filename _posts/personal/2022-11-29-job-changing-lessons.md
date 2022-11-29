@@ -4,7 +4,7 @@ title: 10 lessons I wish I learned before changing jobs
 blogid: personal
 sticky: false
 published: false
-tags: [carrier, CV, job searching, employment]
+tags: [carreer, CV, job searching, employment]
 ---
 
 My first job in Embedded Software Engineering was in 2015. Blazing summer heated lakes in the city, people were enjoying the last days of their vacations. I was working hard on my thesis to graduate from the Opole University of Technology before September. Typical student: always hungry, thin, with curly uncalmed hair. I was broke, living in the dormitory with a guy from Belarus. I did not have any experience in the field of Software Engineering. But I had a strategy!
@@ -13,11 +13,11 @@ If you have tried to find a job as a fresh graduate, with zero exposure to the i
 
 In order to find a job,my strategy was to prepare tens of CVs, and searching for positions in the local work portal: from mechanical engineering to software development, from equipment installation to hardware design. I spent days sending crafted papers to companies, getting **zero interviews**.
 
-Unexperienced, scared, and stressed I went to the place where students should look first: University Carrier Center.
+Unexperienced, scared, and stressed I went to the place where students should look first: University Carreer Center.
 
 If you are a fresh graduate, it is one of the places to go, they have job postings, contracts with employers, and can help you to review the CV. 
 
-At the University Carrier Center, there was a job offer for the new local perspective investment, let's call it "The Best Automation Company", for an "Application Engineer" position.
+At the University Carreer Center, there was a job offer for the new local perspective investment, let's call it "The Best Automation Company", for an "Application Engineer" position.
 
 The recruitment process at "The Best Automation Company" was lengthy: Initial screening with HR, technical conversation with a team, take-home test to present, and finally, meeting with the management.
 For the management meeting, I crafted a presentation with all the projects I worked on at university and presented it to the hiring committee.
