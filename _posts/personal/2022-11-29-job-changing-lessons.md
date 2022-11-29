@@ -35,7 +35,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 ![Avoid level meters]({{"/images/img/2022-11-29/payrange.jpg"|relative_url}}){: .center-image }
 
-I also keep a short portfolio and demo with projects I have built in the past. Each interview is the sales pitch. Sometimes people who do interviews are not even well prepared. By utilizing your portfolio you can channel the job interview in the direction which benefits you. Practice your personal "sales pitch" as much as possible.
+**I also keep a short portfolio and demo with projects I have built in the past. Each interview is the sales pitch. Sometimes people who do interviews are not even well prepared. By utilizing your portfolio you can channel the job interview in the direction which benefits you. Practice your personal "sales pitch" as much as possible.**
 
 3. **Know your worth.** Congratulations! With a good CV you got through the initial screening. Next step will be the call with HR person. At some point, you will be asked about compensation. Ask what range of salaries do company has. If asked about expectations, give a range from the top 25% of the typical salary for a position.
 
@@ -43,7 +43,7 @@ I also keep a short portfolio and demo with projects I have built in the past. E
 
 ![25% top range]({{"/images/img/2022-11-29/levels.jpg"|relative_url}}){: .center-image }
 
-It is important to have a range window for negotiation basis.Your salary demand communicates to the company your level, don't sell yourself cheaply.
+**It is important to have a range window for negotiation basis. Your salary demand communicates to the company your level, don't sell yourself cheaply.**
 
 4. **Do follow-up emails.** Send thank you notes highlighting what you liked and even what you disliked. Follow with tasks: if you have not finished the code in the interview, finish it ASAP, add notes of appreciation, your feedback about the interview, and send it.
 
