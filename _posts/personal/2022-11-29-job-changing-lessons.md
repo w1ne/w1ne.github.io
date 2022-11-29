@@ -36,7 +36,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 2. ***Invest time in preparation.*** Like in the short story above, investing time in a good presentation carried me through the managment meeting. Catchy CV is a golden pass for the  interview. Good CV answers question about what you have done, how you have done it, and what impact it has. Does not matter if it is a student project or work experience: continiously work on your CV to make it polished as possible. If you have experience with the technology required, write it as a skill inside your CV. Don't lie, but bend inforamtion in the direction a job posting requires. Remember, the CV is the lottery ticket to the interview. Its purpose is to get you to the next step. You can check my CV as an example: [Andrii Shylenko LinkedIn](https://www.linkedin.com/in/shylenko/). Another tip about CV is don't use level of knowledge in CVs, it is pointless! Who even evaluetes the level?
 
-![Avoid level meters]({{"/images/img/2022-11-29/payrange.jpg"|relative_url}}){: .center-image }
+![Avoid level meters]({{"/images/img/2022-11-29/payrange.png"|relative_url}}){: .center-image }
 
 **I also keep a short portfolio and demo with projects I have built in the past. Each interview is the sales pitch. Sometimes people who do interviews are not even well prepared. By utilizing your portfolio you can channel the job interview in the direction which benefits you. Practice your personal "sales pitch" as much as possible.**
 
@@ -44,7 +44,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 *Let's say, you know that people with your experience earn between 800000 HUF and 2000000 HUF, a range of 1700000 and 2000000 should be your answer (25% top percent of the typical sallary).*
 
-![25% top range]({{"/images/img/2022-11-29/levels.jpg"|relative_url}}){: .center-image }
+![25% top range]({{"/images/img/2022-11-29/levels.png"|relative_url}}){: .center-image }
 
 *It is important to have a range window for negotiation basis. Your salary demand communicates to the company your level, don't sell yourself cheaply.*
 
