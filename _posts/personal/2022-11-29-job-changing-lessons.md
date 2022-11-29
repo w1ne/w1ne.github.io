@@ -60,7 +60,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 9. **Negotiate as your life depends on it.** If you have experience, you hold the power. Ask what you want and back it up with your previous work and your results. Do not budge easily. Take your time. If you are a good specialist, you can negotiate almost any side of the company's offer.
 
-10. *Don't leave your current job without an offer.* If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
+10. **Don't leave your current job without an offer.** If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
 
 # Summary
 
