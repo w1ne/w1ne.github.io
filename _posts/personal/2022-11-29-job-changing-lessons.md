@@ -19,8 +19,11 @@ If you are a fresh graduate, it is one of the places to go, they have job postin
 
 At the University Carreer Center, there was a job offer for the new local perspective investment, let's call it "The Best Automation Company", for an "Application Engineer" position.
 
-The recruitment process at "The Best Automation Company" was lengthy: Initial screening with HR, technical conversation with a team, take-home test to present, and finally, meeting with the management.
+The recruitment process at "The Best Automation Company" was lengthy: 
+Initial screening with HR, technical conversation with a team, take-home test to present, and finally, meeting with the management.
+
 For the management meeting, I crafted a presentation with all the projects I worked on at university and presented it to the hiring committee.
+
 When given a take-home test, I created the application in Codesys. I went even further, producing the animation of a working program and writing the follow-up email to the HR lady.
 
 Those two aspects and my determination secured success. I got a job offer.
