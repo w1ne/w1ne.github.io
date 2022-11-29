@@ -11,7 +11,7 @@ My first job in Embedded Software Engineering was in 2015. Blazing summer heated
 
 If you have tried to find a job as a fresh graduate, with zero exposure to the industry, you know how hard it is! Companies want a young candidate with 10 years of experience, who will ideally take the lowest possible wage and work night and day. Getting a job offer is especially hard for foreigners. At least I managed to learn the Polish language at the university.
 
-In order to find a job,my strategy was to prepare tens of CVs, and searching for positions in the local work portal: from mechanical engineering to software development, from equipment installation to hardware design. I spent days sending crafted papers to companies, getting ***zero interviews***.
+In order to find a job,my strategy was to prepare tens of CVs, and searching for positions in the local work portal: from mechanical engineering to software development, from equipment installation to hardware design. I spent days sending crafted papers to companies, getting **zero interviews**.
 
 Unexperienced, scared, and stressed I went to the place where students should look first: University Carrier Center.
 
@@ -37,7 +37,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 I also keep a short portfolio and demo with projects I have built in the past. Each interview is the sales pitch. Sometimes people who do interviews are not even well prepared. By utilizing your portfolio you can channel the job interview in the direction which benefits you. Practice your personal "sales pitch" as much as possible.
 
-3. ***Know your worth.***Congratulations! With a good CV you got through the initial screening. Next step will be the call with HR person. At some point, you will be asked about compensation. Ask what range of salaries do company has. If asked about expectations, give a range from the top 25% of the typical salary for a position.
+3. **Know your worth.** Congratulations! With a good CV you got through the initial screening. Next step will be the call with HR person. At some point, you will be asked about compensation. Ask what range of salaries do company has. If asked about expectations, give a range from the top 25% of the typical salary for a position.
 
 *Let's say, you know that people with your experience earn between 800000 HUF and 2000000 HUF, a range of 1700000 and 2000000 should be your answer (25% top percent of the typical sallary).*
 
@@ -53,11 +53,11 @@ It is important to have a range window for negotiation basis.Your salary demand 
 
 7. **Maintain a positive frame** Assume you were successful in the interview. You will be surprised how low the bar is in some companies. Sometimes it is enough to join the interview and understand the domain the company works in. I got job offers for an embedded engineer in the past while **NOT** doing coding at all!
 
-8. If it does not work, fail fast. It is important to cut out companies you don't like. Cut them out as soon as you understand that job is not something you will enjoy. By failing fast you open yourself to possibilities that are a good fit for you.
+8. If it does not work, **fail fast**. It is important to cut out companies you don't like. Cut them out as soon as you understand that job is not something you will enjoy. By failing fast you open yourself to possibilities that are a good fit for you.
 
-9. Negotiate like your life depends on it. If you have experience, you hold the power. Ask what you want and back it up with your previous work and your results. Do not budge easily. Take your time. If you are a good specialist, you can negotiate almost any side of the company's offer.
+9. **Negotiate like your life depends on it.** If you have experience, you hold the power. Ask what you want and back it up with your previous work and your results. Do not budge easily. Take your time. If you are a good specialist, you can negotiate almost any side of the company's offer.
 
-10. Don't leave your current job without an offer. If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
+10. **Don't leave your current job without an offer.** If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
 
 #Summary
 
