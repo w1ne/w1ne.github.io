@@ -27,7 +27,7 @@ Those two aspects and my determination secured success. I got a job offer.
 
 Getting a job is a "selling yourself" skill. After years as an employee, changing workplaces, getting fired, getting promoted, negotiating salary,  and moving countries, here is what I learned about job search.
 
-#Lessons
+# Lessons
 
 1. ***Apply for every job you can do.*** Send CVs to every position you think you can do. This is a number game. Your goal is to get to the interview, in the interview everything can be negotiated. It is important to understand: Years of experience, technologies listed, and a job description, it is something the company wants, the list of desires. There is a scarce number of candidates who meet all the criteria. If you think you can do the job - apply.
 
@@ -59,7 +59,7 @@ It is important to have a range window for negotiation basis.Your salary demand 
 
 10. **Don't leave your current job without an offer.** If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
 
-#Summary
+# Summary
 
 Hope this list will help you to secure the job you want.
 It is important to have a vision for your career and life, before making any job decisions, ask yourself if the next position is moving you closer to your goal? 
