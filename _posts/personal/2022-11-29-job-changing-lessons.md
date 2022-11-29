@@ -43,7 +43,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 ![25% top range]({{"/images/img/2022-11-29/levels.jpg"|relative_url}}){: .center-image }
 
-**It is important to have a range window for negotiation basis. Your salary demand communicates to the company your level, don't sell yourself cheaply.**
+*It is important to have a range window for negotiation basis. Your salary demand communicates to the company your level, don't sell yourself cheaply.*
 
 4. **Do follow-up emails.** Send thank you notes highlighting what you liked and even what you disliked. Follow with tasks: if you have not finished the code in the interview, finish it ASAP, add notes of appreciation, your feedback about the interview, and send it.
 
@@ -57,7 +57,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 9. **Negotiate like your life depends on it.** If you have experience, you hold the power. Ask what you want and back it up with your previous work and your results. Do not budge easily. Take your time. If you are a good specialist, you can negotiate almost any side of the company's offer.
 
-10. **Don't leave your current job without an offer.** If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
+10. *Don't leave your current job without an offer.* If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
 
 # Summary
 
