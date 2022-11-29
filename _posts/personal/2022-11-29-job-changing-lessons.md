@@ -3,7 +3,7 @@ layout: post
 title: 10 lessons I wish I learned before changing jobs
 blogid: personal
 sticky: false
-published: false
+published: true
 tags: [carreer, CV, job searching, employment]
 ---
 
