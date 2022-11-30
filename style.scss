@@ -295,8 +295,8 @@ nav {
   }
 }
 
-.entry{
-  p:first-child:first-letter {
+.entry> *:first-child{
+  p:first-letter {
     color: white;
     background-color: #4183c4;
     border-radius: 2px;
