@@ -6,6 +6,7 @@ sticky: false
 published: true
 author: Andrii Shylenko
 date: 2022-11-27
+feature-img: "/img/22-11-28/feature_image.png"
 tags: [3d printing, guitar, passion]
 ---
 
