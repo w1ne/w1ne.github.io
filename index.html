@@ -26,10 +26,6 @@ layout: default
     {% else %}
     <article class="post">
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-      <p class="post-meta">
-      <span>Posted on {{ post.date }}.</span>
-      {% include read-time.html content=post.content %}
-      </p>
       <div class="entry">
        
         {% if page.feature-img %}
