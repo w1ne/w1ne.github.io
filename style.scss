@@ -296,7 +296,7 @@ nav {
 }
 
 .entry{
-  p::first-letter {
+  h1+p::first-letter {
     color: white;
     background-color: #4183c4;
     border-radius: 2px;
