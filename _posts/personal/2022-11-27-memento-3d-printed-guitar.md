@@ -6,7 +6,7 @@ sticky: false
 published: true
 author: Andrii Shylenko
 date: 2022-11-27
-featured-img: 22-11-28/feature_image.png
+featured-image: 22-11-28/feature_image.png
 featured-image-alt: 3d printed guitar
 tags: [3d printing, guitar, passion]
 ---
