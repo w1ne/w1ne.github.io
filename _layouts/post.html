@@ -7,6 +7,10 @@ layout: default
   
   {% if page.featured-image %}{% include post-featured-image.html image=page.featured-image alt=page.featured-image-alt %}{% endif %}
 
+  <div class="entry">
+    {{ content | reading_time }}
+  </div>
+  
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
