@@ -12,6 +12,8 @@ layout: default
     <article class="post">
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+      {% if post.featured-image %}{% include post-featured-image.html image=post.featured-image alt=post.featured-image-alt %}{% endif %}
+      <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
       <div class="entry">
         {{ post.content }}
