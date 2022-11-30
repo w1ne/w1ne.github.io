@@ -29,7 +29,7 @@ layout: default
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
       <div class="entry">
-        
+       
         {% if page.feature-img %}
             <img class="feature-image" src={{ page.feature-img }} alt="Post Feature Image"/>
         {% endif %}
@@ -40,5 +40,19 @@ layout: default
     </article>
     {% endif %}
   {% endfor %}
+  
+  {% for post in paginator.posts %}
+  <div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">{{ post.title }}</h2>
+    </a>
+    <p class="post-meta">
+        <span>Posted by {{ post.author }} on {{ post.date }}.</span>
+        {% include read-time.html content=post.content %}
+    </p>
+  </div>
+  <hr>
+  
+{% endfor %}
   
 </div>
