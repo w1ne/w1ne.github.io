@@ -63,4 +63,4 @@ Hope this list will help you to secure the job you want.
 It is important to have a vision for your career and life, before making any job decisions, ask yourself if the next position is moving you closer to your goal? 
 
 My bonus 11's point will be: 
-**Never fear to change jobs when it benefits your personal goals. The price of wasted time is much higher compared to the price of failing. Do not have guilt, the company will do just fine without you, but by changing jobs you get more money and faster promotions compared to staying with the same employee for a lifetime. Be selfish like the most villain capitalist.**
+**Never fear to change jobs when it benefits your personal goals. The price of wasted time is much higher compared to the price of failing. Do not have guilt, the company will do just fine without you, but by changing jobs you get more money and faster promotions compared to staying with the same employer for a lifetime. Be selfish like the most villain capitalist.**
