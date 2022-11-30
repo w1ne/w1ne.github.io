@@ -4,6 +4,8 @@ title: 10 lessons I wish I learned before changing jobs
 blogid: personal
 sticky: false
 published: true
+author: Andrii Shylenko
+date: 2022-11-29
 tags: [career, CV, job searching, employment]
 ---
 
