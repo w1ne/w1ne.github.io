@@ -295,7 +295,7 @@ nav {
   }
 }
 
-.entry> *:first-child{
+.entry:first-child{
   p:first-letter {
     color: white;
     background-color: #4183c4;
