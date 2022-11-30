@@ -4,6 +4,8 @@ title: Install Ceedling under NTLM proxy
 blogid: personal
 sticky: false
 published: true
+author: Andrii Shylenko
+date: 2019-08-01
 tags: [Ceedling, proxy, Windows, TDD, c]
 ---
 [Ceedling](http://www.throwtheswitch.org/ceedling) is the build system for C based projects. Ceedling combines CMock, Unity, and CException in one open source package for producing quality C code.
