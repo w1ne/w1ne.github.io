@@ -3,6 +3,8 @@ layout: post
 title: Hydroponics experiment
 blogid: personal
 sticky: false
+author: Andrii Shylenko
+date: 2018-12-03
 tags: [hydroponics, build log]
 ---
 
