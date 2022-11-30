@@ -2,6 +2,8 @@
 layout: post
 title: How to make Linux work with USB-to-serial
 blogid: personal
+author: Andrii Shylenko
+date: 2018-03-04
 sticky: false
 ---
 
