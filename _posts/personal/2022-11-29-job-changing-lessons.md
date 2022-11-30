@@ -57,7 +57,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 10. **Don't leave your current job without an offer.** If you decide to change jobs, having offers gives you the ground for a strong negotiating position. Check for holidays, vacations, and other perks. By leaving at a right time, you can optimize the usage of company policies. For example, taking out a vacation or paternity leave will give you time to prepare for the next role and maintain your private health insurance.
 
-# Summary
+# Conclusion
 
 Hope this list will help you to secure the job you want.
 It is important to have a vision for your career and life, before making any job decisions, ask yourself if the next position is moving you closer to your goal? 
