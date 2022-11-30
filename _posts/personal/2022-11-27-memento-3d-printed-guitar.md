@@ -60,5 +60,5 @@ Do not force your passion. Some people like to play(my father), others like to b
 To find what you like takes failures and experimentation.
 
 You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip)
-Mounting holes are designed to accept M3 knurled inserts to mound hardware.
+Mounting holes are designed to accept M3 knurled inserts for the hardware.
 
