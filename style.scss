@@ -320,8 +320,14 @@ footer {
 
 .center-image
 {
-    margin: 0 auto;
-    display: block;
+  margin: 0 auto;
+  display: block;
+}
+
+.feat-img
+{
+  margin: 0 auto;
+  display: block;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
