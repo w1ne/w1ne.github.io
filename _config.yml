@@ -90,5 +90,5 @@ exclude:
 collections:
   - important
   
-theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 
