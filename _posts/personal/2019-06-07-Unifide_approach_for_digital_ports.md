@@ -3,6 +3,8 @@ layout: post
 title: Unifide approach for digital ports
 blogid: personal
 sticky: false
+author: Andrii Shylenko
+date: 2019-06-07
 published: false
 ---
 In recent design there was a requirement for hundreds of GPIO pins on the MCU.
