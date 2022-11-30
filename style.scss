@@ -295,8 +295,7 @@ nav {
   }
 }
 
-.entry:first-child{
-  p:first-letter {
+#entry > p:first-of-type:first-letter{
     color: white;
     background-color: #4183c4;
     border-radius: 2px;
@@ -305,7 +304,6 @@ nav {
     padding: 6px 3px;
     margin-right: 6px;
     float: left;
-  }
 }
 
 .wrapper-footer {
