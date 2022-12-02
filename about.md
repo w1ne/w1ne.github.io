@@ -8,7 +8,9 @@ permalink: /about/
 
 # Bio
 
-As an R&D engineer at [ifm ecolink](https://www.ifm.com) Andrii Shylenko has a lot of experience in the research and design of industry projects based on the core technology of the Industrial IoT, IO-Link.
+
+
+As an R&D engineer Embedded Software Engineer Andrii is connecting industrial machines to the cloud. He does research and development for IoT systems, from the specification to architecture, firmware and validation.
 
 At spare time he builds 3d printers, dances salsa, learns the art of massage therapy, entrepreneurship and public speaking.
 
@@ -20,7 +22,11 @@ Structural Design Engineer for strength calculations (FEM) of the aircraft fusel
 
 Application Engineer at ifm ecolink R&D department, where he developed PLC software (IEC 61131-3, ST, FBD) with GUI (Codesys).
 
-Embedded Software Engineer at ifm ecolink R&D department, where he is creating Industrial IoT devices.
+Embedded Software Engineer at ifm ecolink R&D department, where he is created Industrial IoT devices.
+
+Firmware Engineer ar Itron, Inc. Where he designed architecture, code, tests and documentation for a new generation of ultrasonic water meters.
+
+Embedded IoT Engineer ar Railnova SA, Where he is Reverse Engineered of data interfaces on locomotives 🚂 and done embedded Linux development.
 
 ## Education
 
