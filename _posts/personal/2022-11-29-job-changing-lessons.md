@@ -9,7 +9,7 @@ date: 2022-11-29
 tags: [career, CV, job searching, employment]
 ---
 
-My first job in Embedded Software Engineering was in 2015. Blazing summer heated lakes in the city, people were enjoying the last days of their vacations. I was working hard on my thesis to graduate from the Opole University of Technology before September. Typical student: always hungry, thin, with curly uncalmed hair. I was broke, living in a dormitory. I did not have any experience in the field of Software Engineering. But I had a strategy!
+I started my first job in embedded software engineering in 2015. Summer had blazed over the lakes in the city, and the last of the vacationers were splashing in the water to cool down. I'd just finished my thesis and was about to graduate from the Opole University of Technology. I was skinny, with curly hair that hadn't been combed in ages. I was broke. I was living in a dormitory and were trying to find work with zero experience in software development. But I had a strategy!
 
 If you have tried to find a job as a fresh graduate, with zero exposure to the industry, you know how hard it is! Companies want a young candidate with 10 years of experience, who will ideally take the lowest possible wage and work night and day. Getting a job offer is especially hard for foreigners. At least I managed to learn Polish language at the university.
 
@@ -34,7 +34,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 
 # Lessons
 
-1. **Apply for every job you can do.** Send CVs to every position you think you can do. This is a number game. Your goal is to get to the interview, in the interview everything can be negotiated. It is important to understand: Years of experience, technologies listed, and a job description, it is something the company wants, the list of desires. There is a scarce number of candidates who meet all the criteria. If you think you can do the job - apply.
+1. **Apply for every job you can do.** Send CVs to every position you think you can do. This is a number game. This is a numbers game: your goal is to get through the resume filter. It is important to understand: Years of experience, technologies listed, and a job description, it is something the company wants, the list of desires. There is a scarce number of candidates who meet all the criteria. If you think you can do the job, apply.
 
 2. **Invest time in preparation.** In the short story above, investing time in a good presentation carried me through the managment meeting. A Catchy CV is a golden pass for the interview. Good CV answers question about what you have done, how you have done it, and what impact it has. Does not matter if it is a student project or work experience: continuously work on your CV to make it polished as possible. If you have experience with the technology required, write it as a skill inside your CV. Don't lie, but bend information in the direction a job posting requires. Remember, the CV is the ticket to the interview. Its purpose is to get you to the next step. You can check my CV as an example: [Andrii Shylenko LinkedIn](https://www.linkedin.com/in/shylenko/). Another tip about CVs is: don't use the level of knowledge, it is pointless! Who even evaluates the level?
 ![Avoid level meters]({{"/images/img/2022-11-29/levels.png""|relative_url}}){: .center-image }
@@ -45,9 +45,9 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 ![25% top range]({{"/images/img/2022-11-29/payrange.png"|relative_url}}){: .center-image }
 	*It is important to have a range window for negotiation basis. Your salary demand communicates to the company your level, don't sell yourself cheaply.*
 
-4. **Do follow-up emails.** Send thank you notes highlighting what you liked and even what you disliked. Follow with tasks: if you have not finished the code in the interview, finish it ASAP, add notes of appreciation, your feedback about the interview, and send it.
+4. **Do follow-up emails.**After an interview, send notes expressing what you liked and even what you disliked. If you have not finished the code in the interview, finish it as soon as possible, add notes of appreciation, your feedback about the interview, and send it.
 
-5. **Keep references handy.** Maintain contact with your colleagues, it is important to have good relationships with former teammates. Often companies require references from your peers and managers. My references allowed me to have good job prospects in the past.
+5. **Keep references handy.** Maintain contact with your colleagues. It’s important to have good relationships with people you used to work with. In the future, you might need someone to vouch for you at a job interview. Sometimes companies require references from your peers and managers. My references allowed me to have good job prospects in the past.
 
 6. **Practice interviews.** Make sure your LinkedIn profile is up-to-date, and apply for jobs regularly. Not only it keeps your opportunities in order, but you are getting an invaluable experience of interviews.
 
