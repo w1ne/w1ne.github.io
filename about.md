@@ -10,7 +10,7 @@ permalink: /about/
 
 
 
-As an R&D engineer Embedded Software Engineer Andrii is connecting industrial machines to the cloud. He does research and development for IoT systems, from the specification to architecture, firmware and validation.
+As an Embedded Software Engineer Andrii is connecting industrial machines to the cloud. He does research and development for IoT systems, from the specification to architecture, firmware and validation.
 
 At spare time he builds 3d printers, dances salsa, learns the art of massage therapy, entrepreneurship and public speaking.
 
