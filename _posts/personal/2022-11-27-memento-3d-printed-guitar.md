@@ -63,7 +63,7 @@ It even sounds like a mediocre Fender.
 
 I enjoyed building the guitar more than playing it!
 
-The lesson of the story is:
+**The lesson of the story is:**
 
 Do not force your passion, since everyone likes different things. Some people like to play(my father), others like to build instruments, like myself.
 
