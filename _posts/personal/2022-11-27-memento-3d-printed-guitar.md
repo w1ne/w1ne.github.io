@@ -15,6 +15,7 @@ My father was a talented guitarist. I remember him playing on holidays and weeke
 
 His guitar was old, sunburned, and covered in small cracks. 
 
+# The talent show
 When I was in the third grade, my parents signed me up for guitar lessons.
 
 I hated guitar lessons.
@@ -47,6 +48,8 @@ Here comes the second round of applause, and I run away from the stage.
 
 After the performance, I put the guitar in its black bag and zipped it up. I tugged to make sure it was secure and then placed the bag in the closet, where it still rests today.
 
+# Covid hobbies
+
 20 years later, when COVID struck and I decided to teach myself to play guitar, I did not have any instruments to practice with.
 Instead of buying a new one, I designed the body in the Fusion360, and 3d printed it on my Anycubic Mega S out of PETG. 
 The neck and other gear are cheap Aliexpress parts. The project cost me less than 100USD, a lot of time for gluing, tuning, and fitting parts together.
@@ -61,10 +64,13 @@ It even sounds like a mediocre Fender.
 I enjoyed building the guitar more than playing it!
 
 The lesson of the story is:
-Do not force your passion, since everyone likes different things. Some people like to play(my father), others like to build instruments, like myself.
-To discover what you like requires experimenting with different things.
 
-You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip)
+Do not force your passion, since everyone likes different things. Some people like to play(my father), others like to build instruments, like myself.
+
+Do not be discouraged, if you are not good in your hobby or work. To discover what you like requires experimenting with different things and a lot of time. Keep going!
+
+# Files
+You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip) .
 Mounting holes are designed to accept M3 knurled inserts for the hardware. I use cheap Fender Strat/Tele electric guitar bridge with a maple Stratocaster neck from Aliexpress.
 
 
