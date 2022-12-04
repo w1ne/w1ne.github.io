@@ -14,7 +14,9 @@ tags: [3d printing, guitar, passion]
 My father was a talented guitarist. I remember him playing on holidays and weekends with our family friends. In the sizzling air of Kyiv summers, they sat around the picnic blanket; my father played the guitar, and my mother sang. A young me would kick a soccer ball through the dust on the parkground with the other children. I loved to hear the sounds of the guitar, even from afar. The rhythmic beats of his hands tapping the strings created beautiful music that filled the air around me. 
 
 His guitar was old, sunburned, and covered in small cracks. 
+
 When I was in the third grade, my parents signed me up for guitar lessons.
+
 I hated guitar lessons.
 I got the old guitar from my father. I put it into the protective bag. Each time I crossed from my apartment to the elevator, I counted my steps, and the guitar shook and crashed against the concrete ladder with each step.
 
@@ -63,6 +65,6 @@ Do not force your passion, since everyone likes different things. Some people li
 To discover what you like requires experimenting with different things.
 
 You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip)
-Mounting holes are designed to accept M3 knurled inserts for the hardware.
+Mounting holes are designed to accept M3 knurled inserts for the hardware. I use cheap Fender Strat/Tele electric guitar bridge with a maple Stratocaster neck from Aliexpress.
 
 
