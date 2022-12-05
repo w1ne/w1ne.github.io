@@ -4,14 +4,24 @@ layout: default
 
 <article class="post">
   <h1>{{ page.title }}</h1>
+  
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }};
     {% include reading-time.html %}
+
     {% if post.tags.size > 0 %}
     Tag{% if post.tags.size > 1 %}s{% endif %}:
       {{ post.tags | sort | join: ", " }}
     {% endif %}
   </div>
+
+  <div class="tags">
+    {% if post.tags.size > 0 %}
+    Tag{% if post.tags.size > 1 %}s{% endif %}:
+      {{ post.tags | sort | join: ", " }}
+    {% endif %}
+  </div>
+
   {% if page.featured-image %}{% include post-featured-image.html image=page.featured-image alt=page.featured-image-alt %}{% endif %}
 
   <div class="entry">
@@ -22,7 +32,7 @@ layout: default
 {% assign minCommonTags =  1 %}
 {% assign maxRelatedCounter = 0 %}
 
-# Related posts:
+<h1>Related posts:</h1>
 <ul>
 	{% for post in site.posts %}
     
