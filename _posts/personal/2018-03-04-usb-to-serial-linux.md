@@ -5,6 +5,7 @@ blogid: personal
 author: Andrii Shylenko
 date: 2018-03-04
 sticky: false
+tags [Linux, USB, arduino]
 ---
 
 I am using [SourceRabbit G-code sender](https://www.sourcerabbit.com/) to control my "Miyazaki" drawing bot.
