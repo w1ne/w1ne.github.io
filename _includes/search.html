@@ -1,4 +1,4 @@
-<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+<script src="https://unpkg.com/simple-jekyll-search"></script>
 
 <!-- Jekyll Instant Search Configuration -->
   <script>
@@ -7,7 +7,7 @@
 	  resultsContainer: document.getElementById('results'),
 	  searchResultTemplate: '<li><a href="{url}" tabindex="1"><p>{title}</p><span>{url}</span></a></li>',
 	  noResultsText: '<li><p>No results found!</p></li>',
-	  json: '/search.json'
+	  json: '{{ site.baseurl }}/search.json'
 	})
 	</script>
   
@@ -18,7 +18,8 @@
 	$(document).ready(function() {
 	  $('#search').on('blur', function() {
 	  $('.search-results').fadeOut('medium');
-  });
+  });file:///home/andrii/Documents/Projects/w1ne.github.io/search.html
+
 	$('#search').on('focus', function() {
 		$('.search-results').show();
 	});
