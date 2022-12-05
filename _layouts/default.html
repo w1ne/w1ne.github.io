@@ -36,20 +36,7 @@
           <!--<a href="https://www.instagram.com/elevatingcat/">Writing</a> -->
           <!-- <a href="{{ site.baseurl }}/teaching">Teaching</a> -->
           <a href="{{ site.baseurl }}/about">About</a>
-        </nav>
-      </header>
-    </div>
-  </div>
-
-  <div id="main" role="main" class="container">
-    <ul id="results-container"></ul>
-    {{ content }}
-  </div>
-
-  <div class="wrapper-footer">
-    <div class="container">
-      <footer class="footer">
-        <!-- Search input field -->
+                  <!-- Search input field -->
         <div class="main-search form-group mb-0 border-bottom">
           <div class="input-group">
             <input id="search" name="main_input" class="form-control border-0" placeholder="press / to search"
@@ -67,7 +54,19 @@
         </div>
 
         {% include search.html %}
+        </nav>
+      </header>
+    </div>
+  </div>
 
+  <div id="main" role="main" class="container">
+    <ul id="results-container"></ul>
+    {{ content }}
+  </div>
+
+  <div class="wrapper-footer">
+    <div class="container">
+      <footer class="footer">
         {% include svg-icons.html %}
       </footer>
     </div>
