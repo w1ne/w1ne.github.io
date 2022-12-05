@@ -1,5 +1,6 @@
 <script src="https://unpkg.com/simple-jekyll-search"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
 <!-- Jekyll Instant Search Configuration -->
   <script>
 	SimpleJekyllSearch({
@@ -11,18 +12,15 @@
 	})
 	</script>
   
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-  <!-- show site search results -->
-  <script>
+<!-- show site search results -->
+<script>
 	$(document).ready(function() {
 	  $('#search').on('blur', function() {
 	  $('.search-results').fadeOut('medium');
-  });file:///home/andrii/Documents/Projects/w1ne.github.io/search.html
+  	});
 
 	$('#search').on('focus', function() {
 		$('.search-results').show();
 	});
-  
-	  });
+});
 </script>
