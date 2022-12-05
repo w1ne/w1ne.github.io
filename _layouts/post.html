@@ -10,19 +10,14 @@ layout: default
     {% include reading-time.html %}
   </div>
 
-  <div class="tags">
-    {% if post.tags.size > 0 %}
-      {% for tag in page.tags %}
-        {{ tag }}
-      {% endfor %}
-    {% endif %}
-  </div>
-
   {% if page.featured-image %}{% include post-featured-image.html image=page.featured-image alt=page.featured-image-alt %}{% endif %}
 
   <div class="entry">
     {{ content }}
   </div>
+
+  <hr>
+  {% include post_tags.html %}
 
 {% assign maxRelated = 3 %}
 {% assign minCommonTags =  1 %}
