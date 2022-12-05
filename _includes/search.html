@@ -1,0 +1,25 @@
+  <!-- Jekyll Instant Search Configuration -->
+  <script>
+	SimpleJekyllSearch({
+	  searchInput: document.getElementById('search'),
+	  resultsContainer: document.getElementById('results'),
+	  searchResultTemplate: '<li><a href="{url}" tabindex="1"><p>{title}</p><span>{url}</span></a></li>',
+	  noResultsText: '<li><p>No results found!</p></li>',
+	  json: '/search.json'
+	})
+	</script>
+  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+  <!-- show site search results -->
+  <script>
+	$(document).ready(function() {
+	  $('#search').on('blur', function() {
+	  $('.search-results').fadeOut('medium');
+  });
+	$('#search').on('focus', function() {
+		$('.search-results').show();
+	});
+  
+	  });
+</script>
