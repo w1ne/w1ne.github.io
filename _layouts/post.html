@@ -38,9 +38,9 @@ layout: default
 		{% endfor %}
     
         {% if sameTagCount >= minCommonTags %}
-        {% if maxRelatedCounter == 0}
-        <h1>Related posts:</h1>
-        {% endif %}
+          {% if maxRelatedCounter == 0 %}
+            <h1>Related posts:</h1>
+          {% endif %}
 
     		<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
             {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
