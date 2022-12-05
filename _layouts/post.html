@@ -17,13 +17,12 @@ layout: default
   </div>
 
   <hr>
-  {% include post_tags.html %}
+{% include post_tags.html %}
 
 {% assign maxRelated = 3 %}
 {% assign minCommonTags =  1 %}
 {% assign maxRelatedCounter = 0 %}
 
-<h1>Related posts:</h1>
 <ul>
 	{% for post in site.posts %}
     
@@ -39,9 +38,13 @@ layout: default
 		{% endfor %}
     
         {% if sameTagCount >= minCommonTags %}
+        {% if maxRelatedCounter == 0}
+        <h1>Related posts:</h1>
+        {% endif %}
+
     		<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
             {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
-            
+
             {% if maxRelatedCounter >= maxRelated %}
                 {% break %}
             {% endif %}
