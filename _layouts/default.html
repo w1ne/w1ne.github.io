@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
-    {% include meta.html %}
+<head>
+  <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
-    <!--[if lt IE 9]>
+  {% include meta.html %}
+
+  <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}"
+    href="{{ site.baseurl }}/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-  </head>
 
-  <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
 
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
+<body>
+  <div class="wrapper-masthead">
+    <div class="container">
+      <header class="masthead clearfix">
+        <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+
+        <div class="site-info">
+          <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+          <p class="site-description">{{ site.description }}</p>
+        </div>
+
+        <nav>
+          <a href="{{ site.baseurl }}/">Blog</a>
+          <a href="{{ site.baseurl }}/BooksNotes">Books notes</a>
+          <!--<a href="https://www.instagram.com/elevatingcat/">Writing</a> -->
+          <!-- <a href="{{ site.baseurl }}/teaching">Teaching</a> -->
+          <a href="{{ site.baseurl }}/about">About</a>
+        </nav>
+      </header>
+    </div>
+  </div>
+
+  <div id="main" role="main" class="container">
+    <ul id="results-container"></ul>
+    {{ content }}
+  </div>
+
+  <div class="wrapper-footer">
+    <div class="container">
+      <footer class="footer">
+        <!-- Search input field -->
+        <div class="main-search form-group mb-0 border-bottom">
+          <div class="input-group">
+            <input id="search" name="main_input" class="form-control border-0" placeholder="press / to search"
+              type="text">
+            <div class="input-group-append">
+              <span class="input-group-text border-0"><i class="fa fa-search" aria-hidden="true"></i></span>
+            </div>
           </div>
+        </div>
 
-          <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/BooksNotes">Books notes</a>
-            <!--<a href="https://www.instagram.com/elevatingcat/">Writing</a> -->
-            <!-- <a href="{{ site.baseurl }}/teaching">Teaching</a> -->
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
-        </header>
-      </div>
+        <!-- Search result container -->
+        <div class="search-results position-absolute">
+          <ul id="results" class="search-results-ul card shadow border border-top-0">
+          </ul>
+        </div>
+
+        {% include search.html %}
+
+        {% include svg-icons.html %}
+      </footer>
     </div>
+  </div>
 
-    <div id="main" role="main" class="container">
-      <ul id="results-container"></ul>
-      {{ content }}
-    </div>
+  {% include analytics.html %}
+</body>
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-                      <!-- Search input field -->
-                      <div class="main-search form-group mb-0 border-bottom">
-                        <div class="input-group">
-                          <input id="search" name="main_input" class="form-control border-0" placeholder="press / to search" type="text">
-                          <div class="input-group-append">
-                            <span class="input-group-text border-0"><i class="fa fa-search" aria-hidden="true"></i></span>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <!-- Search result container -->
-                      <div class="search-results position-absolute">
-                        <ul id="results" class="search-results-ul card shadow border border-top-0">
-                        </ul>
-                      </div>
-          
-                      {% include search.html %}
-                      
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
-
-    {% include analytics.html %}
-  </body>
 </html>
