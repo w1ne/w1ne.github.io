@@ -7,6 +7,10 @@ layout: default
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }};
     {% include reading-time.html %}
+    {% if post.tags.size > 0 %}
+    Tag{% if post.tags.size > 1 %}s{% endif %}:
+      {{ post.tags | sort | join: ", " }}
+    {% endif %}
   </div>
   {% if page.featured-image %}{% include post-featured-image.html image=page.featured-image alt=page.featured-image-alt %}{% endif %}
 
