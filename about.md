@@ -12,11 +12,11 @@ permalink: /about/
 
 As an Embedded Software Engineer Andrii is connecting industrial machines to the cloud. He does research and development for IoT systems, from the specification to architecture, firmware and validation.
 
-At spare time he builds 3d printers, dances salsa, learns the art of massage therapy, entrepreneurship and public speaking.
+At his spare time he builds 3d printers, dances salsa,  learns the art of massage therapy, entrepreneurship, and public speaking.
 
 Andrii has gathered a diverse listing of education and work background.
 
-## Professional expirience
+## Professional experience
 
 Structural Design Engineer for strength calculations (FEM) of the aircraft fuselage at Antonov State Company.
 
