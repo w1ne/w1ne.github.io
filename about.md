@@ -26,7 +26,7 @@ Embedded Software Engineer at ifm ecolink R&D department, where he is created In
 
 Firmware Engineer ar Itron, Inc. Where he designed architecture, code, tests and documentation for a new generation of ultrasonic water meters.
 
-Embedded IoT Engineer ar Railnova SA, Where he is Reverse Engineered of data interfaces on locomotives 🚂 and done embedded Linux development.
+Embedded IoT Engineer ar Railnova SA, Where he is Reverse Engineered of data interfaces on locomotives 🚂 and did embedded Linux development.
 
 ## Education
 
