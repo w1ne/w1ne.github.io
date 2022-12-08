@@ -8,7 +8,7 @@ author: Andrii Shylenko
 date: 2022-11-27
 featured-image: 2022-11-28-guitar/feature_image.png
 featured-image-alt: 3d printed guitar
-tags: [3d printing, guitar, passion]
+tags: [3d printing, guitar, passion, hobby]
 ---
 
 My father was a talented guitarist. I remember him playing on holidays and weekends with our family friends. In the sizzling air of Kyiv summers, they sat around the picnic blanket; my father played the guitar, and my mother sang. A young me would kick a soccer ball through the dust on the parkground with the other children. I loved to hear the sounds of the guitar, even from afar. The rhythmic beats of his hands tapping the strings created beautiful music that filled the air around me. 

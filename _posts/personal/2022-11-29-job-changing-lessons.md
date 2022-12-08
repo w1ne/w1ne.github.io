@@ -11,6 +11,22 @@ tags: [career, CV, job searching, employment]
 
 I started my first job in embedded software engineering in 2015. Summer had blazed over the lakes in the city, and the last of the vacationers were splashing in the water to cool down. I'd just finished my thesis and was about to graduate from the Opole University of Technology. I was skinny, with curly hair that hadn't been combed in ages. I was broke. I was living in a dormitory and were trying to find work with zero experience in software development. But I had a strategy!
 
+# TLDR
+
+Ten lessons for changing jobs:
+1. Apply for any job you think you can do.
+2. Prepare a portfolio and your "sales pitch", and polish CV.
+3. Know your worth, and go as high as possible in compensation. 
+4. Follow up with an email after the interview.
+5. Use references.
+6. Practice doing interviews, apply for jobs regularly.
+7. Bet on yourself, and stay positive.
+8. Fail fast!
+9. Negotiate.
+10. Strategize the leaving time in a company.
+
+# Student story
+
 If you have tried to find a job as a fresh graduate, with zero exposure to the industry, you know how hard it is! Companies want a young candidate with 10 years of experience, who will ideally take the lowest possible wage and work night and day. Getting a job offer is especially hard for foreigners. At least I managed to learn Polish language at the university.
 
 To find a job, my strategy was to prepare tens of CVs, and search for positions in the local work portal: from mechanical engineering to software development, from equipment installation to hardware design. I spent days sending crafted papers to companies, getting **zero interviews**.
