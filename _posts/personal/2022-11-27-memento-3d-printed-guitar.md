@@ -70,7 +70,7 @@ Do not force your passion, since everyone likes different things. Some people li
 Do not be discouraged, if you are not good in your hobby or work. To discover what you like requires experimenting with different things and a lot of time. Keep going!
 
 # Files
-You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/GuitarBodyVoron.zip) .
+You can download 3mf files ready to be printed following the [3d printed Voron Gutar body files link](/files/3d_models/Guitar/GuitarBodyVoron.zip) .
 Mounting holes are designed to accept M3 knurled inserts for the hardware. I use cheap Fender Strat/Tele electric guitar bridge with a maple Stratocaster neck from Aliexpress.
 
 
