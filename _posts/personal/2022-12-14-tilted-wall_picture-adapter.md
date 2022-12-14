@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to avoid "meeting hell"
+title: Roof wall picture adapter
 blogid: personal
 sticky: false
 published: true
