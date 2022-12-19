@@ -10,18 +10,21 @@ featured-image: 2022-12-19-self-employed/beyourownboss.jpg
 featured-image-alt: self employed boss cringe
 tags: [self employed, taxes, calculator, programming, freedom, company]
 ---
+# Intro
+
+The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 
+
 <p>"Want more and more </p>
 <p> People just want more and more </p>
 <p> Freedom and love </p>
 <p> What he's looking for" </p>
-<p> *Gala Freed From Desire* </p>
 
-[link to calculator]
 
-# Intro
+*Gala Freed From Desire*
 
-The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 
 Although I already have clients, in order to reach my goal I need to form a legal business entity.
+
+
 
 # Self-employed vs KFT 
 
