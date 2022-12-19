@@ -12,8 +12,7 @@ tags: [self employed, taxes, calculator, programming, freedom, company]
 ---
 The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 
 
-Although I already have clients, in order to reach my goal I need to form a legal business entity.
-
+Although I already have clients, in order to reach my goal I need to form a legal business entity. *If you came for the calculator only, scroll till the end of the page*
 
 
 # Self-employed vs KFT 
