@@ -27,10 +27,10 @@
             SelfEmployedCalcFlatData.HighQualification = ($('input[name="yes_no"]:checked').val() == 'true');
 
             var CalculatedIncome = calculateIncome(SelfEmployedCalcFlatData.AnnualIncome, SelfEmployedCalcFlatData.FlatRate);
-            $("#CalculatedIncome").text(CalculatedIncome);
+            $("#CalculatedIncome").text(CalculatedIncome.toLocaleString('en', {useGrouping:true}));
 
             var CalculatedIncomePartHalf = calculatePartOfIncomeMinWage(CalculatedIncome, SelfEmployedCalcFlatData.MinWage)
-            $("#CalculatedIncomePartHalf").text(CalculatedIncomePartHalf);
+            $("#CalculatedIncomePartHalf").text(CalculatedIncomePartHalf.toLocaleString('en', {useGrouping:true}));
 
             var TaxFreePeriod = calculateTaxFreePeiod(CalculatedIncome, CalculatedIncomePartHalf);
             $("#CalculatedTaxFreePeriod").text(TaxFreePeriod);
@@ -42,38 +42,38 @@
             $("#TaxablePeriod").text(TaxablePeriod);
 
             var IncomePerMonth = calculatedIncomePerMonth(CalculatedIncome);
-            $("#IncomePerMonth").text(IncomePerMonth);
+            $("#IncomePerMonth").text(IncomePerMonth.toLocaleString('en', {useGrouping:true}));
 
             var MonthlyMinContrib = calculatedMonthlyMinimumContrib(SelfEmployedCalcFlatData.HighQualification);
-            $("#MonthlyMinContrib").text(MonthlyMinContrib);
+            $("#MonthlyMinContrib").text(MonthlyMinContrib.toLocaleString('en', {useGrouping:true}));
 
-            var MonthlyMinFund = calculatedMonthlyMinimumFund(MonthlyMinContrib);
-            $("#MonthlyMinFund").text(MonthlyMinFund);
+            var MonthlyMinFund = calculatedMonthlyMinimumFund(MonthlyMinContrib.toLocaleString('en', {useGrouping:true}));
+            $("#MonthlyMinFund").text(MonthlyMinFund.toLocaleString('en', {useGrouping:true}));
 
             var SimplifiedMonthlyMinimumFund= calculatedSimplifiedMonthlyMinimumFund(CalculatedIncome);
-            $("#SimplifiedMonthlyMinimumFund").text(SimplifiedMonthlyMinimumFund);
+            $("#SimplifiedMonthlyMinimumFund").text(SimplifiedMonthlyMinimumFund.toLocaleString('en', {useGrouping:true}));
 
             var PersonalIncomeTax = calculatePersonalIncomeTax(CalculatedIncomePartHalf);
-            $("#PersonalIncomeTax").text(PersonalIncomeTax);
+            $("#PersonalIncomeTax").text(PersonalIncomeTax.toLocaleString('en', {useGrouping:true}));
 
             var SocialSecurity = calculateSocialSecurity(TaxFreePeriod, MonthlyMinContrib, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree);
-            $("#SocialSecurity").text(SocialSecurity);
+            $("#SocialSecurity").text(SocialSecurit.toLocaleString('en', {useGrouping:true}));
 
             var SocialContributionTax = calculateSocialContributionTax(TaxFreePeriod, MonthlyMinFund, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree);
-            $("#SocialContributionTax").text(SocialContributionTax);
+            $("#SocialContributionTax").text(SocialContributionTax.toLocaleString('en', {useGrouping:true}));
 
             //Annual central tax and contribution burden totals =SUM(PersonalIncomeTax,SocialSecurity,SocialContributionTax)
             var AnnualCentralTax = PersonalIncomeTax+SocialSecurity+SocialContributionTax;
-            $("#AnnualCentralTax").text(AnnualCentralTax);    
+            $("#AnnualCentralTax").text(AnnualCentralTax.toLocaleString('en', {useGrouping:true}));    
 
             var LocalTax = SimplifiedMonthlyMinimumFund*SelfEmployedCalcFlatData.LocalTax;
-            $("#LocalTax").text(LocalTax);              
+            $("#LocalTax").text(LocalTax.toLocaleString('en', {useGrouping:true}));              
 
             var TotalTax = AnnualCentralTax+LocalTax;
-            $("#TotalTax").text(TotalTax);         
+            $("#TotalTax").text(TotalTax.toLocaleString('en', {useGrouping:true}));         
             
             var IncomeAfterTaxes = SelfEmployedCalcFlatData.AnnualIncome-TotalTax;
-            $("#IncomeAfterTaxes").text(IncomeAfterTaxes); 
+            $("#IncomeAfterTaxes").text(IncomeAfterTaxes.toLocaleString('en', {useGrouping:true})) ; 
         }
 
         // Function returns Calculated_income = Annual_income * (1-Flat_rate_percent))
@@ -207,11 +207,11 @@
         Local business tax (in case of choosing a simplified tax base, with a 2% tax rate):
         <span id="LocalTax">288000</span>
         <br />
-        Total annual tax and contribution burden::
-        <span id="TotalTax">5396125</span>
+        Total annual tax and contribution burden:
+        <b> <span id="TotalTax">5396125</span> </b>
         <br />
         Income after taxes:
-        <span id="IncomeAfterTaxes">14603875</span>
+        <b> <span id="IncomeAfterTaxes">14603875</span> </b>
         <br />
 
         <H1>Tax base used for computation</H1>
