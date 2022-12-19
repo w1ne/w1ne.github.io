@@ -163,6 +163,8 @@
         //Local business tax (in case of choosing a simplified tax base, with a 2% tax rate) 288,000 / =B28*0.02 Can be 0.01
         //The annual tax and contribution burden is only 5,396,125 / =B14+B15
         //Income before taxes 14,603,875 / =B7-B16
+
+        
    </script>
 
     <form>
@@ -172,18 +174,21 @@
         <br />
         <div id="local_tax">
             Local business tax (2% for Budapest):
+            <br />
             <input type="radio" name="local_tax_percent" value="0.02" checked>2%
             <input type="radio" name="local_tax_percent" value="0.01">1%
         </div>
         <br />
         <div id="qualification_selector">
             Do you carry out an activity that requires a secondary education or professional qualification? (Yes for Software Engineering)
+            <br />
             <input type="radio" name="yes_no" value="true" checked>Yes
             <input type="radio" name="yes_no" value="false">No
         </div>
         <br />
         <div id="percent_selector">
             Flat rate (%):
+            <br />
             <input type="radio" name="flat_percent" value="0.4" checked>40%
             <input type="radio" name="flat_percent" value="0.8">80%
             <input type="radio" name="flat_percent" value="0.9">90% 
