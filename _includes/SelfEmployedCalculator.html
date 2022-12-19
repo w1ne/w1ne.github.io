@@ -47,7 +47,7 @@
             var MonthlyMinContrib = calculatedMonthlyMinimumContrib(SelfEmployedCalcFlatData.HighQualification);
             $("#MonthlyMinContrib").text(MonthlyMinContrib.toLocaleString('en', {useGrouping:true}));
 
-            var MonthlyMinFund = calculatedMonthlyMinimumFund(MonthlyMinContrib.toLocaleString('en', {useGrouping:true}));
+            var MonthlyMinFund = calculatedMonthlyMinimumFund(MonthlyMinContrib);
             $("#MonthlyMinFund").text(MonthlyMinFund.toLocaleString('en', {useGrouping:true}));
 
             var SimplifiedMonthlyMinimumFund= calculatedSimplifiedMonthlyMinimumFund(CalculatedIncome);
@@ -208,15 +208,15 @@
         <span id="LocalTax">288000</span>
         <br />
         Total annual tax and contribution burden:
-        <b> <span id="TotalTax">5396125</span> </b>
+        <b> <span id="TotalTax" style="background-color:rgb(255, 246, 194);" >5396125</span> </b>
         <br />
         Income after taxes:
-        <b> <span id="IncomeAfterTaxes">14603875</span> </b>
+        <b> <span id="IncomeAfterTaxes" style="background-color:rgb(255, 246, 194);">14603875</span> </b>
         <br />
 
         <H1>Tax base used for computation</H1>
        
-        Calculated income (revenue-flat cost), HUF:
+        Calculated income (revenue-flat rate), HUF:
         <span id="CalculatedIncome">12000000</span>
         <br />
         The part of calculated income exceeding half of the annual minimum wage, HUF:
