@@ -18,12 +18,12 @@ What he's looking for"
 
 [link to calculator]
 
-#Intro
+# Intro
 
 The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 
 Although I already have clients, in order to reach my goal I need to form a legal business entity.
 
-#Self-employed vs KFT 
+# Self-employed vs KFT 
 
 The two most common ways of launching a business in Hungary are to register as a self-employed entrepreneur, which has a straightforward setup and requires no investments, or to set up a limited liability company (KFT). The second option needs the help of a lawyer, and requires an initial investment of 3 million Forint, as well as an accountant.
 
@@ -31,21 +31,21 @@ Creating and managing a limited liability company is complicated, but the trade-
 
 **If an individual is self-employed, they bear all of the financial responsibility for their business activities.**
 
-##Overview of self employed system
+## Overview of sole proprietorship
  In this article, I will focus on the formation of a self employed (egyéni vállalkozás) sole proprietorship business. It is much simpler for foreigners living in Hungary to form one of these businesses, especially for freelancers who are just beginning their journey.
 
 For registering as self employed, the best place to look is the NAV tax administration's articles:
 
 https://nav.gov.hu/ugyfeliranytu/vallalkozoknak/indulo-vallalkozas/egyeni-vallalkozok-nyilvantartasa/az-egyeni-vallalkozas-elkezdese
 
-#Eligibility
+## Eligibility
 
-###Who are eligible:
+### Who are eligible:
 -A person with Hungarian citizenship,
 -Anybody belonging to a member state of the European Union,
 - Someone exercising their right to move and live in Hungary, anyone with a residence permit issued to be employed, reunited with family members or study, and someone with a residence permit issued for humanitarian reasons.
 
-###Who are not eligible:
+### Who are not eligible:
 
 - a minor,
 - someone who is part of a single business or jointly liable for a corporation,
@@ -91,13 +91,18 @@ It should also be noted that as a self-employed you will need to pay for the acc
 
 I made flat rate taxation calculator based on Excel table found on NAV website [https://nav.gov.hu/pfile/file?path=/ado/uj-kata/vallalkozoi-kalkulator], you can use it to approximate tax burden when working as a full time entrepreneur under flat rate taxation and decide if going self-employed is a good choice.
 
-# Flat rate tax calculator
+# Flat rate tax calculator 2022
 
 *Calculator description*
 
 The calculator can be used to make predictions based on simplified assumptions, such as earning the same income each month. The calculator gives a full-year report that contains the tax rates and minimum wage valid in 2022. It does not account for any deductions that can be applied to the income included in the flat rate of the consolidated tax base or to the entrepreneur exemption (for example, discounts for mothers raising four or more children, young people under 25, personal discount, first married couple discount, and family discount). In addition, the flat tax takes into account any tax-free income. It assumes that you're also working as a sole proprietor full-time. Employees and pensioners will likely have better conditions than what is presented in the calculator's calculations.
 
 {% include SelfEmployedCalculator.html %}
+
+
+#Conclusion
+
+Flat rate taxation provides good alternative to KATA system, for Software Engineer consultant tax burden is around 30% or even less. Cobined with inherited freedom of being self-employed I think it is good alternative for working as an employee.
 
 In next posts I will cover topics of business registration wth web portal, bank account, and managing invoices. 
 
