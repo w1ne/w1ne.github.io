@@ -10,8 +10,6 @@ featured-image: 2022-12-19-self-employed/beyourownboss.jpg
 featured-image-alt: self employed boss cringe
 tags: [self employed, taxes, calculator, programming, freedom, company]
 ---
-# Intro
-
 The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 
 
 <p>"Want more and more </p>
