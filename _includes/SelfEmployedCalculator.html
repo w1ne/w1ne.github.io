@@ -172,72 +172,72 @@
         <br />
         <div id="local_tax">
             Local tax (%):
-            <input type="radio" name="local_tax_percent" value="0.02" checked>2{% raw %}%{% endraw %}</input>
-            <input type="radio" name="local_tax_percent" value="0.01">1{% raw %}%{% endraw %}</input>
+            <input type="radio" name="local_tax_percent" value="0.02" checked>2</input>
+            <input type="radio" name="local_tax_percent" value="0.01">1</input>
         </div>
         <br />
         <div id="qualification_selector">
-            Do you carry out an activity that requires a secondary education or professional qualification?
+            Do you carry out an activity that requires a secondary education or professional qualification? (Yes for software Engineering)
             <input type="radio" name="yes_no" value="true" checked>Yes</input>
             <input type="radio" name="yes_no" value="false">No</input>
         </div>
         <br />
         <div id="percent_selector">
             Flat cost (%)*:
-            <input type="radio" name="flat_percent" value="0.4" checked>40{% raw %}%{% endraw %}</input>
-            <input type="radio" name="flat_percent" value="0.8">80{% raw %}%{% endraw %}</input>
-            <input type="radio" name="flat_percent" value="0.9">90{% raw %}%{% endraw %}</input>
+            <input type="radio" name="flat_percent" value="0.4" checked>40</input>
+            <input type="radio" name="flat_percent" value="0.8">80</input>
+            <input type="radio" name="flat_percent" value="0.9">90</input>
         </div>
     </form>
-
+    
     <div id="ComputationResults">
         <H1>Tax burdens</H1>
         Personal income tax (15% of taxable income), HUF:
-        <div id="PersonalIncomeTax"></div>
+        <div id="PersonalIncomeTax">1620000</div>
         <br />
         Social security contribution (at least 18.5% of the taxable income, but for a full-time entrepreneur each month of the minimum contribution base), HUF:
-        <div id="SocialSecurity"></div>
+        <div id="SocialSecurity">246100</div>
         <br />
         Social contribution tax (at least 13% of the taxable income, but for a full-time entrepreneur each month of the minimum contribution base), HUF:
-        <div id="SocialContributionTax"></div>
+        <div id="SocialContributionTax">1442025</div>
         <br />
         Annual central tax and contribution burden totals, HUF:
-        <div id="AnnualCentralTax"></div>
+        <div id="AnnualCentralTax">5108125</div>
         <br />
         Local business tax (in case of choosing a simplified tax base, with a 2% tax rate):
-        <div id="LocalTax"></div>
+        <div id="LocalTax">288000</div>
         <br />
         Total annual tax and contribution burden::
-        <div id="TotalTax"></div>
+        <div id="TotalTax">5396125</div>
         <br />
         Income after taxes:
-        <div id="IncomeAfterTaxes"></div>
+        <div id="IncomeAfterTaxes">14603875</div>
         <br />
 
         <H1>Tax base used for computation</H1>
-        </br>
+       
         Calculated income (revenue-flat cost), HUF:
-        <div id="CalculatedIncome"></div>
+        <div id="CalculatedIncome">12000000</div>
         <br />
         The part of calculated income exceeding half of the annual minimum wage, HUF:
-        <div id="CalculatedIncomePartHalf"></div>
+        <div id="CalculatedIncomePartHalf">10800000</div>
         <br />
         Tax-free period (in full month):
-        <div id="CalculatedTaxFreePeriod"></div>
+        <div id="CalculatedTaxFreePeriod">1</div>
         <br />
         The rate of taxable income in the partially tax-free month:
-        <div id="TaxableIncomePartTaxFree"></div>
+        <div id="TaxableIncomePartTaxFree">0.8</div>
         <br />
         Taxable period (in full months):
-        <div id="TaxablePeriod"></div>
+        <div id="TaxablePeriod">10</div>
         <br />
         The calculated income per month, HUF:
-        <div id="IncomePerMonth"></div>
+        <div id="IncomePerMonth">1000000</div>
         <br />
         Monthly minimum contribution fund (annual minimum wage/guaranteed minimum wage), HUF:
-        <div id="MonthlyMinContrib"></div>
+        <div id="MonthlyMinContrib">292500</div>
         <br />
-        Monthly minimum socho fund (1.125 times annual minimum wage/guaranteed minimum wage), HUF:
+        Monthly minimum social contribution fund (1.125 times annual minimum wage/guaranteed minimum wage), HUF:
         <div id="MonthlyMinFund"></div>
         <br />
         Simplified local business tax base (1.2 times the calculated income), HUF:
