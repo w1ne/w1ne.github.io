@@ -25,18 +25,22 @@ Although I already have clients, in order to reach my goal I need to form a lega
 
 # Self-employed vs KFT 
 
-The two most common ways of launching a business in Hungary are to register as a self-employed entrepreneur, which has a straightforward setup and requires no investments, or to set up a limited liability company (KFT). The second option needs the help of a lawyer, and requires an initial investment of 3 million Forint, as well as an accountant.
+The two most common ways of launching a business in Hungary are to register as a self-employed entrepreneur, which has a straightforward setup and requires no investments, or to set up a limited liability company (KFT). 
+The second option needs the help of a lawyer, and requires an initial investment of 3 million Forint, as well as an mandatory accountant.
 
-Creating and managing a limited liability company is complicated, but the trade-off is worth it. You are shielded from being personally liable, and you have more freedom to sell the organization if you want. Limited personal liability is part of the package. The sole proprietor is liable to his creditors and suppliers with his entire private property. With Kft, the member is generally not responsible for the company's debts.
+Creating and managing a limited liability company is complicated, but the trade-off is worth it. You are shielded from being personally liable, and you have more freedom to sell the organization if you want. Limited personal liability is part of the package. 
+
+The sole proprietor is liable to his creditors and suppliers with his entire private property. With Kft, the member is generally not responsible for the company's debts.
 
 **If an individual is self-employed, they bear all of the financial responsibility for their business activities.**
 
 ## Overview of sole proprietorship
- In this article, I will focus on the formation of a self employed (egyéni vállalkozás) sole proprietorship business. It is much simpler for foreigners living in Hungary to form one of these businesses, especially for freelancers who are just beginning their journey.
+
+In this article, I will focus on the formation of a self employed (egyéni vállalkozás) sole proprietorship business. It is much simpler for foreigners living in Hungary to form one of these businesses, especially for freelancers who are just beginning their journey.
 
 For registering as self employed, the best place to look is the NAV tax administration's articles:
 
-https://nav.gov.hu/ugyfeliranytu/vallalkozoknak/indulo-vallalkozas/egyeni-vallalkozok-nyilvantartasa/az-egyeni-vallalkozas-elkezdese
+[NAV sole proprietorship info(in Hungarian)](https://nav.gov.hu/ugyfeliranytu/vallalkozoknak/indulo-vallalkozas/egyeni-vallalkozok-nyilvantartasa/az-egyeni-vallalkozas-elkezdese)
 
 ## Eligibility
 
