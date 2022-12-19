@@ -5,7 +5,7 @@ blogid: personal
 sticky: false
 published: true
 author: Andrii Shylenko
-date: 2022-12-12
+date: 2022-12-19
 featured-image: 2022-12-19-self-employed/beyourownboss.jpg
 featured-image-alt: self employed boss cringe
 tags: [self employed, taxes, calculator, programming, freedom, company]
