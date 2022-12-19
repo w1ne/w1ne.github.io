@@ -10,11 +10,11 @@ featured-image: 2022-12-19-self-employed/beyourownboss.jpg
 featured-image-alt: self employed boss cringe
 tags: [self employed, taxes, calculator, programming, freedom, company]
 ---
-"Want more and more
-People just want more and more
-Freedom and love
-What he's looking for"
-*Gala Freed From Desire*
+<p>"Want more and more </p>
+<p> People just want more and more </p>
+<p> Freedom and love </p>
+<p> What he's looking for" </p>
+<p> *Gala Freed From Desire* </p>
 
 [link to calculator]
 
@@ -28,8 +28,7 @@ Although I already have clients, in order to reach my goal I need to form a lega
 The two most common ways of launching a business in Hungary are to register as a self-employed entrepreneur, which has a straightforward setup and requires no investments, or to set up a limited liability company (KFT). 
 The second option needs the help of a lawyer, and requires an initial investment of 3 million Forint, as well as an mandatory accountant.
 
-Creating and managing a limited liability company is complicated, but the trade-off is worth it. You are shielded from being personally liable, and you have more freedom to sell the organization if you want. Limited personal liability is part of the package. 
-
+Creating and managing a limited liability company is complicated, but the trade-off is worth it. You are shielded from being personally liable, and you have more freedom to sell the organization if you want. Limited personal liability is part of the package.
 The sole proprietor is liable to his creditors and suppliers with his entire private property. With Kft, the member is generally not responsible for the company's debts.
 
 **If an individual is self-employed, they bear all of the financial responsibility for their business activities.**
@@ -45,12 +44,11 @@ For registering as self employed, the best place to look is the NAV tax administ
 ## Eligibility
 
 ### Who are eligible:
--A person with Hungarian citizenship,
--Anybody belonging to a member state of the European Union,
+- A person with Hungarian citizenship,
+- Anybody belonging to a member state of the European Union,
 - Someone exercising their right to move and live in Hungary, anyone with a residence permit issued to be employed, reunited with family members or study, and someone with a residence permit issued for humanitarian reasons.
 
 ### Who are not eligible:
-
 - a minor,
 - someone who is part of a single business or jointly liable for a corporation,
 - an individual who has been convicted of criminal activity.
@@ -60,11 +58,10 @@ Anyone who is legitimately living in Hungary and **has not been charged with any
 ## Where it can be arranged
 Starting a sole proprietorship can be done:
 
- - with electronic notification via mo.hu [https://www.nyilvantarto.hu/ugyseged/EgyeniVallalkozassalKapcsolatosUgyInditasa.xhtml], you need to register with ügyfélkapu first.
+ - with electronic notification via [mo.hu](https://www.nyilvantarto.hu/ugyseged/EgyeniVallalkozassalKapcsolatosUgyInditasa.xhtml), you need to register with ügyfélkapu first.
  - in person, at any local NAV customer service office.
 
 ## Necessary documents
-
 Nothing special. Either identity card, passport, driver’s license (in card format) or power of attorney must be presented as the original version. 
 
 ## Expenditures
@@ -103,8 +100,7 @@ The calculator can be used to make predictions based on simplified assumptions, 
 
 {% include SelfEmployedCalculator.html %}
 
-
-#Conclusion
+# Conclusion
 
 Flat rate taxation provides good alternative to KATA system, for Software Engineer consultant tax burden is around 30% or even less. Cobined with inherited freedom of being self-employed I think it is good alternative for working as an employee.
 
