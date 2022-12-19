@@ -67,7 +67,7 @@ Before launching a single-person business, it is important to look into whether 
 
 An individual entrepreneur can find an activity in the Register of Self-Employed Entrepreneurs (ÖVTJ codes) Failing to comply with these can lead to one's activity being shut down.
 
-The website of the Hungarian Chamber of Commerce and Industry has an [Entrepreneur Information System KAVIR](https://kavir.mkik.hu/search) that provides information about licensces, qualification and notification needs for individual activities. In cavir database TEÁOR'08 codes with ÖVTJ codes can be found.
+The website of the Hungarian Chamber of Commerce and Industry has an [Entrepreneur Information System KAVIR](https://kavir.mkik.hu/search) that provides information about licensces, qualification and notification needs for individual activities. In the database TEÁOR'08 codes with ÖVTJ codes can be found.
 
 Extra help in classifying potential activities based on their ÖVTJ code may be found on the [KSH website](https://www.ksh.hu/ovtj_menu).
 
