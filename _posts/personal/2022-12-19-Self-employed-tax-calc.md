@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Self-employed in Hungary. Flat rate calculator 2022.
+title: Self-employed in Hungary: Flat rate calculator 2022
 blogid: personal
 sticky: false
 published: true
@@ -91,7 +91,10 @@ It should also be noted that as a self-employed you will need to pay for the acc
 
 I made flat rate taxation calculator based on Excel table found on NAV website [https://nav.gov.hu/pfile/file?path=/ado/uj-kata/vallalkozoi-kalkulator], you can use it to approximate tax burden when working as a full time entrepreneur under flat rate taxation and decide if going self-employed is a good choice.
 
+# Flat rate tax calculator
+
 *Calculator description*
+
 The calculator can be used to make predictions based on simplified assumptions, such as earning the same income each month. The calculator gives a full-year report that contains the tax rates and minimum wage valid in 2022. It does not account for any deductions that can be applied to the income included in the flat rate of the consolidated tax base or to the entrepreneur exemption (for example, discounts for mothers raising four or more children, young people under 25, personal discount, first married couple discount, and family discount). In addition, the flat tax takes into account any tax-free income. It assumes that you're also working as a sole proprietor full-time. Employees and pensioners will likely have better conditions than what is presented in the calculator's calculations.
 
 {% include SelfEmployedCalculator.html %}
