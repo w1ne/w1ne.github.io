@@ -99,11 +99,12 @@ I made flat rate taxation calculator based on Excel table found on [NAV website]
 
 The calculator can be used to make predictions based on simplified assumptions, such as earning the same income each month. The calculator gives a full-year report that contains the tax rates and minimum wage valid in 2022. It does not account for any deductions that can be applied to the income included in the flat rate of the consolidated tax base or to the entrepreneur exemption (for example, discounts for mothers raising four or more children, young people under 25, personal discount, first married couple discount, and family discount). In addition, the flat tax takes into account any tax-free income. It assumes that you're also working as a sole proprietor full-time. Employees and pensioners will likely have better conditions than what is presented in the calculator's calculations.
 
+*Input your data in the calculator!*
 {% include SelfEmployedCalculator.html %}
 
 # Conclusion
 
-Flat rate taxation provides good alternative to KATA system, for Software Engineer consultant tax burden is around 30% or even less. Cobined with inherited freedom of being self-employed I think it is good alternative for working as an employee.
+The flat rate taxation system is a great alternative to the KATA system, as it allows Software Engineer consultants to pay a tax burden of around 30% or even lower. Coupled with the freedom that comes with being self-employed, it makes for an attractive option compared to traditional employment.
 
 In next posts I will cover topics of business registration using web portal, bank account, and managing invoices. 
 
