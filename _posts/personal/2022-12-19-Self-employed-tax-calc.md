@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Self-employed in Hungary, Part 1, Tax Calculator
+title: Self-employed in Hungary, Tax Calculator 2022
 blogid: personal
 sticky: false
 published: true
