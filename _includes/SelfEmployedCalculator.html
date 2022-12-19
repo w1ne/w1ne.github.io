@@ -1,0 +1,247 @@
+<div class="SelfEmployedCalculator">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
+    <script>
+        $(function () {
+            $("input[id=incomeAnnual]").keyup(function () {
+                calculateSelfEmployed();
+            });
+            $("input[type=radio]").on('change', function() {
+                calculateSelfEmployed();
+            });
+        });
+
+        function calculateSelfEmployed() {
+
+            SelfEmployedCalcFlatData =
+            {
+                AnnualIncome: 2000000,
+                FlatRate: 0.4,
+                LocalTax: 0.02,
+                HighQualification: true,
+                MinWage: 1200000
+            }
+            // Get a data from the form
+            SelfEmployedCalcFlatData.AnnualIncome = parseFloat($('input[name="incomeAnnual"]').val());
+            SelfEmployedCalcFlatData.FlatRate = parseFloat($('input[name="flat_percent"]:checked').val());
+            SelfEmployedCalcFlatData.LocalTax = parseFloat($('input[name="local_tax_percent"]:checked').val());
+            SelfEmployedCalcFlatData.HighQualification = ($('input[name="yes_no"]:checked').val() == 'true');
+
+            var CalculatedIncome = calculateIncome(SelfEmployedCalcFlatData.AnnualIncome, SelfEmployedCalcFlatData.FlatRate);
+            $("#CalculatedIncome").text(CalculatedIncome);
+
+            var CalculatedIncomePartHalf = calculatePartOfIncomeMinWage(CalculatedIncome, SelfEmployedCalcFlatData.MinWage)
+            $("#CalculatedIncomePartHalf").text(CalculatedIncomePartHalf);
+
+            var TaxFreePeriod = calculateTaxFreePeiod(CalculatedIncome, CalculatedIncomePartHalf);
+            $("#CalculatedTaxFreePeriod").text(TaxFreePeriod);
+
+            var TaxableIncomePartTaxFree = calculateTaxFreePeriodTaxableIncome(CalculatedIncome, CalculatedIncomePartHalf, TaxFreePeriod);
+            $("#TaxableIncomePartTaxFree").text(TaxableIncomePartTaxFree.toPrecision(1));
+
+            var TaxablePeriod = calculateTaxablePeriod(CalculatedIncome, CalculatedIncomePartHalf);
+            $("#TaxablePeriod").text(TaxablePeriod);
+
+            var IncomePerMonth = calculatedIncomePerMonth(CalculatedIncome);
+            $("#IncomePerMonth").text(IncomePerMonth);
+
+            var MonthlyMinContrib = calculatedMonthlyMinimumContrib(SelfEmployedCalcFlatData.HighQualification);
+            $("#MonthlyMinContrib").text(MonthlyMinContrib);
+
+            var MonthlyMinFund = calculatedMonthlyMinimumFund(MonthlyMinContrib);
+            $("#MonthlyMinFund").text(MonthlyMinFund);
+
+            var SimplifiedMonthlyMinimumFund= calculatedSimplifiedMonthlyMinimumFund(CalculatedIncome);
+            $("#SimplifiedMonthlyMinimumFund").text(SimplifiedMonthlyMinimumFund);
+
+            var PersonalIncomeTax = calculatePersonalIncomeTax(CalculatedIncomePartHalf);
+            $("#PersonalIncomeTax").text(PersonalIncomeTax);
+
+            var SocialSecurity = calculateSocialSecurity(TaxFreePeriod, MonthlyMinContrib, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree);
+            $("#SocialSecurity").text(SocialSecurity);
+
+            var SocialContributionTax = calculateSocialContributionTax(TaxFreePeriod, MonthlyMinFund, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree);
+            $("#SocialContributionTax").text(SocialContributionTax);
+
+            //Annual central tax and contribution burden totals =SUM(PersonalIncomeTax,SocialSecurity,SocialContributionTax)
+            var AnnualCentralTax = PersonalIncomeTax+SocialSecurity+SocialContributionTax;
+            $("#AnnualCentralTax").text(AnnualCentralTax);    
+
+            var LocalTax = SimplifiedMonthlyMinimumFund*SelfEmployedCalcFlatData.LocalTax;
+            $("#LocalTax").text(LocalTax);              
+
+            var TotalTax = AnnualCentralTax+LocalTax;
+            $("#TotalTax").text(TotalTax);         
+            
+            var IncomeAfterTaxes = SelfEmployedCalcFlatData.AnnualIncome-TotalTax;
+            $("#IncomeAfterTaxes").text(IncomeAfterTaxes); 
+        }
+
+        // Function returns Calculated_income = Annual_income * (1-Flat_rate_percent))
+        // Flat_rate_percent is in percent (Can be 0.4, 0.8 or 0.9 accorfing to goverment rules).
+        function calculateIncome(Annual_income, Flat_rate_percent) {
+            return Annual_income * (1 - Flat_rate_percent);
+        }
+
+        // Function returns the part of calculated income exceeding half of the annual minimum wage 
+        // Exceeding_half_of_min_wage = MAX(0, Calculated_income-1200000)
+        function calculatePartOfIncomeMinWage(Calculated_income, Min_wage) {
+            var result = Calculated_income - Min_wage;
+            if (result < 0) { result = 0; }
+            return result;
+        }
+
+        // Calculate Tax-free period (full month)
+        // Tax_free_period = INT(Calculated_income - Part_of_income_min_wage ) / Calculated_income *12
+        function calculateTaxFreePeiod(Calculated_income, Part_of_income_min_wage) {
+            return parseInt((Calculated_income - Part_of_income_min_wage) / Calculated_income * 12.0);
+        }
+
+        // The rate of taxable income in the partially tax-free month
+        // Free_rate_taxable_income = 1-((Calculated_income - Exceeding_half_of_min_wage) / (Calculated_income*12 - Tax_free_period)
+        function calculateTaxFreePeriodTaxableIncome(Calculated_income, Part_of_income_min_wage, Tax_free_period) {
+            return (1.0 - (((Calculated_income - Part_of_income_min_wage) / Calculated_income * 12.0) - Tax_free_period));
+        }
+
+        // Taxable period (full month) 
+        // INT(12-(Calculated_income-The_part_of_calculated_income)/Calculated_income*12)
+        function calculateTaxablePeriod(Calculated_income, Part_of_income_min_wage) {
+            return parseInt(12.0 - ((Calculated_income - Part_of_income_min_wage) / Calculated_income * 12.0));
+        }
+        // The calculated income per month 
+        // Calculated_income/12
+        function calculatedIncomePerMonth(Calculated_income, Part_of_income_min_wage) {
+            return parseInt(Calculated_income / 12.0);
+        }
+
+        // Monthly minimum contribution fund (annual minimum wage/guaranteed minimum wage) 
+        // Only applies for full time entrepreneur: IF(B6="igen", 260000, 200000), 0)
+        function calculatedMonthlyMinimumContrib(HighQualificationNeeded) {
+            var result;
+            if (HighQualificationNeeded) { result = 260000 } else { result = 200000 };
+            return parseInt(result);
+        }
+        // Monthly minimum fund (1.125 times annual minimum wage/guaranteed minimum wage)
+        // Monthly_min_contribution * 1.125
+        function calculatedMonthlyMinimumFund(MonthlyMinimumContrib) {
+            return parseInt(MonthlyMinimumContrib * 1.125);
+        }
+
+        // Simplified local business tax base (1.2 times the calculated income) 
+        // Calculated_income*1.2 
+        function calculatedSimplifiedMonthlyMinimumFund(Calculated_income) {
+            return parseInt(Calculated_income * 1.2);
+        }
+
+        //Personal income tax (15% of taxable income)
+        //TaxableIncome*0.15
+        function calculatePersonalIncomeTax(TaxableIncome) {
+            return parseInt(TaxableIncome * 0.15);
+        }
+
+        //Social security contribution (at least 18.5% of the taxable income, but for a full-time entrepreneur each month of the minimum contribution base) 2,046,100 / 
+        // (B22*B26+B24*MAX(B25,B26)+IF(B22+B24=11,MAX(B26,B25*B23),0))*0.185)
+        // It is assumed fulltime, non pensioner or student
+        function calculateSocialSecurity(TaxFreePeriod, MonthlyMinContrib, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree) {
+            var result = TaxFreePeriod*MonthlyMinContrib+TaxablePeriod*Math.max(IncomePerMonth, MonthlyMinContrib)
+            if((TaxFreePeriod+TaxablePeriod) == 11)
+            {
+                result = result + Math.max(MonthlyMinContrib, IncomePerMonth*TaxableIncomePartTaxFree);
+            };
+            return result*0.185
+        }
+        //Social contribution tax (at least 13% of the taxable income, but for a full-time entrepreneur each month of the minimum contribution base) 
+        //IF(B5="nyugdíjas", 0, (B22*B27+B24*MAX(B25,B27)+IF(B22+B24=11,MAX(B27,B25*B23),0))*0.13)
+        function calculateSocialContributionTax(TaxFreePeriod, MonthlyMinFund, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree) {
+            var result = TaxFreePeriod*MonthlyMinFund+TaxablePeriod*Math.max(IncomePerMonth, MonthlyMinFund)
+            if((TaxFreePeriod+TaxablePeriod) == 11)
+            {
+                result = result + Math.max(MonthlyMinFund, IncomePerMonth*TaxableIncomePartTaxFree);
+            };
+            return result*0.13
+        }
+        //Annual central tax and contribution burden totals 5,108,125 / =SUM(B11:B13)
+        //Local business tax (in case of choosing a simplified tax base, with a 2% tax rate) 288,000 / =B28*0.02 Can be 0.01
+        //The annual tax and contribution burden is only 5,396,125 / =B14+B15
+        //Income before taxes 14,603,875 / =B7-B16
+   </script>
+
+    <form>
+        <div id="annual_income">
+            Annual income (HUF): <input type="text" size="6" id="incomeAnnual" name="incomeAnnual" value="20000000">
+        </div>
+        <br />
+        <div id="local_tax">
+            Local tax (%):
+            <input type="radio" name="local_tax_percent" value="0.02" checked>2%</input>
+            <input type="radio" name="local_tax_percent" value="0.01">1%</input>
+        </div>
+        <br />
+        <div id="qualification_selector">
+            Do you carry out an activity that requires a secondary education or professional qualification?
+            <input type="radio" name="yes_no" value="true" checked>Yes</input>
+            <input type="radio" name="yes_no" value="false">No</input>
+        </div>
+        <br />
+        <div id="percent_selector">
+            Flat cost (%)*:
+            <input type="radio" name="flat_percent" value="0.4" checked>40%</input>
+            <input type="radio" name="flat_percent" value="0.8">80%</input>
+            <input type="radio" name="flat_percent" value="0.9">90%</input>
+        </div>
+    </form>
+    
+    <div id="ComputationResults">
+        <H1>Tax burdens</H1>
+        Personal income tax (15% of taxable income), HUF:
+        <div id="PersonalIncomeTax"></div>
+        <br />
+        Social security contribution (at least 18.5% of the taxable income, but for a full-time entrepreneur each month of the minimum contribution base), HUF:
+        <div id="SocialSecurity"></div>
+        <br />
+        Social contribution tax (at least 13% of the taxable income, but for a full-time entrepreneur each month of the minimum contribution base), HUF:
+        <div id="SocialContributionTax"></div>
+        <br />
+        Annual central tax and contribution burden totals, HUF:
+        <div id="AnnualCentralTax"></div>
+        <br />
+        Local business tax (in case of choosing a simplified tax base, with a 2% tax rate):
+        <div id="LocalTax"></div>
+        <br />
+        Total annual tax and contribution burden::
+        <div id="TotalTax"></div>
+        <br />
+        Income after taxes:
+        <div id="IncomeAfterTaxes"></div>
+        <br />
+
+        <H1>Tax base used for computation</H1>
+        </br>
+        Calculated income (revenue-flat cost), HUF:
+        <div id="CalculatedIncome"></div>
+        <br />
+        The part of calculated income exceeding half of the annual minimum wage, HUF:
+        <div id="CalculatedIncomePartHalf"></div>
+        <br />
+        Tax-free period (in full month):
+        <div id="CalculatedTaxFreePeriod"></div>
+        <br />
+        The rate of taxable income in the partially tax-free month:
+        <div id="TaxableIncomePartTaxFree"></div>
+        <br />
+        Taxable period (in full months):
+        <div id="TaxablePeriod"></div>
+        <br />
+        The calculated income per month, HUF:
+        <div id="IncomePerMonth"></div>
+        <br />
+        Monthly minimum contribution fund (annual minimum wage/guaranteed minimum wage), HUF:
+        <div id="MonthlyMinContrib"></div>
+        <br />
+        Monthly minimum socho fund (1.125 times annual minimum wage/guaranteed minimum wage), HUF:
+        <div id="MonthlyMinFund"></div>
+        <br />
+        Simplified local business tax base (1.2 times the calculated income), HUF:
+        <div id="SimplifiedMonthlyMinimumFund"></div>
+        <br />
+    </div>
+</div>
