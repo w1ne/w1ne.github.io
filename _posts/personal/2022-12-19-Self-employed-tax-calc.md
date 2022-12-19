@@ -76,9 +76,9 @@ Before launching a single-person business, it is important to look into whether 
 
 An individual entrepreneur can find an activity in the Register of Self-Employed Entrepreneurs (ÖVTJ codes) Failing to comply with these can lead to one's activity being shut down.
 
-The website of the Hungarian Chamber of Commerce and Industry has an Entrepreneur Information System (KAVIR, https://kavir.mkik.hu/search) that provides information about licensces, qualification and notification needs for individual activities. In cavir database TEÁOR'08 codes with ÖVTJ codes codes can be found.
+The website of the Hungarian Chamber of Commerce and Industry has an [Entrepreneur Information System KAVIR](https://kavir.mkik.hu/search) that provides information about licensces, qualification and notification needs for individual activities. In cavir database TEÁOR'08 codes with ÖVTJ codes codes can be found.
 
-Extra help in classifying potential activities based on their ÖVTJ code may be found on the KSH website [https://www.ksh.hu/ovtj_menu].
+Extra help in classifying potential activities based on their ÖVTJ code may be found on the [KSH website](https://www.ksh.hu/ovtj_menu).
 
 # Taxation 
 There are two easy ways to handle taxation as a sole proprietor: KATA and a flat rate taxation.
@@ -91,7 +91,7 @@ Providing consulting services for businesses means I cannot use KATA.
 The taxes are divided into personal income tax (15%), social security contribution (18.5%), and social contribution tax (13%) for a total of 46.5%. 
 It should also be noted that as a self-employed you will need to pay for the accountant services (15000-30000 HUF) each month.
 
-I made flat rate taxation calculator based on Excel table found on NAV website [https://nav.gov.hu/pfile/file?path=/ado/uj-kata/vallalkozoi-kalkulator], you can use it to approximate tax burden when working as a full time entrepreneur under flat rate taxation and decide if going self-employed is a good choice.
+I made flat rate taxation calculator based on Excel table found on [NAV website](https://nav.gov.hu/pfile/file?path=/ado/uj-kata/vallalkozoi-kalkulator), you can use it to approximate tax burden when working as a full time entrepreneur under flat rate taxation and decide if going self-employed is a good choice.
 
 # Flat rate tax calculator 2022
 
@@ -105,5 +105,5 @@ The calculator can be used to make predictions based on simplified assumptions, 
 
 Flat rate taxation provides good alternative to KATA system, for Software Engineer consultant tax burden is around 30% or even less. Cobined with inherited freedom of being self-employed I think it is good alternative for working as an employee.
 
-In next posts I will cover topics of business registration wth web portal, bank account, and managing invoices. 
+In next posts I will cover topics of business registration using web portal, bank account, and managing invoices. 
 
