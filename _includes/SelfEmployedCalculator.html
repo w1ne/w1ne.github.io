@@ -57,7 +57,7 @@
             $("#PersonalIncomeTax").text(PersonalIncomeTax.toLocaleString('en', {useGrouping:true}));
 
             var SocialSecurity = calculateSocialSecurity(TaxFreePeriod, MonthlyMinContrib, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree);
-            $("#SocialSecurity").text(SocialSecurit.toLocaleString('en', {useGrouping:true}));
+            $("#SocialSecurity").text(SocialSecurity.toLocaleString('en', {useGrouping:true}));
 
             var SocialContributionTax = calculateSocialContributionTax(TaxFreePeriod, MonthlyMinFund, TaxablePeriod, IncomePerMonth, TaxableIncomePartTaxFree);
             $("#SocialContributionTax").text(SocialContributionTax.toLocaleString('en', {useGrouping:true}));
