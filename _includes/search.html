@@ -6,7 +6,7 @@
 	SimpleJekyllSearch({
 	  searchInput: document.getElementById('search'),
 	  resultsContainer: document.getElementById('results'),
-	  searchResultTemplate: '<li><a href="{url}" tabindex="1"><p>{title}</p><span>{url}</span></a></li>',
+	  searchResultTemplate: '<li><a href="{url}" tabindex="1"><p>{title}</p></a></li>',
 	  noResultsText: '<li><p>No results found!</p></li>',
 	  json: '{{ site.baseurl }}/search.json'
 	})
