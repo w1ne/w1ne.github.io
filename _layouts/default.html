@@ -33,7 +33,7 @@
     </div>
 
     <!-- Search result container -->
-    <div class="search-results position-absolute">
+    <div class="search-results">
       <ul id="results" class="search-results-ul card shadow border border-top-0">
       </ul>
     </div>
@@ -43,7 +43,9 @@
         <ion-icon name="location-outline" size="large"></ion-icon>
       </a> -->
     </div>
-  </div>
+    <div class="toc-container">
+      {% include toc.html html=content %}
+    </div>
   </div>
 
   <div class="wrapper-masthead">
