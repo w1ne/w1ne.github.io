@@ -6,11 +6,12 @@ permalink: /about/
 
 <img style="float: left; padding-left: 0px; padding-bottom: 10px; padding-right: 20px;" src="/images/img/me.jpg" > Welcome to Andrii Shylenko personal website. This blog is about topics Andrii is fascinated with, including Firmware and profuct development from the proof of concept to the manufacturing phase, as well as bo0ks, robots, leadership and communication skills.
 
-**Need assistance buiding a rock solid, agile and secure Firmware for your IoT project? Drop Andrii a [message](mailto:andrii@shylenko.com)**
+
+**Need assistance buiding a rock solid, agile and secure Firmware for your IoT project? Drop Andrii a [message](mailto:andrii@shylenko.com).**
+
+
 
 # Bio
-
-
 
 As an Embedded Software Engineer Andrii is connecting industrial machines to the cloud. He does research and development for IoT systems, from the specification to architecture, firmware and validation.
 
