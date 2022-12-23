@@ -4,7 +4,9 @@ title: About
 permalink: /about/
 ---
 
-<img style="float: left; padding-left: 0px; padding-bottom: 10px; padding-right: 20px;" src="/images/img/me.jpg" > Welcome to Andrii Shylenko personal website. This blog is about topics Andrii is fascinated with, including Embedded Software development from the proof of concept to the manufacturing phase, as well as [books](https://n1n3.net/BooksNotes), robots and communication skills.
+<img style="float: left; padding-left: 0px; padding-bottom: 10px; padding-right: 20px;" src="/images/img/me.jpg" > Welcome to Andrii Shylenko personal website. This blog is about topics Andrii is fascinated with, including Firmware and profuct development from the proof of concept to the manufacturing phase, as well as bo0ks, robots, leadership and communication skills.
+
+**Need assistance buiding a rock solid, agile and secure Firmware for your IoT project? Drop Andrii a [message](mailto:andrii@shylenko.com)**
 
 # Bio
 
@@ -12,9 +14,9 @@ permalink: /about/
 
 As an Embedded Software Engineer Andrii is connecting industrial machines to the cloud. He does research and development for IoT systems, from the specification to architecture, firmware and validation.
 
-At his spare time he builds 3d printers, dances salsa,  learns the art of massage therapy, entrepreneurship, and public speaking.
+At his spare time he builds 3d printers, dances salsa, learns the art of massage therapy, entrepreneurship, and public speaking.
 
-Andrii has gathered a diverse listing of education and work background.
+Andrii has gathered a diverse listing of education and work background while working as a consultant for companies building digital devices.
 
 ## Professional experience
 
@@ -26,7 +28,9 @@ Embedded Software Engineer at ifm ecolink R&D department, where he is created In
 
 Firmware Engineer ar Itron, Inc. Where he designed architecture, code, tests and documentation for a new generation of ultrasonic water meters.
 
-Embedded IoT Engineer ar Railnova SA, Where he is Reverse Engineered of data interfaces on locomotives 🚂 and did embedded Linux development.
+Embedded IoT Engineer ar Railnova SA. Where he Reverse Engineered data interfaces on locomotives 🚂 and did embedded Linux development.
+
+Currently Adrii works as a independent consultant for Architecture and Firmware used in IoT systems. 
 
 ## Education
 
