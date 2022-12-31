@@ -255,10 +255,13 @@ nav {
 }
 
 .nav-slider-button button{
+  color: var(--bg-secondary);
+  background: var(--bg-additional);
   height: 50px;
   width: 50px;
   border-radius: 50%;
   opacity: 70%;
+  cursor: pointer;
 }
 
 .nav-slider-open .nav-slider {
@@ -300,8 +303,8 @@ nav {
   cursor: pointer;
 }
 
-.nav-slider-close:hover, .nav-slider-night:hover, nav-slider-contact:hover{
-  background: rgba(255, 255, 255, 0.1);
+.nav-slider-close:hover, .nav-slider-night:hover, .nav-slider-contact:hover, .nav-slider-button button:hover{
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-slider-links-container {
@@ -324,7 +327,7 @@ nav {
 }
 
 .nav-slider__link:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .main-search{
