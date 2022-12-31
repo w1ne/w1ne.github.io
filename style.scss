@@ -17,10 +17,11 @@ html {
   font-size: 100%;
 }
 
+
 body {
-  background: $white;
+  background: var(--bg);
   font: 18px/1.4 $bodyfont;
-  color: $darkGray;
+  color: var(--text);
 }
 
 .container {
@@ -31,10 +32,9 @@ body {
 }
 
 
-
 h1, h2, h3, h4, h5, h6 {
   font-family: $headerfont;
-  color: $darkerGray;
+  color: var(--headings);
   font-weight: bold;
 
   line-height: 1.7;
@@ -63,7 +63,7 @@ h3 {
 
 h4 {
   font-size: 18px;
-  color: $gray;
+  color: var(--bg-secondary);
 }
 
 p {
@@ -71,11 +71,11 @@ p {
 }
 
 a {
-  color: $blue;
+  color: var(--links);
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: var(--links);
   }
 }
 
@@ -119,17 +119,17 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;
+  color: var(--bg-secondary);
 }
 
 // Specify the color of the selection
 ::-moz-selection {
   color: $black;
-  background: $lightGray;
+  background: var(--bg-additional);
 }
 ::selection {
   color: $black;
-  background: $lightGray;
+  background: var(--bg-additional);
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -163,7 +163,7 @@ img {
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid var(--bg-additional);
   @include mobile {
     text-align: center;
   }
@@ -198,7 +198,7 @@ img {
 
 .site-name {
   margin: 0;
-  color: $darkGray;
+  color: var(--text);
   cursor: pointer;
   font-family: $headerfont;
   font-weight: 300;
@@ -208,7 +208,7 @@ img {
 
 .site-description {
   margin: -5px 0 0 0;
-  color: $gray;
+  color: var(--bg-secondary);
   font-size: 16px;
 
   @include mobile {
@@ -231,14 +231,14 @@ nav {
 
   a {
     margin-left: 20px;
-    color: $darkGray;
+    color: var(--nav-links);
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
 
     @include mobile {
       margin: 0 10px;
-      color: $blue;
+      color: var(--links);
     }
   }
 }
@@ -269,32 +269,39 @@ nav {
   transform: translateX(-350px);
 }
 
+
 .nav-slider {
   width: 250px;
   height: 100vh;
   position: fixed;
   top: 0;
   right: 0;
-  background: $lightGray;
+  background: var(--bg-additional);
   transform: translateX(350px);
   transition: transform 0.2s;
   overflow: hidden;
   z-index: 10;
 }
 
-.nav-slider-close {
+.nav-slider-buttons{
   background: none;
+  justify-content: space-between;
   display: flex;
+  cursor: pointer;
+}
+
+.nav-slider-close, .nav-slider-night, .nav-slider-contact {
+  background: none;
   align-items: center;
   border: none;
-  padding: 15px 25px;
-  color: $gray;
+  padding: 10px 15px;
+  color: var(--bg-secondary);
   margin-right: auto;
   cursor: pointer;
 }
 
-.nav-slider-close:hover {
-  background: rgba(255, 255, 255, 0.05);
+.nav-slider-close:hover, .nav-slider-night:hover, nav-slider-contact:hover{
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-slider-links-container {
@@ -338,16 +345,16 @@ nav {
 }
 
 .search:hover, .search:focus {
-  border: 1.5px solid $blue;
+  border: 1.5px solid var(--links);
   background-color: white;
 }
 
 .search-results a {
-  color: $darkerGray;
+  color: var(--bg-secondary);
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: var(--links);
   }
 }
 //
@@ -360,7 +367,7 @@ nav {
 
 .posts > .post {
   padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid var(--bg-additional);
 }
 
 .posts > .post:last-child {
@@ -373,7 +380,7 @@ nav {
     margin: 1.8em .8em;
     border-left: 2px solid $gray;
     padding: 0.1em 1em;
-    color: $gray;
+    color: var(--bg-secondary);
     font-size: 22px;
     font-style: italic;
   }
@@ -423,7 +430,7 @@ nav {
   margin-top: 50px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
+  background-color: var(--bg-additional);
 }
 
 footer {
@@ -441,6 +448,15 @@ footer {
 {
   margin: 0 auto;
   display: block;
+}
+
+// night transition
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+    transition: all 650ms !important;
+    transition-delay: 0 !important;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

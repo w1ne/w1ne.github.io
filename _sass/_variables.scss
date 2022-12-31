@@ -14,8 +14,29 @@ $gray: #666;
 $lightGray: #eee;
 $white: #fff;
 
+html {
+    --bg: #fff;
+    --bg-secondary: #666;
+    --bg-additional: #eee;
+    --nav-links: #333;
+    --headings: #333;
+    --links: #4183C4;
+    --text: #333;
+}
+
+html[data-theme='dark'] {
+    --bg: #212121;
+    --bg-secondary: #666;
+    --bg-additional: #3f3f3f;
+    --nav-links: #bb86fc;
+    --headings: #bb86fc;
+    --links: #4183C4;
+    --text: #dcdcdc
+}
+
+
 //Header
-$masthead-height            : 100px;
+$masthead-height            : 90px;
 
 // Font stacks
 $bodyfont: Canva Sans,Noto Sans Variable,Noto Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
