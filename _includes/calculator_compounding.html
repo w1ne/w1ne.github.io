@@ -65,18 +65,18 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
         // Define the dimensions of the visualization
-        let margin = { top: 20, right: 30, bottom: 30, left: 40 };
-        let width = document.querySelector('.chart').clientWidth - margin.left - margin.right;
-        let height = 500 - margin.top - margin.bottom;
+	let chartMargin = { top: 20, right: 30, bottom: 30, left: 40 };
+	let chartWidth = document.querySelector('.chart').clientWidth - chartMargin.left - chartMargin.right;
+	let chartHeight = 500 - chartMargin.top - chartMargin.bottom;
 
         // Create an SVG element to contain the visualization,
         // and create a "g" element to group the main elements
         let svg = d3.select(".chart")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("width", chartWidth + chartMargin.left + chartMargin.right)
+            .attr("height", chartHeight + chartMargin.top + chartMargin.bottom)
             .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform", "translate(" + chartMargin.left + "," + chartMargin.top + ")");
 
         // Create the initial investment chart
         createChart(5000, 5, 0.05, 200, 0.2);
@@ -147,14 +147,14 @@
             // Add X axis
             let x = d3.scaleLinear()
                 .domain([0, d3.max(mainData, function(d) { return +d.time; })])
-                .range([0, width]);
+                .range([0, chartWidth]);
 
             svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
+                .attr("transform", "translate(0," + chartHeight + ")")
                 .call(d3.axisBottom(x))
                 .append("text")
                 .attr("fill", "#000")
-                .attr("x", width)
+                .attr("x", chartWidth)
                 .attr("dy", "-0.71em")
                 .attr("text-anchor", "end")
                 .text("Years");
@@ -162,7 +162,7 @@
             // Add Y axis
             let y = d3.scaleLinear()
                 .domain([0, d3.max(mainData, function(d) { return +d.value; })])
-                .range([height, 0]);
+                .range([chartHeight, 0]);
 
             svg.append("g")
                 .call(d3.axisLeft(y).tickFormat(d3.format(",.0f")))
