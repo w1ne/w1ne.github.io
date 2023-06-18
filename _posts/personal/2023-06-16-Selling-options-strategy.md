@@ -63,7 +63,7 @@ The wheel, also known as the cash-secured put and covered call strategy, is an o
 
 The primary risks are potential losses if the stock's price falls significantly (in the case of selling puts) or if the stock's price rises substantially, and you miss out on the gains (in the case of selling covered calls).
 
-I like to sell 30-45 days weeklies, using 50% for a and -100% for the stop loss. One of my favorite stocks is F, it pays good dividends, is relatively stable, has high Implied Volatility and pays dividends.
+I like to sell 30-45 days weeklies, using 50% for a profit and -100% for the stop loss. One of my favorite stocks is F, it pays good dividends, is relatively stable, has high Implied Volatility and pays dividends.
 
 Let's do a rough estimation applying a wheel options trading strategy to reach 100K goals by a combination of saving and trading. It is a simplified example that doesn't account for changes in market conditions, stock performance, or the potential risks involved in using leverage.
 
