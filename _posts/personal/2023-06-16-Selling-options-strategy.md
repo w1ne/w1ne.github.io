@@ -131,9 +131,10 @@ Aaccording to the calculations, the sweet spot is **$1000** saving rate per mont
 
 This is a rough estimation and doesn't account for changes in market conditions, stock performance, or the risks associated with using leverage.
 
-You can simulate options return (assuming monthly compounding) in the calcualtor below:
+You can simulate options return (assuming monthly compounding) in the calcualtor below.
 
 {% include calculator_compounding.html %}
+
 
 # Risks
 Does the Options way worth the trouble? As established at the beginning of the post, passive investment can allow achieving 100k in 5-7 years in a low-risk way, compared to the conservative options trading method which can generate 100k in 3 years, but is much more riskier.
