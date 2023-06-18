@@ -1,0 +1,229 @@
+<style>
+  .axis path,
+  .axis line {
+      fill: none;
+      stroke: grey;
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+  }
+  .chart {
+      margin: auto;
+      width: 800px;
+      height: 500px;
+  }
+</style>
+
+<div class="CompoundingClaculator">
+    <h2>Visualizing Investment Returns</h2>
+
+    <p><strong>X-Axis (Time in Years):</strong> The x-axis of the graph represents the time period of the investment in years. It starts from 0 and extends up to the number of years entered as input. The axis adjusts dynamically as the number of years is changed by the user.</p>
+
+    <p><strong>Y-Axis (Investment Value):</strong> The y-axis of the graph represents the total value of the investment. It also scales dynamically based on the data. The investment value is calculated by taking into account the initial investment, monthly contributions, compounded returns, and annual tax deductions.</p>
+
+    <p><strong>Savings Area (in light green):</strong> This is a colored area on the graph that represents the value of your principal plus any additional monthly contributions over time, without accounting for any returns on the investment. This value increases linearly as you keep adding the monthly contributions.</p>
+
+    <p><strong>Returns Area (in orange):</strong> This is another colored area that covers the gap between the savings area and the line representing the total investment value. It represents the returns you are getting on your investment. This area grows larger with time as the effect of compound interest becomes more significant.</p>
+
+    <p><strong>Investment Value Line (in steelblue):</strong> This line represents the total value of your investment over time. It is calculated by adding the monthly contributions and the returns (including the effect of compounding), and subtracting the tax.</p>
+
+    <p>By comparing the savings area with the returns area, you can clearly visualize the impact of your return rate on your investment over time. The wider the returns area becomes (compared to the savings area), the more earnings you are generating from your investment.</p>
+
+    <p>Likewise, by observing the movement of the investment value line, you can see the overall growth of your investment, including the effects of compounding, contributions, and taxation. The dynamic nature of the graph lets you instantly see how changes in the investment parameters affect your returns and overall investment growth.</p>
+    <p></p>
+    <label for="initial">Initial Investment:</label>
+    <input type="number" id="initial" name="initial" min="1" value="1000">
+
+    <label for="years">Years:</label>
+    <input type="number" id="years" name="years" min="1" max="100" value="10">
+
+    <label for="return">Monthly return (%):</label>
+    <input type="number" id="return" name="return" min="1" max="100" value="3">
+
+    <label for="contribution">Monthly contribution:</label>
+    <input type="number" id="contribution" name="contribution" min="0" value="100">
+
+    <label for="tax">Tax rate (%):</label>
+    <select name="tax" id="tax">
+        <option value="0">0%</option>
+        <option value="5">5%</option>
+        <option value="10">10%</option>
+        <option value="15">15%</option>
+        <option value="20">20%</option>
+        <option value="25">25%</option>
+        <option value="30">30%</option>
+        <option value="35">35%</option>
+        <option value="40">40%</option>
+        <option value="45">45%</option>
+        <option value="50">50%</option>
+    </select>
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<div class="chart"></div>
+
+<script>    
+        // Define the dimensions of the visualization
+        let margin = { top: 20, right: 30, bottom: 30, left: 40 };
+        let width = 760 - margin.left - margin.right;
+        let height = 500 - margin.top - margin.bottom;
+
+        // Create an SVG element to contain the visualization,
+        // and create a "g" element to group the main elements
+        let svg = d3.select(".chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        // Create the initial investment chart
+        createChart(5000, 5, 0.05, 200, 0.2);
+        
+        // Function to create a chart
+        function createChart(principal, years, annualReturn, monthlyContribution, tax) {
+            let data = generateData(principal, years, annualReturn, monthlyContribution, tax);
+            drawChart(data);
+        }
+
+        // Generate initial data
+        let data = generateData(1000, 1, 5, 100, 0);
+
+        // Draw initial chart
+        drawChart(data);
+
+        function generateData(initialInvestment, years, returnPercent, monthlyContribution, taxRate) {
+          let data = [];
+          let principal = parseFloat(initialInvestment);
+          let monthlyReturnPercent = parseFloat(returnPercent) / 100; // Monthly return percentage
+          let monthlyContributionAmount = parseFloat(monthlyContribution);
+          let tax = parseFloat(taxRate) / 100; // Tax rate
+          let saving = 0;
+
+          for (let i = 0; i <= years * 12; i++) { // Iterate by month
+            let time = i / 12;
+
+            if(i == 0) {
+              saving = principal;  // Count the initial investment as savings at the start
+            }
+            else {
+              saving = saving + monthlyContributionAmount; // Calculate value of saving without compounding
+            }
+
+            let returns = principal * monthlyReturnPercent; // Calculate returns based on principal
+            principal = principal + returns + monthlyContributionAmount; // Add returns and monthly contribution to principal
+
+            let taxableReturns = returns;
+            if (i > 0 && i % 12 === 0) { // Apply tax at the end of each year
+              let previousYearPrincipal = data[i - 12].value; // Get principal from the previous year
+              let annualReturns = principal - previousYearPrincipal; // Calculate annual returns
+              let taxAmount = annualReturns * tax; // Calculate tax amount
+              principal -= taxAmount; // Subtract tax from principal
+              taxableReturns -= taxAmount; // Subtract tax from returns for tax calculation
+            }
+
+            data.push({ time: time, value: principal, saving: saving, returns: returns, taxableReturns: taxableReturns });
+          }
+          return data;
+        }
+	// Function to create a chart
+	function createChart(principal, years, annualReturn, monthlyContribution, tax) {
+	    let data = generateData(principal, years, annualReturn, monthlyContribution, tax);
+	    drawChart(data);
+	}
+        // Function to draw chart
+        function drawChart(data) {
+            // Clear SVG
+            svg.selectAll("*").remove();
+
+            // Add X axis
+            let x = d3.scaleLinear()
+              .domain([0, d3.max(data, function(d) { return +d.time; })])
+              .range([ 0, width ]);
+
+            svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x))
+              .append("text")
+              .attr("fill", "#000")
+              .attr("x", width)
+              .attr("dy", "3em")
+              .attr("text-anchor", "end")
+              .text("Years");
+
+            // Add Y axis
+            let y = d3.scaleLinear()
+              .domain([0, d3.max(data, function(d) { return +d.value; })])
+              .range([ height, 0 ]);
+
+            svg.append("g")
+              .call(d3.axisLeft(y).tickFormat(d3.format(",.0f")))
+              .append("text")
+              .attr("fill", "#000")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 6)
+              .attr("dy", "0.71em")
+              .attr("text-anchor", "end")
+              .text("Return(USD)");
+
+            // Add saving area
+            let savingArea = d3.area()
+              .x(function(d) { return x(d.time); })
+              .y0(y(0))
+              .y1(function(d) { return y(d.saving); });
+
+            svg.append("path")
+              .datum(data)
+              .attr("fill", "lightgreen")
+              .attr("d", savingArea);
+
+            // Add returns area
+            let returnsArea = d3.area()
+              .x(function(d) { return x(d.time); })
+              .y0(function(d) { return y(d.saving); })
+              .y1(function(d) { return y(d.value); });
+
+            svg.append("path")
+              .datum(data)
+              .attr("fill", "orange")
+              .attr("d", returnsArea);
+
+            // Add investment value line
+            let line = d3.line()
+              .x(function(d) { return x(d.time); })
+              .y(function(d) { return y(d.value); });
+
+            svg.append("path")
+              .datum(data)
+              .attr("fill", "none")
+              .attr("stroke", "steelblue")
+              .attr("stroke-width", 1.5)
+              .attr("d", line);
+        }
+
+        // Get references to the input elements
+        let initialInvestmentInput = document.getElementById("initial");
+        let yearsInput = document.getElementById("years");
+        let returnInput = document.getElementById("return");
+        let contributionInput = document.getElementById("contribution");
+        let taxInput = document.getElementById("tax");
+
+        // Add event listeners to input elements
+        initialInvestmentInput.addEventListener("input", updateChart);
+        yearsInput.addEventListener("input", updateChart);
+        returnInput.addEventListener("input", updateChart);
+        contributionInput.addEventListener("input", updateChart);
+        taxInput.addEventListener("input", updateChart);
+
+        // Function to update chart when input values change
+        function updateChart() {
+            let newInitialInvestment = initialInvestmentInput.value;
+            let newYears = yearsInput.value;
+            let newReturnPercent = returnInput.value;
+            let newMonthlyContribution = contributionInput.value;
+            let newTaxRate = taxInput.value;
+
+            let newData = generateData(newInitialInvestment, newYears, newReturnPercent, newMonthlyContribution, newTaxRate);
+            drawChart(newData);
+        }
+</script>

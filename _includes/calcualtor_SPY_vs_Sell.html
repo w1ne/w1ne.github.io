@@ -1,0 +1,74 @@
+<div class="OptionsVSCalculator">
+    <h2>Selling Option vs. SPY Return Calculator</h2>
+        
+            <h1>About the Calculator</h1>
+    <p>Our calculator takes into consideration important metrics like the option strike price, option price, time to expiration, and trading commission. It also includes a configurable SPY annual growth rate, allowing you to set your expectation of SPY growth, with options ranging from 5% to 20%.</p>
+    
+    <h1>How it Works</h1>
+    <p>Here's a quick overview of how the calculations are made:</p>
+    <ol>
+        <li>The calculator first computes the daily return you'd get from selling the option, taking into account the net option premium (option price minus commission) and the total amount of capital required (strike price x 100 shares) for the duration until the option's expiration.</li>
+        <li>It then calculates the potential daily return from investing the same amount of capital in SPY shares, considering the annual growth rate you've set.</li>
+        <li>Finally, it compares these two daily returns and provides a verdict on whether it might be more beneficial to sell the option or invest in SPY.</li>
+    </ol>
+    
+    <h1>Why Use This Calculator</h1>
+    <p>This tool is particularly handy for those who sell options but also consider alternative investment strategies, such as passive investing in index funds like SPY. It provides a quantitative perspective on whether selling a particular option is worth it compared to simply investing in SPY, given your assumptions about its annual growth.</p>
+    
+    <p>We hope this calculator will assist you in your trading decisions and help optimize your investing strategies. Please keep in mind that all investments carry risks, and past performance does not guarantee future results. Always do your research. Happy trading!</p>
+
+        <form id="OptionsVSCalculatorForm">
+            <label for="optionStrikePrice">Option Strike Price (USD):</label><br>
+            <input type="number" id="optionStrikePrice" name="optionStrikePrice" value="20"><br><br>
+            <label for="optionPrice">Option Price (USD):</label><br>
+            <input type="number" id="optionPrice" name="optionPrice" value="35"><br><br>
+            <label for="timeToExpiration">Time to Expiration (Days):</label><br>
+            <input type="number" id="timeToExpiration" name="timeToExpiration" value="30"><br><br>
+            <label for="commission">Commission (USD):</label><br>
+            <input type="number" id="commission" name="commission" value="1.0"><br><br>
+            <label for="spyGrowth">SPY Annual Growth (Percentage):</label><br>
+            <select id="spyGrowth" name="spyGrowth">
+                <option value="5">5%</option>
+                <option value="10" selected>10%</option>
+                <option value="15">15%</option>
+                <option value="20">20%</option>
+            </select><br><br>
+            <input type="submit" value="Calculate">
+        </form>
+
+        <div class="result" id="result">
+</div>
+<script>
+    function calculateOptionReturn(strikePrice, optionPrice, timeToExpiration, commission) {
+        var netOptionPremium = optionPrice - commission;
+        var optionReturnPerDay = netOptionPremium / timeToExpiration;
+        return optionReturnPerDay;
+    }
+
+    function calculateSPYReturn(strikePrice, spyGrowth, timeToExpiration) {
+        var potentialInvestmentInSPY = strikePrice * 100;
+        var spyAnnualReturn = potentialInvestmentInSPY * (spyGrowth / 100);
+        var spyReturnPerDay = spyAnnualReturn / 365;
+        return spyReturnPerDay;
+    }
+
+    document.getElementById('OptionsVSCalculatorForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var optionStrikePrice = parseFloat(document.getElementById('optionStrikePrice').value);
+        var optionPrice = parseFloat(document.getElementById('optionPrice').value);
+        var timeToExpiration = parseFloat(document.getElementById('timeToExpiration').value);
+        var commission = parseFloat(document.getElementById('commission').value);
+        var spyGrowth = parseFloat(document.getElementById('spyGrowth').value);
+
+        var optionReturnPerDay = calculateOptionReturn(optionStrikePrice, optionPrice, timeToExpiration, commission);
+        var spyReturnPerDay = calculateSPYReturn(optionStrikePrice, spyGrowth, timeToExpiration);
+
+        var resultText = optionReturnPerDay <= spyReturnPerDay
+            ? 'It is not worth to sell the option. The daily return of the option: <strong>$' + (optionReturnPerDay).toFixed(2) + '</strong>. The daily return of SPY: <strong>$' + (spyReturnPerDay).toFixed(2) + '</strong>.'
+            : 'It might be worth to sell the option. The daily return of the option: <strong>$' + (optionReturnPerDay).toFixed(2) + '</strong>. The daily return of SPY: <strong>$' + (spyReturnPerDay).toFixed(2) + '</strong>.';
+
+        document.getElementById('result').innerHTML = resultText;
+    });
+</script>
+
