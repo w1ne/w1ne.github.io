@@ -239,14 +239,13 @@
 		headerRow.appendChild(headerCell);
 	    }
 
-	    // Extract relevant data from mainData for the summary table
 	    let summaryData = [];
 	    for (let i = 0; i < mainData.length; i += 12) {
-		let year = Math.floor(mainData[i].time);
-		let returns = mainData[i].value.toFixed(2);
-		let spyReturns = spyData[i].value.toFixed(2);
-		let savings = mainData[i].saving.toFixed(2);
-		summaryData.push({ year, returns, spyReturns, savings });
+	      let year = Math.floor(mainData[i].time);
+	      let returns = mainData[i].value.toLocaleString();
+	      let spyReturns = spyData[i].value.toLocaleString();
+	      let savings = mainData[i].saving.toLocaleString();
+	      summaryData.push({ year, returns, spyReturns, savings });
 	    }
 
 	    // Populate the table with data rows
