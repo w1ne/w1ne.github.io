@@ -116,26 +116,6 @@ The tax on this profit would be $3,480 * 0.15 = $522.
 By the end of year 2 (24 months), we would have approximately $29,916 ($14,958 * 2). In the 3rd year, we will reach $100,000.
 **It is very optimistic scenario, in reality there will be failed trades, usual success rate is around 60-70% for my trades. 3% return per month equals to 36% year return. 1% per month is much more realistic expectation.**
 
-You can simulate option return (assuming monthly compounding) in the calcualator below.
-
-## Compound investment growth over time calcualtor
-This calculator is an interactive web-based tool that allows you to visualize how your investment will grow over time:
-The calculator has five adjustable parameters:
-
-**Initial Investment** This is the initial amount that the user invests.
-**Years** This is the duration for which the investment will be held.
-**Return (%)** This is the expected annual return rate on the investment.
-**Monthly contribution** This is the amount that will be added to the investment every month.
-**Tax rate (%)** This is the annual tax rate applied to the investment gains.
-
-The chart is divided into two distinct areas:
-
-**Light Green Area** This area represents the total amount of money that the user has contributed to the investment over time, including the initial investment and all subsequent monthly contributions.
-
-**Orange Area** This area signifies the total returns on the investment, calculated based on the set annual return rate and adjusted for taxes.
-
-There's also a line (in blue) tracing the total value of the investment over time. 
-
 ## How much the monthly contribution influences the time to get to the 100k?
 
 The approximate number of months it would take to reach $100,000 for each scenario, assuming a 3% average monthly return (optimistic), 15% yearly tax on profit, and $1 commission per contract. The initial balance is $5,000 and 2x leverage as previously mentioned is used.
@@ -151,7 +131,7 @@ Aaccording to the calculations, the sweet spot is **$1000** saving rate per mont
 
 This is a rough estimation and doesn't account for changes in market conditions, stock performance, or the risks associated with using leverage.
 
-To play with numbers you can use my compunding calculator below.
+You can simulate options return (assuming monthly compounding) in the calcualtor below:
 
 {% include calculator_compounding.html %}
 
