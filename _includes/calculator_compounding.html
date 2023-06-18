@@ -7,8 +7,9 @@
       shape-rendering: crispEdges;
   }
   .chart {
-      width: 100%;
-      margin: auto;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
   }
 </style>
 
@@ -64,7 +65,7 @@
 <script>    
         // Define the dimensions of the visualization
         let margin = { top: 20, right: 30, bottom: 30, left: 40 };
-        let width = 760 - margin.left - margin.right;
+        let width = document.querySelector('.chart').clientWidth - margin.left - margin.right;
         let height = 500 - margin.top - margin.bottom;
 
         // Create an SVG element to contain the visualization,
