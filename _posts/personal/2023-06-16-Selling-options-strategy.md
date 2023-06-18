@@ -160,14 +160,14 @@ If Ford's options become less liquid, it might be harder to enter and exit posit
 
 Here is my risk mitigation plan for selling options to reach 100,000 in the investment account.
 
-1. Save $5000 which you I am ready to lose. In my opinion, trading options with less than 5000 is time-consuming with low returns. Not worth the trouble. Better to just put it into good ETF.
-2. At $5,000 to $10,000
+1. Save **$5000** which you I am ready to lose. In my opinion, trading options with less than 5000 is time-consuming with low returns. Not worth the trouble. Better to just put it into good ETF.
+2. At **$5,000 to $10,000**
 sell CSPs (cash-secured puts) on Ford, make ~$30/month, and when assigned, practice the wheel.
 The initial goal with $5000 is to have running two CSPs on liquid stocks < $25
 With $10,000 it is possible to manage 5 different positions in 5 uncorrelated companies/products, ideally with no single company with more than 20% dominance of the portfolio. I am trying not to manage more than 5 company stocks at once, as it is easy to lose track.
-3. Above $10,000
+3. **Above $10,000**
 start adding index strangles, the goal is to learn how to manage undefined risk trades
-4. Above $20,000 
+4. **Above $20,000**
 The goal at this point is to get individual exposure down to 5% per company and run CSP and wheels on indexes.
 
 ## My General rules for selling Options
