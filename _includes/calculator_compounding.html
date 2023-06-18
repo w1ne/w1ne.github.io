@@ -65,33 +65,78 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
 	(function() {
-	    // Define the dimensions of the visualization
-	    let chartMargin = { top: 20, right: 30, bottom: 30, left: 40 };
-	    let chartWidth = document.querySelector('.chart').clientWidth - chartMargin.left - chartMargin.right;
-	    let chartHeight = 500 - chartMargin.top - chartMargin.bottom;
+        // Define the dimensions of the visualization
+        let margin = { top: 20, right: 30, bottom: 30, left: 40 };
+        let width = document.querySelector('.chart').clientWidth - margin.left - margin.right;
+        let height = 500 - margin.top - margin.bottom;
 
-	    // Create an SVG element to contain the visualization,
-	    // and create a "g" element to group the main elements
-	    let svg = d3.select(".chart")
-		.append("svg")
-		.attr("width", chartWidth + chartMargin.left + chartMargin.right)
-		.attr("height", chartHeight + chartMargin.top + chartMargin.bottom)
-		.append("g")
-		.attr("transform", "translate(" + chartMargin.left + "," + chartMargin.top + ")");
+        // Create an SVG element to contain the visualization,
+        // and create a "g" element to group the main elements
+        let svg = d3.select(".chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	    // Create the initial investment chart
-	    createChart(5000, 5, 0.05, 200, 0.2);
+        // Create the initial investment chart
+        createChart(5000, 5, 0.05, 200, 0.2);
 
-	    // Function to create a chart
-	    function createChart(principal, years, annualReturn, monthlyContribution, tax) {
-		let data = generateData(principal, years, annualReturn, monthlyContribution, tax);
-		drawChart(data);
-	    }
+        // Function to create a chart
+        function createChart(principal, years, annualReturn, monthlyContribution, tax) {
+            let data = generateData(principal, years, annualReturn, monthlyContribution, tax);
+            drawChart(data);
+        }
 
-	       // Generate initial data
+        // Generate initial data
         let data = generateData(1000, 1, 5, 100, 0);
-        
-               // Function to draw chart
+
+        // Draw initial chart
+        drawChart(data);
+        drawSummaryTable(data);
+
+        function generateData(initialInvestment, years, returnPercent, monthlyContribution, taxRate) {
+            let data = [];
+            let spyData = []; // SPY returns data array
+            let principal = parseFloat(initialInvestment);
+            let spyPrincipal = parseFloat(initialInvestment); // SPY principal
+            let monthlyReturnPercent = parseFloat(returnPercent) / 100; // Monthly return percentage
+            let spyMonthlyReturnPercent = 0.1 / 12; // SPY monthly return percentage (10% annual return)
+            let monthlyContributionAmount = parseFloat(monthlyContribution);
+            let tax = parseFloat(taxRate) / 100; // Tax rate
+            let saving = 0;
+
+            for (let i = 0; i <= years * 12; i++) { // Iterate by month
+                let time = i / 12;
+
+                if (i === 0) {
+                    saving = principal;  // Count the initial investment as savings at the start
+                } else {
+                    saving = saving + monthlyContributionAmount; // Calculate value of saving without compounding
+                }
+
+                let returns = principal * monthlyReturnPercent; // Calculate returns based on principal
+                principal = principal + returns + monthlyContributionAmount; // Add returns and monthly contribution to principal
+
+                let spyReturns = spyPrincipal * spyMonthlyReturnPercent; // Calculate SPY returns based on principal
+                spyPrincipal = spyPrincipal + spyReturns + monthlyContributionAmount; // Add SPY returns and monthly contribution to principal
+
+                let taxableReturns = returns;
+                if (i > 0 && i % 12 === 0) { // Apply tax at the end of each year
+                    let previousYearPrincipal = data[i - 12].value; // Get principal from the previous year
+                    let annualReturns = principal - previousYearPrincipal; // Calculate annual returns
+                    let taxAmount = annualReturns * tax; // Calculate tax amount
+                    principal -= taxAmount; // Subtract tax from principal
+                    taxableReturns -= taxAmount; // Subtract tax from returns for tax calculation
+                }
+
+                data.push({ time: time, value: principal, saving: saving, returns: returns, taxableReturns: taxableReturns });
+                spyData.push({ time: time, value: spyPrincipal }); // Add SPY returns to data
+            }
+            return [data, spyData];
+        }
+
+        // Function to draw chart
         function drawChart(data) {
             // Clear SVG
             svg.selectAll("*").remove();
@@ -103,13 +148,14 @@
             // Add X axis
             let x = d3.scaleLinear()
                 .domain([0, d3.max(mainData, function(d) { return +d.time; })])
-                .range([0, chartWidth]);
+                .range([0, width]);
 
             svg.append("g")
-                .attr("transform", "translate(0," + chartHeight + ")")
+                .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x))
+                .append("text")
                 .attr("fill", "#000")
-                .attr("x", chartWidth)
+                .attr("x", width)
                 .attr("dy", "-0.71em")
                 .attr("text-anchor", "end")
                 .text("Years");
@@ -117,7 +163,7 @@
             // Add Y axis
             let y = d3.scaleLinear()
                 .domain([0, d3.max(mainData, function(d) { return +d.value; })])
-                .range([chartHeight, 0]);
+                .range([height, 0]);
 
             svg.append("g")
                 .call(d3.axisLeft(y).tickFormat(d3.format(",.0f")))
@@ -174,52 +220,6 @@
                 .attr("stroke", "red")
                 .attr("stroke-width", 1.5)
                 .attr("d", spyLine);
-        }
-
-        // Draw initial chart
-        drawChart(data);
-        drawSummaryTable(data);
-        })(); // End of IIFE
-
-        function generateData(initialInvestment, years, returnPercent, monthlyContribution, taxRate) {
-            let data = [];
-            let spyData = []; // SPY returns data array
-            let principal = parseFloat(initialInvestment);
-            let spyPrincipal = parseFloat(initialInvestment); // SPY principal
-            let monthlyReturnPercent = parseFloat(returnPercent) / 100; // Monthly return percentage
-            let spyMonthlyReturnPercent = 0.1 / 12; // SPY monthly return percentage (10% annual return)
-            let monthlyContributionAmount = parseFloat(monthlyContribution);
-            let tax = parseFloat(taxRate) / 100; // Tax rate
-            let saving = 0;
-
-            for (let i = 0; i <= years * 12; i++) { // Iterate by month
-                let time = i / 12;
-
-                if (i === 0) {
-                    saving = principal;  // Count the initial investment as savings at the start
-                } else {
-                    saving = saving + monthlyContributionAmount; // Calculate value of saving without compounding
-                }
-
-                let returns = principal * monthlyReturnPercent; // Calculate returns based on principal
-                principal = principal + returns + monthlyContributionAmount; // Add returns and monthly contribution to principal
-
-                let spyReturns = spyPrincipal * spyMonthlyReturnPercent; // Calculate SPY returns based on principal
-                spyPrincipal = spyPrincipal + spyReturns + monthlyContributionAmount; // Add SPY returns and monthly contribution to principal
-
-                let taxableReturns = returns;
-                if (i > 0 && i % 12 === 0) { // Apply tax at the end of each year
-                    let previousYearPrincipal = data[i - 12].value; // Get principal from the previous year
-                    let annualReturns = principal - previousYearPrincipal; // Calculate annual returns
-                    let taxAmount = annualReturns * tax; // Calculate tax amount
-                    principal -= taxAmount; // Subtract tax from principal
-                    taxableReturns -= taxAmount; // Subtract tax from returns for tax calculation
-                }
-
-                data.push({ time: time, value: principal, saving: saving, returns: returns, taxableReturns: taxableReturns });
-                spyData.push({ time: time, value: spyPrincipal }); // Add SPY returns to data
-            }
-            return [data, spyData];
         }
         
 	// Function to draw summary table
@@ -283,16 +283,16 @@
         taxInput.addEventListener("input", updateChart);
 
         // Function to update chart when input values change
-	function updateChart() {
-	    let newInitialInvestment = parseFloat(initialInvestmentInput.value);
-	    let newYears = parseInt(yearsInput.value);
-	    let newReturnPercent = parseFloat(returnInput.value) / 100; // convert to percentage
-	    let newMonthlyContribution = parseFloat(contributionInput.value);
-	    let newTaxRate = parseFloat(taxInput.value) / 100; // convert to percentage
+        function updateChart() {
+            let newInitialInvestment = initialInvestmentInput.value;
+            let newYears = yearsInput.value;
+            let newReturnPercent = returnInput.value;
+            let newMonthlyContribution = contributionInput.value;
+            let newTaxRate = taxInput.value;
 
-	    let newData = generateData(newInitialInvestment, newYears, newReturnPercent, newMonthlyContribution, newTaxRate);
-	    drawChart(newData);
-	    drawSummaryTable(newData);
+            let newData = generateData(newInitialInvestment, newYears, newReturnPercent, newMonthlyContribution, newTaxRate);
+            drawChart(newData);
+            drawSummaryTable(newData);
 	}
+        })(); // End of IIFE
 </script>
-
