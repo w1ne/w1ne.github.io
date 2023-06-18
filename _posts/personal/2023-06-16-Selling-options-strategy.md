@@ -10,7 +10,7 @@ featured-image: 2023-06-16-Selling-options-sytategy/compound-fail.jpg
 featured-image-alt: investinge cringe
 tags: [investings, taxes, calculator, options, puts, calls, money, savings]
 ---
-There are many "profound" sttrategies from "successful" TikTok investors. Usually, they're about as useful as a chocolate teapot or just too cryptic to make any sense.
+There are many "profound" strategies from "successful" TikTok investors. Usually, they're about as useful as a chocolate teapot or just too cryptic to make any sense.
 Check them out here: [https://twitter.com/TikTokInvestors](https://twitter.com/TikTokInvestors).
 In this post I want to concentrate on my trading strategy to get the first $100,000. I hope it will not become as "profound" in the upcoming years of implementation.
 
