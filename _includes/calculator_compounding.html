@@ -221,58 +221,52 @@
                 .attr("d", spyLine);
         }
         
-                // Function to draw summary table
-		// Function to draw summary table
-		function drawSummaryTable(data) {
-		    let summaryContainer = document.getElementById("summary");
-		    let mainData = data[0];
-		    let spyData = data[1];
+	// Function to draw summary table
+	function drawSummaryTable(data) {
+	    let summaryContainer = document.getElementById("summary");
+	    let mainData = data[0];
+	    let spyData = data[1];
 
-		    // Create the table element
-		    let table = document.createElement("table");
+	    // Create the table element
+	    let table = document.createElement("table");
 
-		    // Create the table header row
-		    let headerRow = table.insertRow();
-		    let headers = ["Year", "Option returns", "SPY Returns", "Savings"];
-		    for (let i = 0; i < headers.length; i++) {
-			let headerCell = document.createElement("th");
-			headerCell.textContent = headers[i];
-			headerRow.appendChild(headerCell);
-		    }
+	    // Create the table header row
+	    let headerRow = table.insertRow();
+	    let headers = ["Year", "Option returns", "SPY Returns", "Savings"];
+	    for (let i = 0; i < headers.length; i++) {
+		let headerCell = document.createElement("th");
+		headerCell.textContent = headers[i];
+		headerRow.appendChild(headerCell);
+	    }
 
-		    // Extract relevant data from mainData for the summary table
-		    let summaryData = [];
-		    for (let i = 0; i < mainData.length; i += 12) {
-			let year = Math.floor(mainData[i].time);
-			let returns = parseInt(mainData[i].value);
-			let spyReturns = parseInt(spyData[i].value);
-			let savings = parseInt(mainData[i].saving);
-			summaryData.push({ year, returns, spyReturns, savings });
-		    }
+	    // Extract relevant data from mainData for the summary table
+	    let summaryData = [];
+	    for (let i = 0; i < mainData.length; i += 12) {
+		let year = Math.floor(mainData[i].time);
+		let returns = parseInt(mainData[i].value);
+		let spyReturns = parseInt(spyData[i].value);
+		let savings = parseInt(mainData[i].saving);
+		summaryData.push({ year, returns, spyReturns, savings });
+	    }
 
-		    // Populate the table with data rows
-		    for (let i = 0; i < summaryData.length; i++) {
-			let dataRow = table.insertRow();
-			let yearCell = dataRow.insertCell();
-			yearCell.textContent = summaryData[i].year;
-			let returnsCell = dataRow.insertCell();
-			returnsCell.textContent = summaryData[i].returns;
-			let spyReturnsCell = dataRow.insertCell();
-			spyReturnsCell.textContent = summaryData[i].spyReturns;
-			let savingsCell = dataRow.insertCell();
-			savingsCell.textContent = summaryData[i].savings;
-		    }
-
-		    // Append the table to the summary container
-		    summaryContainer.innerHTML = "";
-		    summaryContainer.appendChild(table);
-		}
-
+	    // Populate the table with data rows
+	    for (let i = 0; i < summaryData.length; i++) {
+		let dataRow = table.insertRow();
+		let yearCell = dataRow.insertCell();
+		yearCell.textContent = summaryData[i].year;
+		let returnsCell = dataRow.insertCell();
+		returnsCell.textContent = summaryData[i].returns;
+		let spyReturnsCell = dataRow.insertCell();
+		spyReturnsCell.textContent = summaryData[i].spyReturns;
+		let savingsCell = dataRow.insertCell();
+		savingsCell.textContent = summaryData[i].savings;
+	    }
 
 	    // Append the table to the summary container
 	    summaryContainer.innerHTML = "";
 	    summaryContainer.appendChild(table);
 	}
+
         // Get references to the input elements
         let initialInvestmentInput = document.getElementById("initial");
         let yearsInput = document.getElementById("years");
