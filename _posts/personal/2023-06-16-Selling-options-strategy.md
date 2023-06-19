@@ -58,8 +58,10 @@ My favorite strategy for investment is the Wheel, as it is generally safe and co
 
 The wheel, also known as the cash-secured put and covered call strategy, is an options trading strategy that involves selling options to generate income. The strategy consists of two main steps:
 
+```
 1. Sell cash-secured put options. First, you sell a put option on a stock you're willing to own. You receive a premium for selling the option, and you're obligated to buy the stock at the strike price if the option is exercised (i.e. if the stock's price falls below the strike price). To secure this obligation, you set aside cash in your account equal to the strike price multiplied by the number of shares in the contract (typically 100 shares per contract).
 2. Sell covered calls. If the put option is exercised and you end up buying the stock, the next step is to sell a call option on the same stock. This call option is "covered" because you own the underlying stock. By selling the call option, you receive a premium and commit to selling the stock at the strike price if the option is exercised (i.e., if the stock's price rises above the strike price).
+```
 
 The primary risks are potential losses if the stock's price falls significantly (in the case of selling puts) or if the stock's price rises substantially, and you miss out on the gains (in the case of selling covered calls).
 
@@ -127,7 +129,7 @@ $1,000	| 39 |	3.25
 $1,500	| 34 |	2.83
 $2,000	| 30 |	2.5
 
-Aaccording to the calculations, the sweet spot is **$1000** saving rate per month. Saving two tims more shortens the time for 9 months, but requeres much more effort.
+According to the calculations, the sweet spot is **$1000** saving rate per month. Saving $2000 more shortens the time for 9 months, but requeres much more effort.
 
 This is a rough estimation and doesn't account for changes in market conditions, stock performance, or the risks associated with using leverage.
 
