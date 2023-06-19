@@ -71,7 +71,7 @@ Let's do a rough estimation applying a wheel options trading strategy to reach 1
 
 How long will it take for me to achieve 100k if I use the wheel strategy for options in F and adding 1000 USD per month?
 
-The wheel strategy is an options trading strategy that involves selling cash-secured puts and covered calls. While it can be a profitable approach, the outcome heavily depends on the stock, option premiums, strike price, and market conditions. It's impossible to provide an exact timeline for when to achieve $100,000.
+The outcome heavily depends on the stock, option premiums, strike price, and market conditions. It's impossible to provide an exact timeline for when to achieve $100,000.
 To estimate the time it might take, lets' consider the following:
 
 Starting balance: | $5,000
