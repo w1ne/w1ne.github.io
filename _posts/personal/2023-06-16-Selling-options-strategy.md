@@ -24,7 +24,7 @@ There is one gem from Charlie Munger, who I largely admire, the pinnacle of inve
 The initial phase of wealth accumulation is often the most challenging, but it establishes a solid foundation for subsequent financial growth. 
 Here are several reasons why reaching the first $100,000 milestone is particularly crucial.
 
-### Reason #1 Compounding. The most important one.
+## Reason #1 Compounding. The most important one.
 To demonstrate compounding, let's assume that we start with an initial investment of $5,000 and contribute an additional $1,000 each month. With a 9% SnP annual return, we can calculate the future value of the investments after each month using the following formula:
 
 ```math
@@ -44,10 +44,10 @@ This formula calculates the total value of the investment after a specified numb
 As can be seen from Figure [python visualization code](https://github.com/w1ne/compounding_vis_script) the compounding after $100,000 starts to accelerate, before $100,000 the compounding effect is not so pronounced and the majority of growth comes from savings (the blue and orange lines are almost the same). 
 By leveraging compounding and regular contributions of 1K each month, the 100K mark can be reached in only 6-7 years in an absolutely passive, hassle-free way. 
 
-### Reason #2 Diversification
+## Reason #2 Diversification
 With a larger sum of money, there are more flexibility in investment choices. It is possible to diversify across different asset classes, industries, and individual investments, potentially reducing risk and increasing returns. It means that in case of failure of one company, account will not be wiped out. It is much easier to diversify in different sectors with a large sum of money compared to a small account. Simply put, big account gives more security.
 
-### Reason #3 Learning and experience
+## Reason #3 Learning and experience
 Saving and investing enough to reach the $100,000 milestone requires cultivating good financial habits, such as consistently saving a portion of the income, and making informed money decisions. 
 
 # I want it faster! Wheeling the F.
@@ -144,24 +144,24 @@ I am using F as an example.
 
 **What can go wrong when wheeling F?**
 
-### Significant price drop
+## Significant price drop
 If Ford's stock price drops significantly, you could be left holding the shares at a loss for a long time. While it is possible to sell covered calls to generate income, it might take a long time to recover the initial investment.
 
-### Slow recovery
+## Slow recovery
 If Ford's stock price takes a long time to recover after a price drop, it could lead to reduced premiums on the options. (30 per contract is not guaranteed) 
 
-### Dividend cuts or suspension
+## Dividend cuts or suspension
 If Ford cuts or suspends its dividends, it could impact the stock price.
 
-### Reduced liquidity
+## Reduced liquidity
 If Ford's options become less liquid, it might be harder to enter and exit positions at favorable prices. This could lead to lower profits or even losses. It is important to pick liquid stocks for reading.
 
 ## Risk mitigation
-1. Position risk
-2. Beta weighting
+1. Position risk TBA
+2. Beta weighting TBA
 3. Diversify. Use wheel strategy across multiple stocks or sectors to minimize the potential impact of a single stock's performance on a portfolio.
 
-Here is my risk mitigation plan for selling options to reach 100,000 in the investment account.
+Here is my **risk mitigation plan** for selling options to reach 100,000 in the investment account.
 
 1. Save **$5000** which you I am ready to lose. In my opinion, trading options with less than 5000 is time-consuming with low returns. Not worth the trouble. Better to just put it into good ETF.
 2. At **$5,000 to $10,000**
@@ -173,7 +173,7 @@ start adding index strangles, the goal is to learn how to manage undefined risk 
 4. **Above $20,000**
 The goal at this point is to get individual exposure down to 5% per company and run CSP and wheels on indexes.
 
-## My General rules for selling Options
+## My general rules for selling Options
 - Sell weeklies (30-45 days until expiration) and delta 0.30 or lower. Read more about delta and theta here:[theta](https://www.projectfinance.com/theta/), [delta](https://www.projectfinance.com/option-delta-explained/) In very simple terms, 0.3 delta call option gives about a 70% chance of success.
 - Set the profit taking at +50% and cutting losses at -100% for each trade. 
 - Do not hold naked put position during earnings or other significant stock events. I was burned before when stock swung violently in earnings, which resulted in losses. Selling puts into earnings is a gamble. 
