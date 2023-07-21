@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ship till you dead
+title: Ship till you are dead
 blogid: personal
 sticky: false
 published: true
