@@ -22,16 +22,16 @@ Use plain CSS, JS, other platforms, and technologies to build a simple implement
 Promote my page on social media, paid ads, etc. People should use it from day one.
 
 **Step 4: Set Up Monetization**
-Implement Google Ads, affiliate links, direct sales anything that brings money. Tool should start bringing money in one-year maximum. If not, forget about it.
+Implement Google Ads, affiliate links, direct sales anything that brings money. The tool should start bringing money in one-year maximum. If not, forget about it.
 
 **Step 6: Automate**
 If a tool/service brings money, automate it as much as possible. Robots must work.
 
 **Step 6: Exit**
-Keep it generating money as long as it is possible. 
+Keep it generating money as long as it is possible. The goal is to generate a "passive" income that can sustain me.
 
 # Current projects
 
 1. [String instrument tuner](https://stringtune.com)
 2. [Roasting meat time calculator](https://meatcalc.com)
-
+3. [Budapest events and services website](https://budapest.ink)
