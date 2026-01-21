@@ -1,13 +1,15 @@
 ---
-layout: post
+layout: single
 title: The first 100K by trading options
 blogid: personal
 sticky: false
 published: true
 author: Andrii Shylenko
 date: 2023-06-16
-featured-image: 2023-06-16-Selling-options-sytategy/compound-fail.jpg
-featured-image-alt: investing cringe
+header:
+  teaser: /images/img/2023-06-16-Selling-options-sytategy/compound-fail.jpg
+  overlay_image: /images/img/2023-06-16-Selling-options-sytategy/compound-fail.jpg
+  overlay_filter: 0.5
 tags: [investings, taxes, calculator, options, puts, calls, money, savings]
 ---
 There are many "profound" strategies from "successful" TikTok investors. Usually, they're about as useful as a chocolate teapot or just too cryptic to make any sense.

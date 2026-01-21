@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Hydroponics experiment
 blogid: personal
 sticky: false

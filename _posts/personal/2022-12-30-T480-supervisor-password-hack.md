@@ -1,13 +1,15 @@
 ---
-layout: post
+layout: single
 title: Unlocking BIOS Supervisor password on Thinkpad T480
 blogid: personal
 sticky: false
 published: false
 author: Andrii Shylenko
 date: 2022-12-19
-featured-image: 2022-12-30-T480-bios-hack	/SuperviserLock.jpg
-featured-image-alt: self employed boss cringe
+header:
+  teaser: /images/img/2022-12-30-T480-bios-hack	/SuperviserLock.jpg
+  overlay_image: /images/img/2022-12-30-T480-bios-hack	/SuperviserLock.jpg
+  overlay_filter: 0.5
 tags: [firmware, hacking, thinkpad, password, bios, soldering, reverse-engineering]
 ---
 

@@ -1,13 +1,15 @@
 ---
-layout: post
+layout: single
 title: 3d printed guitar
 blogid: personal
 sticky: false
 published: true
 author: Andrii Shylenko
 date: 2022-11-27
-featured-image: 2022-11-28-guitar/feature_image.png
-featured-image-alt: 3d printed guitar
+header:
+  teaser: /images/img/2022-11-28-guitar/feature_image.png
+  overlay_image: /images/img/2022-11-28-guitar/feature_image.png
+  overlay_filter: 0.5
 tags: [3d printing, guitar, passion, hobby]
 ---
 

@@ -1,13 +1,15 @@
 ---
-layout: post
+layout: single
 title: Self-employed in Hungary, Tax Calculator 2022
 blogid: personal
 sticky: false
 published: true
 author: Andrii Shylenko
 date: 2022-12-19
-featured-image: 2022-12-19-self-employed/beyourownboss.jpg
-featured-image-alt: self employed boss cringe
+header:
+  teaser: /images/img/2022-12-19-self-employed/beyourownboss.jpg
+  overlay_image: /images/img/2022-12-19-self-employed/beyourownboss.jpg
+  overlay_filter: 0.5
 tags: [self employed, taxes, calculator, programming, freedom, company]
 ---
 The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 

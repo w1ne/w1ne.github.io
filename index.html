@@ -1,38 +1,35 @@
 ---
-layout: default
+layout: splash
+permalink: /
+hidden: true
+author_profile: false
+header:
+  overlay_color: "#1a1a1a"
+  cta_label: "Hire Me"
+  cta_url: "mailto:andrii@shylenko.com"
+excerpt: "Freelance Engineering Services <br /> <small>Embedded Systems - IoT - Linux Development</small>"
+feature_row:
+  - image_path: ""
+    icon: "fas fa-microchip"
+    title: "Firmware Development"
+    excerpt: "Rock solid firmware for industrial and consumer devices. **STM32, ESP32, Nordic**. **FreeRTOS & Zephyr**. MISRA-C compliance, unit testing, and robust architecture."
+  - image_path: ""
+    icon: "fas fa-network-wired"
+    title: "IoT & Connectivity"
+    excerpt: "End-to-end IoT solutions. **Bluetooth/WiFi** connectivity, **MQTT** pipelines, and secure **OTA updates**. From sensor data to Cloud (AWS/Azure)."
+  - image_path: ""
+    icon: "fas fa-cogs"
+    title: "Reverse Engineering & Linux"
+    excerpt: "Bringing hardware to the cloud. **CAN/J1939** and other industrial protocols, **Embedded Linux** (Yocto/Buildroot) and kernel development."
 ---
 
-<div class="posts">
-  {% assign posts_not_sticky = site.posts | where_exp:'post', 'post.sticky == false' %}
-  {% assign posts_sticky = site.posts | where_exp:'post', 'post.sticky == true' %}
-  
-   {% for post in posts_sticky %}
-   {% if post.blogid != 'personal' %}
-    {% else %}
-    <article class="post">
+<div style="text-align: center; margin-bottom: 3em; margin-left: auto; margin-right: auto; width: 100%;">
+  <h2 style="margin-bottom: 0.5em;">Why work with me?</h2>
+  <p>I design <strong>industrial-grade software</strong> from proof of concept to the manufacturing phase. With deep expertise in <strong>battery-powered devices</strong> and modular robust firmware architecture, I help companies turn complex requirements into products.</p>
+</div>
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-      <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+{% include feature_row %}
 
-      <div class="entry">
-        {{ post.content }}
-      </div>
-
-    </article>
-    {% endif %}
-  {% endfor %}
-  
-  {% for post in posts_not_sticky %}
-   {% if post.blogid != 'personal' %}
-    {% else %}
-    <article class="post">
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-      {% if post.featured-image %}{% include post-featured-image.html image=post.featured-image alt=post.featured-image-alt %}{% endif %}
-      <div class="entry">
-        {{ post.excerpt | remove: '<p>' | remove: '</p>' }}
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">...</a>
-      </div>
-    </article>
-    {% endif %}
-  {% endfor %}
+<div style="text-align: center; margin-top: 3em;">
+  <a href="/projects/" class="btn btn--primary btn--large">View Portfolio</a>
 </div>

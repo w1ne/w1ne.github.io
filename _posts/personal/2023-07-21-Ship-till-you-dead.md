@@ -1,13 +1,15 @@
 ---
-layout: post
+layout: single
 title: Ship till you are dead
 blogid: personal
 sticky: false
 published: true
 author: Andrii Shylenko
 date: 2023-07-21
-featured-image: 2023-07-21-Ship-till-you-dead/ship-till-you-dead.png
-featured-image-alt: 100 projects ship
+header:
+  teaser: /images/img/2023-07-21-Ship-till-you-dead/ship-till-you-dead.png
+  overlay_image: /images/img/2023-07-21-Ship-till-you-dead/ship-till-you-dead.png
+  overlay_filter: 0.5
 tags: [challenge, project, ship, ideas, bootstrapping, build in public]
 ---
 Challenge: build 100 projects and make them profitable.

@@ -1,97 +1,66 @@
-#
-# This file contains configuration flags to customize your site
-#
+# Site Settings
+title: Andrii Shylenko
+locale: "en-US"
+description: "Engineer, Entrepreneur, Humanist. Focusing on Embedded Systems, Robotics, and Web Technologies."
+url: "https://shylenko.com"
+baseurl: "" # subpath of your site, e.g. /blog
+repository: "w1ne/w1ne.github.io"
 
-# Name of your site (displayed in the header)
-name: Andrii Shylenko
+# Theme Settings
+theme: "minimal-mistakes-jekyll"
+minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+search: true
 
-# Short bio or description (displayed in the header)
-description: Engineer, Entrepreneur, Humanist
+# Author / Personal Info
+author:
+  name: "Andrii Shylenko"
+  avatar: "/images/profile-photo.jpg"
+  bio: "Engineer, Entrepreneur, Humanist"
+  email: "andrii@shylenko.com"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/w1ne"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/shylenko"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter"
+      url: "https://twitter.com/andriishylenko"
 
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://n1n3.net/images/logoAS_blue_white.png
+# Navigation
+logo: "/images/logoAS_blue_white.png"
+date_format: "%Y-%m-%d"
 
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  facebook:
-  flickr:
-  github: w1ne
-  email: andrii@shylenko.com
-  instagram:
-  linkedin: shylenko
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  twitter: andriishylenko
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
-
-
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus: shylenko-com
-    
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: G-R93MN5R6DK
-
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
-# Used for Sitemap.xml and your RSS feed
-url: https://shylenko.com
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
-baseurl: ""
-
-#
-# !! You don't need to change any of the configuration flags below !!
-#
-
-permalink: /:title/
-
-# The release of Jekyll Now that you're using
-version: v1.2.0
-
-# Jekyll 3 now only supports Kramdown for Markdown
-kramdown:
-  # Use GitHub flavored markdown, including triple backtick fenced code blocks
-  input: GFM
-  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    # Use existing pygments syntax highlighting css
-    css_class: 'highlight'
-
-# Set the Sass partials directory, as we're using @imports
-sass:
-  style: :expanded # You might prefer to minify using :compressed
-
-# Use the following plug-ins
+# Plugins
 plugins:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-  - jekyll-stickyposts
+  - jekyll-include-cache
+  - jekyll-feed
+  - jekyll-sitemap
 
-# Exclude these files from your production _site
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README.md
-  - CNAME
-  
-collections:
-  - important
-  
-theme: jekyll-theme-architect
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: false
+      classes: wide
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+      classes: wide
 
-reading_time:
-  second_plural: "sec"    # default: seconds
-  minute_singular: "min"  # default: minute
-  minute_plural: "min"    # default: minutes
+# Sass
+sass:
+  style: compressed

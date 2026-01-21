@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Install Ceedling under NTLM proxy
 blogid: personal
 sticky: false

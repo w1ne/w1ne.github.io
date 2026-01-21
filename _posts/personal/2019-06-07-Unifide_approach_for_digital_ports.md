@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Unifide approach for digital ports
 blogid: personal
 sticky: false

@@ -1,13 +1,15 @@
 ---
-layout: post
+layout: single
 title: Roof wall picture adapter
 blogid: personal
 sticky: false
 published: true
 author: Andrii Shylenko
 date: 2022-12-14
-featured-image: 2022-12-14-wall-tilted-wall-picture-adapter/feature-image-3d-adapter.png
-featured-image-alt: 3d apapter for
+header:
+  teaser: /images/img/2022-12-14-wall-tilted-wall-picture-adapter/feature-image-3d-adapter.png
+  overlay_image: /images/img/2022-12-14-wall-tilted-wall-picture-adapter/feature-image-3d-adapter.png
+  overlay_filter: 0.5
 tags: [3d printing, functional prints, home decoration]
 ---
 

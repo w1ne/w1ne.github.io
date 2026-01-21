@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Folder structure of the embedded project
 blogid: personal
 sticky: false

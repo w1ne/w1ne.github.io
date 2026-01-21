@@ -1,0 +1,98 @@
+--- # Only the main Sass file needs front matter (the dashes are enough) --- @import "minimal-mistakes";
+
+/* Custom Overrides */
+/* Default wide layout for posts and pages */
+.page__inner-wrap {
+  float: none !important;
+  /* Don't float left */
+  margin-left: auto !important;
+  /* Center horizontally */
+  margin-right: auto !important;
+  width: 100% !important;
+  max-width: 90% !important;
+  padding-right: 0;
+}
+
+/* Force full width for Splash layout (Home page) explicitly if needed, though above covers it */
+.layout--splash .page__inner-wrap {
+  max-width: 100% !important;
+}
+
+.page__content {
+  width: 100%;
+}
+
+/* Ensure wide class is actually wide if applied manually */
+.wide .page__inner-wrap {
+  max-width: 95% !important;
+}
+
+/* Center the container if sidebar is off */
+.no-sidebar .page__inner-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+/* Soften the Dark Theme */
+body {
+  background-color: #212121 !important;
+  color: #b0b0b0 !important;
+}
+
+/* Force Typography to Full Width */
+.page__content p,
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.page__content h4,
+.page__content h5,
+.page__content h6,
+.page__content li,
+.page__content dl,
+.page__content pre {
+  max-width: 100% !important;
+}
+
+/* FORCE 3-COLUMN GRID for Feature Row */
+.feature__wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2em;
+  width: 100%;
+}
+
+.feature__item {
+  max-width: 100% !important;
+  flex: none !important;
+  /* Override flex if used */
+  width: auto !important;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 800px) {
+  .feature__wrapper {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* Update Header/Masthead to match or complement */
+.masthead {
+  background-color: #1a1a1a !important;
+  border-bottom: 1px solid #333;
+}
+
+/* Cards/Teasers background */
+.archive__item-teaser {
+  background-color: #2c2c2c !important;
+}
+
+/* Links - making them slightly muted but readable */
+a {
+  color: #64b5f6 !important;
+}
+
+a:hover {
+  color: #90caf9 !important;
+}

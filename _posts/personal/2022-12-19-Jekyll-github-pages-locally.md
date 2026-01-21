@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: Jekyll Github-pages locally in Ubuntu 22.04
 blogid: personal
 sticky: false

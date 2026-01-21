@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: 10 lessons I wish I learned before changing jobs
 blogid: personal
 sticky: false
@@ -53,7 +53,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 1. **Apply for every job you can do.** Send CVs to every position you think you can do. This is a number game. This is a numbers game: your goal is to get through the resume filter. It is important to understand: Years of experience, technologies listed, and a job description, it is something the company wants, the list of desires. There is a scarce number of candidates who meet all the criteria. If you think you can do the job, apply.
 
 2. **Invest time in preparation.** In the short story above, investing time in a good presentation carried me through the managment meeting. A Catchy CV is a golden pass for the interview. Good CV answers question about what you have done, how you have done it, and what impact it has. Does not matter if it is a student project or work experience: continuously work on your CV to make it polished as possible. If you have experience with the technology required, write it as a skill inside your CV. Don't lie, but bend information in the direction a job posting requires. Remember, the CV is the ticket to the interview. Its purpose is to get you to the next step. You can check my CV as an example: [Andrii Shylenko LinkedIn](https://www.linkedin.com/in/shylenko/). Another tip about CVs is: don't use the level of knowledge, it is pointless! Who even evaluates the level?
-![Avoid level meters]({{"/images/img/2022-11-29/levels.png""|relative_url}}){: .center-image }
+![Avoid level meters]({{"/images/img/2022-11-29/levels.png"|relative_url}}){: .center-image }
 *I also keep a short portfolio and demo with projects I have built in the past. Each interview is the sales pitch. Sometimes people who do interviews are not even well prepared. By utilizing your portfolio you can channel the job interview in the direction which benefits you. Practice your personal "sales pitch" as much as possible.*
 
 3. **Know your worth.** Congratulations! With a good CV, you got through the initial screening. The next step will be the call with the HR person. At some point, you will be asked about compensation. Ask what range of salaries do company has. If asked about expectations, give a range from the top 25% of the typical salary for a position.
