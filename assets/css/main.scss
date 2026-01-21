@@ -1,4 +1,4 @@
---- # Only the main Sass file needs front matter (the dashes are enough) --- @import "minimal-mistakes";
+--- --- @import "minimal-mistakes";
 
 /* Custom Overrides */
 /* Default wide layout for posts and pages */
@@ -95,4 +95,169 @@ a {
 
 a:hover {
   color: #90caf9 !important;
+}
+
+/* ========================================= */
+/* MEDIUM.COM STYLE BLOG OVERRIDES           */
+/* ========================================= */
+
+.medium-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 0;
+  border-bottom: 1px solid #333;
+  /* Dark mode separator */
+}
+
+/* Content Column (Left) */
+.medium-card__content {
+  flex: 1;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Image Column (Right) */
+.medium-card__image-wrapper {
+  width: 160px;
+  /* Standard Medium thumbnail size */
+  height: 112px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  /* Slight roundness */
+}
+
+.medium-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  transition: transform 0.3s ease;
+}
+
+.medium-card__image:hover {
+  transform: scale(1.05);
+}
+
+/* Typography Overrides for the Card */
+
+/* Title */
+.medium-card .archive__item-title {
+  font-family: "Georgia", "Times New Roman", serif !important;
+  font-size: 1.4em !important;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.medium-card .archive__item-title a {
+  color: #e0e0e0 !important;
+  /* Brighter white/grey for title */
+  text-decoration: none;
+}
+
+/* Excerpt */
+.medium-card .archive__item-excerpt {
+  font-family: "Georgia", "Times New Roman", serif !important;
+  font-size: 1em !important;
+  color: #a0a0a0 !important;
+  line-height: 1.5;
+  margin-bottom: 12px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Meta Top (Author, Avatar) */
+.medium-card__meta-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.85em;
+  font-family: sans-serif;
+  /* Medium uses sans for meta */
+  color: #b0b0b0;
+}
+
+.medium-card__avatar {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50%;
+  margin-right: 8px;
+  float: none !important;
+  /* Override default float styling */
+  padding: 0 !important;
+  border: none !important;
+}
+
+.medium-card__author-name {
+  font-weight: 500;
+  margin-right: 8px;
+  color: #ffffff;
+}
+
+/* Meta Bottom (Read time, Date, Tags if you want) */
+.medium-card__meta-bottom {
+  font-size: 0.85em;
+  color: #757575;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.medium-card__tag {
+  background-color: #333;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+/* RESPONSIVE: Stack on Mobile */
+@media (max-width: 768px) {
+  .medium-card {
+    flex-direction: column-reverse;
+    /* Put image on top? No, Medium usually hides formatting or puts text first. Let's do standard stack. */
+    align-items: flex-start;
+  }
+
+  .medium-card__image-wrapper {
+    width: 100%;
+    height: 200px;
+    /* Big image on mobile */
+    margin-bottom: 16px;
+  }
+
+  .medium-card__content {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  /* On mobile, maybe we want image ABOVE title? 
+       flex-direction: column; -> Image (2nd child) is below Content (1st child).
+       If we want Image Top: flex-direction: column-reverse? 
+       Let's stick to content first for logic, but visually image top is nice. 
+       Let's try row-reverse logic? No, simple stack is safer.
+       Actually Medium mobile: Title -> Content -> Meta. Image is small distinct square on right OR big on top.
+       Let's keep image distinct on right for small screens or hide it?
+       Let's go for Image Top block.
+     */
+  .medium-card {
+    flex-direction: column;
+  }
+
+  .medium-card__image-wrapper {
+    order: -1;
+    /* Move image to top */
+    width: 100%;
+    height: 180px;
+    margin-bottom: 12px;
+  }
 }

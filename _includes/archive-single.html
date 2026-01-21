@@ -1,0 +1,56 @@
+{% if post.header.teaser %}
+{% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+{% assign teaser = site.teaser %}
+{% endif %}
+
+{% if post.id %}
+{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+{% assign title = post.title %}
+{% endif %}
+
+<div class="{{ include.type | default: 'list' }}__item">
+    <article class="archive__item medium-card" itemscope itemtype="https://schema.org/CreativeWork">
+
+        <div class="medium-card__content">
+            <!-- Meta: Author & Date -->
+            <div class="medium-card__meta-top">
+                <span class="medium-card__date">{{ post.date | date: "%b %-d, %Y" }}</span>
+            </div>
+
+            <h2 class="archive__item-title no_toc" itemprop="headline">
+                {% if post.link %}
+                <a href="{{ post.link }}">{{ title }}</a> <a href="{{ post.url | relative_url }}" rel="permalink"><i
+                        class="fas fa-link" aria-hidden="true" title="permalink"></i><span
+                        class="sr-only">Permalink</span></a>
+                {% else %}
+                <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
+                {% endif %}
+            </h2>
+
+            <div class="archive__item-excerpt" itemprop="description">
+                {{ post.excerpt | markdownify | strip_html | truncate: 150 }}
+            </div>
+
+            <div class="medium-card__meta-bottom">
+                {% if post.read_time %}
+                <span class="medium-card__read-time">{% include page__meta.html %}</span>
+                {% endif %}
+                <!-- Optional: Add Tags here if needed -->
+                {% if post.tags %}
+                <span class="medium-card__tag">· {{ post.tags | first }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if teaser %}
+        <div class="medium-card__image-wrapper">
+            <a href="{{ post.url | relative_url }}" aria-label="{{ title }}">
+                <img src="{{ teaser | relative_url }}" alt="" class="medium-card__image">
+            </a>
+        </div>
+        {% endif %}
+
+    </article>
+</div>
