@@ -8,16 +8,12 @@ author_profile: false
 
 <div
   style="text-align: center; margin-top: 4em; margin-bottom: 3em; margin-left: auto; margin-right: auto; width: 100%;">
-  <h3 style="margin-top: 0px; margin-bottom: 10px; font-weight: normal;">
-    <strong>Freelance Engineering Services:</strong> Embedded Systems • IoT • Linux Development
-  </h3>
+  <h3 style="margin-top: 0; margin-bottom: 0.5em;">Freelance Engineering Services</h3>
+  <p style="font-size: 1.1em; color: #888; margin-bottom: 1em;">Embedded Systems • IoT • Linux Development</p>
+  <p><a href="mailto:{{ site.author.email }}" class="btn btn--light-outline btn--large"><i class="fas fa-envelope"></i>
+      {{ site.author.email }}</a></p>
 </div>
 
-{% include feature_row id="main" feature_row=site.data.features.main %}
 
-<div style="text-align: center; margin-top: 4em; margin-bottom: 2em;">
-  <p style="font-size: 1.2em; margin-bottom: 1em;">Interested in working together?</p>
-  <a href="mailto:{{ site.author.email }}" class="btn btn--primary btn--large"><i class="fas fa-envelope"></i> Email</a>
-  <a href="https://linkedin.com/in/shylenko" class="btn btn--info btn--large"><i class="fab fa-linkedin"></i>
-    LinkedIn</a>
-</div>
+
+{% include feature_row.html feature_row=site.data.features.main %}
