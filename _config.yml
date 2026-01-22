@@ -7,7 +7,8 @@ baseurl: "" # subpath of your site, e.g. /blog
 repository: "w1ne/w1ne.github.io"
 
 # Theme Settings
-theme: "minimal-mistakes-jekyll"
+remote_theme: "mmistakes/minimal-mistakes"
+# theme: "minimal-mistakes-jekyll"
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 search: true
 
@@ -34,6 +35,7 @@ date_format: "%Y-%m-%d"
 
 # Plugins
 plugins:
+  - jekyll-remote-theme
   - jekyll-include-cache
   - jekyll-feed
   - jekyll-sitemap
