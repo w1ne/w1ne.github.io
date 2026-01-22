@@ -3,19 +3,7 @@ layout: splash
 permalink: /
 hidden: true
 author_profile: false
-feature_row:
-- icon: "fas fa-microchip"
-title: "Firmware Development"
-excerpt: "Rock solid firmware for industrial and consumer devices. **STM32, ESP32, Nordic**. **FreeRTOS & Zephyr**.
-MISRA-C compliance, unit testing, and robust architecture."
-- icon: "fas fa-network-wired"
-title: "IoT & Connectivity"
-excerpt: "End-to-end IoT solutions. **Bluetooth/WiFi** connectivity, **MQTT** pipelines, and secure **OTA updates**.
-From sensor data to Cloud (AWS/Azure)."
-- icon: "fas fa-cogs"
-title: "Reverse Engineering & Linux"
-excerpt: "Bringing hardware to the cloud. **CAN/J1939** and other industrial protocols, **Embedded Linux**
-(Yocto/Buildroot) and kernel development."
+
 ---
 
 <div
@@ -25,7 +13,7 @@ excerpt: "Bringing hardware to the cloud. **CAN/J1939** and other industrial pro
   </h3>
 </div>
 
-{% include feature_row %}
+{% include feature_row id="main" feature_row=site.data.features.main %}
 
 <div style="text-align: center; margin-top: 4em; margin-bottom: 2em;">
   <p style="font-size: 1.2em; margin-bottom: 1em;">Interested in working together?</p>
