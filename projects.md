@@ -5,6 +5,9 @@ permalink: /projects/
 author_profile: true
 ---
 
-Coming soon: A showcase of my engineering projects.
+A showcase of my engineering projects.
 
-<!-- This section will be populated with project collections or manually added items -->
+{% assign entries = site.posts | where: "blogid", "projects" %}
+{% for post in entries %}
+  {% include archive-single.html type="list" %}
+{% endfor %}
