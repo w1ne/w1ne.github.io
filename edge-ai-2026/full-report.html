@@ -131,34 +131,44 @@
   .toc {
     position: sticky;
     top: 0;
-    background: rgba(244,239,230,.95);
-    backdrop-filter: blur(12px);
+    background: rgba(244,239,230,.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--rule);
     z-index: 50;
-    padding: 0.75rem 0;
+    padding: 0.65rem 0;
   }
   .toc-inner {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
-    gap: 1.25rem;
-    font-size: 12px;
-    overflow-x: auto;
-    white-space: nowrap;
-    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: 11px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    scrollbar-width: thin;
-    font-weight: 500;
+    font-weight: 600;
+    overflow: visible;
   }
   .toc-inner a {
-    color: var(--ink-soft);
+    color: var(--ink-muted);
     text-decoration: none;
-    padding: 0.4rem 0;
+    padding: 0.3rem 0;
     border-bottom: 1px solid transparent;
-    transition: border-color .2s, color .2s;
+    transition: color .15s, border-color .15s;
+    white-space: nowrap;
   }
   .toc-inner a:hover { color: var(--ink); border-color: var(--green); }
+
+  /* Hide horizontal scrollbar if anything still overflows on narrow screens */
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-inner { scrollbar-width: none; -ms-overflow-style: none; }
+
+  @media (max-width: 640px) {
+    .toc { padding: 0.5rem 0; }
+    .toc-inner { font-size: 10px; gap: 0.25rem 0.85rem; letter-spacing: 0.1em; }
+  }
 
   /* ====== GENERIC ====== */
   .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
