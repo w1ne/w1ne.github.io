@@ -1,0 +1,82 @@
+name,segment,hq_city,hq_country,founded,latest_round,latest_round_date,latest_round_amount,latest_round_lead,notes,source_url
+Axelera AI,Silicon,Eindhoven,NL,2021,Series C,2026-02-24,>$250M,Innovation Industries,imec spin-off. Metis + Europa AIPU (629 INT8 TOPS),https://axelera.ai/news/axelera-ai-secures-more-than-250-million-funding-on-global-commercial-growth
+SiPearl,Silicon,Maisons-Laffitte,FR,2019,Series A final close,2025-07,€130M,EIC Fund,Rhea1 HPC/AI CPU taped out TSMC 2025. JUPITER exascale anchor,https://insidehpc.com/2025/07/sipearl-tapes-out-hpc-and-ai-chip-rhea1-closes-e130m-series-a-for-european-tech-sovereignty/
+GreenWaves Technologies,Silicon,Grenoble,FR,2014,Series B,2023-02,€20M,Innovacom,GAP9 ultra-low-power RISC-V for hearables,
+Innatera,Silicon,Delft,NL,2018,Series A,2024-06,$21M,Innavest + Invest-NL,T1 Spiking Neural Processor neuromorphic,https://www.prnewswire.com/news-releases/fueling-the-future-innatera-attracts-a-cumulative-21m-in-oversubscribed-series-a-funding-amidst-strong-market-interest-302183961.html
+Prophesee,Silicon,Paris,FR,2014,Series C + growth,2022-09,$49.5M + €15M,,Event-based Metavision neuromorphic vision. Sony IMX636/IMX646 partnership,https://www.prophesee.ai/
+XMOS,Silicon,Bristol,UK,2005,Venture,2019,$19M,Harbert,xcore.ai for voice/audio edge,
+Euclyd,Silicon,Eindhoven,NL,2024,raising,2026-04,€100M,,CRAFTWERK multi-chiplet. Wennink + Faggin + Schuurman backing,https://www.cnbc.com/2026/04/17/nvidia-rivals-chip-market-funding-ai-asml-euclyd.html
+Kalray,Silicon,Grenoble,FR,2008,Public ALKAL,,€16.5M FY25 revenue,,CEA spin-off. DPU licensing pivot 2025,https://www.actusnews.com/en/download/kalray/2026/01/13/95981-pr_kalray_2025_revenue_en_version.pdf
+STMicroelectronics,Silicon,Geneva,CH/IT,1987,Public STM,,€16.6B FY25 rev,,Neural-ART NPU in STM32N6 + Stellar P3E automotive MCU,https://www.cnx-software.com/2026/02/13/stmicroelectronics-stellar-p3e-quad-core-arm-cortex-r52-automotive-mcu-features-neural-art-ai-accelerator/
+Infineon,Silicon,Neubiberg,DE,1999,Public IFX,,,PSOC Edge + Ethos-U55 + NNLite. NVIDIA TAO integration,https://www.infineon.com/market-news/2025/infcss202503-075
+NXP,Silicon,Eindhoven,NL,2006,Public NXPI,,,eIQ Neutron NPU. Kinara acquisition closed Oct 2025,https://www.globenewswire.com/news-release/2025/10/28/3175296/0/en/NXP-Completes-Acquisitions-of-Aviva-Links-and-Kinara-to-Advance-Automotive-Connectivity-and-AI-at-the-Intelligent-Edge.html
+Arm,Silicon,Cambridge,UK,1990,Public ARM,,,Ethos-U85 NPU. SoftBank majority-owned. NASDAQ listed,https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85
+Imagination Technologies,Silicon,Kings Langley,UK,1985,Private,,,IMG Series4 NNA. Canyon Bridge owned since 2017,https://www.imaginationtech.com/resources/img-series4-nna/
+Codasip,Silicon,Munich/Brno,DE/CZ,2006,Private,,,RISC-V IP. DARE project high-end GP processor designer,https://codasip.com/press-release/2025/03/06/codasip-selected-to-design-a-high-end-risc-v-processor-for-the-eu-funded-dare-project/
+Q.ANT,Silicon,Stuttgart,DE,2018,Series A,2025-07,€62M,Cherry Ventures,TRUMPF spin-off. Photonic NPU at LRZ,https://qant.com/press-releases/qant-raises-62-million-euro-to-transform-the-future-of-computing-with-photonic-processing/
+SpiNNcloud Systems,Silicon,Dresden,DE,2022,Grant,2025-06,€10M,EIC Accelerator,SpiNNaker2 neuromorphic. 35k chips at TU Dresden,https://ebrains.eu/news-and-events/2025/brain-tech-in-action-german-spinncloud-computing-startup-secures-funding-of-10
+Black Semiconductor,Silicon,Aachen,DE,,Series A+IPCEI,2024-06,€254.4M,,Graphene chip interconnect,https://techcrunch.com/2024/06/12/germanys-black-semiconductor-raises-273m-for-graphene-based-chip-tech/
+Graphcore,Silicon,Bristol,UK,2016,Acquisition,2024-07,undisclosed ($500-600M reported),SoftBank,IPU. Peak $2.77B valuation at Dec 2020 Series E. ~$767M raised across 6 rounds 2016-2020. Acquisition price not officially disclosed; Bloomberg reported ~$600M; $500M denied by co-founder,https://techcrunch.com/2024/07/11/softbank-acquires-uk-ai-chipmaker-graphcore/
+Mistral AI,Models,Paris,FR,2023-05,Series C,2025-09-09,€1.7B,ASML (€1.3B of €1.7B),Ministral 3B/8B edge line. Le Chat Enterprise on-prem. €11.7B post-money. NVIDIA + a16z + Bpifrance + DST + General Catalyst + Index + Lightspeed participating,https://mistral.ai/news/mistral-ai-raises-1-7-b-to-accelerate-technological-progress-with-ai
+Black Forest Labs,Models,Freiburg,DE,2024,seed,2024-08,$31M,a16z,FLUX.1 [schnell] Apache-2.0 image model,https://blackforestlabs.ai/announcing-black-forest-labs
+Kyutai,Models,Paris,FR,2023-11,endowment,2023,€300M,Niel / CMA CGM / Schmidt,Moshi + Hibiki open-weights speech. Nonprofit,https://kyutai.org/
+LightOn,Models,Paris,FR,2016,IPO,2024-11,€8M,Euronext Growth,First European GenAI IPO. Paradigm on-prem RAG,
+Stability AI,Models,London,UK,2019,private recap,2024,,,SD 3.5 Medium 2B. SD Turbo real-time on Apple Silicon,
+Silo AI,Models,Helsinki,FI,2017,Acquisition,2024-07,$665M,AMD,Poro + Viking Nordic open-weights. Now AMD ROCm arm,
+Aleph Alpha,Models,Heidelberg,DE,2019,Series B,2023-11,€500M,Schwarz + Bosch + SAP,Pharia LLM 7B + PhariaAI on-prem OS,
+H Company,Models,Paris,FR,2024,seed,2024-05,$220M,Accel + Amazon,Runner H agent model. Cloud-only not edge,https://sifted.eu/articles/h-startup-france-fundraise
+Wayve,Models / Automotive,London,UK,2017,Series D + ext,2026-02 / 2026-04,~$1.5B,NVIDIA/Microsoft/Uber/Mercedes/Nissan/Stellantis + AMD/Arm/Qualcomm,End-to-end neural driving AV2.0. Nissan production 2027,https://wayve.ai/press/series-d/
+ElevenLabs,Models,London,UK,2022,Series C,2025-01,$180M,a16z + ICONIQ,Voice AI. On-device enterprise GA H1 2026,https://elevenlabs.io/blog/enterprise-voice-ai-deployed-locally
+Pruna AI,Runtimes,Paris/Munich,FR/DE,2023,seed,2025-03,$6.5M,EQT Ventures,Open-source compression pipeline,
+ggml / llama.cpp,Runtimes,Sofia,BG,2023,seed,2023-06,undisclosed,Nat Friedman + Daniel Gross,Open runtime + GGUF format,https://ggml.ai/
+Hugging Face,Models / Runtimes,NYC + Paris ops,US (French-founded),2016,Series D,2023-08,$235M,Salesforce / Google / Amazon / NVIDIA / Intel / AMD / IBM / Qualcomm,Founded by Delangue + Chaumond + Wolf. $4.5B post-money. Ships Transformers + Optimum + transformers.js + SafeTensors + Candle. Delaware-registered so flagged for sovereignty,https://huggingface.co/
+Edge Impulse,Runtimes,UK/US,UK/US,2019,Acquisition,2025-03,undisclosed,Qualcomm,TinyML platform. Now Qualcomm,https://edgeimpulse.com/
+OpenEuroLLM,Models/Sovereign,EU-wide,EU,2025-02,Horizon grant,2025-02,€37.4M,EU Horizon,Consortium 20+ partners incl Aleph Alpha + BSC,https://openeurollm.eu/
+EuroLLM,Models/Sovereign,Edinburgh/Lisbon,UK/PT,2024,academic,2024-09,,U Edinburgh + IST Lisbon,1.7B + 9B Apache-2.0 35 langs,https://huggingface.co/utter-project/EuroLLM-9B
+Neura Robotics,Robotics,Metzingen,DE,2019,Series B + reported,2025-01 / 2026-03,€120M + ~€1bn (reported),Lingotto / Tether (reported),4NE-1 cognitive humanoid. Schaeffler partnership,https://neura-robotics.com/neura-robotics-secures-euro-120-million-series-b/
+1X Technologies,Robotics,Palo Alto (was Moss NO),US (was NO),2014,Series C target,2025-09,$1B targeting,,HQ flipped Norway → Palo Alto Jul 2025. Manufacturing in Moss,
+Humanoid,Robotics,London,UK,2024,founder capital,,~$50M,,HMND 01 Alpha mobile manipulator,https://www.therobotreport.com/u-k-based-startup-humanoid-unveils-hmnd-01-alpha-mobile-manipulator/
+Wandelbots,Robotics,Dresden,DE,2017,Series C,2022-01,$84M,Insight Partners,NOVA robot-agnostic OS,
+ANYbotics,Robotics,Zurich,CH,2016,Series C + ext,2024-12 / 2025-09,$60M + $20M,Qualcomm Ventures / Supernova,ANYmal quadruped for hazardous industrial,https://www.anybotics.com/news/anybotics-raises-additional-60-million-to-drive-u-s-expansion/
+PAL Robotics,Robotics,Barcelona,ES,2004,private,,,TALOS + TIAGo. Grupo PAL,https://pal-robotics.com/robots/
+Agile Robots SE,Robotics,Munich,DE,2018,Series C,2021-10,$220M,SoftBank,DLR spin-off. First German robot unicorn. Acquired audEERING Mar 2025,
+Wandercraft,Robotics,Paris,FR,2012,Series D,2025-06,$75M,Renault + Bpifrance PSIM,Exoskeletons + Calvin-40 humanoid for Renault,
+Flexion Robotics,Robotics,Zurich,CH,2025-01,Series A,2025-11,$50M,DST Global Partners,Humanoid autonomy stack VLA models,https://www.eu-startups.com/2025/11/zurichs-flexion-raises-e50-million-to-build-the-brains-behind-humanoids/
+Oxa,Automotive,Oxford,UK,2014,growth,2026-03,$103M,NVIDIA NVentures,Formerly Oxbotica. Industrial AD,https://cybernews.com/ai-news/nvidia-uk-driverless-startup-oxa/
+Valeo,Automotive,Paris,FR,1923,Public VALOF,,,SCALA Gen 3 LiDAR. Mercedes DRIVE PILOT L3,
+Bosch Mobility,Automotive,Stuttgart,DE,Large div,Public,,,DRIVE AGX Thor. ~€10B AD/AI cumulative,
+ZF Friedrichshafen,Automotive,Friedrichshafen,DE,1915,Public,,,ProAI up to 1500 TOPS in series production,
+Continental / Aumovio,Automotive,Hanover,DE,,Public,,,Ambarella CV3 5nm. Auto unit spin-off,
+Einride,Automotive,Stockholm,SE,2016,growth,2025-10,$100M,,Autonomous electric freight,
+Robovision,Industrial,Ghent,BE,2010,Series A,2024-03,$42M,Astanor + Target Global,Vision AI platform 1000+ robots in 40 countries,https://sifted.eu/articles/ai-computer-vision-startup-raise-robovision-belgium-news
+MVTec Software,Industrial,Munich,DE,1996,private,,,HALCON machine vision. Continual learning 25.11,https://metrology.news/next-gen-halcon-25-11-transforms-industrial-machine-vision/
+OnRobot,Industrial,Odense,DK,2015,private,,,D:PLOY + VGP30 30kg vacuum gripper,
+audEERING,Industrial,Gilching,DE,2012,Acquisition,2025-03,undisclosed,Agile Robots,devAIce SDK + openSMILE. Now in Agile,
+Siemens Industrial Edge,Industrial,Munich,DE,Large div,Public,,,Industrial Automation DataCenter Hannover Messe 2026,
+Schneider Electric EcoStruxure,Industrial,Rueil-Malmaison,FR,1836,Public SU,,€40B FY25,,Automation Copilot + Modicon M660 IPC,
+ABB Robotics,Industrial,Zurich,CH,Large div,Public,,,OmniCore + OmniCore EyeMotion,
+Nothing,Consumer,London,UK,2020,private,,,Phone (3) $799 Jul 2025. Essential Space AI. Carl Pei,
+Dyson,Consumer,Malmesbury,UK (Singapore legal),1993,private,,,Spot+Scrub AI on-device 200-substance classifier,
+Helsing,Defense,Munich,DE,2021,Series D,2025-06,€600M,Prima Materia (Daniel Ek),Altra + Centaur. Gripen E + CA-1 Europa,https://helsing.ai/newsroom/helsing-raises-eur600m-to-invest-in-european-technological-sovereignty
+Quantum Systems,Defense,Gilching,DE,2015,Series C + ext,2025-05 / 2025-11,€160M + €180M,Balderton,Vector AI VTOL dual Jetson onboard,https://quantum-systems.com/blog/2025/05/05/quantum-systems-raises-euro160m/
+Tekever,Defense,Lisbon / UK,PT,,unicorn,2025-05,$500M,Ventura + Baillie Gifford + NIF,AR3/AR5 ISTAR drones 10k+ combat hours,
+STARK,Defense,Munich,DE,2024,Series A,2025-08,$62M,Sequoia,OWE-V Virtus. €900M Bundeswehr framework,https://techfundingnews.com/sequoia-leads-62m-round-valuing-stark-at-500m-as-it-ramps-up-ai-powered-battlefield-drones/
+ARX Robotics,Defense,Oberding,DE,2022,Series A,2025-04,€42M,HV Capital + Speedinvest,Gereon UGV + Mithra OS,https://www.eu-startups.com/2025/07/german-defensetech-arx-robotics-reinforces-europes-battlefield-edge-with-e42-million-for-tactical-ugvs/
+Destinus,Defense,Payerne,CH (shifting NL),,Facility,2025-12,€50M,Commerzbank,Acquired Daedalean Aug 2025 CHF180M,
+Delian Alliance Industries,Defense,Athens,GR,,Series A,2025-07,$14M,Air Street Capital,Autonomous surveillance towers + Interceptigon,https://techcrunch.com/2025/07/29/this-founder-left-silicon-valley-to-challenge-u-s-defense-supremacy-from-athens-and-investors-are-paying-attention/
+Swarmer,Defense,Kyiv,UA,,Series A,2025-09,$15M,US investors,Largest Ukrainian defense-tech round since 2022,https://kyivindependent.com/ukrainian-swarm-drone-ai-startup-secures-15-million-investment/
+Airlogix,Defense,Kyiv,UA,,German MoD,2026-02,undisclosed,Bundeswehr via Auterion JV,Gor + Anubis + Seth-X with AI targeting,
+Kvertus,Defense,Kyiv,UA,,Atlas program,,£5M self-funded,,EW + anti-drone wall £103M Atlas program,
+Hensoldt,Defense,Taufkirchen,DE,2017,Public,,,TRML-4D + Aiona. Partnership with Helsing on CA-1 Europa,
+ICEYE,Space,Espoo,FI,2014,Series E,2025-12,€150M,General Catalyst,SAR sats. €2.4B valuation. Rheinmetall JV $2bn DE contract,https://europeanspaceflight.com/finlands-iceye-closes-e150-million-series-e-funding-round/
+Open Cosmos,Space,Harwell,UK,2015,private,,,6GStarLab + Open Constellation. £5.15M DSTL 2025,
+Unseenlabs,Space,Rennes,FR,2015,Series C,2024-02,€85M,Supernova + ISALT,Maritime RF geolocation 16 sats,
+D-Orbit,Space,Fino Mornasco,IT,2011,Series D,2026-01,$53M,Azimut,Orbital Edge AI. Planetek combination 2025,https://news.satnews.com/2026/01/22/d-orbit-secures-53m-series-d-funding-to-accelerate-ma-and-in-space-computing-capacity/
+Isar Aerospace,Space,Munich,DE,2018,convertible,2025-06,€150M,Eldridge,Spectrum launch vehicle,https://spacenews.com/isar-aerospace-raises-150-million-euros/
+The Exploration Company,Space,Munich/Bordeaux,DE/FR,2021,Series B,2024-11,$160M,,Nyx cargo. DLR anchor Feb 2025,
+Aerospacelab,Space,Charleroi,BE,,Series B + EIB,2025-08 / 2025-09,€94M + €37.5M,,Megafactory 500 sats/year by 2027,
+ReOrbit,Space,Helsinki,FI,,Series A,2025-09,€45M,Springvest,Software-defined sats largest Finnish all-equity A,
+EnduroSat,Space,Sofia,BG,,2 rounds,2025-05 / 2025-10,€43M + $104M,Founders Fund,Sofia Space Center opened Oct 2025,
+Reflex Aerospace,Space,Munich/Berlin,DE,,Series A,2025-11,€50M,Human Element + Alpine Space,Praetora ISR sats largest EU New Space A,
+Constellr,Space,Freiburg,DE,,Series A,2026-02,€37M,Alpine Space + Lakestar,Thermal EO SkyBee-1/2,
+SatVu,Space,London,UK,,Series B,2026-02,£30M,NATO Innovation Fund,HotSat thermal intelligence,

@@ -1,0 +1,1403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 2026 European Edge AI Report · Entropora</title>
+<meta name="description" content="A survey of Europe's edge AI stack: silicon, on-device models, robotics, automotive, industrial, defense, space. Compiled from inside a shipping product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4efe6;
+    --paper: #faf6ee;
+    --ink: #1c221d;
+    --ink-soft: #3d443e;
+    --ink-muted: #6a6f69;
+    --rule: #d8d1c2;
+    --green-deep: #2c3a2f;
+    --green: #3a4a3d;
+    --green-soft: #5c6b5f;
+    --green-pale: #e8e4d6;
+    --accent: #a0522d;
+    --red: #8b3a3a;
+    --highlight: #f0e9d5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
+  a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .15s; }
+  a:hover { color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* ====== HERO ====== */
+  .hero {
+    background: var(--green-deep);
+    color: var(--bg);
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #1a221c;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(200,190,160,.03) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(200,190,160,.04) 0, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .hero .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,.55);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6.5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.02;
+    max-width: 16ch;
+    letter-spacing: -0.025em;
+    font-variation-settings: "SOFT" 20, "opsz" 144;
+  }
+  .hero h1 .em { font-style: italic; font-weight: 400; color: #d7ccab; }
+  .hero .byline {
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: rgba(244,239,230,.7);
+    border-top: 1px solid rgba(244,239,230,.15);
+    padding-top: 2rem;
+    max-width: 720px;
+  }
+  .hero .byline dt {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,.5);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  .hero .byline dd { font-size: 15px; color: rgba(244,239,230,.9); font-weight: 400; }
+  .hero .brand {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: rgba(244,239,230,.8);
+  }
+  .hero .brand::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: rgba(244,239,230,.4);
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+  .hero .dek {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-style: italic;
+    color: rgba(244,239,230,.8);
+    max-width: 640px;
+    margin-top: 2rem;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ====== NAV ====== */
+  .toc {
+    position: sticky;
+    top: 0;
+    background: rgba(244,239,230,.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    z-index: 50;
+    padding: 0.75rem 0;
+  }
+  .toc-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 1.25rem;
+    font-size: 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    scrollbar-width: thin;
+    font-weight: 500;
+  }
+  .toc-inner a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s, color .2s;
+  }
+  .toc-inner a:hover { color: var(--ink); border-color: var(--green); }
+
+  /* ====== GENERIC ====== */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .prose { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 6rem 0; border-bottom: 1px solid var(--rule); }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--green);
+  }
+  h2.h-section {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    max-width: 22ch;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  h2.h-section em { color: var(--green); font-style: italic; font-weight: 400; }
+  .lede {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    max-width: 32em;
+  }
+  p { margin-bottom: 1.1rem; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* ====== PULL QUOTE ====== */
+  .pullquote {
+    border-left: 2px solid var(--green);
+    padding: 0.5rem 0 0.5rem 2rem;
+    margin: 2.5rem 0;
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    line-height: 1.45;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .pullquote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  /* ====== STAT GRID ====== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    margin: 3rem 0;
+    border: 1px solid var(--rule);
+  }
+  .stat {
+    background: var(--bg);
+    padding: 1.75rem 1.5rem;
+  }
+  .stat-big {
+    font-family: 'Fraunces', serif;
+    font-size: 2.3rem;
+    line-height: 1;
+    color: var(--green-deep);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.35;
+  }
+
+  /* ====== CARDS ====== */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+  .card {
+    background: var(--bg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+  }
+  .card h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .card .meta {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .card .desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  .card .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 2px 7px;
+    margin-top: 0.75rem;
+    align-self: flex-start;
+    font-weight: 500;
+    border-radius: 2px;
+  }
+  .card .funding {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+
+  /* ====== TABLE ====== */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 14px;
+  }
+  .tbl th, .tbl td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .tbl th {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--ink-soft);
+  }
+  .tbl td { color: var(--ink-soft); }
+  .tbl td strong { color: var(--ink); font-weight: 600; }
+  .tbl .num { font-family: 'JetBrains Mono', monospace; font-size: 13px; white-space: nowrap; color: var(--green-deep); font-weight: 500; }
+  .tbl tr:hover td { background: var(--highlight); }
+
+  /* ====== CHART ====== */
+  .chart-wrap {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .chart-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .chart-sub {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .chart-footnote {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 1rem;
+    font-style: italic;
+  }
+
+  /* ====== STACK SECTIONS ====== */
+  .stack-section {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .stack-section:first-of-type { padding-top: 0; }
+  .stack-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: baseline;
+  }
+  .stack-num {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    color: var(--green);
+    font-weight: 300;
+    line-height: 1;
+    font-style: italic;
+  }
+  .stack-header h3 {
+    font-size: 2rem;
+    line-height: 1.15;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .stack-header .stack-funding {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    color: var(--green);
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 0.25rem;
+  }
+
+  /* ====== HUB MAP ====== */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0;
+    border: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+  .hub {
+    padding: 1.25rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .hub .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  .hub .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+    font-weight: 500;
+  }
+  .hub .country {
+    font-size: 11px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .hub .focus {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* ====== POV (Entropora voice) ====== */
+  .pov {
+    background: var(--green-deep);
+    color: var(--bg);
+    padding: 7rem 0;
+    border-bottom: none;
+  }
+  .pov .section-label { color: #d7ccab; }
+  .pov .section-label::before { background: #d7ccab; }
+  .pov h2.h-section { color: var(--bg); }
+  .pov h2.h-section em { color: #d7ccab; }
+  .pov p { color: rgba(244,239,230,.82); }
+  .pov p strong { color: var(--bg); }
+  .pov .lede { color: rgba(244,239,230,.7); }
+  .pov .pullquote { border-color: #d7ccab; color: var(--bg); }
+  .pov .pullquote cite { color: rgba(244,239,230,.55); }
+  .pov .sig {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(244,239,230,.18);
+  }
+  .pov .sig .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--bg);
+  }
+  .pov .sig .title {
+    font-size: 13px;
+    color: rgba(244,239,230,.6);
+    margin-top: 0.15rem;
+  }
+
+  /* ====== SOURCES ====== */
+  .sources {
+    background: var(--paper);
+    padding: 4rem 0;
+  }
+  .sources h3 { font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 400; }
+  .sources ul { list-style: none; column-count: 2; column-gap: 2.5rem; }
+  .sources li {
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+    color: var(--ink-soft);
+    break-inside: avoid;
+    line-height: 1.4;
+  }
+  .sources li a { color: var(--green); }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--green-deep);
+    color: rgba(244,239,230,.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 13px;
+  }
+  footer .brand-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: var(--bg);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ====== UTILS ====== */
+  .divider { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+  .note {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-style: italic;
+    border-left: 2px solid var(--rule);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+  }
+  .flag { font-size: 12px; color: var(--red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+  .dropcap::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.45rem 0.65rem 0 0;
+    color: var(--green);
+    font-weight: 400;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 5rem 1.5rem 3.5rem; }
+    .section { padding: 4rem 0; }
+    .container, .prose { padding: 0 1.25rem; }
+    .stack-header { grid-template-columns: 1fr; gap: 0.5rem; }
+    .sources ul { column-count: 1; }
+    .toc-inner { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================ HERO ================ -->
+<header class="hero">
+  <div class="brand">Entropora</div>
+  <div class="hero-inner">
+    <div class="kicker">A Report · April 2026</div>
+    <h1>The 2026 European <span class="em">Edge AI</span> Report.</h1>
+    <p class="dek">Where AI runs when it doesn't run inside a hyperscaler. The European side of that question, across silicon, runtimes, robotics, autos, defence, and space. Researched in April 2026 by the team at Entropora, from inside heydict, a voice agent that ships on customer hardware.</p>
+    <dl class="byline">
+      <div><dt>Authors</dt><dd>Andrii Shylenko &amp; Lorenz Sauer</dd></div>
+      <div><dt>Publisher</dt><dd>Entropora, Inc.</dd></div>
+      <div><dt>Date</dt><dd>April 2026</dd></div>
+      <div><dt>Coverage</dt><dd>EU27 · UK · CH · NO · UA</dd></div>
+      <div><dt>Length</dt><dd>~9,000 words · ≈30 min read</dd></div>
+    </dl>
+  </div>
+</header>
+
+<!-- ================ TOC ================ -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#why">Why now</a>
+    <a href="#ingredients">Ingredients</a>
+    <a href="#numbers">The numbers</a>
+    <a href="#geography">Geography</a>
+    <a href="#stack">The stack</a>
+    <a href="#rounds">Top rounds</a>
+    <a href="#challenges">Challenges</a>
+    <a href="#pov">Notes from a product</a>
+    <a href="#methodology">Method</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<!-- ================ WHY NOW ================ -->
+<section class="section" id="why">
+  <div class="prose">
+    <div class="section-label">I · Why now</div>
+    <h2 class="h-section">Inference is leaving the <em>hyperscaler cloud</em>.</h2>
+    <p class="lede">Energy cost, GDPR exposure, and the AI Act phase-in are shifting where AI runs. Each vector bites harder in Europe than in the US.</p>
+
+    <p class="dropcap">For three years the reported story about AI has been four or five US labs paying NVIDIA to serve tokens over HTTPS. That is still happening. Underneath it, more and more inference is running on devices outside hyperscaler clouds: cars, cameras, phones, factory PLCs, drones, satellites. The economics push this hard in Europe. Eurostat puts EU27 non-household electricity at 19.0 cents per kWh in H1 2025. EIA has the US industrial average over the same period at 8.3 cents. Gartner expects data-centre demand to double by 2030 and S&amp;P Global expects European DC electricity up 70 percent over the same window. Ireland's regulator has constrained new Dublin-area data-centre connections since the CRU's November 2021 direction (CRU/21/124, superseded by CRU 2025/236); EirGrid subsequently indicated no new Dublin DC connections before 2028. The Netherlands imposed a similar temporary moratorium in the Amsterdam region. Frankfurt is tight, though without a formal refusal regime.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">The substrate economics</div>
+      <div class="chart-sub">EU27 non-household vs US industrial electricity, H1 2025 · cents per kWh, matched units</div>
+      <svg viewBox="0 0 800 230" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:12px;">
+        <text x="80" y="50" fill="#1c221d" font-family="Fraunces" font-size="15" font-weight="500">European Union (27 avg)</text>
+        <rect x="80" y="65" width="555" height="40" fill="#3a4a3d"/>
+        <text x="650" y="93" fill="#2c3a2f" font-family="Fraunces" font-size="28" font-weight="500">19.0 ¢</text>
+        <text x="80" y="145" fill="#1c221d" font-family="Fraunces" font-size="15" font-weight="500">United States (industrial)</text>
+        <rect x="80" y="160" width="240" height="40" fill="#a0522d"/>
+        <text x="335" y="188" fill="#a0522d" font-family="Fraunces" font-size="28" font-weight="500">8.3 ¢</text>
+        <text x="540" y="215" fill="#6a6f69" font-size="11" text-anchor="end">~2.3x gap · intra-EU range: Finland ~8¢ to Ireland ~27¢</text>
+      </svg>
+      <div class="chart-footnote">Sources: Eurostat nrg_pc_205 (H1 2025 non-household electricity, EU27 average); US EIA Electric Power Monthly (industrial average, 2025). Intra-EU dispersion is wide. In H1 2025 non-household aggregates, Finland had the EU low (~€0.080/kWh) and Ireland the EU high (~€0.273/kWh). Tariff definitions differ slightly between jurisdictions; band definitions vary.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Then there is the regulation, which phases in across three years. GPAI obligations applied on 2 August 2025. General applicability, including Annex III high-risk systems and Article 50 transparency, kicks in on 2 August 2026. Annex I, which covers high-risk AI inside regulated products, applies from 2 August 2027. GDPR's data-minimisation and privacy-by-design duties have been in force throughout; the EDPB's Opinion 28/2024 in November 2024 made clear that AI inference does not get a free pass. For any pipeline that touches personal data, on-device inference is the cleanest compliance path that currently exists. Regulated buyers in healthcare, legal, industrial, defence and public-sector procurement now open conversations with "the data does not leave our estate" as a stated requirement rather than a preference.</p>
+
+    <p>The political layer is sovereignty. In September 2024 Mario Draghi told the European Parliament that the EU depended on foreign sources for over 80 percent of its digital products, services, infrastructure, and IP. Five months later France committed €109 billion to an AI plan at the Paris AI Action Summit. Germany followed in July 2025 with a €5.5 billion national strategy, industrial-adoption targets through 2030, and a new federal Digital Ministry to coordinate it. The UK launched its AI Opportunities Action Plan in January 2025 with a £500 million Sovereign AI Unit and a twenty-fold expansion of the AI Research Resource targeted for 2030. Public capital of this scale in European tech is itself the newer signal.</p>
+
+    <p>One caveat to state up front: a lot of what Europe calls "sovereign" currently buys US silicon. The France-led AI campus JV names NVIDIA in the headline. Wayve's 2026 Series D was led by NVIDIA. Mistral's €1.7 billion Series C in September 2025 was led by ASML at an €11.7 billion post-money valuation.</p>
+
+    <div class="pullquote">
+      Europe is weak in the emerging technologies that will drive future growth. The EU relies on foreign countries for over 80 percent of digital products, services, infrastructure and intellectual property.
+      <cite>Mario Draghi · The Future of European Competitiveness · September 2024</cite>
+    </div>
+
+    <p>Europe missed the frontier-model round; that is not controversial. Whether the edge layer also consolidates into three US hyperscalers is a harder question than the cloud case was. Our read: it does not, because power budgets, vertical fragmentation and GDPR-era data residency push against consolidation, and Europe has forty years of embedded-systems work that lines up with what the edge actually rewards.</p>
+  </div>
+
+  <!-- Edge AI definition box -->
+  <div class="container">
+    <div class="chart-wrap" style="background:var(--green-pale);border:1px solid var(--green-soft);">
+      <div class="chart-title" style="color:var(--green-deep);">What this report means by "Edge AI"</div>
+      <div class="chart-sub">Scope definition, adapted from tinyML Foundation and ETSI MEC taxonomies</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:1rem;font-size:14px;color:var(--ink-soft);">
+        <div><strong style="color:var(--ink);">In scope.</strong> Inference that runs <em>outside hyperscaler cloud</em>: on-device (MCU, NPU, mobile SoC, automotive ECU, in-cabin compute, satellite payload), on-prem in a customer's own data estate (air-gapped or sovereign-cloud), or inside industrial and defence endpoints that cannot phone home.</div>
+        <div><strong style="color:var(--ink);">Out of scope.</strong> Training-time AI, generic public-cloud inference, and foundation-model R&amp;D that does not ship an on-device artifact. Mistral is in scope because it releases Ministral 3B and 8B under Apache-2.0; foundation-model labs without an edge variant are not.</div>
+        <div><strong style="color:var(--ink);">Layers covered.</strong> Silicon (NPU, neuromorphic, photonic, IP), runtimes and compression (ggml, ONNX, Pruna), models (open weights with edge variants), sovereign deployment platforms, and seven vertical applications (robotics, automotive, industrial, defence, space, consumer, IoT).</div>
+        <div><strong style="color:var(--ink);">Geography.</strong> HQ in the EU27, United Kingdom, Switzerland, Norway, Iceland, or Ukraine. HQ flips to the US (e.g., 1X) are flagged explicitly. Publicly listed incumbents (Arm, ST, Infineon, NXP) are included where material, even when majority-owner geography is foreign.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ INGREDIENTS ================ -->
+<section class="section" id="ingredients">
+  <div class="prose">
+    <div class="section-label">II · Ingredients</div>
+    <h2 class="h-section">Europe has forty years of embedded-systems work waiting for this <em>workload</em>.</h2>
+    <p class="lede">Deep silicon expertise, power budgeting, real-time systems, compiler work, robotics. The institutional memory is forty years old. Capital has been the missing piece, and it is now arriving.</p>
+
+    <p>Academic substrate is dense. The PULP platform between ETH Zürich and the University of Bologna has delivered 40+ RISC-V silicon prototypes for energy-efficient ML in a decade. TU Delft runs an Embedded AI and 6G Lab. CEA-Leti in Grenoble has operated a flagship edge-AI, in-memory and neuromorphic program since 2019. UCL opened its Neuroware centre for brain-inspired computing in 2025. TU Dresden's CEE-AI, with Fraunhofer, focuses on efficient ML. Imperial, Cambridge and Oxford launched QRT Labs in 2026 with 70+ researchers.</p>
+
+    <p>Public capital, measured in discrete programs, looks modest against any single OpenAI round. Aggregated, it is industrial policy at scale.</p>
+  </div>
+
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-big">€80 bn+</div>
+        <div class="stat-label">"catalysed" under the EU Chips Act versus the original €43 bn envelope; of this, only about €4.5 bn is directly EU-managed per ECA Special Report 12/2025. Intel's Magdeburg fab, included in the headline, was cancelled in July 2025. TSMC's Dresden fab remains on track. Chips Act 2.0 expected H1 2026.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€240 M</div>
+        <div class="stat-label">DARE project, launched March 2025, 38 partners across 13 countries; includes an AI Processing Unit for inference</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">19 + 13</div>
+        <div class="stat-label">AI Factories plus Antennas selected by EuroHPC JU across three rounds in 2024 and 2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€109 bn</div>
+        <div class="stat-label">France's AI investment plan, Paris AI Action Summit, 10 February 2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€8.1 bn</div>
+        <div class="stat-label">IPCEI on Microelectronics &amp; Communication Technologies, public funding across 14 Member States and 68 projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€1 bn</div>
+        <div class="stat-label">NATO Innovation Fund, 24 allies, 2025 cohort DIANA scaled to 150 companies across 24 countries</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>None of this capital is earmarked specifically for "edge AI" as a line item. But the substrate, chips, on-device compute, sovereign stack, compliant inference, is what most of it funds by the time it actually lands. The Chips Joint Undertaking covers advanced nodes, FD-SOI, heterogeneous integration and power electronics. DARE is building a RISC-V vector accelerator and an AI Processing Unit, both of which are edge-inference parts. The AI Factories program pairs EuroHPC supercomputers with model-training hubs, giving European inference silicon a built-in customer. Even the Apply AI Strategy announced in October 2025, with €1 billion reallocated for industrial and defense AI rollout, spends its money on deployments that cannot practically run in a hyperscaler cloud.</p>
+
+    <p>The remaining ingredient is capital and exit path. That is where the story gets more uncomfortable, and we address it in the Challenges section.</p>
+  </div>
+</section>
+
+<!-- ================ NUMBERS ================ -->
+<section class="section" id="numbers">
+  <div class="prose">
+    <div class="section-label">III · The numbers</div>
+    <h2 class="h-section">Global edge AI is a <em>$25 billion</em> market now, and a $140 billion market by the mid-2030s.</h2>
+    <p class="lede">Sell-side research firms put global Edge AI TAM in a $24 to $29 billion band for 2025, and a $60 to $200 billion band for the early 2030s. The range spans a factor of 3.5x. The forecast serves for orientation only. We take the low end.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Global Edge AI TAM · five firms, five different numbers</div>
+      <div class="chart-sub">Point estimates from sell-side market-research firms · $ bn · horizon and SAM definitions vary</div>
+      <svg viewBox="0 0 800 280" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:11px;">
+        <line x1="240" y1="230" x2="240" y2="20" stroke="#d8d1c2"/>
+        <line x1="240" y1="230" x2="780" y2="230" stroke="#d8d1c2"/>
+        <g fill="#6a6f69" font-size="10">
+          <line x1="240" y1="180" x2="780" y2="180" stroke="#ece7d8"/><text x="235" y="184" text-anchor="end">$50B</text>
+          <line x1="240" y1="130" x2="780" y2="130" stroke="#ece7d8"/><text x="235" y="134" text-anchor="end">$100B</text>
+          <line x1="240" y1="80" x2="780" y2="80" stroke="#ece7d8"/><text x="235" y="84" text-anchor="end">$150B</text>
+          <line x1="240" y1="30" x2="780" y2="30" stroke="#ece7d8"/><text x="235" y="34" text-anchor="end">$200B</text>
+        </g>
+        <!-- Rows -->
+        <!-- Precedence 2025 25.65 → 2034 143.06 -->
+        <g>
+          <text x="230" y="54" text-anchor="end" fill="#1c221d" font-size="11">Precedence Research</text>
+          <circle cx="255" cy="50" r="4" fill="#5c6b5f"/>
+          <circle cx="683" cy="50" r="5" fill="#3a4a3d"/>
+          <line x1="259" y1="50" x2="679" y2="50" stroke="#3a4a3d" stroke-width="1.5"/>
+          <text x="693" y="54" fill="#3a4a3d" font-size="11" font-weight="500">$143B (2034)</text>
+        </g>
+        <!-- Grand View 2025 24.91 → 2033 118.69 -->
+        <g>
+          <text x="230" y="94" text-anchor="end" fill="#1c221d" font-size="11">Grand View Research</text>
+          <circle cx="255" cy="90" r="4" fill="#5c6b5f"/>
+          <circle cx="636" cy="90" r="5" fill="#3a4a3d"/>
+          <line x1="259" y1="90" x2="632" y2="90" stroke="#3a4a3d" stroke-width="1.5"/>
+          <text x="646" y="94" fill="#3a4a3d" font-size="11" font-weight="500">$119B (2033)</text>
+        </g>
+        <!-- Market.us 2025 28.8 → 2034 196.6 -->
+        <g>
+          <text x="230" y="134" text-anchor="end" fill="#1c221d" font-size="11">Market.us</text>
+          <circle cx="258" cy="130" r="4" fill="#5c6b5f"/>
+          <circle cx="768" cy="130" r="5" fill="#2c3a2f"/>
+          <line x1="262" y1="130" x2="764" y2="130" stroke="#2c3a2f" stroke-width="1.5"/>
+          <text x="680" y="122" fill="#2c3a2f" font-size="11" font-weight="500">$197B (2034)</text>
+        </g>
+        <!-- MarketsandMarkets HW 2025 26.14 → 2030 58.9 -->
+        <g>
+          <text x="230" y="174" text-anchor="end" fill="#1c221d" font-size="11">MarketsandMarkets <tspan fill="#a0522d">(HW only)</tspan></text>
+          <circle cx="256" cy="170" r="4" fill="#5c6b5f"/>
+          <circle cx="355" cy="170" r="5" fill="#a0522d"/>
+          <line x1="260" y1="170" x2="351" y2="170" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="365" y="174" fill="#a0522d" font-size="11" font-weight="500">$59B (2030)</text>
+        </g>
+        <!-- Research and Markets 2025 11.8 → 2030 56.8 -->
+        <g>
+          <text x="230" y="214" text-anchor="end" fill="#1c221d" font-size="11">Research and Markets</text>
+          <circle cx="250" cy="210" r="4" fill="#5c6b5f"/>
+          <circle cx="343" cy="210" r="5" fill="#a0522d"/>
+          <line x1="254" y1="210" x2="339" y2="210" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="353" y="214" fill="#a0522d" font-size="11" font-weight="500">$57B (2030)</text>
+        </g>
+        <g fill="#6a6f69" font-size="10" text-anchor="middle">
+          <text x="256" y="247">2025 TAM ($24-$29B band)</text>
+          <text x="780" y="247" text-anchor="end">→ 2030s horizon</text>
+        </g>
+        <text x="510" y="268" fill="#1c221d" font-size="11" text-anchor="middle" font-style="italic">Horizon estimates span a factor of 3.5×. Directional only.</text>
+      </svg>
+      <div class="chart-footnote">Caveat for the reader: sell-side firms use divergent SAM definitions (hardware-only vs full stack) and incompatible horizons. We present the range for orientation, not for sizing a position. Primary sources: Precedence Research, Grand View Research, MarketsandMarkets, Market.us, Research and Markets (2025 releases). Accessed April 2026.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>The European slice of that pie is harder to read. No one publishes a clean timeseries labelled "European edge AI VC." The numbers below are reconstructed from Dealroom's Future of Compute category, Sifted's hardware-funding briefings and Atomico's State of European Tech, triangulated against individual round announcements. The trend is unambiguous. 2025 was the year the line finally turned up, with around $5.5 to $6 billion deployed into European edge-AI-adjacent startups, more than doubling 2024. The first two months of 2026 already contain two of the largest single rounds on record: Axelera AI's >$250 million in February and Wayve's $1.2 billion Series D the same week.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">European Edge-AI-adjacent VC funding, 2015-2025</div>
+      <div class="chart-sub">Reconstructed from Dealroom, Sifted, Atomico · $ bn, approximate</div>
+      <svg viewBox="0 0 800 320" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:11px;">
+        <!-- Axes -->
+        <line x1="70" y1="270" x2="770" y2="270" stroke="#d8d1c2"/>
+        <line x1="70" y1="30" x2="70" y2="270" stroke="#d8d1c2"/>
+        <!-- Y ticks -->
+        <g fill="#6a6f69">
+          <line x1="70" y1="230" x2="770" y2="230" stroke="#ece7d8"/>
+          <text x="60" y="234" text-anchor="end">1</text>
+          <line x1="70" y1="190" x2="770" y2="190" stroke="#ece7d8"/>
+          <text x="60" y="194" text-anchor="end">2</text>
+          <line x1="70" y1="150" x2="770" y2="150" stroke="#ece7d8"/>
+          <text x="60" y="154" text-anchor="end">3</text>
+          <line x1="70" y1="110" x2="770" y2="110" stroke="#ece7d8"/>
+          <text x="60" y="114" text-anchor="end">4</text>
+          <line x1="70" y1="70" x2="770" y2="70" stroke="#ece7d8"/>
+          <text x="60" y="74" text-anchor="end">5</text>
+          <line x1="70" y1="30" x2="770" y2="30" stroke="#ece7d8"/>
+          <text x="60" y="34" text-anchor="end">6</text>
+        </g>
+        <!-- Bars for 2015-25 -->
+        <!-- 2015: 0.3 -->
+        <rect x="90" y="258" width="50" height="12" fill="#5c6b5f"/>
+        <text x="115" y="253" text-anchor="middle" fill="#1c221d">0.3</text>
+        <!-- 2016: 0.35 -->
+        <rect x="150" y="256" width="50" height="14" fill="#5c6b5f"/>
+        <text x="175" y="251" text-anchor="middle" fill="#1c221d">0.4</text>
+        <!-- 2017: 0.45 -->
+        <rect x="210" y="252" width="50" height="18" fill="#5c6b5f"/>
+        <text x="235" y="247" text-anchor="middle" fill="#1c221d">0.5</text>
+        <!-- 2018: 0.6 -->
+        <rect x="270" y="246" width="50" height="24" fill="#5c6b5f"/>
+        <text x="295" y="241" text-anchor="middle" fill="#1c221d">0.6</text>
+        <!-- 2019: 0.8 -->
+        <rect x="330" y="238" width="50" height="32" fill="#5c6b5f"/>
+        <text x="355" y="233" text-anchor="middle" fill="#1c221d">0.8</text>
+        <!-- 2020: 1.0 -->
+        <rect x="390" y="230" width="50" height="40" fill="#5c6b5f"/>
+        <text x="415" y="225" text-anchor="middle" fill="#1c221d">1.0</text>
+        <!-- 2021: 1.5 -->
+        <rect x="450" y="210" width="50" height="60" fill="#3a4a3d"/>
+        <text x="475" y="205" text-anchor="middle" fill="#1c221d">1.5</text>
+        <!-- 2022: 1.8 -->
+        <rect x="510" y="198" width="50" height="72" fill="#3a4a3d"/>
+        <text x="535" y="193" text-anchor="middle" fill="#1c221d">1.8</text>
+        <!-- 2023: 2.0 -->
+        <rect x="570" y="190" width="50" height="80" fill="#3a4a3d"/>
+        <text x="595" y="185" text-anchor="middle" fill="#1c221d">2.0</text>
+        <!-- 2024: 2.5 -->
+        <rect x="630" y="170" width="50" height="100" fill="#3a4a3d"/>
+        <text x="655" y="165" text-anchor="middle" fill="#1c221d">2.5</text>
+        <!-- 2025: 5.7 -->
+        <rect x="690" y="42" width="50" height="228" fill="#2c3a2f"/>
+        <text x="715" y="37" text-anchor="middle" fill="#2c3a2f" font-weight="700">5.7</text>
+        <!-- X labels -->
+        <g fill="#6a6f69" text-anchor="middle" font-size="10">
+          <text x="115" y="290">2015</text><text x="175" y="290">2016</text><text x="235" y="290">2017</text>
+          <text x="295" y="290">2018</text><text x="355" y="290">2019</text><text x="415" y="290">2020</text>
+          <text x="475" y="290">2021</text><text x="535" y="290">2022</text><text x="595" y="290">2023</text>
+          <text x="655" y="290">2024</text><text x="715" y="290">2025</text>
+        </g>
+        <!-- Arrow callout -->
+        <path d="M740,50 L760,30" stroke="#8b3a3a" stroke-width="1"/>
+        <text x="763" y="28" fill="#8b3a3a" font-weight="600">+128% YoY</text>
+      </svg>
+      <div class="chart-footnote">Approximations. European Edge AI has no single source-of-truth taxonomy; figures reconstruct from Dealroom's Future of Compute, Sifted hardware briefings, Atomico State of European Tech and individual round announcements. 2026 year-to-date (not shown) already includes Axelera &gt;$250M and Wayve $1.2B.</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-big">~6 %</div>
+        <div class="stat-label">Europe's share of global AI-chip VC, cumulative 2022-2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">$14 bn</div>
+        <div class="stat-label">total European AI VC 2025 · against $146 bn in the US</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">$8.7 bn</div>
+        <div class="stat-label">European Defense, Security &amp; Resilience VC 2025, a record; AI was 44% of it</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">44 %</div>
+        <div class="stat-label">AI's share of DSR funding, per Dealroom × NATO Innovation Fund</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Six percent of global AI-chip VC is below Europe's weight by population or GDP. It also understates reality. The listed incumbents (Arm, STMicroelectronics, Infineon, NXP, ASML, Kalray) and the non-VC public capital (grants, guarantees, EIB loans) do not clear through Crunchbase. Europe punches closer to its weight at the edge than it ever did in cloud AI, and 2025-26 is the inflection.</p>
+
+    <p>The composition of European Deep Tech VC has shifted just as hard. In 2016, defense and resilience was 23 percent of the category. By 2025 it was 43 percent. AI inside defense-security-resilience was 44 percent of that. The pattern is a direct consequence of Ukraine and of an EU that has started spending on its own edge.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Defense, Security &amp; Resilience share of European Deep Tech VC</div>
+      <div class="chart-sub">Percentage of European Deep Tech VC funding going to DSR startups · 2016-2025</div>
+      <svg viewBox="0 0 800 260" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:11px;">
+        <line x1="70" y1="210" x2="770" y2="210" stroke="#d8d1c2"/>
+        <g fill="#6a6f69">
+          <line x1="70" y1="170" x2="770" y2="170" stroke="#ece7d8"/>
+          <text x="60" y="174" text-anchor="end">20%</text>
+          <line x1="70" y1="130" x2="770" y2="130" stroke="#ece7d8"/>
+          <text x="60" y="134" text-anchor="end">30%</text>
+          <line x1="70" y1="90" x2="770" y2="90" stroke="#ece7d8"/>
+          <text x="60" y="94" text-anchor="end">40%</text>
+          <line x1="70" y1="50" x2="770" y2="50" stroke="#ece7d8"/>
+          <text x="60" y="54" text-anchor="end">50%</text>
+        </g>
+        <!-- Bars 2016-2025, values: 23, 12, 20, 15, 23, 23, 21, 25, 33, 43 -->
+        <rect x="95"  y="118" width="50" height="92" fill="#5c6b5f"/><text x="120" y="113" text-anchor="middle" fill="#1c221d">23</text>
+        <rect x="165" y="162" width="50" height="48" fill="#5c6b5f"/><text x="190" y="157" text-anchor="middle" fill="#1c221d">12</text>
+        <rect x="235" y="130" width="50" height="80" fill="#5c6b5f"/><text x="260" y="125" text-anchor="middle" fill="#1c221d">20</text>
+        <rect x="305" y="150" width="50" height="60" fill="#5c6b5f"/><text x="330" y="145" text-anchor="middle" fill="#1c221d">15</text>
+        <rect x="375" y="118" width="50" height="92" fill="#5c6b5f"/><text x="400" y="113" text-anchor="middle" fill="#1c221d">23</text>
+        <rect x="445" y="118" width="50" height="92" fill="#5c6b5f"/><text x="470" y="113" text-anchor="middle" fill="#1c221d">23</text>
+        <rect x="515" y="126" width="50" height="84" fill="#5c6b5f"/><text x="540" y="121" text-anchor="middle" fill="#1c221d">21</text>
+        <rect x="585" y="110" width="50" height="100" fill="#3a4a3d"/><text x="610" y="105" text-anchor="middle" fill="#1c221d">25</text>
+        <rect x="655" y="78"  width="50" height="132" fill="#3a4a3d"/><text x="680" y="73" text-anchor="middle" fill="#1c221d">33</text>
+        <rect x="725" y="38"  width="40" height="172" fill="#2c3a2f"/><text x="745" y="33" text-anchor="middle" fill="#2c3a2f" font-weight="700">43</text>
+        <g fill="#6a6f69" text-anchor="middle" font-size="10">
+          <text x="120" y="230">2016</text><text x="190" y="230">2017</text><text x="260" y="230">2018</text>
+          <text x="330" y="230">2019</text><text x="400" y="230">2020</text><text x="470" y="230">2021</text>
+          <text x="540" y="230">2022</text><text x="610" y="230">2023</text><text x="680" y="230">2024</text>
+          <text x="745" y="230">2025</text>
+        </g>
+      </svg>
+      <div class="chart-footnote">Source: Dealroom × NATO Innovation Fund, "Defence, Security &amp; Resilience in Europe Report 2026." DSR defined as defense, space, quantum, nuclear energy, critical materials, biodefense.</div>
+    </div>
+  </div>
+
+  <!-- ===== Decomposition: stats we ran ourselves against the 81-company dataset ===== -->
+  <div class="prose" style="margin-top:5rem;">
+    <hr class="divider">
+    <div class="section-label" style="margin-top:3rem;">III.b · Decomposed</div>
+    <h2 class="h-section" style="margin-top:1rem;">Patterns the headline <em>doesn't surface</em>.</h2>
+    <p class="lede">The numbers below come from our own companion dataset: 81 European edge-AI companies, $10.4 billion of disclosed 2024-2026 VC and acquisition value, listed incumbents excluded. Currency normalised to April 2026 spot. Everything here is reproducible from <code>companies.csv</code>.</p>
+  </div>
+
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-big">53 %</div>
+        <div class="stat-label">of disclosed European edge-AI VC went to the <em>Models &amp; Runtimes</em> segment. Even building the on-device thesis, Europe still follows the cloud-AI funding pattern.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">3.5×</div>
+        <div class="stat-label">Average model-lab round ($429 M) versus average silicon round ($122 M). For the edge thesis to hold, silicon round size has to close this gap.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">75 %</div>
+        <div class="stat-label">France + Germany + UK share of disclosed capital. FR 27% · DE 26% · UK 23%. Everything else is long-tail.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">$159 /cap</div>
+        <div class="stat-label">Finland's edge-AI VC per capita in 2024-2026. Roughly 5× France, Germany and the UK. Silo AI + ICEYE + ReOrbit. Almost nobody writes about this.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Average round size by segment, 2024-2026</div>
+      <div class="chart-sub">Latest disclosed round per company, USD millions, n=81 companies</div>
+      <svg viewBox="0 0 900 400" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:12px;">
+        <!-- Scale: Models $429M = 650px -->
+        <g font-size="11">
+          <!-- Models -->
+          <text x="130" y="55" text-anchor="end" fill="#1c221d" font-weight="600">Models &amp; Runtimes</text>
+          <rect x="140" y="36" width="650" height="28" fill="#2c3a2f"/>
+          <text x="798" y="56" fill="#2c3a2f" font-family="Fraunces" font-size="22" font-weight="500">$429 M</text>
+          <text x="130" y="78" text-anchor="end" fill="#6a6f69" font-size="10">13 cos</text>
+          <!-- Defense -->
+          <text x="130" y="105" text-anchor="end" fill="#1c221d" font-weight="600">Defence edge</text>
+          <rect x="140" y="86" width="230" height="28" fill="#3a4a3d"/>
+          <text x="378" y="106" fill="#3a4a3d" font-family="Fraunces" font-size="20" font-weight="500">$152 M</text>
+          <text x="130" y="128" text-anchor="end" fill="#6a6f69" font-size="10">10 cos</text>
+          <!-- Silicon -->
+          <text x="130" y="155" text-anchor="end" fill="#1c221d" font-weight="600">Silicon</text>
+          <rect x="140" y="136" width="185" height="28" fill="#3a4a3d"/>
+          <text x="333" y="156" fill="#3a4a3d" font-family="Fraunces" font-size="20" font-weight="500">$122 M</text>
+          <text x="130" y="178" text-anchor="end" fill="#6a6f69" font-size="10">12 cos</text>
+          <!-- Automotive -->
+          <text x="130" y="205" text-anchor="end" fill="#1c221d" font-weight="600">Automotive</text>
+          <rect x="140" y="186" width="155" height="28" fill="#5c6b5f"/>
+          <text x="303" y="206" fill="#5c6b5f" font-family="Fraunces" font-size="20" font-weight="500">$102 M</text>
+          <text x="130" y="228" text-anchor="end" fill="#6a6f69" font-size="10">2 cos · Tier-1 capex invisible here, see note</text>
+          <!-- Robotics -->
+          <text x="130" y="255" text-anchor="end" fill="#1c221d" font-weight="600">Robotics</text>
+          <rect x="140" y="236" width="127" height="28" fill="#5c6b5f"/>
+          <text x="275" y="256" fill="#5c6b5f" font-family="Fraunces" font-size="20" font-weight="500">$84 M</text>
+          <text x="130" y="278" text-anchor="end" fill="#6a6f69" font-size="10">8 cos</text>
+          <!-- Space -->
+          <text x="130" y="305" text-anchor="end" fill="#1c221d" font-weight="600">Space</text>
+          <rect x="140" y="286" width="121" height="28" fill="#5c6b5f"/>
+          <text x="269" y="306" fill="#5c6b5f" font-family="Fraunces" font-size="20" font-weight="500">$80 M</text>
+          <text x="130" y="328" text-anchor="end" fill="#6a6f69" font-size="10">12 cos</text>
+          <!-- Industrial -->
+          <text x="130" y="355" text-anchor="end" fill="#1c221d" font-weight="600">Industrial</text>
+          <rect x="140" y="336" width="16" height="28" fill="#a0522d"/>
+          <text x="164" y="356" fill="#a0522d" font-family="Fraunces" font-size="20" font-weight="500">$10 M</text>
+          <text x="130" y="378" text-anchor="end" fill="#6a6f69" font-size="10">4 cos disclosed · public incumbents dominate here, see note</text>
+        </g>
+      </svg>
+      <div class="chart-footnote">Calculated from <code>companies.csv</code>. Listed incumbents excluded (their "round" column records revenue, not VC). Acquisitions included at deal value. 1X's "targeting $1 B" round excluded because it has not closed.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Two data points sit underneath that chart that deserve their own sentences.</p>
+
+    <p><strong>The Ukraine paradox.</strong> Three funded Ukrainian edge-AI companies in our dataset (Swarmer, Airlogix, Kvertus) add up to roughly $21 million in disclosed 2024-2026 VC. That is 0.2 percent of the continental total. Those same three, plus Ukrspecsystems, are the largest combat-tested edge-drone cluster in Europe, flying across six NATO member states. The validation is there; the capital is not. Ukraine's edge AI gets paid by defence ministry contracts, not by VC rounds. For a fund manager looking for non-consensus entry points, this is the clearest one in the dataset.</p>
+
+    <p><strong>The automotive blindspot.</strong> Two disclosed automotive rounds in the dataset (Oxa $103 M, Einride $100 M) excluding Wayve, which we bucket under Models. The real European automotive edge-AI spend sits inside Tier-1 capex, which never clears through VC. Bosch Mobility has invested roughly €10 billion cumulatively in AD/AI. ZF's ProAI is in volume series production. Valeo ships Mercedes DRIVE PILOT. None of that shows up in Dealroom. If you trust the VC tracker alone, you will miss the largest European edge-AI market on the continent, which ships on several million new vehicles a year.</p>
+
+    <p><strong>Concentration (HHI = 730).</strong> Top round in the window is 18 percent of the total. Top five rounds are 50 percent. Top ten are 67 percent. HHI under 1,500 is classified unconcentrated under the US DOJ scale; Europe at 730 is well below. Compare: US AI funding where three labs (OpenAI, Anthropic, xAI) represent over 80 percent. Europe's edge-AI ecosystem is structurally more distributed. A portfolio thesis that depends on backing several winners, not picking one, is empirically supported by the data.</p>
+
+    <p><strong>Exit base rate: n = 2.</strong> Two clean edge-AI exits in the window. Silo AI to AMD returned roughly 3.3x on invested capital. Generational lab lost. Graphcore to SoftBank returned roughly 0.7-0.8x, which is a meaningful loss. The sample is too small for a statistical claim, but the distribution is bimodal, and European silicon in particular has a "miss" prior until Axelera or SiPearl ships the counter-evidence.</p>
+
+    <p>Graphcore is the base rate worth remembering. The IPU startup peaked at a $2.77 billion valuation at its $222 million Series E in December 2020, having raised approximately $767 million across six rounds between 2016 and 2020. Four years later it ended in a SoftBank deal whose price was not publicly disclosed but is widely reported in the $500-$600 million range. The implicated factors were familiar: tapeout schedules that slipped, a compiler ecosystem that did not compound commercial design-wins at speed, and the long gap between first tape-out and shipping customer product. Axelera's >$250 million Series C in February 2026 is the strongest evidence to date that the European silicon model can break that base rate. It is also one round in a single quarter.</p>
+
+    <div class="note">Dataset caveat. 81 companies profiled, not a census. "Disclosed VC" means most-recent priced equity round or acquisition value where announced. Currency normalised to April 2026 USD at €1.08 and £1.27. Public listed incumbents (ST, NXP, Arm, Bosch, ZF, Valeo, Continental, Siemens, Schneider, ABB, Infineon, Kalray, Hensoldt) excluded because the column in our CSV records revenue, not VC flow. Reconstruction is directional, not a census.</div>
+  </div>
+</section>
+
+<!-- ================ GEOGRAPHY ================ -->
+<section class="section" id="geography">
+  <div class="prose">
+    <div class="section-label">IV · Geography</div>
+    <h2 class="h-section">Edge AI Europe has <em>many capitals</em>, and each has its specialty.</h2>
+    <p class="lede">There is no Silicon Valley here. Munich is the defense-tech and space capital. London is the autonomy and model capital. Grenoble is where the chips get fabbed. Kyiv is where they get combat-tested.</p>
+  </div>
+
+  <div class="container">
+    <div class="hub-grid">
+      <div class="hub"><div class="rank">01</div><div class="name">Munich</div><div class="country">Germany</div><div class="focus">Helsing, Quantum Systems, STARK, Isar Aerospace, Exploration Company, Reflex Aerospace, Agile Robots, Codasip. Defense + space + humanoid core. TUM + Fraunhofer.</div></div>
+      <div class="hub"><div class="rank">02</div><div class="name">London / Harwell</div><div class="country">United Kingdom</div><div class="focus">Wayve, Open Cosmos, SatVu, Tekever UK, ElevenLabs, Humanoid, Nothing. AI = 33% of UK VC 2025; £17 bn total.</div></div>
+      <div class="hub"><div class="rank">03</div><div class="name">Paris</div><div class="country">France</div><div class="focus">Mistral, Kyutai, Wandercraft, Prophesee, SiPearl, Pruna, H Company, Comand AI, Exotrail. Hugging Face's founding team and significant engineering. Anthropic opened its Paris EMEA office in 2025.</div></div>
+      <div class="hub"><div class="rank">04</div><div class="name">Grenoble</div><div class="country">France</div><div class="focus">CEA-Leti, STMicroelectronics, Kalray, Soitec, GreenWaves. The "Silicon Valley of Europe" for edge chips, by density.</div></div>
+      <div class="hub"><div class="rank">05</div><div class="name">Zurich / Lausanne</div><div class="country">Switzerland</div><div class="focus">ETH + EPFL + Swiss AI Initiative, ANYbotics, Daedalean (acquired by Destinus Aug 2025), Flexion Robotics.</div></div>
+      <div class="hub"><div class="rank">06</div><div class="name">Eindhoven / Delft</div><div class="country">Netherlands</div><div class="focus">ASML, NXP, Axelera AI, Euclyd, Innatera. TU Delft Embedded AI &amp; 6G Lab.</div></div>
+      <div class="hub"><div class="rank">07</div><div class="name">Dresden</div><div class="country">Germany</div><div class="focus">Silicon Saxony, GlobalFoundries, Infineon, SpiNNcloud (35k-chip neuromorphic supercomputer), Wandelbots.</div></div>
+      <div class="hub"><div class="rank">08</div><div class="name">Stuttgart</div><div class="country">Germany</div><div class="focus">Bosch, Mercedes, Porsche, ZF, Q.ANT (€62 M Jul 2025 photonic processor, Europe's largest).</div></div>
+      <div class="hub"><div class="rank">09</div><div class="name">Berlin</div><div class="country">Germany</div><div class="focus">Helsing office, Reflex office, Vsquared Ventures, Auterion engineering, defense-tech capital of the public square.</div></div>
+      <div class="hub"><div class="rank">10</div><div class="name">Helsinki / Espoo</div><div class="country">Finland</div><div class="focus">ICEYE, ReOrbit (€45 M Sep 2025), DataCrunch, Aalto. Plus AMD via the Silo AI acquisition.</div></div>
+      <div class="hub"><div class="rank">11</div><div class="name">Cambridge</div><div class="country">United Kingdom</div><div class="focus">Arm, Graphcore alumni network, CamGraPhIC, plenty of doctoral overflow from QRT Labs.</div></div>
+      <div class="hub"><div class="rank">12</div><div class="name">Oulu</div><div class="country">Finland</div><div class="focus">6G Flagship at the University of Oulu, Nokia RF-edge heritage, a quiet hub for low-level radio-AI work.</div></div>
+      <div class="hub"><div class="rank">13</div><div class="name">Tallinn</div><div class="country">Estonia</div><div class="focus">Defence Estonia, DIANA site, EstMil, Defence Business Lab. Small but fastest-growing defense-edge scene.</div></div>
+      <div class="hub"><div class="rank">14</div><div class="name">Bologna</div><div class="country">Italy</div><div class="focus">Benini's PULP platform, University of Bologna, STMicro presence. Forty-plus RISC-V ML prototypes in ten years.</div></div>
+      <div class="hub"><div class="rank">15</div><div class="name">Kyiv</div><div class="country">Ukraine</div><div class="focus">Swarmer, Airlogix, Kvertus, Ukrspecsystems. The largest combat-tested edge-drone cluster in Europe, full stop.</div></div>
+      <div class="hub"><div class="rank">16</div><div class="name">Barcelona</div><div class="country">Spain</div><div class="focus">Barcelona Supercomputing Center (coordinating €240 M DARE), i2CAT, PAL Robotics.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ STACK ================ -->
+<section class="section" id="stack">
+  <div class="prose">
+    <div class="section-label">V · The stack</div>
+    <h2 class="h-section">Eight layers. <em>What ships</em>, and who funded it.</h2>
+    <p class="lede">Eight segments, each with the European companies we track and the last disclosed round as a reality check. Where ownership or HQ has flipped, we flag it in red.</p>
+  </div>
+
+  <!-- V.A SILICON -->
+  <div class="container">
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.a</div>
+        <div>
+          <h3>Silicon. NPUs, neuromorphic cores, photonic processors and the IP beneath them.</h3>
+          <div class="stack-funding">≈ $0.55 bn in 2024-26 disclosed rounds · >$250 M single round in Feb 2026</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Axelera AI</h4><div class="meta">Eindhoven, NL · 2021 · imec spin-off</div><div class="desc">Metis and Europa AIPU (Oct 2025, 629 INT8 TOPS). 500th customer in defense, industrial, retail, robotics. Titania chiplet funded by €61.6 M EuroHPC DARE grant.</div><div class="funding">Feb 2026 · >$250 M Series C · Innovation Industries + BlackRock</div></div>
+        <div class="card"><h4>SiPearl</h4><div class="meta">Maisons-Laffitte, FR · 2019 · EPI spin-off</div><div class="desc">Rhea1 HPC CPU taped out 2025 at TSMC, sampling 2026. JUPITER exascale anchor. Series B €200 M planned 2026-28.</div><div class="funding">Jul 2025 · €130 M Series A final close · EIC Fund</div></div>
+        <div class="card"><h4>GreenWaves Technologies</h4><div class="meta">Grenoble, FR · 2014</div><div class="desc">GAP9 ultra-low-power RISC-V (50 GOPS at 50 mW) for hearables and battery-powered edge AI. Quiet between rounds.</div><div class="funding">Feb 2023 · €20 M · Innovacom + Thales + Definvest</div></div>
+        <div class="card"><h4>Innatera</h4><div class="meta">Delft, NL · 2018 · TU Delft spin-off</div><div class="desc">T1 Spiking Neural Processor, an analog mixed-signal neuromorphic chip for sensor-edge. Pulsar hardware platform Jul 2025. First consumer audio design-in via Joya Design.</div><div class="funding">Jun 2024 · $21 M Series A · Innavest + Invest-NL</div></div>
+        <div class="card"><h4>Prophesee</h4><div class="meta">Paris, FR · 2014 (as Chronocam)</div><div class="desc">Event-based Metavision neuromorphic vision sensors. GenX320 (36 µW, 320×320) for mobile/AR/VR. Sony partnership on stacked IMX636/IMX646.</div><div class="funding">Sep 2022 · $49.5 M Series C · plus €15 M (2024)</div></div>
+        <div class="card"><h4>Q.ANT</h4><div class="meta">Stuttgart, DE · 2018 · TRUMPF spin-off</div><div class="desc">Photonic Native Processing Unit. First-gen photonic AI processor live at the Leibniz Supercomputing Centre since July 2025. The largest photonic round on the continent.</div><div class="funding">Jul 2025 · €62 M Series A · Cherry Ventures + UVC Partners + imec.xpand</div></div>
+        <div class="card"><h4>SpiNNcloud Systems</h4><div class="meta">Dresden, DE · TU Dresden spin-off</div><div class="desc">SpiNNaker2 neuromorphic chip, Arm-based. Commercial neuromorphic supercomputer live at TU Dresden with 35,000 chips and 5 million-plus cores.</div><div class="funding">Jun 2025 · €10 M blended · EIC Accelerator GenAI4EU</div></div>
+        <div class="card"><h4>Euclyd</h4><div class="meta">Eindhoven, NL · 2024</div><div class="desc">CRAFTWERK multi-chiplet AI inference system, first silicon 2028. Founded by ex-ASML director Bernardo Kastrup; backed by Peter Wennink (ex-ASML CEO), Federico Faggin (inventor of the microprocessor) and Steven Schuurman.</div><div class="funding">Apr 2026 · €100 M target · in market</div></div>
+        <div class="card"><h4>Kalray</h4><div class="meta">Grenoble, FR · 2008 · CEA spin-off · public (ALKAL)</div><div class="desc">MPPA-based DPUs; strategy refocused 2025 onto DPU licensing and co-development. Semiconductor-only revenue grew 4x year-over-year. Positive EBITDA FY25.</div><div class="funding">Public · €16.5 M FY25 revenue</div></div>
+        <div class="card"><h4>STMicroelectronics</h4><div class="meta">Geneva / Agrate Brianza · public (STM)</div><div class="desc">Neural-ART Accelerator across STM32N6 MCUs and Stellar P3E automotive MCU (Feb 2026), the first automotive MCU to integrate an NPU. Mass production Q4 2026.</div><div class="funding">Public · €16.6 bn FY25 revenue</div></div>
+        <div class="card"><h4>Infineon</h4><div class="meta">Neubiberg, DE · public (IFX)</div><div class="desc">PSOC Edge E83/E84 (Cortex-M55 + Ethos-U55 + proprietary NNLite). NVIDIA TAO integration, DEEPCRAFT AI Hub launched with embedUR in October 2025.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>NXP</h4><div class="meta">Eindhoven, NL · public (NXPI)</div><div class="desc">eIQ Neutron NPU across i.MX 95/94 applications processors and i.MX RT700 crossover MCU (up to 172x AI acceleration vs prior gen). Closed Kinara acquisition October 2025.</div><div class="funding">Public · $307 M on Kinara</div></div>
+        <div class="card"><h4>Arm <span class="flag">majority SoftBank</span></h4><div class="meta">Cambridge, UK · NASDAQ: ARM</div><div class="desc">Ethos-U85 NPU (Apr 2024), Corstone-320 reference platform, ExecuTorch 1.0. Licensed by Infineon, NXP and most of the AIoT SoC universe. Engineering and HQ are UK; NASDAQ-listed with SoftBank as majority holder, which is where the "European silicon sovereignty" story gets complicated.</div><div class="funding">Public · 90% SoftBank</div></div>
+        <div class="card"><h4>Imagination Technologies <span class="flag">Canyon Bridge owned</span></h4><div class="meta">Kings Langley, UK · private</div><div class="desc">IMG Series4 NNA for ADAS. E-Series GPU with dedicated neural cores (2025), DXTP GPU shipping with first design-ins. Taken private in 2017 by Canyon Bridge, a US-China-linked PE fund; a reminder that "UK edge silicon" and "European-controlled" are not the same thing.</div><div class="funding">Private · foreign-owned</div></div>
+        <div class="card"><h4>Codasip</h4><div class="meta">Munich, DE + Brno, CZ · 2006</div><div class="desc">European RISC-V IP provider. Selected by DARE in March 2025 to design the high-end general-purpose RISC-V processor for EU HPC and AI. EIC Accelerator grant recipient.</div><div class="funding">Private · EU DARE anchor</div></div>
+        <div class="card"><h4>XMOS</h4><div class="meta">Bristol, UK · 2005</div><div class="desc">xcore.ai SoC combining AI accelerator, DSP, MCU and flexible I/O. XCORE-VOICE stack for far-field keyword detection. "2025 Edge AI MCU Excellence" recognition.</div><div class="funding">2019 · $19 M · Harbert European Growth Capital</div></div>
+      </div>
+    </div>
+
+    <!-- V.B MODELS -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.b</div>
+        <div>
+          <h3>Models and runtimes. The software that lets AI leave the cloud.</h3>
+          <div class="stack-funding">≈ $3.7 bn in disclosed rounds · from Mistral through Wayve through the one person who maintains llama.cpp</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Mistral AI</h4><div class="meta">Paris, FR · May 2023</div><div class="desc">Ministral 3B and 8B (Oct 2024) are the explicit edge line: Apache-2.0 weights, GGUF quants on HF, runs on llama.cpp, Ollama, MLX. Mistral NeMo 12B with NVIDIA, Mixtral, Codestral Mamba.</div><div class="funding">Sep 9 2025 · €1.7 B Series C · ASML-led (€1.3 B) · €11.7 B post-money · NVIDIA + a16z + Bpifrance + DST participating</div></div>
+        <div class="card"><h4>Black Forest Labs</h4><div class="meta">Freiburg, DE · 2024</div><div class="desc">FLUX.1 [schnell] Apache-2.0, 12 B params, 4-step image model. Runs on consumer GPUs at 4/8-bit quant. Team are the original Stable Diffusion authors.</div><div class="funding">Aug 2024 · $31 M seed · a16z</div></div>
+        <div class="card"><h4>Kyutai</h4><div class="meta">Paris, FR · Nov 2023 · nonprofit lab</div><div class="desc">Moshi (Sep 2024) is a 7 B real-time full-duplex speech LLM, CC-BY-4.0. Hibiki (Feb 2025) is real-time speech-to-speech translation; a 2 B variant runs on-device with MLX on iPhone.</div><div class="funding">€300 M endowment · Niel / CMA CGM / Schmidt Futures</div></div>
+        <div class="card"><h4>Wayve</h4><div class="meta">London, UK · 2017</div><div class="desc">End-to-end "AV2.0" embedded driving model. GAIA-1 world model, LINGO-1/2 vision-language, PRISM-1 embedded driver. Nissan shipping in 2027.</div><div class="funding">Feb 2026 · $1.2 B Series D · NVIDIA / Uber / Mercedes / Nissan / Stellantis (+$60 M extension Apr 2026 from AMD, Arm, Qualcomm)</div></div>
+        <div class="card"><h4>ElevenLabs</h4><div class="meta">London, UK · 2022 · Polish founders</div><div class="desc">Voice AI with on-device enterprise models in early access; general availability targeted for H1 2026. Locally-deployed models for regulated low-latency workloads.</div><div class="funding">Jan 2025 · $180 M Series C · a16z / ICONIQ · $3.3 B</div></div>
+        <div class="card"><h4>Silo AI (AMD)</h4><div class="meta">Helsinki, FI · 2017</div><div class="desc">Built Poro 34 B and the Viking 7/13/33 B Nordic-language line (Apache-2.0). Acquired by AMD for $665 M in July 2024; now part of AMD's ROCm/MI300 effort.</div><div class="funding">Jul 2024 · $665 M acquisition · AMD</div></div>
+        <div class="card"><h4>Aleph Alpha</h4><div class="meta">Heidelberg, DE · 2019</div><div class="desc">Pivoted in 2024 from frontier LLMs to a sovereign on-prem stack. Pharia-1 LLM 7 B and PhariaAI OS deployed inside Schwarz Group and the Bundeswehr.</div><div class="funding">Nov 2023 · €500 M · Schwarz + Bosch + SAP</div></div>
+        <div class="card"><h4>Stability AI</h4><div class="meta">London, UK · 2019</div><div class="desc">Stable Diffusion 3 / 3.5 Medium (2 B), SD Turbo and SDXL Turbo that run real-time on M-series Macs. Stable LM 2 1.6 B. Stable Audio Open. Recapitalized late 2024.</div><div class="funding">Cumulative ~$200 M+ · private</div></div>
+        <div class="card"><h4>Pruna AI</h4><div class="meta">Paris, FR / Munich · 2023</div><div class="desc">Open-source `pruna` Python package (Apache-2.0) for quantization, pruning, caching, compilation of diffusion and LLMs. 2 to 5x speedup on FLUX and SDXL.</div><div class="funding">Mar 2025 · $6.5 M seed · EQT Ventures</div></div>
+        <div class="card"><h4>OpenEuroLLM consortium</h4><div class="meta">EU-wide · Feb 2025</div><div class="desc">Horizon-funded consortium coordinated by Charles University Prague and AMD / Silo AI. 20+ partners including Aleph Alpha, CSC Finland, BSC, CINECA. Goal: open multilingual foundation models covering every EU official language. Training on LUMI and Leonardo.</div><div class="funding">Feb 2025 · €37.4 M · EU Horizon</div></div>
+        <div class="card"><h4>EuroLLM</h4><div class="meta">Edinburgh / Lisbon / Unbabel</div><div class="desc">Separate, earlier project. EuroLLM-1.7 B (Sep 2024) and EuroLLM-9 B (Dec 2024), Apache-2.0, 35 languages. The 1.7 B model is genuinely edge-friendly.</div><div class="funding">Academic · open weights</div></div>
+        <div class="card"><h4>ggml / llama.cpp</h4><div class="meta">Sofia, BG · Georgi Gerganov</div><div class="desc">The dominant open runtime for on-device LLM inference outside mobile-OS stacks. GGUF is the canonical format for local LLM deployment on Linux, Mac and Windows (Apple Core ML, Qualcomm QNN and MediaTek NeuroPilot own the mobile-OS layer). Incorporated as ggml.ai in 2023 with seed funding from Nat Friedman and Daniel Gross. A European open-source infrastructure asset that gets less recognition than its usage warrants.</div><div class="funding">Private · open source</div></div>
+        <div class="card"><h4>Hugging Face <span class="flag">French-founded · US-HQ</span></h4><div class="meta">NYC (HQ) + significant Paris ops · founded 2016</div><div class="desc">Founded by Clément Delangue, Julien Chaumond and Thomas Wolf. The Hub is where most European open-weights work (Mistral, Kyutai, BFL, EuroLLM, Stability) ships. Ships Transformers, Optimum (edge-optimised ONNX/OpenVINO/Qualcomm pipelines), transformers.js (browser), SafeTensors. Delaware-registered, so flagged.</div><div class="funding">Aug 2023 · $235 M Series D · $4.5 B · Salesforce / Google / Amazon / NVIDIA / Intel / AMD / IBM / Qualcomm</div></div>
+        <div class="card"><h4>Candle</h4><div class="meta">Hugging Face · Rust framework</div><div class="desc">Rust-native ML framework, ~12 k GitHub stars. Minimalist inference, WASM-capable. The production path many edge-Rust deployments run on, including heydict's intent router.</div><div class="funding">Open source · Apache-2.0</div></div>
+        <div class="card"><h4>Edge Impulse</h4><div class="meta">UK / US · founded 2019 · Dutch founders</div><div class="desc">End-to-end tinyML platform: data collection, training, deployment to MCUs and MPUs (Cortex-M, ESP32, Syntiant, Himax). Acquired by Qualcomm in March 2025.</div><div class="funding">Mar 2025 · Acquisition · Qualcomm</div></div>
+      </div>
+    </div>
+
+    <!-- V.C SOVEREIGN -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.c</div>
+        <div>
+          <h3>Sovereign platforms. Where "Edge AI" meets "not in Oracle Cloud Ashburn."</h3>
+          <div class="stack-funding">On-prem, air-gapped, inside data-residency zones. Everything the AI Act wants.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Mistral Le Chat Enterprise</h4><div class="meta">Paris, FR</div><div class="desc">Enterprise tier offers on-prem deployment on customer infrastructure. The explicit French sovereign-AI commercial vehicle.</div><div class="funding">Product line</div></div>
+        <div class="card"><h4>Aleph Alpha PhariaAI</h4><div class="meta">Heidelberg, DE</div><div class="desc">The operating system for sovereign AI. Runs in customer data centres, air-gapped possible. Deployed in Schwarz Group retail and the Bundeswehr.</div><div class="funding">Part of €500 M cumulative</div></div>
+        <div class="card"><h4>OpenEuroLLM</h4><div class="meta">EU-wide consortium</div><div class="desc">Horizon-funded open-weights line covering every EU official language, trained on LUMI and Leonardo. A policy instrument as much as a research project.</div><div class="funding">€37.4 M · EU Horizon</div></div>
+        <div class="card"><h4>France's AI campus</h4><div class="meta">Paris region</div><div class="desc">MGX × Bpifrance × Mistral × NVIDIA joint venture, targeting 1.4 GW. The physical substrate for French sovereign inference. Announced alongside the €109 bn plan, Paris AI Action Summit, Feb 2025.</div><div class="funding">Public · €109 bn envelope</div></div>
+      </div>
+    </div>
+
+    <!-- V.D ROBOTICS -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.d</div>
+        <div>
+          <h3>Robotics and embodied AI. The applied end of on-device inference.</h3>
+          <div class="stack-funding">Disclosed 2024-26 rounds around $1 bn. The reported Neura / Tether round (~€1 bn, March 2026) is unclosed and excluded from this total. 1X left.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Neura Robotics</h4><div class="meta">Metzingen, DE · 2019</div><div class="desc">4NE-1 cognitive humanoid. ~$1 bn of orders disclosed with Kawasaki and Omron. Schaeffler partnership to deploy thousands of Neura units on factory lines by 2035.</div><div class="funding">Jan 2025 · €120 M Series B · Lingotto · (reported: ~€1 bn Tether round Mar 2026)</div></div>
+        <div class="card"><h4>Agile Robots SE</h4><div class="meta">Munich, DE · 2018 · DLR spin-off</div><div class="desc">First German robot unicorn, 2,300+ staff. Plans industrial humanoid Agile ONE from Bavaria starting 2026. Acquired audEERING in March 2025, putting on-device voice AI inside a German humanoid stack.</div><div class="funding">Oct 2021 · $220 M Series C · SoftBank · ~$384 M total</div></div>
+        <div class="card"><h4>Wandercraft</h4><div class="meta">Paris, FR · 2012</div><div class="desc">Self-balancing medical exoskeletons. Calvin-40 industrial humanoid built for Renault. Renault is both investor and first customer; Nvidia is a technology partner.</div><div class="funding">Jun 2025 · $75 M Series D · Renault + Bpifrance PSIM</div></div>
+        <div class="card"><h4>ANYbotics</h4><div class="meta">Zurich, CH · 2016 · ETH spin-off</div><div class="desc">ANYmal quadruped for hazardous industrial inspection (oil &amp; gas, chemicals). Customers: Shell, Petronas, BASF. Fully autonomous on-robot navigation and anomaly detection.</div><div class="funding">Dec 2024 · $60 M Series C + ~$20 M Sep 2025 · Qualcomm Ventures / Supernova · >$150 M total</div></div>
+        <div class="card"><h4>Flexion Robotics</h4><div class="meta">Zurich, CH · Jan 2025</div><div class="desc">Ex-Nvidia founding team building humanoid autonomy stack: VLA models, manipulation, locomotion. Onboard control runs on the robot.</div><div class="funding">Nov 2025 · $50 M Series A · DST Global + NVentures + Prosus</div></div>
+        <div class="card"><h4>PAL Robotics</h4><div class="meta">Barcelona, ES · 2004</div><div class="desc">TALOS humanoid (1.75 m, 100 kg, 32-DoF) and the TIAGo mobile manipulator line. Industrial pilots, research labs. Self-funded under Grupo PAL.</div><div class="funding">Private · no disclosed VC</div></div>
+        <div class="card"><h4>Wandelbots</h4><div class="meta">Dresden, DE · 2017 · TU Dresden spin-out</div><div class="desc">NOVA robot-agnostic OS and NOVA Cloud. Abstracts brand-specific robot controllers. Runs on factory-edge hardware.</div><div class="funding">Jan 2022 · $84 M Series C · Insight Partners · ~$126 M total</div></div>
+        <div class="card"><h4>Humanoid</h4><div class="meta">London, UK · 2024</div><div class="desc">HMND 01 Alpha, a 220 cm dual-arm mobile manipulator with 15 kg bimanual payload. Robotics-as-a-service commercial model. First commercial product targeted 2027.</div><div class="funding">~$50 M founder-led · no priced round yet</div></div>
+        <div class="card"><h4>1X Technologies <span class="flag">HQ moved</span></h4><div class="meta">Moss, NO → Palo Alto, CA · Jul 2025</div><div class="desc">NEO home humanoid. Originally Norwegian (Halodi), relocated HQ to Palo Alto in July 2025; manufacturing stayed in Moss. Reportedly raising $1 bn Series C at $10 bn.</div><div class="funding">Jan 2024 · $100 M Series B · EQT Ventures · Series C targeting $1 B</div></div>
+      </div>
+    </div>
+
+    <!-- V.E AUTOMOTIVE -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.e</div>
+        <div>
+          <h3>Automotive and mobility. The biggest edge AI deployment in the world, one vehicle at a time.</h3>
+          <div class="stack-funding">Wayve alone: $2.25 bn across two rounds. Plus Bosch, Valeo, Continental, ZF running at industrial scale.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Wayve</h4><div class="meta">London, UK · 2017</div><div class="desc">End-to-end neural driving with no hand-coded rules. Nissan producing from 2027. Uber committed $300 M for multi-year robotaxi deployment. Chipmakers AMD, Arm and Qualcomm all now invested.</div><div class="funding">Feb 2026 · $1.2 B Series D · + $60 M ext · ~$1.5 B round total · $8.6 B valuation</div></div>
+        <div class="card"><h4>Oxa</h4><div class="meta">Oxford, UK · 2014 (as Oxbotica)</div><div class="desc">Self-driving software retrofitted into industrial, airport and mining vehicles. UK National Wealth Fund participation rumored. NVIDIA NVentures in the March 2026 round.</div><div class="funding">Mar 2026 · $103 M · NVIDIA NVentures · > £180 M cumulative</div></div>
+        <div class="card"><h4>Valeo</h4><div class="meta">Paris, FR · public</div><div class="desc">Valeo.ai labs in Paris and Prague. SCALA Gen 3 LiDAR at 25 fps and 200 m in production. Mercedes DRIVE PILOT uses the only serially approved L3 sensor set on the market.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Bosch Mobility</h4><div class="meta">Stuttgart, DE · public</div><div class="desc">~€10 bn cumulative AD/AI investment. NVIDIA DRIVE AGX Thor integrated into next-gen ADAS. Strategic ADAS collaboration with Qualcomm expanded April 2026. Bosch's AIShield secures AI models on-device.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>ZF Friedrichshafen</h4><div class="meta">Friedrichshafen, DE · public</div><div class="desc">ProAI central compute family up to 1,500 TOPS in top configuration; high-performance version entered series production end 2024. Configurable across L2+ through L4.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Continental / Aumovio</h4><div class="meta">Hanover, DE · public</div><div class="desc">Modular ADAS on Ambarella CV3 5 nm. Radar-based parking replacing ultrasonics. Automotive unit being spun off and rebranded as Aumovio.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Einride</h4><div class="meta">Stockholm, SE · 2016</div><div class="desc">Autonomous electric freight; Pod cabless truck. Operating in the US and Europe. Pure edge inference on-vehicle for safety-critical control.</div><div class="funding">Oct 2025 · $100 M growth</div></div>
+      </div>
+    </div>
+
+    <!-- V.F INDUSTRIAL -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.f</div>
+        <div>
+          <h3>Industrial vision, manufacturing, and IoT edge. The boring money.</h3>
+          <div class="stack-funding">Where the incumbents run most of the world's deployed edge AI in SCADA and shop-floor PCs.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>MVTec Software</h4><div class="meta">Munich, DE · 1996</div><div class="desc">HALCON, the de-facto machine-vision standard. HALCON 25.11 (Nov 2025) introduced "Continual Learning", incremental deep-learning retraining on the edge with few-shot data. Deep-learning 3D bin picking in HALCON 26.05.</div><div class="funding">Private · founders and management</div></div>
+        <div class="card"><h4>Robovision</h4><div class="meta">Ghent, BE · 2010</div><div class="desc">No-code Vision AI platform. Integrated with 1,000+ robots across 40 countries in agtech and industrial inspection. Models export to edge devices next to the robots.</div><div class="funding">Mar 2024 · $42 M Series A · Astanor + Target Global</div></div>
+        <div class="card"><h4>audEERING (Agile Robots)</h4><div class="meta">Gilching / Munich, DE · TUM spin-off</div><div class="desc">devAIce SDK for on-device audio emotion and paralinguistic analysis. openSMILE open-source toolkit. Acquired March 2025 by Agile Robots; now the voice layer of a German humanoid stack.</div><div class="funding">Mar 2025 · Acquired by Agile Robots</div></div>
+        <div class="card"><h4>OnRobot</h4><div class="meta">Odense, DK · 2015</div><div class="desc">Full end-of-arm tooling portfolio plus D:PLOY zero-programming deployment platform (2024). VGP30 30 kg vacuum gripper integrated with D:PLOY in 2025.</div><div class="funding">Private</div></div>
+        <div class="card"><h4>Siemens Industrial Edge</h4><div class="meta">Munich, DE · public</div><div class="desc">Industrial Automation DataCenter unveiled at Hannover Messe 2026, an AI-ready edge platform integrating NVIDIA accelerated compute and Palo Alto security into Xcelerator.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Schneider Electric EcoStruxure</h4><div class="meta">Rueil-Malmaison, FR · public</div><div class="desc">Automate 2025 launched Automation Copilot (with Azure AI Foundry), Modicon M660 IPC motion controller, and Modicon Edge I/O NTS. Three-layer edge architecture. FY25 €40 bn revenue.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>ABB Robotics</h4><div class="meta">Zurich, CH · public</div><div class="desc">OmniCore unified controller plus OmniCore EyeMotion vision. Visual SLAM on the Flexley Mover P603 AMR. LandingAI partnership cutting vision-AI training time 80%.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Nothing</h4><div class="meta">London, UK · 2020 · founder Carl Pei</div><div class="desc">Phone (3), launched July 2025 at $799. Essential Space and Essential Search run on-device AI via Qualcomm NPU. AI-native OS teased for 2026 (no Phone (4) planned for 2026).</div><div class="funding">Private</div></div>
+      </div>
+    </div>
+
+    <!-- V.G DEFENSE -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.g</div>
+        <div>
+          <h3>Defense edge. Ukraine is the R&amp;D lab; Germany is the factory floor.</h3>
+          <div class="stack-funding">43% of European Deep Tech VC in 2025 went to Defence, Security &amp; Resilience; AI is 44% of that.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Helsing</h4><div class="meta">Munich, DE · 2021</div><div class="desc">Altra battlefield management AI fusing drone, vehicle and soldier sensors. Centaur autonomy stack flying on Saab Gripen E and on the CA-1 Europa uncrewed combat aircraft. HF-1 strike drone, SG-1 Fathom underwater glider.</div><div class="funding">Jun 2025 · €600 M Series D · Prima Materia (Daniel Ek) · €12 B · ~€1.37 B cumulative</div></div>
+        <div class="card"><h4>Quantum Systems</h4><div class="meta">Gilching, DE · 2015</div><div class="desc">Vector AI VTOL fixed-wing ISR drone with dual Jetson on-board for GPS-denied navigation and real-time ISR fusion. Combat-deployed in Ukraine.</div><div class="funding">2025 · €340 M across Series C + ext · Balderton · €3 B valuation</div></div>
+        <div class="card"><h4>Tekever</h4><div class="meta">Lisbon, PT / UK · unicorn May 2025</div><div class="desc">AR3 and AR5 ISTAR drones with on-board analytics, more than 10,000 combat flight hours in Ukraine. Portugal's first defense unicorn.</div><div class="funding">May 2025 · $500 M · Ventura Capital + Baillie Gifford + NATO Innovation Fund</div></div>
+        <div class="card"><h4>STARK</h4><div class="meta">Munich, DE · 2024</div><div class="desc">Founded by Florian Seibel (ex-Quantum Systems). OWE-V Virtus loitering munition. Minerva C2 running on rugged laptops / vehicle servers with offline ML. November 2025 share of €900 M Bundeswehr kamikaze-drone framework with Helsing and Rheinmetall. <span class="flag">caveat: reportedly failed four of four Bundeswehr trial strikes Oct 2025</span>.</div><div class="funding">Aug 2025 · $62 M · Sequoia · $500 M</div></div>
+        <div class="card"><h4>ARX Robotics</h4><div class="meta">Oberding, DE · 2022</div><div class="desc">Gereon UGV plus Mithra OS, an AI operating system to retrofit legacy military ground vehicles. Deployed across six European armies including Ukraine.</div><div class="funding">Apr-Jul 2025 · €42 M Series A · HV Capital + Speedinvest + NIF</div></div>
+        <div class="card"><h4>Destinus</h4><div class="meta">Payerne, CH → NL · pivoting</div><div class="desc">Pivoted from hypersonic passenger aircraft to AI-driven uncrewed systems. In August 2025 acquired Zurich's Daedalean (AI autonomy) for CHF 180 M. HQ partly flipping to Netherlands.</div><div class="funding">~€400 M cumulative</div></div>
+        <div class="card"><h4>Swarmer</h4><div class="meta">Kyiv, UA</div><div class="desc">Styx AI, Minas, Trident. Drone swarms with on-board autonomy. The $15 M Series A was the largest publicly announced Ukrainian defense-tech round since 2022.</div><div class="funding">Sep 2025 · $15 M Series A · US investors</div></div>
+        <div class="card"><h4>Airlogix</h4><div class="meta">Kyiv, UA</div><div class="desc">Gor reconnaissance UAV; Anubis and Seth-X strike drones with AI targeting. February 2026: JV with Auterion (Munich) with a Bundeswehr contract for "thousands" of systems. Production moves to Germany from 2026.</div><div class="funding">Feb 2026 · German MoD contract via Auterion JV</div></div>
+        <div class="card"><h4>Kvertus</h4><div class="meta">Kyiv, UA</div><div class="desc">Electronic warfare and anti-drone. Launched Atlas, a £103.7 M front-line anti-drone wall project, with £5 M self-funded.</div><div class="funding">Self-funded + Atlas program</div></div>
+        <div class="card"><h4>Delian Alliance Industries</h4><div class="meta">Athens, GR</div><div class="desc">Autonomous surveillance towers, GPS-denied navigation modules, Interceptigon loitering munitions plus interceptor UAVs. Founder Dimitrios Kottas is ex-Apple robotics.</div><div class="funding">Jul 2025 · $14 M Series A · Air Street Capital</div></div>
+        <div class="card"><h4>Hensoldt</h4><div class="meta">Taufkirchen, DE · public</div><div class="desc">TRML-4D radar with AI target recognition. Aiona modular AI platform. Strategic partnership with Helsing on CA-1 Europa. SPEXER 2000 radars into Rheinmetall air defense.</div><div class="funding">Public</div></div>
+      </div>
+    </div>
+
+    <!-- V.H SPACE -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.h</div>
+        <div>
+          <h3>Space edge. On-orbit inference moves from slide deck to silicon.</h3>
+          <div class="stack-funding">Only the data you actually need gets downlinked. The rest is inferred before it ever leaves the satellite.</div>
+        </div>
+      </div>
+      <p style="margin-bottom:1.5rem;">The EU's IRIS² sovereign LEO/MEO constellation (€10.6 bn budget, SpaceRISE consortium awarded December 2024) is the policy backdrop; 264 LEO plus 18 MEO satellites, deployment 2029-2030.</p>
+      <div class="cards">
+        <div class="card"><h4>ICEYE</h4><div class="meta">Espoo, FI</div><div class="desc">SAR satellites. Rheinmetall JV won an approximately $2 bn German SAR constellation contract in December 2025 with AI-driven image evaluation. Finnish MoD SAR contract signed September 2025.</div><div class="funding">Dec 2025 · €150 M Series E · General Catalyst · €2.4 B</div></div>
+        <div class="card"><h4>Open Cosmos</h4><div class="meta">Harwell, UK</div><div class="desc">On-board AI for hyperspectral payloads. November 2025 launched 6GStarLab and an Open Constellation node on SpaceX Falcon 9. £5.15 M DSTL space-situational-awareness contract 2025.</div><div class="funding">Raising ~$200 M for LEO constellation</div></div>
+        <div class="card"><h4>D-Orbit</h4><div class="meta">Fino Mornasco, IT</div><div class="desc">Jan 2026 Series D led by Azimut. April 2025 business combination with Planetek for in-orbit AI data processing. Now positioning explicitly as "Orbital Edge AI".</div><div class="funding">Jan 2026 · $53 M Series D · Azimut · (~€150 M prior Series C)</div></div>
+        <div class="card"><h4>Isar Aerospace</h4><div class="meta">Munich, DE</div><div class="desc">Launch vehicle Spectrum. Not an edge-AI company directly, but the key sovereign-launch option for European edge-AI payloads. In talks to raise another €250 M pre-launch.</div><div class="funding">Jun 2025 · €150 M Eldridge convertible</div></div>
+        <div class="card"><h4>Aerospacelab</h4><div class="meta">Charleroi, BE</div><div class="desc">€94 M Series B in August 2025 plus €37.5 M EIB financing in September. Megafactory targeting 500 sats per year by 2027. Picked by Redwire to build Belgium's first national-security satellite.</div><div class="funding">Aug 2025 · €94 M Series B</div></div>
+        <div class="card"><h4>ReOrbit</h4><div class="meta">Helsinki, FI</div><div class="desc">€45 M Series A in September 2025, the largest all-equity Series A in Finland. Software-defined satellites: Silta communications platform, Ukko ISR. Software-defined is the edge-AI story.</div><div class="funding">Sep 2025 · €45 M Series A · Springvest</div></div>
+        <div class="card"><h4>EnduroSat</h4><div class="meta">Sofia, BG</div><div class="desc">Approximately $150 M raised across 2025: €43 M in May (Founders Fund-led) and $104 M in October. New 188,000 sq ft Sofia Space Center opened October 2025.</div><div class="funding">2025 · ~$150 M across two rounds</div></div>
+        <div class="card"><h4>Reflex Aerospace</h4><div class="meta">Munich + Berlin, DE</div><div class="desc">€50 M Series A in November 2025, labelled the largest European New Space Series A. Praetora platform for optical, SAR, SDA and SIGINT ISR sats. First satellite flew January 2025.</div><div class="funding">Nov 2025 · €50 M Series A · Human Element + Alpine Space</div></div>
+        <div class="card"><h4>Constellr</h4><div class="meta">Freiburg, DE</div><div class="desc">Thermal Earth observation. €37 M Series A in February 2026 (Alpine Space + Lakestar); €75 M total. SkyBee-1 and SkyBee-2 on orbit. Pivoting to defense-grade thermal intelligence.</div><div class="funding">Feb 2026 · €37 M Series A</div></div>
+        <div class="card"><h4>SatVu</h4><div class="meta">London, UK</div><div class="desc">Thermal intelligence. £30 M round in February 2026, led by NATO Innovation Fund. £60 M total equity. HotSat-2 and HotSat-3 planned for 2026. Edge AI on HotSats on the roadmap.</div><div class="funding">Feb 2026 · £30 M · NATO Innovation Fund</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ ROUNDS ================ -->
+<section class="section" id="rounds">
+  <div class="prose">
+    <div class="section-label">VI · Top rounds</div>
+    <h2 class="h-section">Twelve rounds that <em>tell the story</em> of the last two years.</h2>
+    <p class="lede">This is not a complete list. It is the list you would need to know to understand where European edge AI sits today.</p>
+  </div>
+
+  <div class="container">
+    <table class="tbl">
+      <thead>
+        <tr><th>#</th><th>Company</th><th>HQ</th><th>Round</th><th>Date</th><th class="num">Amount</th><th>Segment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Wayve</strong></td><td>London, UK</td><td>Series D (+ext)</td><td>Feb / Apr 2026</td><td class="num">~$1.5 B</td><td>Automotive</td></tr>
+        <tr><td>2</td><td><strong>Wayve</strong></td><td>London, UK</td><td>Series C</td><td>May 2024</td><td class="num">$1.05 B</td><td>Automotive</td></tr>
+        <tr><td>3</td><td><strong>Neura Robotics</strong></td><td>Metzingen, DE</td><td>reported</td><td>Mar 2026</td><td class="num">~€1.0 B <span class="flag">not closed</span></td><td>Humanoid</td></tr>
+        <tr><td>4</td><td><strong>Helsing</strong></td><td>Munich, DE</td><td>Series D</td><td>Jun 2025</td><td class="num">€600 M</td><td>Defense</td></tr>
+        <tr><td>5</td><td><strong>Tekever</strong></td><td>Lisbon, PT</td><td>unicorn round</td><td>May 2025</td><td class="num">$500 M</td><td>Defense (ISR)</td></tr>
+        <tr><td>6</td><td><strong>Quantum Systems</strong></td><td>Gilching, DE</td><td>Series C + ext</td><td>May + Nov 2025</td><td class="num">€160M + €180M</td><td>Defense (drones)</td></tr>
+        <tr><td>7</td><td><strong>Axelera AI</strong></td><td>Eindhoven, NL</td><td>Series C</td><td>Feb 2026</td><td class="num">>$250 M</td><td>Edge AI silicon</td></tr>
+        <tr><td>8</td><td><strong>Black Semiconductor</strong></td><td>Aachen, DE</td><td>Series A + IPCEI</td><td>Jun 2024</td><td class="num">€254 M</td><td>Graphene chip interconnect</td></tr>
+        <tr><td>9</td><td><strong>ICEYE</strong></td><td>Espoo, FI</td><td>Series E</td><td>Dec 2025</td><td class="num">€150 M</td><td>Space (SAR)</td></tr>
+        <tr><td>10</td><td><strong>Isar Aerospace</strong></td><td>Munich, DE</td><td>convertible</td><td>Jun 2025</td><td class="num">€150 M</td><td>Launch</td></tr>
+        <tr><td>11</td><td><strong>SiPearl</strong></td><td>Maisons-Laffitte, FR</td><td>Series A final close</td><td>Jul 2025</td><td class="num">€130 M</td><td>HPC / AI processor</td></tr>
+        <tr><td>12</td><td><strong>Neura Robotics</strong></td><td>Metzingen, DE</td><td>Series B</td><td>Jan 2025</td><td class="num">€120 M</td><td>Humanoid</td></tr>
+        <tr><td>13</td><td><strong>Oxa</strong></td><td>Oxford, UK</td><td>growth</td><td>Mar 2026</td><td class="num">$103 M</td><td>Automotive (industrial)</td></tr>
+        <tr><td>14</td><td><strong>Einride</strong></td><td>Stockholm, SE</td><td>growth</td><td>Oct 2025</td><td class="num">$100 M</td><td>Automotive (freight)</td></tr>
+        <tr><td>15</td><td><strong>Euclyd</strong></td><td>Eindhoven, NL</td><td>raising</td><td>Apr 2026</td><td class="num">€100 M</td><td>Edge AI silicon</td></tr>
+        <tr><td>16</td><td><strong>Wandercraft</strong></td><td>Paris, FR</td><td>Series D</td><td>Jun 2025</td><td class="num">$75 M</td><td>Humanoid / exo</td></tr>
+        <tr><td>17</td><td><strong>Axelera AI</strong></td><td>Eindhoven, NL</td><td>Series B</td><td>Jun 2024</td><td class="num">$68 M</td><td>Edge AI silicon</td></tr>
+        <tr><td>18</td><td><strong>Q.ANT</strong></td><td>Stuttgart, DE</td><td>Series A</td><td>Jul 2025</td><td class="num">€62 M</td><td>Photonic silicon</td></tr>
+        <tr><td>19</td><td><strong>STARK</strong></td><td>Munich, DE</td><td>Series A</td><td>Aug 2025</td><td class="num">$62 M</td><td>Defense</td></tr>
+        <tr><td>20</td><td><strong>ANYbotics</strong></td><td>Zurich, CH</td><td>Series C + ext</td><td>Dec 2024 / Sep 2025</td><td class="num">$80 M</td><td>Quadruped robotics</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================ CHALLENGES ================ -->
+<section class="section" id="challenges">
+  <div class="prose">
+    <div class="section-label">VII · Challenges</div>
+    <h2 class="h-section">The ecosystem is here. The <em>exit path</em> is not.</h2>
+    <p class="lede">Four things still do not work. Fund managers underwriting a European edge-AI thesis should price them in explicitly.</p>
+
+    <p><strong>The cap-table drain.</strong> Dealroom's read for late-stage European Deep Tech is that roughly 70 percent of mega-round funding comes from non-European investors. Partly this is success (Europe's best startups are attractive enough that US, Asian and Middle Eastern capital crowds in) but the pattern biases future exits toward US acquirers and US listings. When Silo AI sold to AMD for $665 million in July 2024, Finland lost a generational AI-lab.</p>
+
+    <p><strong>The HQ flip.</strong> In July 2025, 1X Technologies relocated its global headquarters from Moss, Norway to Palo Alto. Manufacturing stayed. Capital moved. The pattern is not yet epidemic (Helsing, Quantum Systems, Wayve, Axelera and Neura are still European-registered) but it is a real signal. US chipmakers (AMD, Arm, Qualcomm, NVIDIA) and US VCs (Sequoia, Andreessen, DST) sit on most top cap tables. A Series D priced at $8.6 billion that accepts strategic money from three US chipmakers and a US ride-hail giant will, eventually, go where those investors can realise.</p>
+
+    <p><strong>The M&amp;A vacuum.</strong> In 2024 and 2025 alone: Qualcomm acquired Edge Impulse, Foundries.io (Cambridge) and Arduino (Italy); NXP bought Kinara for $307M; SoftBank took Graphcore; AMD bought Silo AI. If you build edge-AI infrastructure in Europe and miss escape velocity before Series C, the credible acquirers are US-listed industrial buyers. Europe has almost no listed strategic buyers of comparable scale. ASML, STMicro, Infineon and Arm exist, but ASML bought Cymer in 2013 and the rest rarely acquire at this scale. This is the single problem the Chips Act 2.0, scheduled for H1 2026, has to solve.</p>
+
+    <p><strong>The NVIDIA dependency.</strong> The sovereign-AI thesis most European governments are now funding runs on silicon designed in Santa Clara. France's AI campus JV names NVIDIA in the headline. Wayve's Series D is NVIDIA-led. Bosch's next-generation ADAS runs DRIVE AGX Thor. Mistral's €1.7 billion Series C (9 Sep 2025, €11.7 billion post-money) is ASML-led with NVIDIA among the participants. Any report that sells "European edge sovereignty" without naming NVIDIA as the counterparty on most sovereign rounds is selling an incomplete product. DARE's AIPU, SiPearl's Rhea1 and Axelera's Europa are the medium-term answers; none of them ships at production volume in 2026.</p>
+
+    <div class="pullquote">
+      Now, Europe must ensure that this next generation of high-conviction founders has the local growth capital to scale their breakthroughs here, rather than being forced to relocate for the final mile of commercialization.
+      <cite>Simon King · Partner, Lakestar · 2026 European Deep Tech Report</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ================ POV (ENTROPORA) ================ -->
+<section class="pov" id="pov">
+  <div class="prose">
+    <div class="section-label">VIII · Notes from a shipping product</div>
+    <h2 class="h-section">What the seven sections above look like <em>from inside heydict</em>.</h2>
+    <p class="lede">Entropora builds heydict, a desktop voice-action agent where the audio stays on the user's machine.</p>
+
+    <p>The heydict architecture is a tight loop: microphone, VAD gating (webrtc-vad), on-device STT (whisper-rs plus Moonshine compiled to ONNX), local embeddings and intent routing via candle, and application action through enigo's cross-platform injector. Audio never leaves the device. Transcript text is optionally sent to a cloud LLM for complex rewrites. Enterprise deployments can disable that cloud path entirely and run dictation-only mode with local routing. The stack is the product.</p>
+
+    <p>The European open-source ecosystem is more load-bearing in that stack than the public narrative suggests. Whisper itself is US-origin, but whisper-rs wraps whisper.cpp, which shares its runtime foundation with llama.cpp. Both are part of the ggml project Georgi Gerganov maintains from Sofia. Every whisper-rs user is downstream of that Bulgarian engineering, and we are one of them. Candle, the intent-routing framework, originated at Hugging Face (Paris roots, now US-HQ) and is the concrete European dependency in our production loop. Europe ends up more structurally present in the on-device stack than in the public-cloud stack, and the ggml line of work is a meaningful reason.</p>
+
+    <p>An honest note on the cloud fallback path. When heydict is configured to use a cloud LLM for complex rewrites, the provider options shipped in v1 are OpenAI, Anthropic, Groq, and OpenRouter. All four are US or US-intermediated. A European team explicitly building for the privacy/latency thesis still bridges to US hyperscaler LLMs when customers opt into a cloud fallback at all, which is exactly the sovereignty gap Sections I and VII describe from the policy side. We disable the cloud path for enterprise customers who cannot accept it; that is the compliant default. The absence of a comparable European inference provider at production quality and price is a real gap, not a rhetorical one.</p>
+
+    <p>Other European pieces we track closely without shipping them in the current product: Kyutai's Moshi and Hibiki, released as open weights (Hibiki 2B was demonstrated on iPhone via MLX by Kyutai themselves); Pruna AI's open-source compression pipeline; Aleph Alpha, whose pivot to sovereign on-prem is the cleanest match we have seen to what European regulated customers ask for; and the open-weights releases from Mistral. None are in heydict today. Whether any become part of the stack depends on customer requirements and our own benchmarking work.</p>
+
+    <p>On the silicon side, the last twelve months were genuinely different. For most of the decade, "European edge AI hardware" meant Arm IP embedded inside a consumer stack owned by Qualcomm or MediaTek. Axelera's >$250 million Series C in February 2026 is the first time a pure-play European edge-AI silicon company has been funded at something close to the scale of its US peers. Q.ANT's photonic processor is live at the Leibniz Supercomputing Centre. SpiNNcloud's 35,000-chip neuromorphic system is running at TU Dresden. SiPearl's Rhea1 taped out at TSMC in 2025. Whether any of these products take enterprise design-wins at volume is the open question.</p>
+
+    <p>Three caveats worth putting on the record before extrapolating. Most of what Europe calls "sovereign AI" still buys its training silicon from NVIDIA; Wayve's Series D, Bosch's ADAS platform and Mistral's €1.7 billion Series C are all confirmation of that. The NPU abstraction layer across Qualcomm, Arm, Apple, MediaTek, ST and the new European accelerators is a patchwork of vendor SDKs that do not agree on operators, quantisation calibration or profiling. A credible open runtime across those vendors (not another ONNX dialect) would move more production teams than several of the silicon rounds in this report. And Graphcore is still the base rate for hardware outcomes on the continent; the Axelera round is one data point against that base rate, not a pattern yet.</p>
+
+    <div class="pullquote">
+      The edge is defined by constraints cloud AI does not have to respect: power budgets that can't reach a data centre, regulated voice that can't cross a border, safety-critical decisions on a 20 ms budget. Forty years of European embedded-systems work.
+    </div>
+
+    <p>Whether this report ages well depends on three things landing. The Chips Act 2.0 shipping in H1 2026 with a real scale-up envelope. European public procurement moving from grant-sized cheques to production contracts at volume. At least one European acquirer emerging at something close to Qualcomm scale before the next Silo-AI-shaped exit. Our working expectation is that two land in some form by 2028 and one slips to 2030. That is the set of assumptions Entropora plans heydict's roadmap around.</p>
+
+    <div class="sig">
+      <div class="name">Andrii Shylenko &amp; Lorenz Sauer</div>
+      <div class="title">Co-founders, <a href="https://entropora.com" style="color:inherit;text-decoration:underline;">Entropora, Inc.</a> · <a href="mailto:andrii@shylenko.com" style="color:inherit;text-decoration:underline;">andrii@shylenko.com</a> · <a href="https://linkedin.com/in/shylenko" style="color:inherit;text-decoration:underline;">in/shylenko</a> · <a href="https://linkedin.com/in/lorenz-sauer" style="color:inherit;text-decoration:underline;">in/lorenz-sauer</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ METHODOLOGY ================ -->
+<section class="sources" id="methodology" style="background:var(--bg);border-top:1px solid var(--rule);">
+  <div class="container">
+    <h3 class="serif" style="margin-bottom:1.5rem;">How we built this</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;font-size:14px;color:var(--ink-soft);line-height:1.6;">
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Process.</strong>
+        Six parallel research passes were run in April 2026, each covering a distinct domain: funding &amp; market, EU policy &amp; macro, silicon, on-device models &amp; runtimes, applications (robotics, automotive, industrial), and defence + space + hubs + universities. Raw output is preserved verbatim in <code>raw-research/01-06</code> in the companion repo.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Scope rules.</strong>
+        "European" means HQ in the EU27, UK, Switzerland, Norway, Iceland or Ukraine. Listed incumbents (Arm, ST, Infineon, NXP) are included where material; HQ flips (1X Technologies) are flagged in red. Foundation-model labs are included only when they ship an on-device artifact (Mistral Ministral is in; H Company is not).
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Data hygiene.</strong>
+        Funding figures are as disclosed by companies or primary reporting. The European Edge-AI VC timeseries in Section III is reconstructed from Dealroom Future-of-Compute, Sifted hardware briefings and Atomico's State of European Tech; it is directional, not a census, and the chart caveats this explicitly. Sell-side TAM forecasts are shown as a range, not a point estimate.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">What we left out.</strong>
+        Fintech and AdTech ML, even when deployed on customer hardware. Cloud-first "AI platform" companies that do not ship an edge variant. Retail and consumer-internet AI. Mobile OS vendors' own on-device AI (Apple Intelligence, Google Gemini Nano, Samsung Galaxy AI) except as a reference point. Inference-as-a-service providers are noted only where they compete directly with on-prem.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Known gaps (v1).</strong>
+        We underweight compiler and runtime research (Apache TVM, MLIR, the European MLPerf Tiny contributors). We underweight academic silicon in Fraunhofer IIS/IMS, imec, KU Leuven MICAS. We have no direct-quoted commentary from practitioners beyond the Draghi pull quote; external named quotes are queued for v2 via the outreach list published alongside this report.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Companion dataset.</strong>
+        A CSV of every company cited in this report (<code>companies.csv</code>, ~90 rows: name, HQ, country, segment, founded, last round, source URL) is published alongside the HTML. Tech.eu, Sifted and Dealroom analysts are welcome to cite or correct it.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Corrections.</strong>
+        Email <a href="mailto:andrii@shylenko.com">andrii@shylenko.com</a> with the specific line and the corrected source. Accepted corrections ship as dated addenda at the bottom of this page.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Cut-off.</strong>
+        Coverage window closes 19 April 2026. Q1 2026 rounds are included. The 2026 European Deep Tech Report by Dealroom × Lakestar × Walden Catalyst (March 2026) is a structural reference.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ SOURCES ================ -->
+<section class="sources" id="sources">
+  <div class="container">
+    <h3 class="serif">Sources</h3>
+    <p style="margin-bottom:2rem;color:var(--ink-muted);font-size:14px;max-width:60ch;">Where a number appears in the body, its primary source sits here. Accessed April 2026 unless otherwise noted.</p>
+
+    <ul>
+      <li><strong>Reports &amp; data.</strong></li>
+      <li><a href="https://dealroom.co/reports">Dealroom.co, 2026 European Deep Tech Report</a> (with Lakestar &amp; Walden Catalyst, Mar 2026)</li>
+      <li><a href="https://sifted.eu/articles/state-european-tech-report-2025">Atomico / Sifted, State of European Tech 2025</a></li>
+      <li><a href="https://sifted.eu/articles/2025-in-data">Sifted, European tech's 2025 in data</a></li>
+      <li><a href="https://www.precedenceresearch.com/edge-ai-market">Precedence Research, Edge AI market</a></li>
+      <li><a href="https://www.grandviewresearch.com/industry-analysis/edge-ai-market-report">Grand View Research, Edge AI market</a></li>
+      <li><a href="https://www.marketsandmarkets.com/Market-Reports/edge-ai-hardware-market-158498281.html">MarketsandMarkets, Edge AI Hardware</a></li>
+      <li><a href="https://market.us/report/edge-ai-market/">Market.us, Edge AI</a></li>
+      <li><a href="https://newmarketpitch.com/blogs/news/edge-ai-funding-trends">NewMarketPitch, Edge AI funding trends</a></li>
+      <li><a href="https://www.nif.fund/news/dealroom-and-nato-innovation-fund-european-defence-security-resilience-startups-smash-record-with-8-7b-raised-in-2025/">NATO Innovation Fund &amp; Dealroom, European DSR 2025 record</a></li>
+      <li><strong>Policy &amp; public capital.</strong></li>
+      <li><a href="https://commission.europa.eu/topics/competitiveness/draghi-report_en">Mario Draghi, The Future of European Competitiveness (Sept 2024)</a></li>
+      <li><a href="https://www.elysee.fr/en/sommet-pour-l-action-sur-l-ia">Paris AI Action Summit (Feb 2025)</a></li>
+      <li><a href="https://www.gov.uk/government/publications/ai-opportunities-action-plan/ai-opportunities-action-plan">UK AI Opportunities Action Plan (Jan 2025)</a></li>
+      <li><a href="https://www.ki-strategie-deutschland.de/files/downloads/Fortschreibung_KI-Strategie_engl.pdf">Germany AI Strategy (Jul 2025)</a></li>
+      <li><a href="https://artificialintelligenceact.eu/implementation-timeline/">EU AI Act implementation timeline</a></li>
+      <li><a href="https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf">EDPB Opinion 28/2024</a></li>
+      <li><a href="https://www.chips-ju.europa.eu/">Chips Joint Undertaking</a></li>
+      <li><a href="https://www.eurohpc-ju.europa.eu/advancing-european-sovereignty-hpc-risc-v-2025-03-06_en">EuroHPC DARE project (Mar 2025, €240 M)</a></li>
+      <li><a href="https://www.eurohpc-ju.europa.eu/ai-factories_en">EuroHPC AI Factories</a></li>
+      <li><a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20251029-2">Eurostat H1 2025 industrial electricity prices</a></li>
+      <li><strong>Company announcements (selected).</strong></li>
+      <li><a href="https://axelera.ai/news/axelera-ai-secures-more-than-250-million-funding-on-global-commercial-growth">Axelera AI &gt;$250 M Series C (Feb 2026)</a></li>
+      <li><a href="https://wayve.ai/press/series-d/">Wayve $1.2 B Series D (Feb 2026)</a></li>
+      <li><a href="https://helsing.ai/newsroom/helsing-raises-eur600m-to-invest-in-european-technological-sovereignty">Helsing €600 M Series D (Jun 2025)</a></li>
+      <li><a href="https://quantum-systems.com/blog/2025/05/05/quantum-systems-raises-euro160m/">Quantum Systems €160 M Series C (May 2025)</a></li>
+      <li><a href="https://insidehpc.com/2025/07/sipearl-tapes-out-hpc-and-ai-chip-rhea1-closes-e130m-series-a-for-european-tech-sovereignty/">SiPearl €130 M Series A (Jul 2025)</a></li>
+      <li><a href="https://qant.com/press-releases/qant-raises-62-million-euro-to-transform-the-future-of-computing-with-photonic-processing/">Q.ANT €62 M Series A (Jul 2025)</a></li>
+      <li><a href="https://neura-robotics.com/neura-robotics-secures-euro-120-million-series-b/">Neura Robotics €120 M (Jan 2025)</a></li>
+      <li><a href="https://www.wandercraft.eu/articles/wandercraft-announces-series-d-round-bringing-75m-in-total-funding-secured-for-global-acceleration-of-ai-powered-robotics">Wandercraft $75 M Series D (Jun 2025)</a></li>
+      <li><a href="https://www.eu-startups.com/2025/11/zurichs-flexion-raises-e50-million-to-build-the-brains-behind-humanoids/">Flexion Robotics €50 M Series A (Nov 2025)</a></li>
+      <li><a href="https://mistral.ai/news/ministraux">Mistral Ministral 3B/8B release (Oct 2024)</a></li>
+      <li><a href="https://kyutai.org/">Kyutai (Moshi, Hibiki)</a></li>
+      <li><a href="https://elevenlabs.io/blog/enterprise-voice-ai-deployed-locally">ElevenLabs on-device enterprise voice</a></li>
+      <li><a href="https://huggingface.co/utter-project/EuroLLM-9B">EuroLLM-9B on Hugging Face</a></li>
+      <li><a href="https://openeurollm.eu/">OpenEuroLLM consortium</a></li>
+      <li><a href="https://tech.eu/2026/03/24/the-2026-european-deeptech-report-sector-reaches-690b-as-vc-share-hits-record/">Tech.eu coverage of the 2026 Deep Tech Report</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="brand-mark">Entropora</div>
+  <div>Hardware + applied AI. Building heydict, on-device voice for regulated industries.</div>
+  <div style="margin-top:0.5rem;font-size:12px;"><a href="https://entropora.com" style="color:inherit;">entropora.com</a> · <a href="mailto:andrii@shylenko.com" style="color:inherit;">andrii@shylenko.com</a> · <a href="https://linkedin.com/in/shylenko" style="color:inherit;">linkedin.com/in/shylenko</a> · <a href="https://linkedin.com/in/lorenz-sauer" style="color:inherit;">linkedin.com/in/lorenz-sauer</a></div>
+  <div style="margin-top:1.5rem;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(244,239,230,.4);">Report published April 2026. All figures as disclosed by subjects or public filings.</div>
+</footer>
+
+</body>
+</html>
