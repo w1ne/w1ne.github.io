@@ -539,6 +539,14 @@
     font-weight: 400;
   }
 
+  /* ====== RESPONSIVE SVG ====== */
+  .chart-wrap svg,
+  .container svg {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+  }
+
   @media (max-width: 640px) {
     .hero { padding: 5rem 1.5rem 3.5rem; }
     .section { padding: 4rem 0; }
@@ -546,6 +554,10 @@
     .stack-header { grid-template-columns: 1fr; gap: 0.5rem; }
     .sources ul { column-count: 1; }
     .toc-inner { padding: 0 1.25rem; }
+
+    /* Charts: bump internal text so labels stay legible on 375px. */
+    .chart-wrap svg text,
+    .container svg text { font-size: 14px; }
   }
 </style>
 </head>
@@ -1943,6 +1955,14 @@
       <li><a href="https://openeurollm.eu/">OpenEuroLLM consortium</a></li>
       <li><a href="https://tech.eu/2026/03/24/the-2026-european-deeptech-report-sector-reaches-690b-as-vc-share-hits-record/">Tech.eu coverage of the 2026 Deep Tech Report</a></li>
     </ul>
+  </div>
+</section>
+
+<section style="background:var(--green-deep); color:var(--bg); padding:3.5rem 2rem; border-top:1px solid #1a221c;">
+  <div class="inner" style="text-align:center; max-width:700px; margin:0 auto;">
+    <p style="font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:rgba(244,239,230,.82); margin-bottom:1.75rem;">Prefer it as a PDF?</p>
+    <a href="carousel.pdf" download style="display:inline-block; padding:0.9rem 1.5rem; background:#d7ccab; color:var(--green-deep); text-decoration:none; font-weight:500; font-size:14px; letter-spacing:0.04em;">Download the report (PDF) →</a>
+    <p style="margin-top:1.25rem; font-size:12px; color:rgba(244,239,230,.5);"><a href="companies.csv" style="color:rgba(244,239,230,.72); border-bottom:1px solid rgba(215,204,171,.3);">companies.csv</a></p>
   </div>
 </section>
 
