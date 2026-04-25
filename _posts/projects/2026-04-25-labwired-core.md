@@ -6,7 +6,7 @@ sticky: false
 published: true
 author: Andrii Shylenko
 date: 2026-04-25
-tags: [rust, firmware, simulation, cortex-m, risc-v, embedded, ci/cd, open source]
+tags: [rust, firmware, simulation, cortex-m, risc-v, embedded, ci-cd, open source]
 header:
   overlay_filter: 0.5
 toc: true
