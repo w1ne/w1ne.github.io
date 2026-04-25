@@ -30,9 +30,9 @@ labwired test --script examples/ci/uart-ok.yaml --output-dir results
 
 The same engine runs three roles:
 
-*   **Local dev** — single-step in VS Code via DAP, or `gdb-multiarch` over RSP.
-*   **CI gate** — JSON/JUnit reports on every PR, no hardware required.
-*   **Catalog validation** — full sweep across supported boards to verify ISA and peripheral coverage.
+*   **Local dev**: single-step in VS Code via DAP, or `gdb-multiarch` over RSP.
+*   **CI gate**: JSON/JUnit reports on every PR, no hardware required.
+*   **Catalog validation**: full sweep across supported boards to verify ISA and peripheral coverage.
 
 # Architecture Decisions
 
@@ -84,10 +84,8 @@ That short file is enough to wire a TMP102 sensor onto an STM32F103's I2C1 in si
 
 For autonomous fuzzing and large CI matrices, raw cycles-per-second matters. For real-time firmware, *cycle accuracy* matters. LabWired exposes both via `SimulationConfig`:
 
-*   **Fast mode** — instruction decode cache, multi-byte bus fast-path, batched peripheral ticks. Good for property-based tests and replays.
-*   **Strict mode** — `peripheral_tick_interval = 1`, caches off. Good for verifying timing-sensitive drivers.
-
-Same engine, same models, two knobs.
+*   **Fast mode**: instruction decode cache, multi-byte bus fast-path, batched peripheral ticks. Good for property-based tests and replays.
+*   **Strict mode**: `peripheral_tick_interval = 1`, caches off. Good for verifying timing-sensitive drivers.
 
 ## 4. Standard Debug Protocols, No Lock-In
 
@@ -102,7 +100,7 @@ If you outgrow LabWired, your debug workflow stays.
 
 The firmware industry still treats simulation as a poor cousin of hardware-in-the-loop. But every other branch of software has spent the last decade building deterministic local tooling so CI can catch bugs before they reach a human. LabWired Core is the same idea applied to MCU firmware, bit-identical, headless, scriptable.
 
-The roadmap is public, multicore, fault-injection API, and ISO 26262 tool-qualification readiness for v1.0. If you build firmware and would like to stop waiting for boards, the install is one line:
+The roadmap is public, multicore, fault-injection API, and ISO 26262 tool-qualification readiness. If you build firmware and would like to stop waiting for boards, the install is one line:
 
 ```sh
 curl -fsSL https://labwired.com/install.sh | sh
