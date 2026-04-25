@@ -18,6 +18,8 @@ Every embedded project I have consulted on hits the same wall. The hardware show
 
 I have wanted to fix that workflow for years. **LabWired Core** is my answer, a deterministic, headless firmware simulator that runs in `cargo test`, in CI, and inside VS Code.
 
+> **Website & Docs**: [labwired.com](https://labwired.com)
+>
 > **Source Code**: [github.com/w1ne/labwired-core](https://github.com/w1ne/labwired-core)
 
 # What It Is
@@ -100,10 +102,10 @@ If you outgrow LabWired, your debug workflow stays.
 
 The firmware industry still treats simulation as a poor cousin of hardware-in-the-loop. But every other branch of software has spent the last decade building deterministic local tooling so CI can catch bugs before they reach a human. LabWired Core is the same idea applied to MCU firmware, bit-identical, headless, scriptable.
 
-The roadmap is public, multicore, fault-injection API, and ISO 26262 tool-qualification readiness. If you build firmware and would like to stop waiting for boards, the install is one line:
+If you build firmware and would like to stop waiting for boards, the install is one line:
 
 ```sh
 curl -fsSL https://labwired.com/install.sh | sh
 ```
 
-If you want to onboard a board, port a peripheral, or just compare notes, find me at andrii@shylenko.com.
+Find the docs and supported boards at [labwired.com](https://labwired.com), explore the code on [GitHub](https://github.com/w1ne/labwired-core), or reach me at andrii@shylenko.com.
