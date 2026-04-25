@@ -24,12 +24,12 @@ So I built **darktable-mcp**, a Model Context Protocol server that lets Claude (
 
 The server exposes a small, opinionated set of tools to the LLM:
 
-*   `view_photos` — Browse the library with rating and tag filters.
-*   `rate_photos` — Apply 1–5 star ratings, single shot or in batch.
-*   `import_batch` — Pull files from a directory, optionally recursive.
-*   `adjust_exposure` — Bump exposure in EV stops (-5.0 to +5.0).
-*   `apply_preset` — Apply named editing presets.
-*   `export_images` — Export to JPEG, PNG, or TIFF at a chosen quality.
+*   `view_photos`: browse the library with rating and tag filters.
+*   `rate_photos`: apply 1–5 star ratings, single shot or in batch.
+*   `import_batch`: pull files from a directory, optionally recursive.
+*   `adjust_exposure`: bump exposure in EV stops (-5.0 to +5.0).
+*   `apply_preset`: apply named editing presets.
+*   `export_images`: export to JPEG, PNG, or TIFF at a chosen quality.
 
 The interaction looks like this:
 
