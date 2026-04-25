@@ -89,8 +89,4 @@ Most photo-editing automation tools live in one of two boxes, either a clunky sc
 
 This is also why I am keeping the surface small on purpose. Six tools that are well typed and predictable beat sixty that are half-broken.
 
-# Status
-
-The project is in early beta (v0.1.0). The tool schemas are stable, the Lua bridge is being filled in. If you shoot RAW, run darktable on Linux, and want to script your culling workflow with an LLM, I'd love your feedback.
-
-`pip install darktable-mcp`, point your MCP client at it, and let me know what tool you reach for next at andrii@shylenko.com.
+If you shoot RAW, run darktable on Linux, and want to script your culling workflow with an LLM, `pip install darktable-mcp`, point your MCP client at it, and let me know what tool you reach for next at andrii@shylenko.com.
