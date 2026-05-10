@@ -5,6 +5,7 @@ blogid: personal
 sticky: false
 author: Andrii Shylenko
 date: 2018-12-03
+published: false
 tags: [hydroponics, build log]
 ---
 
@@ -38,7 +39,6 @@ Electronic components:
 | N | Component               | Amount | Description                       | Price, pln | Link
 |---|-------------------------|--------|-----------------------------------|------------|------
 | 1 | Hsbao HSB-333 pump      | 1      | Cheap, but powerfull enough for simple system. Just to get strarted. | 20       |
-
 
 
 

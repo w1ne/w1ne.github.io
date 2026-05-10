@@ -3,7 +3,7 @@ layout: single
 title: How to make Linux work with USB-to-serial
 blogid: personal
 sticky: false
-published: true
+published: false
 author: Andrii Shylenko
 date: 2018-03-04
 tags: [Linux, USB, arduino]

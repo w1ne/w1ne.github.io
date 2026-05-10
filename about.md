@@ -13,15 +13,15 @@ header:
 
 
 
-I am a **Firmware Engineering Consultant** specializing in building reliable, battery-powered IoT devices. I help companies navigate the full product lifecycle: from rapid proof-of-concept to mass manufacturing.
+I am a **technical founder** building tools for firmware teams, industrial systems, and agent-assisted engineering workflows.
 
-My expertise lies in designing modular firmware architectures, ensuring rock-solid connectivity (BLE/WiFi/Cellular), and bringing legacy industrial systems into the modern cloud.
+My work sits where hardware, software, and product execution meet: deterministic firmware simulation, browser-based machine control, industrial protocol stacks, and developer tools that make complex engineering systems easier to build and verify.
 
 ## Bio
 
-As an Embedded Software Engineer, I connect industrial machines to the cloud. I do research and development for IoT systems, from specification to architecture, firmware, and validation.
+I started in mechanical and embedded engineering, then moved deeper into firmware architecture, industrial connectivity, and developer tooling. Across consulting and product work, I have built systems for smart metering, railway telemetry, IO-Link devices, UDS diagnostics, laser control, and firmware simulation.
 
-I have gathered a diverse background while working as a consultant for companies building digital devices, ranging from aircraft fuselage design to smart water meters and locomotive data interfaces.
+Today I focus on founder-led engineering projects where deep technical execution matters: turning hard infrastructure problems into usable products, shipping open-source tools, and building software that helps engineers move faster without losing rigor.
 
 ## Hobbies & Interests
 
@@ -35,14 +35,14 @@ In my spare time, I am a maker and lifelong learner. My interests include:
 
 ## Work Experience
 
-### **Firmware Engineering Consultant**
+### **Technical Founder / Independent Engineering Consultant**
 *January 2023 - Present*
 
-Helping companies and individuals build IoT devices.
-- **Architected** comprehensive IoT solutions for air quality monitoring using Zephyr, ESP32, and RP2040.
-- **Led development** of a low-cost Bluetooth-enabled Telematics Unit (STM32H5 + FreeRTOS).
-- Implemented secure OTA updates, MQTT data pipelines, and CANOpen stacks.
-- Designed CI/CD pipelines (Jenkins/Docker) for automated "nightly" builds and testing.
+Building engineering tools and helping teams bring connected devices from prototype to production.
+- Built and released open-source tools including **LabWired Core**, **Laseryx**, **UDSLib**, **iolinki**, and **darktable-mcp**.
+- Architected IoT solutions for air quality monitoring using Zephyr, ESP32, and RP2040.
+- Led development of a low-cost Bluetooth-enabled telematics unit using STM32H5 and FreeRTOS.
+- Implemented secure OTA updates, MQTT data pipelines, CANOpen stacks, and automated CI/CD pipelines.
 
 ### **Railnova S.A. | Embedded IoT Engineer**
 *March 2022 - January 2023*

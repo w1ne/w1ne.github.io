@@ -3,7 +3,7 @@ layout: single
 title: Ship till you are dead
 blogid: personal
 sticky: false
-published: true
+published: false
 author: Andrii Shylenko
 date: 2023-07-21
 header:

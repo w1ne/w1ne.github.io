@@ -3,7 +3,7 @@ layout: single
 title: The first 100K by trading options
 blogid: personal
 sticky: false
-published: true
+published: false
 author: Andrii Shylenko
 date: 2023-06-16
 header:

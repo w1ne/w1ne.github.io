@@ -3,7 +3,7 @@ layout: single
 title: Roof wall picture adapter
 blogid: personal
 sticky: false
-published: true
+published: false
 author: Andrii Shylenko
 date: 2022-12-14
 header:
@@ -29,6 +29,5 @@ The adapter is held in place with one or two 2.5x12mm wooden screws. For smaller
 For a wall, I use screws with a head diameter of 6mm. 
 
 [Download 3d model of the adapter](/files/3d_models/PictureHanger/PictureKeyHole.3mf), it is in a public domain.
-
 
 

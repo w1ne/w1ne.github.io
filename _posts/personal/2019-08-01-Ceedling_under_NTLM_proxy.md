@@ -3,7 +3,7 @@ layout: single
 title: Install Ceedling under NTLM proxy
 blogid: personal
 sticky: false
-published: true
+published: false
 author: Andrii Shylenko
 date: 2019-08-01
 tags: [Ceedling, proxy, Windows, TDD, c]
@@ -49,4 +49,3 @@ $ gem install --http-proxy http://localhost:8888 GEM_NAME_
 ```
 
 RubyGems does not work behind NTLM proxy used in many companies. Currently there is no elegant way to bypass it natively, without using local proxies.
-

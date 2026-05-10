@@ -3,7 +3,7 @@ layout: single
 title: Self-employed in Hungary, Tax Calculator 2022
 blogid: personal
 sticky: false
-published: true
+published: false
 author: Andrii Shylenko
 date: 2022-12-19
 header:
@@ -100,4 +100,3 @@ The calculator can be used to make predictions based on simplified assumptions, 
 The flat rate taxation system is a great alternative to the KATA system, as it allows me, as a Software Engineer consultant, to pay a tax burden of around 30% or even lower. Coupled with the freedom that comes with being self-employed, it makes for an attractive option compared to traditional employment.
 
 In next posts I will cover topics of business registration using web portal, bank account, and managing invoices. 
-
