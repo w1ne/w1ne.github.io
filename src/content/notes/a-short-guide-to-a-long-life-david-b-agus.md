@@ -7,4 +7,3 @@ legacyUrl: /a-short-guide-to-a-long-life-david-b-agus/
 featured: false
 draft: false
 ---
-

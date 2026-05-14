@@ -7,13 +7,13 @@ date: '2019-06-07'
 tags: []
 legacyUrl: /unifide-approach-for-digital-ports/
 featured: false
-draft: false
+draft: true
 ---
 In recent design there was a requirement for hundreds of GPIO pins on the MCU.
 STM32F373 in 100-pin LQFP processor used for GPIO, analogue and resistance measurements is perfect for the task due to Sigma Delta ADC and rich peripherals. But it lacks required count of GPIO ports. In the same time the bigger processor is prohibited by mechanical limitations of the board, production process and logistical limitations.
 
-The HW solution is to use port expanders. 
-The SW challenge is to integrate shift register port expanders with clear separation on BSP and application layers. bsp_port module unifies access to GPIO and SIPO pins. 
+The HW solution is to use port expanders.
+The SW challenge is to integrate shift register port expanders with clear separation on BSP and application layers. bsp_port module unifies access to GPIO and SIPO pins.
 
 There are two possibilities to toggle a GPIO pin:
      via SIPO registers, using bsp module responsible for data transfer via shift registers.
@@ -37,7 +37,7 @@ Not explicitely initialized members are initialized as zero.
 As stated in C11 paragraph "6.7.9 Initialization":
 "If there are fewer initializers in a brace-enclosed list than there are elements or members of an aggregate, or fewer characters in a string literal used to initialize an array of known size than there are elements in the array, the remainder of the aggregate shall be initialized implicitly the same as objects that have static storage duration."
 
-Therefore SIPO pin 
+Therefore SIPO pin
 
 ```c
 static const port_conf_t PinConf[] =
@@ -53,13 +53,13 @@ static const port_conf_t PinConf[] =
 ```
 
 Advantages of the solution:
-+ All GPIO ports are visible to application layer as same GPIO objects. 
++ All GPIO ports are visible to application layer as same GPIO objects.
 HW differences dosn't obscure application interfaces.
 + Universal interface for all GPIO.
 + Self explanatory, readable, easy port configuration
-+ Such initialization is compatible with MISRA rule 9.2. 
++ Such initialization is compatible with MISRA rule 9.2.
 Disadvantages:
-- Excessive memory use. Not initialized members just stay in memory. 
+- Excessive memory use. Not initialized members just stay in memory.
 Not really a problem, as long as table is located in flash.
 - Code is only compatible with C99 standard and higher.
 

@@ -17,14 +17,14 @@ featured: false
 draft: false
 heroImage: /images/img/2022-12-19-self-employed/beyourownboss.jpg
 ---
-The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering. 
+The dream of becoming my own boss had been a long-time aspiration. After working under someone else for years, I decided to venture out and offer my services as an Expert specialized in Internet of Things systems and Firmware engineering.
 
 Although I already have clients, in order to reach my goal I need to form a legal business entity. *If you came for the calculator only, scroll till the end of the page*
 
 
-# Self-employed vs KFT 
+# Self-employed vs KFT
 
-The two most common ways of launching a business in Hungary are to register as a self-employed entrepreneur, which has a straightforward setup and requires no investments, or to set up a limited liability company (KFT). 
+The two most common ways of launching a business in Hungary are to register as a self-employed entrepreneur, which has a straightforward setup and requires no investments, or to set up a limited liability company (KFT).
 The second option needs the help of a lawyer, and requires an initial investment of 3 million Forint, as well as an mandatory accountant.
 
 Creating and managing a limited liability company is complicated, but the trade-off is worth it. You are shielded from being personally liable, and you have more freedom to sell the organization if you want. Limited personal liability is part of the package.
@@ -61,7 +61,7 @@ Starting a sole proprietorship can be done:
  - in person, at any local NAV customer service office.
 
 ## Necessary documents
-Nothing special. Either identity card, passport, driver’s license (in card format) or power of attorney must be presented as the original version. 
+Nothing special. Either identity card, passport, driver’s license (in card format) or power of attorney must be presented as the original version.
 
 ## Expenditures
 The notification of the start of the activity is free of charge and any fees.
@@ -78,15 +78,15 @@ The website of the Hungarian Chamber of Commerce and Industry has an [Entreprene
 
 Extra help in classifying potential activities based on their ÖVTJ code may be found on the [KSH website](https://www.ksh.hu/ovtj_menu).
 
-# Taxation 
+# Taxation
 There are two easy ways to handle taxation as a sole proprietor: KATA and a flat rate taxation.
 
 Every month, members of the **KATA system** pay a fix sum of HUF 50,000 for income tax, social security contributions, and social tax. All revenue made over this amount is kept by the individual. Unfortunately, certain people are unable to take advantage of this system. **Those selling goods or services to other businesses or foreign entities are not eligible.** Additionally, anyone who is not working as a full-time self-employed individual is not able to use KATA. This applies to students and other employed people as well.
 
 Providing consulting services for businesses means I cannot use KATA.
 
-**The flat rate tax system** requires freelancers to deduct 40%(or up to 90% rate if their activity is in retail or agriculture) of the revenue. This leaves 60% of the revenue as the amount of money they to pay taxes on. 
-The taxes are divided into personal income tax (15%), social security contribution (18.5%), and social contribution tax (13%) for a total of 46.5%. 
+**The flat rate tax system** requires freelancers to deduct 40%(or up to 90% rate if their activity is in retail or agriculture) of the revenue. This leaves 60% of the revenue as the amount of money they to pay taxes on.
+The taxes are divided into personal income tax (15%), social security contribution (18.5%), and social contribution tax (13%) for a total of 46.5%.
 It should also be noted that as a self-employed you will need to pay for the accountant services (15000-30000 HUF) each month.
 
 I made flat rate taxation calculator based on Excel table found on [NAV website](https://nav.gov.hu/pfile/file?path=/ado/uj-kata/vallalkozoi-kalkulator), you can use it to approximate tax burden when working as a full time entrepreneur under flat rate taxation and decide if going self-employed is a good choice.

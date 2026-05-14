@@ -34,16 +34,16 @@ If you were ever in a managing position at a big software company, especially do
 
 Your schedule is almost always planned from 9:30 to 16:00 with meetings, meetings and meetings. Meeting hell!
 
-When I first started to do architecture, I was excited about meeting all the teams in the company: India, France, USA. Sometimes more than hundred people in a call. After a few months I started to hate meetings. 
-Because they steal time and make big part of the day unproductive. Most of the time there is no agenda, just status update or QA session. There is usually no action items or clearly defined outcomes. 
+When I first started to do architecture, I was excited about meeting all the teams in the company: India, France, USA. Sometimes more than hundred people in a call. After a few months I started to hate meetings.
+Because they steal time and make big part of the day unproductive. Most of the time there is no agenda, just status update or QA session. There is usually no action items or clearly defined outcomes.
 
-After few years I learned that having 30 minutes per week per person for status update and 30 minutes per week for a team for planning tasks together is enough. 
+After few years I learned that having 30 minutes per week per person for status update and 30 minutes per week for a team for planning tasks together is enough.
 
 # Strategy
 
 Here is my recipe for productive meetings:
 
-1. **Is it needed?** The first and most important question to ask is if the meeting is needed at all. When I was junior software engineer in multinanational companies I was often invited to meetings where I did not have either expertise or knowledge to give an advice. 
+1. **Is it needed?** The first and most important question to ask is if the meeting is needed at all. When I was junior software engineer in multinanational companies I was often invited to meetings where I did not have either expertise or knowledge to give an advice.
 
     Imagine sitting in the meeting and saying "hello", "yes" and "goodbye". While other people discuss unrelated to your job task for an hour. At the end of this hour, you do not have any new information, but it took your time and deprived you of an opportunity to complete your coding tasks.
 
@@ -61,7 +61,7 @@ Good email or wiki post is an efficient way to start an asynchronious discussion
 
 # Conclusion
 
-I strongly suggest using asynchronous communication in written form instead of attending meetings. Text-based conversations such as emails should replace the need for them. 
+I strongly suggest using asynchronous communication in written form instead of attending meetings. Text-based conversations such as emails should replace the need for them.
 
 Do not use a platform like Slack or chat messengers to make technical decisions as it can be hard to recall what was said in a wave of messages. Structured posts (like Basecamp), documents(Slides), and notes (like OneNote) provide much clearer communication platfroms.
 

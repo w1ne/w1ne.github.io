@@ -3,7 +3,7 @@ title: Jekyll Github-pages locally in Ubuntu 22.04
 description: >-
   I'm an enthusiastic admirer of Jekyll, which I use for all my static websites
   and this blog. The official GitHub documentation doesn't help much as a guide
-date: '2022-12-19'
+date: '2022-12-30'
 tags:
   - linux
   - Jekyll

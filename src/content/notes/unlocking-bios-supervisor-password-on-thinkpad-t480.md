@@ -3,7 +3,7 @@ title: Unlocking BIOS Supervisor password on Thinkpad T480
 description: >-
   Recently I bought an old Thinkpad T480 to do development on in my spare time.
   It is good machine with fast CPU, swappable batteries and possibility to upgr
-date: '2022-12-30'
+date: '2022-12-19'
 tags:
   - firmware
   - hacking
@@ -14,8 +14,8 @@ tags:
   - reverse-engineering
 legacyUrl: /t480-supervisor-password-hack/
 featured: true
-draft: false
-heroImage: "/images/img/2022-12-30-T480-bios-hack\t/SuperviserLock.jpg"
+draft: true
+heroImage: /images/img/2022-12-30-T480-bios-hack/SuperviserLock.jpg
 ---
 Recently I bought an old Thinkpad T480 to do development on in my spare time. It is good machine with fast CPU, swappable batteries and possibility to upgrade to 4K screen and 64GB RAM. My machine was locked down by a "Supervisor Password", which means that it would not allow me to enter BIOS.
 
@@ -29,7 +29,7 @@ All content and information on the I website is for informational and educationa
 
 [soic-8 clip]
 1. Another computer (surprise, surprise).
-2. CH341A/FT2232H (or any other 3.3v SPI programmer) + SOIC8 test clip. 
+2. CH341A/FT2232H (or any other 3.3v SPI programmer) + SOIC8 test clip.
 If you use CH341A, modify it to work with 3.3 volts. [mod link]
 3. This site to patch your firmware. [patch firmware]
 
@@ -49,7 +49,7 @@ The procedure confirmed to work on all Lenovo Thinkpad laptops up to the 8th gen
 11. Revert BIOS settings to factory defaults.
 
 When starting the modified BIOS, it could be necessary to:
- - Keep the anti-tampering button activated all the time(use tape) 
+ - Keep the anti-tampering button activated all the time(use tape)
  - Take out the hard disk.
 
 This instruction is based on all the info I have found on the [Badcaps forum and autopatcher script posted there.](https://www.badcaps.net/forum/showthread.php?p=981152), if you have a problem or questiions while patching people will be glad to help!
@@ -57,7 +57,7 @@ This instruction is based on all the info I have found on the [Badcaps forum and
 # Password hacking story
 
 I never buy new laptops, they are expensive and provide very little advance over older generation.
-My old 2730p works flawlessly with upgraded 16gb memory and 7-3610QM 4-core socketed CPU. Costed me peanuts, but beats many modern pricey laptops in speed and build quality. Good construction, upgradability and wide selection of ports is what I admire in older laptops. 
+My old 2730p works flawlessly with upgraded 16gb memory and 7-3610QM 4-core socketed CPU. Costed me peanuts, but beats many modern pricey laptops in speed and build quality. Good construction, upgradability and wide selection of ports is what I admire in older laptops.
 It is much more worthwhile to buy used and make repairs whenever possible, rather than opting for the shiny and expensive new models. Repair is one of the way to avoid consumerism.
 
 And here I am, with locked used T480, searching the internet on how to fix it!
@@ -67,7 +67,7 @@ The official [Lenovo support page states:](https://support.lenovo.com/us/en/solu
 **Reset forgotten supervisor password**
 *If you forget your supervisor password, Lenovo cannot reset your password. You must take your computer to a Lenovo Service Provider to have the system board replaced.*
 
-What a waste of time. Replacing a circuit board on a device that is working perfectly. 
+What a waste of time. Replacing a circuit board on a device that is working perfectly.
 
 ## Dumping firmware
 
@@ -91,7 +91,7 @@ The Chinese FT2232H board I have is incorrectly routed, the 5V and 3.3V pins are
 
 [FT2232H volt mod]
 
-Because I did not have a clip, I desoldered Flash and connected it to the FT2232H board manually. 
+Because I did not have a clip, I desoldered Flash and connected it to the FT2232H board manually.
 
 [picture]
 
@@ -245,23 +245,23 @@ DECIMAL    HEXADECIMAL   DESCRIPTION
 16758192   0xFFB5B0    Microsoft executable, portable (PE)
 ```
 
-## Flashing back 
+## Flashing back
 
-I had been working on the laptop late into the night, trying to re-flash the ROM. 
+I had been working on the laptop late into the night, trying to re-flash the ROM.
 After soldering wires back and running write command with
 
 ```console
-andrii@andrii-jupiter:~/Projects/T480$ flashrom -p ft2232_spi:type=2232H,port=A -w T480_bios_original_locked.bin 
+andrii@andrii-jupiter:~/Projects/T480$ flashrom -p ft2232_spi:type=2232H,port=A -w T480_bios_original_locked.bin
 ```
 
 **there was no response from the chip!**
 
 I touched the ROM, and felt the radiating heat...
-I tried to solder chip back, the laptop went completely dark except for the light of the charger indicator. 
+I tried to solder chip back, the laptop went completely dark except for the light of the charger indicator.
 
 Have I doomed the laptop beyond repair?
 
-I began by testing the power, 3.3v and 12v lines, to make sure they were running correctly. 
+I began by testing the power, 3.3v and 12v lines, to make sure they were running correctly.
 Once that was established, I hooked up a logic analyzer to find out if the processor was communicating via SPI.
 
 [logic analyzer image]
@@ -284,8 +284,8 @@ Erasing and writing flash chip... done.
 Verifying flash... VERIFIED.
 ```
 
-I started the laptop and pressed F1 to open the BIOS settings (you can find step by step instructions in the beginning of the post). 
-A small box with lock appeared. 
+I started the laptop and pressed F1 to open the BIOS settings (you can find step by step instructions in the beginning of the post).
+A small box with lock appeared.
 [Supervisor pass image]
 I typed a random keyboard character as Supervisor password. The screen changed and showed me a Hardware ID.
 [HW id image]

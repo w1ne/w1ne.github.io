@@ -33,6 +33,21 @@ function dateFromFile(fileName) {
   return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 }
 
+function normalizeDate(input, fallback) {
+  if (!input) return fallback;
+  if (input instanceof Date) return input.toISOString().slice(0, 10);
+
+  const value = String(input).trim();
+  const match = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (!match) return fallback;
+  const [, year, month, day] = match;
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
+
+function normalizeImagePath(input) {
+  return String(input).trim().replace(/\s*\/\s*/g, '/');
+}
+
 function descriptionFromBody(body) {
   const plain = body
     .replace(/```[\s\S]*?```/g, '')
@@ -43,7 +58,7 @@ function descriptionFromBody(body) {
     .replace(/[#>*_`~-]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
-  return plain.slice(0, 155);
+  return plain.slice(0, 155).trimEnd();
 }
 
 function normalizeBody(body) {
@@ -58,7 +73,10 @@ function normalizeBody(body) {
     .replace(/\{\%\s*include\s+calculator_compounding\.html\s*\%\}/g, '> Legacy compounding calculator omitted during the Astro migration.')
     .replace(/\{\%\s*include\s+calcualtor_SPY_vs_Sell\.html\s*\%\}/g, '> Legacy options calculator omitted during the Astro migration.')
     .replace(/\)\{:\s*\.[^}]+\s*\}/g, ')')
-    .replace(/\t+/g, '');
+    .replace(/\t+/g, '')
+    .split('\n')
+    .map((line) => line.trimEnd())
+    .join('\n');
 }
 
 async function listMarkdownFiles(dir) {
@@ -82,7 +100,7 @@ for (const file of files) {
   const parsed = matter(raw);
   const fileName = path.basename(file);
   const title = parsed.data.title ?? titleFromFile(fileName);
-  const date = dateFromFile(fileName);
+  const date = normalizeDate(parsed.data.date, dateFromFile(fileName));
   const slug = slugify(title);
   const legacySlug = slugify(fileName.replace(/^\d{4}-\d{1,2}-\d{1,2}-/, '').replace(/\.md$/, ''));
   const body = normalizeBody(parsed.content);
@@ -93,13 +111,14 @@ for (const file of files) {
     tags: Array.isArray(parsed.data.tags) ? parsed.data.tags.map(String) : [],
     legacyUrl: `/${legacySlug}/`,
     featured: featuredTitles.has(title),
-    draft: false
+    draft: parsed.data.published === false
   };
   if (parsed.data['featured-image']) {
-    frontmatter.heroImage = `/images/img/${String(parsed.data['featured-image']).trim()}`;
+    frontmatter.heroImage = `/images/img/${normalizeImagePath(parsed.data['featured-image'])}`;
   }
 
-  const output = matter.stringify(`${body.trim()}\n`, frontmatter);
+  const content = body.trim();
+  const output = matter.stringify(content ? `${content}\n` : '', frontmatter).replace(/\n\n$/, '\n');
   await fs.writeFile(path.join(outputDir, `${slug}.md`), output);
 }
 

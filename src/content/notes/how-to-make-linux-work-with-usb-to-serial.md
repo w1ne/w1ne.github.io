@@ -14,7 +14,7 @@ draft: false
 ---
 I am using [SourceRabbit G-code sender](https://www.sourcerabbit.com/) to control my "Miyazaki" drawing bot.
 The robot is using [CP2102](https://www.silabs.com/products/interface/usb-bridges/classic-usb-bridges/device.cp2102) chip as a virtual com port bridge between USB and control application.
-Unfortunately it isn't working out of the box in OpenSuse. 
+Unfortunately it isn't working out of the box in OpenSuse.
 USB-to-serial converter is mounted as `/dev/ttyUSB0`, with following rights:
 
 ```
@@ -25,7 +25,7 @@ Device is owned by root and read and write permissions are granted for the `dial
 The solution is to add your user to correct groups:
 1. Run in terminal `sudo usermod -a -G dialout %username%`.
 *Current user groups can be checked with `groups` command.*
-2. Log off and login again to apply group changes. 
+2. Log off and login again to apply group changes.
 3. Run application which is using USB-to-serial adapter,
 e.g. `java -jar "SourceRabbit-GCODE-Sender.jar"`
 4. SourceRabbit G-code Sender is now working with CP2102 adapter.

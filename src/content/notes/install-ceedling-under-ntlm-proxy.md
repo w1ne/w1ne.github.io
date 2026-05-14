@@ -2,8 +2,7 @@
 title: Install Ceedling under NTLM proxy
 description: >-
   Ceedling is the build system for C based projects. Ceedling combines CMock,
-  Unity, and CException in one open source package for producing quality C
-  code. 
+  Unity, and CException in one open source package for producing quality C code.
 date: '2019-08-01'
 tags:
   - Ceedling
@@ -48,7 +47,7 @@ results in the same error.
 
 # Solution
 
-[Fast and simple solution](https://stackoverflow.com/questions/4418/how-do-i-update-ruby-gems-from-behind-a-proxy-isa-ntlm/4431) is to use local proxy, e.g. Fiddler. it does not require configuration and works out of the box.:  
+[Fast and simple solution](https://stackoverflow.com/questions/4418/how-do-i-update-ruby-gems-from-behind-a-proxy-isa-ntlm/4431) is to use local proxy, e.g. Fiddler. it does not require configuration and works out of the box.:
 1. Install and run [Fiddler](https://www.fiddler2.com).
 2. Run RubyGems:
 ```

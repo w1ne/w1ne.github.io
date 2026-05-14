@@ -21,7 +21,7 @@ I started my first job in embedded software engineering in 2015. Summer had blaz
 Ten lessons for changing jobs:
 1. Apply for any job you think you can do.
 2. Prepare a portfolio and your "sales pitch", and polish CV.
-3. Know your worth, and go as high as possible in compensation. 
+3. Know your worth, and go as high as possible in compensation.
 4. Follow up with an email after the interview.
 5. Use references.
 6. Practice doing interviews, apply for jobs regularly.
@@ -38,11 +38,11 @@ To find a job, my strategy was to prepare tens of CVs, and search for positions 
 
 Unexperienced, scared, and stressed I went to the place where students should look first: University Career Center.
 
-If you are a fresh graduate, it is one of the places to go, they have job postings, contracts with employers, and can help you to review the CV. 
+If you are a fresh graduate, it is one of the places to go, they have job postings, contracts with employers, and can help you to review the CV.
 
 At the University Career Center, there was a job offer for the new local perspective investment, let's call it "The Best Automation Company", for an "Application Engineer" position.
 
-The recruitment process at "The Best Automation Company" was lengthy: 
+The recruitment process at "The Best Automation Company" was lengthy:
 Initial screening with HR, technical conversation with a team, take-home test to present, and finally, meeting with the management.
 
 For the management meeting, I crafted a presentation with all the projects I worked on at the university and presented it to the hiring committee.
@@ -83,7 +83,7 @@ Getting a job is a "selling yourself" skill. After years as an employee, changin
 # Conclusion
 
 Hope this list will help you to secure the job you want.
-It is important to have a vision for your career and life, before making any job decisions, ask yourself if the next position is moving you closer to your goal? 
+It is important to have a vision for your career and life, before making any job decisions, ask yourself if the next position is moving you closer to your goal?
 
-My bonus 11's point will be: 
+My bonus 11's point will be:
 **Never fear to change jobs when it benefits your personal goals. The price of wasted time is much higher compared to the price of failing. Do not have guilt, the company will do just fine without you, but by changing jobs you get more money and faster promotions compared to staying with the same employer for a lifetime. Be selfish like the most villain capitalist.**

@@ -28,9 +28,9 @@ There is one gem from Charlie Munger, who I largely admire, the pinnacle of inve
 *The first $100,000 is a bitch, but you gotta do it. I don’t care what you have to do – if it means walking everywhere and not eating anything that wasn’t purchased with a coupon, find a way to get your hands on $100,000. After that, you can ease off the gas a little bit.*
 **Charlie Munger**
 
-# Intro 
+# Intro
 
-The initial phase of wealth accumulation is often the most challenging, but it establishes a solid foundation for subsequent financial growth. 
+The initial phase of wealth accumulation is often the most challenging, but it establishes a solid foundation for subsequent financial growth.
 Here are several reasons why reaching the first $100,000 milestone is particularly crucial.
 
 ## Reason #1 Compounding. The most important one.
@@ -50,14 +50,14 @@ MC - monthly contribution
 This formula calculates the total value of the investment after a specified number of months, taking into account both the initial principal and the regular monthly contributions, compounded monthly at the given annual interest rate.
 ![Compounding](/images/img/2023-06-16-Selling-options-sytategy/CompoundingSPY.png)
 
-As can be seen from Figure [python visualization code](https://github.com/w1ne/compounding_vis_script) the compounding after $100,000 starts to accelerate, before $100,000 the compounding effect is not so pronounced and the majority of growth comes from savings (the blue and orange lines are almost the same). 
-By leveraging compounding and regular contributions of 1K each month, the 100K mark can be reached in only 6-7 years in an absolutely passive, hassle-free way. 
+As can be seen from Figure [python visualization code](https://github.com/w1ne/compounding_vis_script) the compounding after $100,000 starts to accelerate, before $100,000 the compounding effect is not so pronounced and the majority of growth comes from savings (the blue and orange lines are almost the same).
+By leveraging compounding and regular contributions of 1K each month, the 100K mark can be reached in only 6-7 years in an absolutely passive, hassle-free way.
 
 ## Reason #2 Diversification
 With a larger sum of money, there is more flexibility in investment choices. It is possible to diversify across different asset classes, industries, and individual investments, potentially reducing risk and increasing returns. It means that in case of failure of one company, the account will not be wiped out. It is much easier to diversify in different sectors with a large sum of money compared to a small account. Simply put, big account gives more security.
 
 ## Reason #3 Learning and experience
-Saving and investing enough to reach the $100,000 milestone requires cultivating good financial habits, such as consistently saving a portion of the income, and making informed money decisions. 
+Saving and investing enough to reach the $100,000 milestone requires cultivating good financial habits, such as consistently saving a portion of the income, and making informed money decisions.
 
 # I want it faster! Wheeling the F.
 We established that 100K is an important goal toward financial freedom and with good financial discipline can be achieved in 6-7 years of savings in a good market.
@@ -107,7 +107,7 @@ We should also take into account a yearly tax of 15% on the profit (for Hungary)
 2. Calculate the monthly option premium income after commission:
    $300 (option premium income) - $10 (commission) = $290
 3. Calculate the total monthly investment:
-   
+
    $1,000 (monthly contribution) + $290 (option premium income after commission) = $1,290
 
 For simplicity, we'll assume a constant 3% monthly return (0.03) on the total investment, although this may not be realistic:
@@ -119,7 +119,7 @@ Solving for n, we get approximately **26 months**.
 Now, let's account for the 15% yearly tax on profits:
 
 - Year 1: After 12 months, we would have made approximately $15,480 ($1,290 * 12 months) in total investments, including option premiums and contributions.
-- Year 1 Tax: Assuming a constant 3% monthly return, the profit in year 1 would be $15,480 - $12,000 (12 months * $1,000 monthly contribution) = $3,480. 
+- Year 1 Tax: Assuming a constant 3% monthly return, the profit in year 1 would be $15,480 - $12,000 (12 months * $1,000 monthly contribution) = $3,480.
 The tax on this profit would be $3,480 * 0.15 = $522.
 - Year 1 After Tax: $15,480 - $522 = $14,958
 By the end of year 2 (24 months), we would have approximately $29,916 ($14,958 * 2). In the 3rd year, we will reach $100,000.
@@ -155,7 +155,7 @@ I am using F as an example.
 If Ford's stock price drops significantly, you could be left holding the shares at a loss for a long time. While it is possible to sell covered calls to generate income, it might take a long time to recover the initial investment.
 
 ## Slow recovery
-If Ford's stock price takes a long time to recover after a price drop, it could lead to reduced premiums on the options. (30 per contract is not guaranteed) 
+If Ford's stock price takes a long time to recover after a price drop, it could lead to reduced premiums on the options. (30 per contract is not guaranteed)
 
 ## Dividend cuts or suspension
 If Ford cuts or suspends its dividends, it could impact the stock price.
@@ -182,10 +182,10 @@ The goal at this point is to get individual exposure down to 5% per company and 
 
 ## My general rules for selling Options
 - Sell weeklies (30-45 days until expiration) and delta 0.30 or lower. Read more about delta and theta here:[theta](https://www.projectfinance.com/theta/), [delta](https://www.projectfinance.com/option-delta-explained/) In very simple terms, 0.3 delta call option gives about a 70% chance of success.
-- Set the profit taking at +50% and cutting losses at -100% for each trade. 
-- Do not hold a naked put position during earnings or other significant stock events. I was burned before when stock swung violently in earnings, which resulted in losses. Selling puts into earnings is a gamble. 
+- Set the profit taking at +50% and cutting losses at -100% for each trade.
+- Do not hold a naked put position during earnings or other significant stock events. I was burned before when stock swung violently in earnings, which resulted in losses. Selling puts into earnings is a gamble.
 
-Please be free to use my Option vs. SPY Return Calculator - a tool designed to assist option sellers in making informed decisions. 
+Please be free to use my Option vs. SPY Return Calculator - a tool designed to assist option sellers in making informed decisions.
 It allows us to compare the potential return of selling an option versus investing the same amount of capital into the S&P 500 ETF (SPY).
 
 > Legacy options calculator omitted during the Astro migration.

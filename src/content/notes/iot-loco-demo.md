@@ -22,7 +22,7 @@ heroImage: /images/img/2022-12-02-iot-train/feature-image-train_alt.png
 ---
 Pablo is a middle-aged train driver, with a round face, brown like the dirt of the freight car eyes, and an evergreen smile. Pablo lives in Spiez, Switzerland.
 
-When Pablo was in sixth grade, the train driver who worked for the local rail company organised the lecture for the kids. 
+When Pablo was in sixth grade, the train driver who worked for the local rail company organised the lecture for the kids.
 <img align="right" src="/images/img/2022-12-02-iot-train/pablo.jpg" />
 
 The train driver walked into the class, dressed in his clean blue uniform. He sat at the teacher's desk and told them how beautiful it is to drive a train. Pablo looked at him with fascination, the way that only a twelve-year-old can look at someone. The voice of the train driver sounded like a low mumble of diesel exhaust as he spoke of train tracks and engines.
@@ -41,7 +41,7 @@ So many kilometers, so many kilometers of peaceful, solitary driving are spoiled
 
 <img align="left" src="/images/img/2022-12-02-iot-train/boss.jpg" />
 
-Pablo's boss, Mr. Schmetterlink, is a short man with jet-black hair streaked gray. His tiny body always alarmed Pablo with nervous energy. Mr. Schmetterlink demands to fill hundreds of reports. 
+Pablo's boss, Mr. Schmetterlink, is a short man with jet-black hair streaked gray. His tiny body always alarmed Pablo with nervous energy. Mr. Schmetterlink demands to fill hundreds of reports.
 
 
 Brake test reports, Engine reports, Safety reports. Reports, reports, and more reports for Pablo.
@@ -81,10 +81,10 @@ IoT Loco is powered by LiPo batteries with voltage up to 12v (maximum voltage fo
 ## Firmware
 Embedded Software is written in C++ and using arduino framework.
 ![FW](/images/img/2022-12-02-iot-train/FW_State_machine.png)
-There are three software states: 
-1. Init - Initialisation of all sensors and hardwere. 
-2. Main - MQTT data publishing and subsctibing, measuring power, GPS, motor contron and WiFi. 
-3. Error - Routine to handle errors, such as no WiFi connection or absent GPS data. 
+There are three software states:
+1. Init - Initialisation of all sensors and hardwere.
+2. Main - MQTT data publishing and subsctibing, measuring power, GPS, motor contron and WiFi.
+3. Error - Routine to handle errors, such as no WiFi connection or absent GPS data.
 The full architeture of the system is fully descriped in the docs forder of the [repo](https://github.com/w1ne/TrainIoT_Demo/tree/main/Docs).
 
 ## Connectivity
@@ -97,7 +97,7 @@ Server-side dashboard, which can display data and conntrol the loco, is built us
 ![Python IoT Dashboard](/images/img/2022-12-02-iot-train/Dashboard.png)
 
 # Conclusion
-With the IoT Loco Dashboard Pablo can drive his train and do forget about all the Excel processes and calls from Mr. Schmetterlink. The energy dashboard clearly shows how much energy the train is using, along with the GPS location. 
+With the IoT Loco Dashboard Pablo can drive his train and do forget about all the Excel processes and calls from Mr. Schmetterlink. The energy dashboard clearly shows how much energy the train is using, along with the GPS location.
 
 ## Code
 Documentation and code are available on [github](https://github.com/w1ne/TrainIoT_Demo/) and distributed under [MIT](https://opensource.org/licenses/MIT) license.
