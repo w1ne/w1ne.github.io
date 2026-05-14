@@ -132,14 +132,15 @@ for (const file of files) {
   const slug = slugify(title);
   const legacySlug = slugify(fileName.replace(/^\d{4}-\d{1,2}-\d{1,2}-/, '').replace(/\.md$/, ''));
   const body = normalizeBody(parsed.content);
+  const draft = parsed.data.published === false;
   const frontmatter = {
     title,
     description: parsed.data.description ?? descriptionFromBody(body),
     date,
     tags: Array.isArray(parsed.data.tags) ? parsed.data.tags.map(String) : [],
-    legacyUrl: `/${legacySlug}/`,
+    ...(draft ? {} : { legacyUrl: `/${legacySlug}/` }),
     featured: featuredTitles.has(title),
-    draft: parsed.data.published === false
+    draft
   };
   if (parsed.data['featured-image']) {
     const heroImage = await resolveHeroImage(parsed.data['featured-image']);

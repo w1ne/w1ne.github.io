@@ -140,3 +140,27 @@ img {
   padding: 0;
   background: transparent;
 }
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  border-left: 3px solid var(--border);
+  padding-left: 16px;
+  color: var(--muted);
+}
+
+.prose iframe {
+  max-width: 100%;
+}

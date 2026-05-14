@@ -5,7 +5,6 @@ description: >-
   STM32F373 in 100pin LQFP processor used for GPIO, analogue and resistance me
 date: '2019-06-07'
 tags: []
-legacyUrl: /unifide-approach-for-digital-ports/
 featured: false
 draft: true
 ---

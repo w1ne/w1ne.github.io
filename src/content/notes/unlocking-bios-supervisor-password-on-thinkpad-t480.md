@@ -12,7 +12,6 @@ tags:
   - bios
   - soldering
   - reverse-engineering
-legacyUrl: /t480-supervisor-password-hack/
 featured: true
 draft: true
 heroImage: /images/img/2022-12-30-T480-bios-hack/SuperviserLock.jpg
