@@ -18,7 +18,7 @@ tags:
 legacyUrl: /iot-train/
 featured: true
 draft: false
-heroImage: /images/img/2022-12-02-iot-train/feature-image-train_alt.png
+heroImage: /images/img/2022-12-02-iot-train/feature-image-train_alt-min.png
 ---
 Pablo is a middle-aged train driver, with a round face, brown like the dirt of the freight car eyes, and an evergreen smile. Pablo lives in Spiez, Switzerland.
 

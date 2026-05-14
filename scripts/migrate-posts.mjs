@@ -48,6 +48,34 @@ function normalizeImagePath(input) {
   return String(input).trim().replace(/\s*\/\s*/g, '/');
 }
 
+function minImagePath(imagePath) {
+  const extension = path.extname(imagePath);
+  const base = imagePath.slice(0, -extension.length);
+  return `${base}-min${extension}`;
+}
+
+async function fileExists(filePath) {
+  try {
+    const stats = await fs.stat(filePath);
+    return stats.isFile();
+  } catch (error) {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  }
+}
+
+async function resolveHeroImage(input) {
+  const imagePath = normalizeImagePath(input);
+  const candidates = [imagePath, minImagePath(imagePath)];
+
+  for (const candidate of candidates) {
+    const publicPath = `/images/img/${candidate}`;
+    if (await fileExists(path.join(root, publicPath))) return publicPath;
+  }
+
+  return undefined;
+}
+
 function descriptionFromBody(body) {
   const plain = body
     .replace(/```[\s\S]*?```/g, '')
@@ -114,7 +142,8 @@ for (const file of files) {
     draft: parsed.data.published === false
   };
   if (parsed.data['featured-image']) {
-    frontmatter.heroImage = `/images/img/${normalizeImagePath(parsed.data['featured-image'])}`;
+    const heroImage = await resolveHeroImage(parsed.data['featured-image']);
+    if (heroImage) frontmatter.heroImage = heroImage;
   }
 
   const content = body.trim();
