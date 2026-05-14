@@ -10,7 +10,9 @@ const { note } = Astro.props;
 ---
 
 <article class="note-card card">
-  <p class="meta">{formatDate(note.data.date)}</p>
+  <p class="meta">
+    <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+  </p>
   <h2><a href={`/notes/${note.slug}/`}>{note.data.title}</a></h2>
   {note.data.description && <p>{note.data.description}</p>}
   {note.data.tags.length > 0 && (
