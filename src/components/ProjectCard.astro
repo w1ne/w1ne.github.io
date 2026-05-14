@@ -12,9 +12,9 @@ const { project } = Astro.props;
   <p class="meta">{project.data.status}</p>
   <h2><a href={`/projects/${project.slug}/`}>{project.data.name}</a></h2>
   <p>{project.data.summary}</p>
-  {project.data.topics.length > 0 && (
-    <ul aria-label="Topics">
-      {project.data.topics.map((topic) => <li>{topic}</li>)}
+  {project.data.proofPoints.length > 0 && (
+    <ul aria-label="Proof points">
+      {project.data.proofPoints.slice(0, 2).map((point) => <li>{point}</li>)}
     </ul>
   )}
 </article>

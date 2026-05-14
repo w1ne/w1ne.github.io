@@ -15,11 +15,10 @@ const { project } = Astro.props;
     <h1>{project.data.name}</h1>
     <p class="lede">{project.data.summary}</p>
 
-    {project.data.repoUrl && (
-      <p class="actions">
-        <a class="button" href={project.data.repoUrl}>View repository</a>
-      </p>
-    )}
+    <p class="actions">
+      {project.data.repoUrl && <a class="button" href={project.data.repoUrl}>View repository</a>}
+      <a class="button secondary" href="/projects/">All projects</a>
+    </p>
 
     {project.data.topics.length > 0 && (
       <div class="topics" aria-label="Topics">
