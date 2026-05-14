@@ -6,9 +6,13 @@ interface Props {
 ---
 
 <nav class="tag-filter" aria-label="Filter notes by tag">
-  <a class={!Astro.props.activeTag ? 'active' : ''} href="/notes/">All</a>
+  <a class={!Astro.props.activeTag ? 'active' : ''} href="/notes/" aria-current={!Astro.props.activeTag ? 'page' : undefined}>All</a>
   {Astro.props.tags.map((tag) => (
-    <a class={Astro.props.activeTag === tag ? 'active' : ''} href={`/notes/?tag=${encodeURIComponent(tag)}`}>
+    <a
+      class={Astro.props.activeTag === tag ? 'active' : ''}
+      href={`/notes/tags/${encodeURIComponent(tag)}/`}
+      aria-current={Astro.props.activeTag === tag ? 'page' : undefined}
+    >
       {tag}
     </a>
   ))}
