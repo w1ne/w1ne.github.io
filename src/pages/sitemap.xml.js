@@ -14,7 +14,6 @@ function xmlEscape(value) {
 export async function GET() {
   const notes = publishedNotes(await getCollection('notes'));
   const urls = [
-    '/',
     '/notes/',
     ...notes.map((note) => `/notes/${note.slug}/`),
     ...allTags(notes).map((tag) => tagPath(tag))
