@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not found" description="The requested page could not be found.">
+  <section class="content not-found">
+    <p class="eyebrow">404</p>
+    <h1>Page not found.</h1>
+    <p>The page may have moved during the redesign. Start from the notes archive or projects index.</p>
+    <p>
+      <a class="button" href="/notes/">Browse notes</a>
+      <a class="button secondary" href="/projects/">View projects</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: 72px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
+  }
+
+  p {
+    color: var(--muted);
+  }
+
+  p:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

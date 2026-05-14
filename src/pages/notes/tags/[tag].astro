@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoteCard from '../../../components/NoteCard.astro';
+import TagFilter from '../../../components/TagFilter.astro';
+import { allTags, notesByTag } from '../../../lib/notes';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return allTags(notes).map((tag) => ({
+    params: { tag },
+    props: { tag }
+  }));
+}
+
+const notes = await getCollection('notes');
+const tags = allTags(notes);
+const activeTag = Astro.props.tag ?? decodeURIComponent(Astro.params.tag ?? '');
+const visibleNotes = notesByTag(notes, activeTag);
+---
+
+<BaseLayout title={`Notes tagged ${activeTag}`} description={`Engineering notes tagged ${activeTag}.`}>
+  <section class="content notes-head">
+    <p class="eyebrow">Engineering Notes</p>
+    <h1>Notes tagged {activeTag}.</h1>
+    <p>Embedded systems, IoT architecture, firmware validation, productization, and hard-won lessons from real work.</p>
+    <TagFilter tags={tags} activeTag={activeTag} />
+  </section>
+  <section class="container grid two notes-list" aria-label={`Notes tagged ${activeTag}`}>
+    {visibleNotes.map((note) => <NoteCard note={note} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .notes-head {
+    padding-block: 56px 20px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .notes-head p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  .notes-list {
+    padding-block: 12px 32px;
+  }
+</style>

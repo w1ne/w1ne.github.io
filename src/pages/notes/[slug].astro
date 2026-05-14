@@ -1,0 +1,76 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/notes';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((note) => ({ params: { slug: note.slug }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+---
+
+<BaseLayout title={note.data.title} description={note.data.description}>
+  <article class="content article">
+    <p class="eyebrow">{formatDate(note.data.date)}</p>
+    <h1>{note.data.title}</h1>
+    {note.data.description && <p class="lede">{note.data.description}</p>}
+    {note.data.heroImage && <img class="hero-image" src={note.data.heroImage} alt="" />}
+    {note.data.tags.length > 0 && (
+      <div class="meta-tags" aria-label="Tags">
+        {note.data.tags.map((tag) => <a href={`/notes/tags/${encodeURIComponent(tag)}/`}>{tag}</a>)}
+      </div>
+    )}
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    padding-block: 56px 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .lede {
+    margin: 18px 0 24px;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  .hero-image {
+    margin: 16px 0 22px;
+    border-radius: 8px;
+  }
+
+  .meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .meta-tags a {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 9px;
+    color: var(--muted);
+    font-size: 0.86rem;
+    text-decoration: none;
+  }
+
+  :global(.youtube-embed) {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 8px;
+  }
+</style>
