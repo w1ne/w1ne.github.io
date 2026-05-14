@@ -1,0 +1,49 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; {new Date().getFullYear()} {site.name}</p>
+    <nav aria-label="Footer links">
+      {site.socials.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 72px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 28px;
+  }
+
+  .footer-inner p {
+    margin: 0;
+  }
+
+  nav {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner {
+      flex-direction: column;
+    }
+  }
+</style>
