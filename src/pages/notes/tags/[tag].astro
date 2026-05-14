@@ -8,14 +8,14 @@ import { allTags, notesByTag } from '../../../lib/notes';
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
   return allTags(notes).map((tag) => ({
-    params: { tag },
+    params: { tag: encodeURIComponent(tag) },
     props: { tag }
   }));
 }
 
 const notes = await getCollection('notes');
 const tags = allTags(notes);
-const activeTag = Astro.props.tag ?? decodeURIComponent(Astro.params.tag ?? '');
+const activeTag = Astro.props.tag;
 const visibleNotes = notesByTag(notes, activeTag);
 ---
 

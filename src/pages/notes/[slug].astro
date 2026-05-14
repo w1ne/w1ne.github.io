@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatDate } from '../../lib/notes';
+import { formatDate, tagPath } from '../../lib/notes';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
@@ -14,13 +14,13 @@ const { Content } = await render(note);
 
 <BaseLayout title={note.data.title} description={note.data.description}>
   <article class="content article">
-    <p class="eyebrow">{formatDate(note.data.date)}</p>
+    <p class="eyebrow"><time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time></p>
     <h1>{note.data.title}</h1>
     {note.data.description && <p class="lede">{note.data.description}</p>}
     {note.data.heroImage && <img class="hero-image" src={note.data.heroImage} alt="" />}
     {note.data.tags.length > 0 && (
       <div class="meta-tags" aria-label="Tags">
-        {note.data.tags.map((tag) => <a href={`/notes/tags/${encodeURIComponent(tag)}/`}>{tag}</a>)}
+        {note.data.tags.map((tag) => <a href={tagPath(tag)}>{tag}</a>)}
       </div>
     )}
     <div class="prose">

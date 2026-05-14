@@ -25,6 +25,10 @@ export function notesByTag(notes: Note[], tag: string): Note[] {
   return sortNotes(publishedNotes(notes).filter((note) => note.data.tags.includes(tag)));
 }
 
+export function tagPath(tag: string): string {
+  return `/notes/tags/${encodeURIComponent(tag)}/`;
+}
+
 export function formatDate(date: Date): string {
   return new Intl.DateTimeFormat('en', {
     year: 'numeric',

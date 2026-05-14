@@ -1,6 +1,6 @@
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
-import { allTags, publishedNotes } from '../lib/notes';
+import { allTags, publishedNotes, tagPath } from '../lib/notes';
 
 function xmlEscape(value) {
   return value
@@ -13,15 +13,11 @@ function xmlEscape(value) {
 
 export async function GET() {
   const notes = publishedNotes(await getCollection('notes'));
-  const projects = await getCollection('projects').catch(() => []);
   const urls = [
     '/',
     '/notes/',
-    '/projects/',
-    '/about/',
     ...notes.map((note) => `/notes/${note.slug}/`),
-    ...allTags(notes).map((tag) => `/notes/tags/${encodeURIComponent(tag)}/`),
-    ...projects.map((project) => `/projects/${project.slug}/`)
+    ...allTags(notes).map((tag) => tagPath(tag))
   ];
 
   return new Response(
