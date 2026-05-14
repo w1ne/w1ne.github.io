@@ -15,10 +15,12 @@ export async function GET() {
   const notes = publishedNotes(await getCollection('notes'));
   const projects = await getCollection('projects');
   const urls = [
+    '/',
     '/notes/',
     ...notes.map((note) => `/notes/${note.slug}/`),
     '/projects/',
-    ...projects.map((project) => `/projects/${project.slug}/`)
+    ...projects.map((project) => `/projects/${project.slug}/`),
+    '/about/'
   ];
 
   return new Response(

@@ -7,8 +7,10 @@ export const site = {
   email: 'andrii@shylenko.com',
   avatar: '/images/logoAS_blue_white.png',
   nav: [
+    { href: '/', label: 'Home' },
     { href: '/notes/', label: 'Notes' },
-    { href: '/projects/', label: 'Projects' }
+    { href: '/projects/', label: 'Projects' },
+    { href: '/about/', label: 'About' }
   ],
   socials: [
     { href: 'https://github.com/w1ne', label: 'GitHub' },
