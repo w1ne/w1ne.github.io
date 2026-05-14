@@ -6,7 +6,10 @@ export const site = {
   url: 'https://shylenko.com',
   email: 'andrii@shylenko.com',
   avatar: '/images/logoAS_blue_white.png',
-  nav: [{ href: '/notes/', label: 'Notes' }],
+  nav: [
+    { href: '/notes/', label: 'Notes' },
+    { href: '/projects/', label: 'Projects' }
+  ],
   socials: [
     { href: 'https://github.com/w1ne', label: 'GitHub' },
     { href: 'https://www.linkedin.com/in/andrewshylenko/', label: 'LinkedIn' },

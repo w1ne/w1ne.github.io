@@ -13,9 +13,12 @@ function xmlEscape(value) {
 
 export async function GET() {
   const notes = publishedNotes(await getCollection('notes'));
+  const projects = await getCollection('projects');
   const urls = [
     '/notes/',
-    ...notes.map((note) => `/notes/${note.slug}/`)
+    ...notes.map((note) => `/notes/${note.slug}/`),
+    '/projects/',
+    ...projects.map((project) => `/projects/${project.slug}/`)
   ];
 
   return new Response(
