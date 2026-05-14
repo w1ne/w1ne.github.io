@@ -1,0 +1,63 @@
+---
+import type { Note } from '../lib/notes';
+import { formatDate } from '../lib/notes';
+
+interface Props {
+  note: Note;
+}
+
+const { note } = Astro.props;
+---
+
+<article class="note-card card">
+  <p class="meta">{formatDate(note.data.date)}</p>
+  <h2><a href={`/notes/${note.slug}/`}>{note.data.title}</a></h2>
+  {note.data.description && <p>{note.data.description}</p>}
+  {note.data.tags.length > 0 && (
+    <ul aria-label="Tags">
+      {note.data.tags.slice(0, 4).map((tag) => <li>{tag}</li>)}
+    </ul>
+  )}
+</article>
+
+<style>
+  .note-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .note-card > * {
+    margin: 0;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  h2 a {
+    color: var(--text);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+</style>

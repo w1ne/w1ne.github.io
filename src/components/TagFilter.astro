@@ -1,0 +1,39 @@
+---
+interface Props {
+  tags: string[];
+  activeTag?: string;
+}
+---
+
+<nav class="tag-filter" aria-label="Filter notes by tag">
+  <a class={!Astro.props.activeTag ? 'active' : ''} href="/notes/">All</a>
+  {Astro.props.tags.map((tag) => (
+    <a class={Astro.props.activeTag === tag ? 'active' : ''} href={`/notes/?tag=${encodeURIComponent(tag)}`}>
+      {tag}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0;
+  }
+
+  a {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  a.active,
+  a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+</style>
