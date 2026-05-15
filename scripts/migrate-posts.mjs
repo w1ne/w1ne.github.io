@@ -89,6 +89,14 @@ function descriptionFromBody(body) {
   return plain.slice(0, 155).trimEnd();
 }
 
+function isNearEmptyBody(body) {
+  return body
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/\{[%{][\s\S]*?[%}]\}/g, '')
+    .replace(/[#>*_`~-]/g, '')
+    .trim().length === 0;
+}
+
 function normalizeBody(body) {
   return body
     .replace(/\.png""/g, '.png"')
@@ -132,7 +140,7 @@ for (const file of files) {
   const slug = slugify(title);
   const legacySlug = slugify(fileName.replace(/^\d{4}-\d{1,2}-\d{1,2}-/, '').replace(/\.md$/, ''));
   const body = normalizeBody(parsed.content);
-  const draft = parsed.data.published === false;
+  const draft = parsed.data.published === false || isNearEmptyBody(parsed.content);
   const frontmatter = {
     title,
     description: parsed.data.description ?? descriptionFromBody(body),
