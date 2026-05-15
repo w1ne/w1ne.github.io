@@ -3,14 +3,24 @@ import { getCollection, render } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+  const [projects, notes] = await Promise.all([getCollection('projects'), getCollection('notes')]);
+  const notesBySlug = new Map(notes.map((note) => [note.slug, note]));
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      featuredNotes: project.data.featuredNotes
+        .map((slug) => notesBySlug.get(slug))
+        .filter((note) => note !== undefined)
+    }
+  }));
 }
 
-const { project } = Astro.props;
+const { project, featuredNotes } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<ProjectLayout project={project}>
+<ProjectLayout project={project} featuredNotes={featuredNotes}>
   <Content />
 </ProjectLayout>

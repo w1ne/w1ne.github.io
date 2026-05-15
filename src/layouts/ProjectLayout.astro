@@ -4,9 +4,10 @@ import BaseLayout from './BaseLayout.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  featuredNotes?: CollectionEntry<'notes'>[];
 }
 
-const { project } = Astro.props;
+const { project, featuredNotes = [] } = Astro.props;
 ---
 
 <BaseLayout title={project.data.name} description={project.data.summary}>
@@ -38,6 +39,24 @@ const { project } = Astro.props;
     <div class="prose">
       <slot />
     </div>
+
+    {featuredNotes.length > 0 && (
+      <section aria-labelledby="project-notes">
+        <h2 id="project-notes">Existing articles</h2>
+        <div class="note-links">
+          {featuredNotes.map((note) => (
+            <a class="note-link" href={`/notes/${note.slug}/`}>
+              <span>{note.data.title}</span>
+              <time datetime={note.data.date.toISOString()}>{note.data.date.toLocaleDateString('en', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              })}</time>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </article>
 </BaseLayout>
 
@@ -86,5 +105,36 @@ const { project } = Astro.props;
   .proof-points {
     margin: 0 0 30px;
     padding-left: 1.2em;
+  }
+
+  .note-links {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .note-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-block: 1px solid var(--border);
+    padding: 12px 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .note-link time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 560px) {
+    .note-link {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
   }
 </style>

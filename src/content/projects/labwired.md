@@ -1,18 +1,31 @@
 ---
 name: Labwired
-summary: Deterministic firmware simulation for AI agents, CI, and VS Code-assisted debugging.
+summary: Deterministic firmware simulation for Cortex-M and RISC-V targets, built for CI, local debugging, and AI-assisted firmware work.
 status: Open-source project
+repoUrl: https://github.com/w1ne/labwired-core
 topics:
   - firmware simulation
-  - AI agents
+  - Cortex-M
+  - RISC-V
   - CI
-featuredNotes: []
+  - AI agents
+proofPoints:
+  - Boots ELF firmware on virtual ARM Cortex-M or RISC-V targets.
+  - Runs headless in CI and produces reproducible traces.
+  - Exposes standard GDB and Debug Adapter Protocol workflows.
+featuredNotes:
+  - labwired-core
 ---
 
 ## What it is
 
-LabWired is a deterministic hardware simulation platform for firmware work. It is built around local simulation, machine-readable CI artifacts, and VS Code-assisted debugging.
+LabWired Core is a Rust execution engine for deterministic firmware simulation. It boots an ELF on a virtual target, drives peripherals from YAML, and makes firmware behavior reproducible without a physical board attached.
 
 ## Why it matters
 
-The project gives AI agents and engineers a repeatable way to observe firmware behavior without depending on physical hardware for every check.
+Hardware-dependent firmware work is hard to put in CI and hard for AI tools to inspect. LabWired gives both engineers and agents a repeatable execution environment with traces, reports, and debugger access.
+
+## Links
+
+- [Website and docs](https://labwired.com)
+- [Repository](https://github.com/w1ne/labwired-core)

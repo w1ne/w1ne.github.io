@@ -5,11 +5,25 @@ import { formatDate, tagPath } from '../../lib/notes';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
-  return notes.map((note) => ({ params: { slug: note.slug }, props: { note } }));
+  return notes.map((note) => {
+    const relatedNotes = notes
+      .filter((candidate) => candidate.slug !== note.slug)
+      .map((candidate) => ({
+        note: candidate,
+        score: candidate.data.tags.filter((tag) => note.data.tags.includes(tag)).length
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score || b.note.data.date.getTime() - a.note.data.date.getTime())
+      .slice(0, 3)
+      .map(({ note }) => note);
+
+    return { params: { slug: note.slug }, props: { note, relatedNotes } };
+  });
 }
 
-const { note } = Astro.props;
-const { Content } = await render(note);
+const { note, relatedNotes } = Astro.props;
+const { Content, headings } = await render(note);
+const contents = headings.filter((heading) => heading.depth < 4);
 ---
 
 <BaseLayout title={note.data.title} description={note.data.description}>
@@ -23,9 +37,34 @@ const { Content } = await render(note);
         {note.data.tags.map((tag) => <a href={tagPath(tag)}>{tag}</a>)}
       </div>
     )}
+    {contents.length > 0 && (
+      <nav class="contents" aria-labelledby="contents-title">
+        <h2 id="contents-title">Contents</h2>
+        <ol>
+          {contents.map((heading) => (
+            <li class={`depth-${heading.depth}`}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
     <div class="prose">
       <Content />
     </div>
+    {relatedNotes.length > 0 && (
+      <section class="related" aria-labelledby="related-title">
+        <h2 id="related-title">Related articles</h2>
+        <div class="related-list">
+          {relatedNotes.map((related) => (
+            <a class="related-link" href={`/notes/${related.slug}/`}>
+              <span>{related.data.title}</span>
+              <time datetime={related.data.date.toISOString()}>{formatDate(related.data.date)}</time>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </article>
 </BaseLayout>
 
@@ -65,6 +104,80 @@ const { Content } = await render(note);
     color: var(--muted);
     font-size: 0.86rem;
     text-decoration: none;
+  }
+
+  .contents {
+    border-block: 1px solid var(--border);
+    margin: 28px 0 34px;
+    padding: 18px 0;
+  }
+
+  .contents h2,
+  .related h2 {
+    margin: 0 0 12px;
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .contents ol {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding-left: 1.25em;
+  }
+
+  .contents li.depth-3 {
+    margin-left: 18px;
+  }
+
+  .contents li.depth-2 {
+    margin-left: 10px;
+  }
+
+  .contents a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .contents a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .related {
+    border-top: 1px solid var(--border);
+    margin-top: 44px;
+    padding-top: 22px;
+  }
+
+  .related-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .related-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .related-link time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 560px) {
+    .related-link {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
   }
 
   :global(.youtube-embed) {

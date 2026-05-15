@@ -12,8 +12,11 @@ import { site } from '../data/site';
       <nav aria-label="Main navigation">
         {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
+      <a class="search-link" href="/search/" aria-label="Search" title="Search">
+        <span aria-hidden="true"></span>
+      </a>
       <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <span aria-hidden="true">Aa</span>
+        <span class="theme-bulb" aria-hidden="true"></span>
       </button>
     </div>
   </div>
@@ -99,15 +102,81 @@ import { site } from '../data/site';
     border-radius: 6px;
     background: var(--surface);
     color: var(--text);
-    font: inherit;
-    font-size: 0.9rem;
-    font-weight: 800;
-    line-height: 1;
     cursor: pointer;
+  }
+
+  .search-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 44px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .search-link:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .search-link span {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+  }
+
+  .search-link span::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    width: 8px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transform: rotate(45deg);
+    transform-origin: center;
   }
 
   .theme-toggle:hover {
     border-color: var(--accent);
+  }
+
+  .theme-bulb {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 22px;
+  }
+
+  .theme-bulb::before {
+    content: "";
+    position: absolute;
+    inset: 1px 3px 7px;
+    border: 2px solid currentColor;
+    border-radius: 999px 999px 7px 7px;
+  }
+
+  .theme-bulb::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    bottom: 1px;
+    width: 6px;
+    height: 7px;
+    border-top: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+  }
+
+  :global(html[data-theme='dark']) .theme-bulb::before {
+    background: currentColor;
   }
 
   @media (max-width: 560px) {
