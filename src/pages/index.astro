@@ -25,22 +25,13 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
   </section>
 
   <section class="container section-block">
-    <div class="section-head">
-      <p class="eyebrow">Projects</p>
-      <h2>My projects.</h2>
-      <a href="/projects/">All projects</a>
-    </div>
     <div class="grid two">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
+    <p class="section-tail"><a href="/projects/">All projects &rarr;</a></p>
   </section>
 
   <section class="container section-block">
-    <div class="section-head">
-      <p class="eyebrow">Notes</p>
-      <h2>Writing.</h2>
-      <a href="/notes/">All notes</a>
-    </div>
     <ul class="note-list">
       {recentNotes.map((note) => (
         <li>
@@ -49,6 +40,7 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
         </li>
       ))}
     </ul>
+    <p class="section-tail"><a href="/notes/">All notes &rarr;</a></p>
   </section>
 
   <section class="container contact-band">
@@ -97,17 +89,19 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
     padding-block: 36px;
   }
 
-  .section-head {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 18px;
+  .section-tail {
+    margin: 18px 0 0;
+    text-align: right;
   }
 
-  .section-head h2 {
-    margin: 0;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  .section-tail a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .section-tail a:hover {
+    color: var(--accent);
   }
 
   .note-list {
@@ -171,7 +165,6 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
   }
 
   @media (max-width: 700px) {
-    .section-head,
     .contact-band {
       align-items: flex-start;
       flex-direction: column;
