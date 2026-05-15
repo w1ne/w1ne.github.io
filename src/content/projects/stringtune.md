@@ -1,5 +1,5 @@
 ---
-name: String instrument tuner
+name: Stringtune
 summary: Browser-based tuner for string instruments.
 status: Old-site project
 repoUrl: https://stringtune.com
