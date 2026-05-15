@@ -3,8 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { site } from '../data/site';
+import { sortNotes, publishedNotes, formatDate } from '../lib/notes';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slice(0, 6);
 ---
 
 <BaseLayout>
@@ -31,6 +33,22 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.name.lo
     <div class="grid two">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
+  </section>
+
+  <section class="container section-block">
+    <div class="section-head">
+      <p class="eyebrow">Notes</p>
+      <h2>Writing.</h2>
+      <a href="/notes/">All notes</a>
+    </div>
+    <ul class="note-list">
+      {recentNotes.map((note) => (
+        <li>
+          <a href={`/notes/${note.slug}/`}>{note.data.title}</a>
+          <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <section class="container contact-band">
@@ -90,6 +108,49 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.name.lo
   .section-head h2 {
     margin: 0;
     font-size: clamp(1.8rem, 4vw, 2.6rem);
+  }
+
+  .note-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .note-list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+
+  .note-list a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .note-list a:hover {
+    color: var(--accent);
+  }
+
+  .note-list time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 560px) {
+    .note-list li {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
   }
 
   .contact-band {

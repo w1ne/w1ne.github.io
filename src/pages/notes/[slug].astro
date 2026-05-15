@@ -6,16 +6,19 @@ import { formatDate, tagPath } from '../../lib/notes';
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
   return notes.map((note) => {
-    const relatedNotes = notes
-      .filter((candidate) => candidate.slug !== note.slug)
+    const others = notes.filter((candidate) => candidate.slug !== note.slug);
+    const tagged = others
       .map((candidate) => ({
         note: candidate,
         score: candidate.data.tags.filter((tag) => note.data.tags.includes(tag)).length
       }))
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score || b.note.data.date.getTime() - a.note.data.date.getTime())
-      .slice(0, 3)
       .map(({ note }) => note);
+
+    const recent = [...others].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+    const seen = new Set(tagged.map((n) => n.slug));
+    const relatedNotes = [...tagged, ...recent.filter((n) => !seen.has(n.slug))].slice(0, 3);
 
     return { params: { slug: note.slug }, props: { note, relatedNotes } };
   });

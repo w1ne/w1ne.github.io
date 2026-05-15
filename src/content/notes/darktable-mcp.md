@@ -11,46 +11,64 @@ legacyUrl: https://n1n3.net/2026/04/25/darktable-mcp.html
 featured: true
 draft: false
 ---
-I shoot a lot of RAW and darktable is my editor of choice. The problem is the workflow. After a long shoot, there are hundreds of files to triage, rate, adjust, and export.
 
-That is the kind of repetitive task I would rather describe in a sentence than click through one by one. So I built darktable-mcp, a Model Context Protocol server that lets Claude or any MCP-compatible assistant drive my darktable library directly.
+I shoot a lot of RAW and darktable is my editor of choice. The problem is the workflow. After a long shoot, I have hundreds of files to triage, rate the keepers, fix the underexposed ones, push the rest into export folders. It is the kind of repetitive task that I'd rather describe in a sentence than click through one by one.
 
-> Source code: [github.com/w1ne/darktable-mcp](https://github.com/w1ne/darktable-mcp)
+So I built **darktable-mcp**, a Model Context Protocol server that lets Claude (or any MCP-compatible assistant) drive my darktable library directly.
 
-# What it does
+> **Source Code**: [github.com/w1ne/darktable-mcp](https://github.com/w1ne/darktable-mcp)
+
+# What It Does
 
 The server exposes a small, opinionated set of tools to the LLM:
 
-- `view_photos`: browse the library with rating and tag filters.
-- `rate_photos`: apply 1-5 star ratings, single shot or in batch.
-- `import_batch`: pull files from a directory, optionally recursive.
-- `adjust_exposure`: bump exposure in EV stops.
-- `apply_preset`: apply named editing presets.
-- `export_images`: export to JPEG, PNG, or TIFF.
+*   `view_photos`: browse the library with rating and tag filters.
+*   `rate_photos`: apply 1–5 star ratings, single shot or in batch.
+*   `import_batch`: pull files from a directory, optionally recursive.
+*   `adjust_exposure`: bump exposure in EV stops (-5.0 to +5.0).
+*   `apply_preset`: apply named editing presets.
+*   `export_images`: export to JPEG, PNG, or TIFF at a chosen quality.
 
 The interaction looks like this:
 
-> Claude, rate my landscape photos from last week 4 stars.
+> "Claude, rate my landscape photos from last week 4 stars."
 
-> Adjust exposure +0.5 on all underexposed sunset photos.
+> "Adjust exposure +0.5 on all underexposed sunset photos."
 
-> Import everything from `/media/sdcard` and organize by date.
+> "Import everything from /media/sdcard and organize by date."
 
-# Design decisions
+# Design Decisions
 
-## Use the official Lua API
+## 1. Use the Official Lua API
 
-There are plenty of ways to poke at darktable's SQLite library directly. None of them are safe. darktable-mcp integrates through darktable's own scripting layer, the same one users already script with.
+There are plenty of ways to poke at darktable's SQLite library directly. None of them are safe. `darktable-mcp` integrates through darktable's own scripting layer, the same one users already script their own automations with. If darktable's developers say a thing is allowed, the MCP server can do it. Anything else is out of scope.
 
-If darktable's developers say a thing is allowed, the MCP server can do it. Anything else is out of scope.
+## 2. Strict Tool Schemas
 
-## Strict tool schemas
+Every tool is declared with a JSON Schema (rating bounds 1–5, exposure clamped to ±5 EV, format restricted to a known enum). The LLM cannot invent a 9-star rating or an exotic export format. The schema is the contract.
 
-Every tool is declared with a JSON Schema. Rating bounds, exposure limits, and export formats are explicit. The model cannot invent a 9-star rating or an unsupported image format. The schema is the contract.
+```python
+Tool(
+    name="adjust_exposure",
+    description="Adjust exposure settings for photos",
+    inputSchema={
+        "type": "object",
+        "properties": {
+            "exposure_ev": {
+                "type": "number",
+                "minimum": -5.0,
+                "maximum": 5.0,
+            },
+            # ...
+        },
+        "required": ["exposure_ev"],
+    },
+)
+```
 
-## Stdio transport
+## 3. Stdio Transport
 
-The server runs over stdio, which is what Claude Desktop expects. There is no HTTP server, auth setup, or port conflict.
+The server runs over stdio, which is what Claude Desktop expects. No HTTP, no auth headache, no port conflicts. Add it to `~/.claude_desktop_config.json` and it shows up the next time the client starts:
 
 ```json
 {
@@ -65,6 +83,8 @@ The server runs over stdio, which is what Claude Desktop expects. There is no HT
 
 # Why MCP
 
-Most photo-editing automation tools are either scripting languages few people want to learn or cloud services that upload your photos. MCP gives you a third option: your assistant talks to local tools, and your photos stay on your machine.
+Most photo-editing automation tools live in one of two boxes, either a clunky scripting language nobody wants to learn, or a SaaS that uploads your shots to the cloud. MCP gives you a third option, your assistant talks to your local tools, your photos never leave the machine.
 
-That is why the surface is intentionally small. Six well-typed, predictable tools beat sixty half-broken ones.
+This is also why I am keeping the surface small on purpose. Six tools that are well typed and predictable beat sixty that are half-broken.
+
+If you shoot RAW, run darktable on Linux, and want to script your culling workflow with an LLM, `pip install darktable-mcp`, point your MCP client at it, and let me know what tool you reach for next at andrii@shylenko.com.

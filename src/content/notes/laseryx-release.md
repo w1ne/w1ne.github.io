@@ -11,30 +11,33 @@ legacyUrl: https://n1n3.net/2026/01/23/laseryx-release.html
 featured: true
 draft: false
 ---
-I love my laser cutter, but I hated the software ecosystem around it.
 
-Most laser software is either expensive, locked to Windows, or awkward on Linux. I wanted something that works without Wine, virtual machines, or extra native software. So I decided to build Laseryx.
+II love my laser cutter, but I honestly hated the software ecosystem that came with it.
 
-# The concept
+Most laser software available today is either prohibitively expensive, locked exclusively to Windows. As a Linux user, I just wanted something that "just works", without Wine, no virtual machines, and no hassle.
 
-Laseryx is a Progressive Web App that runs in the browser. It uses the Web Serial API, which allows Chrome or Edge to talk directly to a machine over USB.
+So I decided to build **Laseryx**.
 
-That means you can connect to a GRBL laser cutter without installing a native control application. It works across Linux, macOS, Windows, Chromebooks, and potentially Android tablets.
+### The Concept
 
-# A unified workflow
+Laseryx is a Progressive Web App (PWA) that runs entirely in your browser(e.g. Chrome). It leverages the Web Serial API, which allows Chrome or Edge to talk directly to your machine’s USB port. This means you can connect to your GRBL laser cutter without installing a single piece of native software. It works across Linux, Mac, Windows, Chromebooks, and potentially even Android tablets.
 
-The goal was a universal workflow. Usually you need one program for design, another for CAM settings, and often a third to stream G-code.
+### A Unified Workflow
 
-Laseryx combines that into a single browser tab. You can handle vector design, import images, define cutting parameters, generate G-code, and stream it directly to the machine with live progress.
+My main goal was to have universal. Typically, you need one program for design (like Inkscape), another for CAM settings (like LightBurn), and often a third just to stream the G-code.
 
-# Privacy and performance
+Laseryx comined this into a single browser tab. You can handle vector design, import images, and define your cutting parameters all in one place. When you are setting power and speed for a vector cut or preparing a raster image, the app generates the G-code and streams it directly to your machine with real-time progress.
 
-Laseryx processes designs locally on your computer. Your files do not leave the device, and once the app is loaded, you do not need an internet connection to keep cutting.
+### Privacy and Performance
 
-Under the hood, the project uses a custom G-code engine in TypeScript running in a Web Worker. It handles vector travel moves and dithering for image scanning. The UI is built with React and Vite, with RxJS managing the data stream between the browser and the laser.
+Despite being web-based, privacy is a priority. Laseryx processes everything locally on your computer. Your designs never leave your device, and once the app is loaded, you don't even need an internet connection to keep cutting.
 
-# Open source
+Under the hood, I wrote a custom G-code engine in TypeScript that runs in a Web Worker to ensure the interface stays responsive. It handles travel moves for vectors and manages dithering for image scanning. The UI itself is built with React and Vite for speed, using RxJS to manage data stream between your browser and the laser.
 
-The project is licensed under CC BY-NC-SA 4.0.
+### Open Source
 
-Check out the live app at [laseryx.com](https://laseryx.com) or explore the code on [GitHub](https://github.com/w1ne/Laseryx).
+The project is licensed under **CC BY-NC-SA 4.0**, so you are welcome to view the source code, modify it, and learn from it. As well as reques new features.
+
+If you have a GRBL-based laser cutter (like many of the common diode lasers), I’d love for you to give it a try.
+
+**Check out the live app at [laseryx.com](https://laseryx.com) or explore the code on [GitHub](https://github.com/w1ne/Laseryx).**

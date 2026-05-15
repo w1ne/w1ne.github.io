@@ -11,19 +11,20 @@ legacyUrl: https://n1n3.net/2026/02/05/iolinki.html
 featured: true
 draft: false
 ---
-I developed IO-Link devices when I was working at [ifm](https://www.ifm.com). I still remember crafting IODDs by hand, and I wondered how hard it would be to build a stack for it myself.
 
-The industrial automation world is standardizing on IO-Link, IEC 61131-9. There were no open-source, full-featured IO-Link stacks to support that work. So I built iolinki to prove that an industrial bus stack can be modern, testable, and decoupled from hardware.
+I developed IOlink devices when I was working at [IFM](https://www.ifm.com/). I still remember crafting IODDs by hand. And I was wondering how hard will it be to build a stack for it by myslef? The industrial automation world is standardizing on IO-Link (IEC 61131-9). Yet, there were no open-source full featured IO-Link stacks to support it. So here it is.
 
-> Source code: [github.com/w1ne/iolinki](https://github.com/w1ne/iolinki)
+I built **iolinki** to prove that an industrial bus stack can and SHOULD be modern, testable, and completely decoupled from hardware.
 
-# Key architecture decisions
+> **Source Code**: [github.com/w1ne/iolinki](https://github.com/w1ne/iolinki)
 
-## Hardware independence
+# Key Architecture Decisions
 
-iolinki takes a pure abstraction approach. No hardware-specific code lives in the stack.
+## 1. Hardware Independence
 
-The stack talks to hardware through `iolink_phy_api_t`, a structure of function pointers:
+`iolinki` takes an approach of **Pure Abstraction**. No hardware specific code is in the stack.
+
+The stack interacts with the hardware *solely* through a `iolink_phy_api_t` structure of function pointers.
 
 ```c
 typedef struct {
@@ -35,39 +36,46 @@ typedef struct {
 } iolink_phy_api_t;
 ```
 
-This boundary means protocol logic cannot access hardware registers. It also makes simulation practical.
+This boundary means the protocol logic (`dll.c`) cannot access hardware registers. Because of that, we can implement the best solution to fast and safe development, **Simulation**.
 
-## Test-driven development
+## 2. Test-Driven Development (TDD)
 
-iolinki was developed with a virtual PHY that pipes data to a Python-based IO-Link master simulation in `tools/virtual_master`.
+We use the PHY in Linux as an interface to communicate with the IO-Link Master.
+`iolinki` was developed using a **Virtual PHY** that pipes data to a Python-based IO-Link Master simulation (`tools/virtual_master`).
 
-That lets the project run automated conformance tests in CI without real hardware connected.
+This allows us to run **automated conformance tests** in a CI/CD pipeline (GitHub Actions) without a single piece of real hardware connected.
 
-## Conformance coverage
+### Conformance Coverage
+We validate against IO-Link V1.1.5 specification requirements.
+*   **State Machine**
+    All transitions (Startup → Preoperate → Operate).
+*   **Timing**
+    Cycle times and wake-up pulses measured to microsecond precision in simulation.
+*   **ISDU**
+    Full coverage of all 12 mandatory indices (0x0010 Vendor Name, etc.).
+*   **Error Injection**
+    We inject CRC errors and timeouts to verify the stack's recovery logic.
 
-The project validates against IO-Link V1.1.5 requirements:
+## 3. Zero dynamic memory safety
 
-- State machine transitions from Startup to Preoperate to Operate.
-- Timing, including cycle times and wake-up pulses, measured in simulation.
-- ISDU coverage for mandatory indices.
-- Error injection for CRC errors and timeouts.
+`iolinki` uses a **static memory allocation**.
+*   **No `malloc`/`free`**. All buffers are allocated at compile time.
+*   **Deterministic Execution**. The `iolink_process()` loop is designed to have a bounded execution time. This makes it safe for real-time control loops.
 
-## Zero dynamic memory
+## 4. Zephyr RTOS Integration
 
-iolinki uses static allocation:
+While the core runs bare-metal, `iolinki` can be used on Zephyr.
+*   **Logging**. Uses Zephyr's logging subsystem for transparent debugging.
+*   **Shell**. Exposes stack status and statistics via the Zephyr console.
 
-- No `malloc` or `free`.
-- Bounded execution in the `iolink_process()` loop.
+# Technical Deep Dive
 
-## Zephyr RTOS integration
+The heart of the stack is the Data Link Layer (DLL) state machine. It handles "M-Sequence" exchange.
 
-The core can run bare metal, and the project also integrates with Zephyr:
+1.  **STARTUP** The stack waits for the Wake-Up pulse (WURQ).
+2.  **PREOPERATE** The Master requests parameters (MinCycleTime, FrameCapability) at 230.4 kbaud (COM3) or lower.
+3.  **OPERATE** The stack enters the cyclic Process Data (PD) exchange.
 
-- Zephyr logging for transparent debugging.
-- Zephyr shell commands for stack status and statistics.
+This transition logic is tricky due to strict timing requirements (e.g., specific response windows). We use unit-testing for the state machine with `cmocka` to ensure that edge cases—like a Master dropping out mid-handshake—are handled correctly.
 
-# Technical deep dive
-
-The heart of the stack is the Data Link Layer state machine. It handles M-Sequence exchange through startup, preoperate, and operate phases.
-
-That transition logic is tricky because IO-Link has strict timing requirements. iolinki uses unit tests for the state machine with `cmocka` to cover edge cases such as a master dropping out mid-handshake.
+`iolinki`uses modern software engineering standards such CI/CD, TDD, and modular architecture. It provides a robust, verified foundation for building the next gen of smart sensors. And it's open source. If you want to build a sensor, find me at andrii@shylenko.com.

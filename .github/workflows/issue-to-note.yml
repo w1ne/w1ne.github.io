@@ -1,0 +1,112 @@
+name: Issue to note PR
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  create-note-pr:
+    if: contains(github.event.issue.labels.*.name, 'new-note')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Build draft note
+        id: build
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const rawTitle = process.env.ISSUE_TITLE || '';
+          const issueBody = process.env.ISSUE_BODY || '';
+          const issueNumber = process.env.ISSUE_NUMBER;
+
+          const title = rawTitle.replace(/^note:\s*/i, '').trim() || `Note ${issueNumber}`;
+
+          const slug = title
+            .toLowerCase()
+            .replace(/[''""`]/g, '')
+            .replace(/&/g, ' and ')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '') || `note-${issueNumber}`;
+
+          // Issue Forms emit sections delimited by "### <label>".
+          const sections = {};
+          let current = null;
+          for (const line of issueBody.split(/\r?\n/)) {
+            const match = line.match(/^###\s+(.+)$/);
+            if (match) { current = match[1].trim().toLowerCase(); sections[current] = []; continue; }
+            if (current) sections[current].push(line);
+          }
+          const get = (key) => (sections[key] || []).join('\n').trim();
+          const noResponse = (v) => (v && v !== '_No response_') ? v : '';
+
+          const description = noResponse(get('one-line description'));
+          const tagsRaw = noResponse(get('tags'));
+          const body = noResponse(get('body')) || issueBody.trim();
+
+          const tags = tagsRaw
+            ? tagsRaw.split(',').map((t) => t.trim()).filter(Boolean)
+            : [];
+
+          const today = new Date().toISOString().slice(0, 10);
+          const frontmatter = [
+            '---',
+            `title: ${JSON.stringify(title).slice(1, -1)}`,
+            `description: ${JSON.stringify(description).slice(1, -1)}`,
+            `date: '${today}'`,
+            'tags:',
+            ...tags.map((t) => `  - ${t}`),
+            'draft: true',
+            '---',
+            '',
+            body,
+            ''
+          ].join('\n');
+
+          const file = path.join('src', 'content', 'notes', `${slug}.md`);
+          fs.mkdirSync(path.dirname(file), { recursive: true });
+          fs.writeFileSync(file, frontmatter, 'utf8');
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `slug=${slug}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `title=${title.replace(/\n/g, ' ')}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `file=${file}\n`);
+          EOF
+
+      - name: Create branch + PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SLUG: ${{ steps.build.outputs.slug }}
+          TITLE: ${{ steps.build.outputs.title }}
+          FILE: ${{ steps.build.outputs.file }}
+        run: |
+          branch="note/${SLUG}-${ISSUE_NUMBER}"
+          git checkout -b "$branch"
+          git add "$FILE"
+          git commit -m "note: ${TITLE} (#${ISSUE_NUMBER})"
+          git push -u origin "$branch"
+          gh pr create \
+            --base master \
+            --head "$branch" \
+            --title "note: ${TITLE}" \
+            --body "Draft note from issue #${ISSUE_NUMBER}. Set \`draft: false\` and merge to publish."
+          gh issue comment "$ISSUE_NUMBER" --body "Drafted as PR on branch \`$branch\`. Set \`draft: false\` in the front-matter when ready to publish."

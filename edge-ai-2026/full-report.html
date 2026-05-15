@@ -1,0 +1,1977 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 2026 European Edge AI Report · Entropora</title>
+<meta name="description" content="A survey of Europe's edge AI stack: silicon, on-device models, robotics, automotive, industrial, defense, space. Compiled from inside a shipping product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4efe6;
+    --paper: #faf6ee;
+    --ink: #1c221d;
+    --ink-soft: #3d443e;
+    --ink-muted: #6a6f69;
+    --rule: #d8d1c2;
+    --green-deep: #2c3a2f;
+    --green: #3a4a3d;
+    --green-soft: #5c6b5f;
+    --green-pale: #e8e4d6;
+    --accent: #a0522d;
+    --red: #8b3a3a;
+    --highlight: #f0e9d5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
+  a { color: var(--green); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .15s; }
+  a:hover { color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* ====== HERO ====== */
+  .hero {
+    background: var(--green-deep);
+    color: var(--bg);
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #1a221c;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(200,190,160,.03) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(200,190,160,.04) 0, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .hero .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,.55);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6.5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.02;
+    max-width: 16ch;
+    letter-spacing: -0.025em;
+    font-variation-settings: "SOFT" 20, "opsz" 144;
+  }
+  .hero h1 .em { font-style: italic; font-weight: 400; color: #d7ccab; }
+  .hero .byline {
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: rgba(244,239,230,.7);
+    border-top: 1px solid rgba(244,239,230,.15);
+    padding-top: 2rem;
+    max-width: 720px;
+  }
+  .hero .byline dt {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,.5);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  .hero .byline dd { font-size: 15px; color: rgba(244,239,230,.9); font-weight: 400; }
+  .hero .brand {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: rgba(244,239,230,.8);
+  }
+  .hero .brand::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: rgba(244,239,230,.4);
+    vertical-align: middle;
+    margin-right: 12px;
+  }
+  .hero .dek {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-style: italic;
+    color: rgba(244,239,230,.8);
+    max-width: 640px;
+    margin-top: 2rem;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ====== NAV ====== */
+  .toc {
+    position: sticky;
+    top: 0;
+    background: rgba(244,239,230,.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+    z-index: 50;
+    padding: 0.65rem 0;
+  }
+  .toc-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    overflow: visible;
+  }
+  .toc-inner a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color .15s, border-color .15s;
+    white-space: nowrap;
+  }
+  .toc-inner a:hover { color: var(--ink); border-color: var(--green); }
+
+  /* Hide horizontal scrollbar if anything still overflows on narrow screens */
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-inner { scrollbar-width: none; -ms-overflow-style: none; }
+
+  @media (max-width: 640px) {
+    .toc { padding: 0.5rem 0; }
+    .toc-inner { font-size: 10px; gap: 0.25rem 0.85rem; letter-spacing: 0.1em; }
+  }
+
+  /* ====== GENERIC ====== */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .prose { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 6rem 0; border-bottom: 1px solid var(--rule); }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--green);
+  }
+  h2.h-section {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    max-width: 22ch;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  h2.h-section em { color: var(--green); font-style: italic; font-weight: 400; }
+  .lede {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    max-width: 32em;
+  }
+  p { margin-bottom: 1.1rem; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* ====== PULL QUOTE ====== */
+  .pullquote {
+    border-left: 2px solid var(--green);
+    padding: 0.5rem 0 0.5rem 2rem;
+    margin: 2.5rem 0;
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    line-height: 1.45;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .pullquote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  /* ====== STAT GRID ====== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    margin: 3rem 0;
+    border: 1px solid var(--rule);
+  }
+  .stat {
+    background: var(--bg);
+    padding: 1.75rem 1.5rem;
+  }
+  .stat-big {
+    font-family: 'Fraunces', serif;
+    font-size: 2.3rem;
+    line-height: 1;
+    color: var(--green-deep);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.35;
+  }
+
+  /* ====== CARDS ====== */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+  .card {
+    background: var(--bg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+  }
+  .card h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .card .meta {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .card .desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  .card .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 2px 7px;
+    margin-top: 0.75rem;
+    align-self: flex-start;
+    font-weight: 500;
+    border-radius: 2px;
+  }
+  .card .funding {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+
+  /* ====== TABLE ====== */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 14px;
+  }
+  .tbl th, .tbl td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .tbl th {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--ink-soft);
+  }
+  .tbl td { color: var(--ink-soft); }
+  .tbl td strong { color: var(--ink); font-weight: 600; }
+  .tbl .num { font-family: 'JetBrains Mono', monospace; font-size: 13px; white-space: nowrap; color: var(--green-deep); font-weight: 500; }
+  .tbl tr:hover td { background: var(--highlight); }
+
+  /* ====== CHART ====== */
+  .chart-wrap {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .chart-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .chart-sub {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .chart-footnote {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 1rem;
+    font-style: italic;
+  }
+
+  /* ====== STACK SECTIONS ====== */
+  .stack-section {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .stack-section:first-of-type { padding-top: 0; }
+  .stack-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: baseline;
+  }
+  .stack-num {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    color: var(--green);
+    font-weight: 300;
+    line-height: 1;
+    font-style: italic;
+  }
+  .stack-header h3 {
+    font-size: 2rem;
+    line-height: 1.15;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .stack-header .stack-funding {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    color: var(--green);
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 0.25rem;
+  }
+
+  /* ====== HUB MAP ====== */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0;
+    border: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+  .hub {
+    padding: 1.25rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .hub .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  .hub .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+    font-weight: 500;
+  }
+  .hub .country {
+    font-size: 11px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .hub .focus {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* ====== POV (Entropora voice) ====== */
+  .pov {
+    background: var(--green-deep);
+    color: var(--bg);
+    padding: 7rem 0;
+    border-bottom: none;
+  }
+  .pov .section-label { color: #d7ccab; }
+  .pov .section-label::before { background: #d7ccab; }
+  .pov h2.h-section { color: var(--bg); }
+  .pov h2.h-section em { color: #d7ccab; }
+  .pov p { color: rgba(244,239,230,.82); }
+  .pov p strong { color: var(--bg); }
+  .pov .lede { color: rgba(244,239,230,.7); }
+  .pov .pullquote { border-color: #d7ccab; color: var(--bg); }
+  .pov .pullquote cite { color: rgba(244,239,230,.55); }
+  .pov .sig {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(244,239,230,.18);
+  }
+  .pov .sig .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--bg);
+  }
+  .pov .sig .title {
+    font-size: 13px;
+    color: rgba(244,239,230,.6);
+    margin-top: 0.15rem;
+  }
+
+  /* ====== SOURCES ====== */
+  .sources {
+    background: var(--paper);
+    padding: 4rem 0;
+  }
+  .sources h3 { font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 400; }
+  .sources ul { list-style: none; column-count: 2; column-gap: 2.5rem; }
+  .sources li {
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+    color: var(--ink-soft);
+    break-inside: avoid;
+    line-height: 1.4;
+  }
+  .sources li a { color: var(--green); }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--green-deep);
+    color: rgba(244,239,230,.6);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 13px;
+  }
+  footer .brand-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: var(--bg);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ====== UTILS ====== */
+  .divider { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+  .note {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-style: italic;
+    border-left: 2px solid var(--rule);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+  }
+  .flag { font-size: 12px; color: var(--red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+  .dropcap::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.45rem 0.65rem 0 0;
+    color: var(--green);
+    font-weight: 400;
+  }
+
+  /* ====== RESPONSIVE SVG ====== */
+  .chart-wrap svg,
+  .container svg {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 5rem 1.5rem 3.5rem; }
+    .section { padding: 4rem 0; }
+    .container, .prose { padding: 0 1.25rem; }
+    .stack-header { grid-template-columns: 1fr; gap: 0.5rem; }
+    .sources ul { column-count: 1; }
+    .toc-inner { padding: 0 1.25rem; }
+
+    /* Charts: bump internal text so labels stay legible on 375px. */
+    .chart-wrap svg text,
+    .container svg text { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================ HERO ================ -->
+<header class="hero">
+  <div class="brand">Entropora</div>
+  <div class="hero-inner">
+    <div class="kicker">A Report · April 2026</div>
+    <h1>The 2026 European <span class="em">Edge AI</span> Report.</h1>
+    <p class="dek">Where AI runs when it doesn't run inside a hyperscaler. The European side of that question, across silicon, runtimes, robotics, autos, defence, and space. Researched in April 2026 by the team at Entropora, from inside heydict, a voice agent that ships on customer hardware.</p>
+    <dl class="byline">
+      <div><dt>Authors</dt><dd>Andrii Shylenko &amp; Lorenz Sauer</dd></div>
+      <div><dt>Publisher</dt><dd>Entropora, Inc.</dd></div>
+      <div><dt>Date</dt><dd>April 2026</dd></div>
+      <div><dt>Coverage</dt><dd>EU27 · UK · CH · NO · UA</dd></div>
+      <div><dt>Length</dt><dd>~9,000 words · ≈30 min read</dd></div>
+    </dl>
+  </div>
+</header>
+
+<!-- ================ TOC ================ -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#why">Why now</a>
+    <a href="#ingredients">Ingredients</a>
+    <a href="#numbers">The numbers</a>
+    <a href="#geography">Geography</a>
+    <a href="#stack">The stack</a>
+    <a href="#rounds">Top rounds</a>
+    <a href="#challenges">Challenges</a>
+    <a href="#pov">Notes from a product</a>
+    <a href="#methodology">Method</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<!-- ================ WHY NOW ================ -->
+<section class="section" id="why">
+  <div class="prose">
+    <div class="section-label">I · Why now</div>
+    <h2 class="h-section">Inference is leaving the <em>hyperscaler cloud</em>.</h2>
+    <p class="lede">Energy cost, GDPR exposure, and the AI Act phase-in are shifting where AI runs. Each vector bites harder in Europe than in the US.</p>
+
+    <p class="dropcap">For three years the reported story about AI has been four or five US labs paying NVIDIA to serve tokens over HTTPS. That is still happening. Underneath it, more and more inference is running on devices outside hyperscaler clouds: cars, cameras, phones, factory PLCs, drones, satellites. The economics push this hard in Europe. Eurostat puts EU27 non-household electricity at 19.0 cents per kWh in H1 2025. EIA has the US industrial average over the same period at 8.3 cents. Gartner expects data-centre demand to double by 2030 and S&amp;P Global expects European DC electricity up 70 percent over the same window. Ireland's regulator has constrained new Dublin-area data-centre connections since the CRU's November 2021 direction (CRU/21/124, superseded by CRU 2025/236); EirGrid subsequently indicated no new Dublin DC connections before 2028. The Netherlands imposed a similar temporary moratorium in the Amsterdam region. Frankfurt is tight, though without a formal refusal regime.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">The substrate economics</div>
+      <div class="chart-sub">EU27 non-household vs US industrial electricity, H1 2025 · cents per kWh, matched units</div>
+      <svg viewBox="0 0 800 230" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:12px;">
+        <text x="80" y="50" fill="#1c221d" font-family="Fraunces" font-size="15" font-weight="500">European Union (27 avg)</text>
+        <rect x="80" y="65" width="555" height="40" fill="#3a4a3d"/>
+        <text x="650" y="93" fill="#2c3a2f" font-family="Fraunces" font-size="28" font-weight="500">19.0 ¢</text>
+        <text x="80" y="145" fill="#1c221d" font-family="Fraunces" font-size="15" font-weight="500">United States (industrial)</text>
+        <rect x="80" y="160" width="240" height="40" fill="#a0522d"/>
+        <text x="335" y="188" fill="#a0522d" font-family="Fraunces" font-size="28" font-weight="500">8.3 ¢</text>
+        <text x="540" y="215" fill="#6a6f69" font-size="11" text-anchor="end">~2.3x gap · intra-EU range: Finland ~8¢ to Ireland ~27¢</text>
+      </svg>
+      <div class="chart-footnote">Sources: Eurostat nrg_pc_205 (H1 2025 non-household electricity, EU27 average); US EIA Electric Power Monthly (industrial average, 2025). Intra-EU dispersion is wide. In H1 2025 non-household aggregates, Finland had the EU low (~€0.080/kWh) and Ireland the EU high (~€0.273/kWh). Tariff definitions differ slightly between jurisdictions; band definitions vary.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Then there is the regulation, which phases in across three years. GPAI obligations applied on 2 August 2025. General applicability, including Annex III high-risk systems and Article 50 transparency, kicks in on 2 August 2026. Annex I, which covers high-risk AI inside regulated products, applies from 2 August 2027. GDPR's data-minimisation and privacy-by-design duties have been in force throughout; the EDPB's Opinion 28/2024 in November 2024 made clear that AI inference does not get a free pass. For any pipeline that touches personal data, on-device inference is the cleanest compliance path that currently exists. Regulated buyers in healthcare, legal, industrial, defence and public-sector procurement now open conversations with "the data does not leave our estate" as a stated requirement rather than a preference.</p>
+  </div>
+
+  <div class="container">
+    <div style="background:var(--green-deep); padding:2rem; margin-top:2rem;">
+      <div style="font-family:'Fraunces',serif; font-size:1.25rem; color:var(--bg); font-weight:400; margin-bottom:1rem;">AI Act phase-in, three Augusts</div>
+      <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="margin-top:40px; width:100%; height:420px; font-family:Inter,sans-serif;">
+    <!-- Main axis line -->
+    <line x1="60" y1="220" x2="860" y2="220" stroke="rgba(244,239,230,.35)" stroke-width="2"/>
+    <!-- Arrow head -->
+    <polygon points="860,220 845,212 845,228" fill="rgba(244,239,230,.7)"/>
+    <!-- Milestones -->
+    <!-- 2 Aug 2025 -->
+    <circle cx="140" cy="220" r="14" fill="rgba(244,239,230,.4)"/>
+    <line x1="140" y1="206" x2="140" y2="100" stroke="rgba(244,239,230,.3)" stroke-dasharray="3,4"/>
+    <text x="140" y="90" text-anchor="middle" fill="#d7ccab" font-family="Fraunces" font-size="30" font-weight="400">2 Aug 2025</text>
+    <text x="140" y="60" text-anchor="middle" fill="rgba(244,239,230,.6)" font-size="14" letter-spacing="2" font-weight="500">APPLIED</text>
+    <text x="140" y="270" text-anchor="middle" fill="rgba(244,239,230,.82)" font-size="17" font-family="Inter">GPAI obligations.</text>
+    <text x="140" y="292" text-anchor="middle" fill="rgba(244,239,230,.82)" font-size="17">National authorities.</text>
+    <!-- 2 Aug 2026 -->
+    <circle cx="470" cy="220" r="22" fill="#d7ccab"/>
+    <circle cx="470" cy="220" r="34" fill="none" stroke="#d7ccab" stroke-width="2" opacity="0.5"/>
+    <line x1="470" y1="186" x2="470" y2="100" stroke="#d7ccab" stroke-width="1.5"/>
+    <text x="470" y="90" text-anchor="middle" fill="#ffffff" font-family="Fraunces" font-size="44" font-weight="400" font-style="italic">2 Aug 2026</text>
+    <text x="470" y="58" text-anchor="middle" fill="#d7ccab" font-size="14" letter-spacing="2" font-weight="700">THE BIG ONE</text>
+    <text x="470" y="280" text-anchor="middle" fill="#ffffff" font-size="19" font-weight="500">General applicability.</text>
+    <text x="470" y="306" text-anchor="middle" fill="rgba(244,239,230,.85)" font-size="17">Annex III high-risk systems.</text>
+    <text x="470" y="328" text-anchor="middle" fill="rgba(244,239,230,.85)" font-size="17">Art. 50 transparency duties.</text>
+    <!-- 2 Aug 2027 -->
+    <circle cx="780" cy="220" r="14" fill="rgba(244,239,230,.4)"/>
+    <line x1="780" y1="206" x2="780" y2="100" stroke="rgba(244,239,230,.3)" stroke-dasharray="3,4"/>
+    <text x="780" y="90" text-anchor="middle" fill="#d7ccab" font-family="Fraunces" font-size="30" font-weight="400">2 Aug 2027</text>
+    <text x="780" y="60" text-anchor="middle" fill="rgba(244,239,230,.6)" font-size="14" letter-spacing="2" font-weight="500">PENDING</text>
+    <text x="780" y="270" text-anchor="middle" fill="rgba(244,239,230,.82)" font-size="17">Annex I.</text>
+    <text x="780" y="292" text-anchor="middle" fill="rgba(244,239,230,.82)" font-size="17">Safety components of</text>
+    <text x="780" y="313" text-anchor="middle" fill="rgba(244,239,230,.82)" font-size="17">regulated products.</text>
+    <!-- Zones shading below axis -->
+    <rect x="60"  y="360" width="260" height="30" fill="rgba(244,239,230,.08)"/>
+    <text x="190" y="380" text-anchor="middle" fill="rgba(244,239,230,.55)" font-size="13" letter-spacing="1">Foundation-model obligations</text>
+    <rect x="320" y="360" width="310" height="30" fill="rgba(215,204,171,.18)"/>
+    <text x="475" y="380" text-anchor="middle" fill="#d7ccab" font-size="13" letter-spacing="1" font-weight="600">High-risk systems live</text>
+    <rect x="630" y="360" width="230" height="30" fill="rgba(244,239,230,.08)"/>
+    <text x="745" y="380" text-anchor="middle" fill="rgba(244,239,230,.55)" font-size="13" letter-spacing="1">Product safety scope</text>
+  </svg>
+    </div>
+  </div>
+
+  <div class="prose">
+
+    <p>The political layer is sovereignty. In September 2024 Mario Draghi told the European Parliament that the EU depended on foreign sources for over 80 percent of its digital products, services, infrastructure, and IP. Five months later France committed €109 billion to an AI plan at the Paris AI Action Summit. Germany followed in July 2025 with a €5.5 billion national strategy, industrial-adoption targets through 2030, and a new federal Digital Ministry to coordinate it. The UK launched its AI Opportunities Action Plan in January 2025 with a £500 million Sovereign AI Unit and a twenty-fold expansion of the AI Research Resource targeted for 2030. Public capital of this scale in European tech is itself the newer signal.</p>
+
+    <p>One caveat to state up front: a lot of what Europe calls "sovereign" currently buys US silicon. The France-led AI campus JV names NVIDIA in the headline. Wayve's 2026 Series D was led by NVIDIA. Mistral's €1.7 billion Series C in September 2025 was led by ASML at an €11.7 billion post-money valuation.</p>
+
+    <div class="pullquote">
+      Europe is weak in the emerging technologies that will drive future growth. The EU relies on foreign countries for over 80 percent of digital products, services, infrastructure and intellectual property.
+      <cite>Mario Draghi · The Future of European Competitiveness · September 2024</cite>
+    </div>
+
+    <p>Europe missed the frontier-model round; that is not controversial. Whether the edge layer also consolidates into three US hyperscalers is a harder question than the cloud case was. Our read: it does not, because power budgets, vertical fragmentation and GDPR-era data residency push against consolidation, and Europe has forty years of embedded-systems work that lines up with what the edge actually rewards.</p>
+  </div>
+
+  <!-- Edge AI definition box -->
+  <div class="container">
+    <div class="chart-wrap" style="background:var(--green-pale);border:1px solid var(--green-soft);">
+      <div class="chart-title" style="color:var(--green-deep);">What this report means by "Edge AI"</div>
+      <div class="chart-sub">Scope definition, adapted from tinyML Foundation and ETSI MEC taxonomies</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:1rem;font-size:14px;color:var(--ink-soft);">
+        <div><strong style="color:var(--ink);">In scope.</strong> Inference that runs <em>outside hyperscaler cloud</em>: on-device (MCU, NPU, mobile SoC, automotive ECU, in-cabin compute, satellite payload), on-prem in a customer's own data estate (air-gapped or sovereign-cloud), or inside industrial and defence endpoints that cannot phone home.</div>
+        <div><strong style="color:var(--ink);">Out of scope.</strong> Training-time AI, generic public-cloud inference, and foundation-model R&amp;D that does not ship an on-device artifact. Mistral is in scope because it releases Ministral 3B and 8B under Apache-2.0; foundation-model labs without an edge variant are not.</div>
+        <div><strong style="color:var(--ink);">Layers covered.</strong> Silicon (NPU, neuromorphic, photonic, IP), runtimes and compression (ggml, ONNX, Pruna), models (open weights with edge variants), sovereign deployment platforms, and seven vertical applications (robotics, automotive, industrial, defence, space, consumer, IoT).</div>
+        <div><strong style="color:var(--ink);">Geography.</strong> HQ in the EU27, United Kingdom, Switzerland, Norway, Iceland, or Ukraine. HQ flips to the US (e.g., 1X) are flagged explicitly. Publicly listed incumbents (Arm, ST, Infineon, NXP) are included where material, even when majority-owner geography is foreign.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ INGREDIENTS ================ -->
+<section class="section" id="ingredients">
+  <div class="prose">
+    <div class="section-label">II · Ingredients</div>
+    <h2 class="h-section">Europe has forty years of embedded-systems work waiting for this <em>workload</em>.</h2>
+    <p class="lede">Deep silicon expertise, power budgeting, real-time systems, compiler work, robotics. The institutional memory is forty years old. Capital has been the missing piece, and it is now arriving.</p>
+
+    <p>Academic substrate is dense. The PULP platform between ETH Zürich and the University of Bologna has delivered 40+ RISC-V silicon prototypes for energy-efficient ML in a decade. TU Delft runs an Embedded AI and 6G Lab. CEA-Leti in Grenoble has operated a flagship edge-AI, in-memory and neuromorphic program since 2019. UCL opened its Neuroware centre for brain-inspired computing in 2025. TU Dresden's CEE-AI, with Fraunhofer, focuses on efficient ML. Imperial, Cambridge and Oxford launched QRT Labs in 2026 with 70+ researchers.</p>
+
+    <p>Public capital, measured in discrete programs, looks modest against any single OpenAI round. Aggregated, it is industrial policy at scale.</p>
+  </div>
+
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-big">€80 bn+</div>
+        <div class="stat-label">"catalysed" under the EU Chips Act versus the original €43 bn envelope; of this, only about €4.5 bn is directly EU-managed per ECA Special Report 12/2025. Intel's Magdeburg fab, included in the headline, was cancelled in July 2025. TSMC's Dresden fab remains on track. Chips Act 2.0 expected H1 2026.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€240 M</div>
+        <div class="stat-label">DARE project, launched March 2025, 38 partners across 13 countries; includes an AI Processing Unit for inference</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">19 + 13</div>
+        <div class="stat-label">AI Factories plus Antennas selected by EuroHPC JU across three rounds in 2024 and 2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€109 bn</div>
+        <div class="stat-label">France's AI investment plan, Paris AI Action Summit, 10 February 2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€8.1 bn</div>
+        <div class="stat-label">IPCEI on Microelectronics &amp; Communication Technologies, public funding across 14 Member States and 68 projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">€1 bn</div>
+        <div class="stat-label">NATO Innovation Fund, 24 allies, 2025 cohort DIANA scaled to 150 companies across 24 countries</div>
+      </div>
+    </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Public capital at a different scale</div>
+      <div class="chart-sub">Headline national AI envelopes announced 2025, Chips Act "catalysed" number with the ECA-managed portion highlighted · bars to relative scale</div>
+      <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:520px; margin-top:16px; font-family:Inter,sans-serif;">
+    <!-- Normalize France €109bn = full width 600 so the label has room to the right -->
+    <!-- France -->
+    <text x="0" y="58" fill="#3a4a3d" font-size="15" letter-spacing="2" font-weight="700">FRANCE · FEB 2025</text>
+    <rect x="0" y="70" width="600" height="62" fill="#2c3a2f"/>
+    <text x="615" y="114" fill="#2c3a2f" font-family="Fraunces" font-size="46" font-weight="400" letter-spacing="-0.02em">€109 bn</text>
+    <text x="10" y="150" fill="#6a6f69" font-size="14">Paris AI Action Summit. Bpifrance commits €10 bn to AI over 5 years.</text>
+    <!-- Chips Act catalysed -->
+    <text x="0" y="198" fill="#3a4a3d" font-size="15" letter-spacing="2" font-weight="700">EU CHIPS ACT "CATALYSED"</text>
+    <rect x="0" y="210" width="441" height="52" fill="#3a4a3d"/>
+    <text x="455" y="250" fill="#3a4a3d" font-family="Fraunces" font-size="38" font-weight="400" letter-spacing="-0.02em">€80 bn+</text>
+    <!-- ECA-directly-managed portion highlighted -->
+    <rect x="0" y="210" width="25" height="52" fill="#a0522d"/>
+    <text x="35" y="290" fill="#a0522d" font-size="13" font-style="italic">€4.5 bn directly EU-managed per ECA SR 12/2025. Intel Magdeburg (in headline) cancelled Aug 2025.</text>
+    <!-- Germany -->
+    <text x="0" y="326" fill="#3a4a3d" font-size="15" letter-spacing="2" font-weight="700">GERMANY · JUL 2025</text>
+    <rect x="0" y="338" width="30" height="38" fill="#3a4a3d"/>
+    <text x="42" y="368" fill="#3a4a3d" font-family="Fraunces" font-size="30" font-weight="400">€5.5 bn</text>
+    <text x="195" y="368" fill="#6a6f69" font-size="14">national AI strategy + new federal Digital Ministry</text>
+    <!-- UK -->
+    <text x="0" y="400" fill="#3a4a3d" font-size="15" letter-spacing="2" font-weight="700">UK · JAN 2025</text>
+    <rect x="0" y="412" width="14" height="38" fill="#3a4a3d"/>
+    <text x="24" y="442" fill="#3a4a3d" font-family="Fraunces" font-size="30" font-weight="400">£2 bn+</text>
+    <text x="145" y="442" fill="#6a6f69" font-size="14">AI Opportunities Action Plan. £500 m Sovereign AI Unit. AIRR 20× by 2030.</text>
+    <!-- DARE -->
+    <text x="0" y="472" fill="#3a4a3d" font-size="15" letter-spacing="2" font-weight="700">DARE RISC-V · MAR 2025</text>
+    <rect x="0" y="484" width="2" height="26" fill="#a0522d"/>
+    <text x="14" y="506" fill="#a0522d" font-family="Fraunces" font-size="22" font-weight="500">€240 m</text>
+    <text x="130" y="506" fill="#6a6f69" font-size="14">38 partners · 13 countries · includes an AI Processing Unit for inference</text>
+  </svg>
+    </div>
+  </div>
+  </div>
+
+  <div class="prose">
+    <p>None of this capital is earmarked specifically for "edge AI" as a line item. But the substrate, chips, on-device compute, sovereign stack, compliant inference, is what most of it funds by the time it actually lands. The Chips Joint Undertaking covers advanced nodes, FD-SOI, heterogeneous integration and power electronics. DARE is building a RISC-V vector accelerator and an AI Processing Unit, both of which are edge-inference parts. The AI Factories program pairs EuroHPC supercomputers with model-training hubs, giving European inference silicon a built-in customer. Even the Apply AI Strategy announced in October 2025, with €1 billion reallocated for industrial and defense AI rollout, spends its money on deployments that cannot practically run in a hyperscaler cloud.</p>
+
+    <p>The remaining ingredient is capital and exit path. That is where the story gets more uncomfortable, and we address it in the Challenges section.</p>
+  </div>
+</section>
+
+<!-- ================ NUMBERS ================ -->
+<section class="section" id="numbers">
+  <div class="prose">
+    <div class="section-label">III · The numbers</div>
+    <h2 class="h-section">Global edge AI is a <em>$25 billion</em> market now, and a $140 billion market by the mid-2030s.</h2>
+    <p class="lede">Sell-side research firms put global Edge AI TAM in a $24 to $29 billion band for 2025, and a $60 to $200 billion band for the early 2030s. The range spans a factor of 3.5x. The forecast serves for orientation only. We take the low end.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Global Edge AI TAM · five firms, five different numbers</div>
+      <div class="chart-sub">Point estimates from sell-side market-research firms · $ bn · horizon and SAM definitions vary</div>
+      <svg viewBox="0 0 800 280" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:11px;">
+        <line x1="240" y1="230" x2="240" y2="20" stroke="#d8d1c2"/>
+        <line x1="240" y1="230" x2="780" y2="230" stroke="#d8d1c2"/>
+        <g fill="#6a6f69" font-size="10">
+          <line x1="240" y1="180" x2="780" y2="180" stroke="#ece7d8"/><text x="235" y="184" text-anchor="end">$50B</text>
+          <line x1="240" y1="130" x2="780" y2="130" stroke="#ece7d8"/><text x="235" y="134" text-anchor="end">$100B</text>
+          <line x1="240" y1="80" x2="780" y2="80" stroke="#ece7d8"/><text x="235" y="84" text-anchor="end">$150B</text>
+          <line x1="240" y1="30" x2="780" y2="30" stroke="#ece7d8"/><text x="235" y="34" text-anchor="end">$200B</text>
+        </g>
+        <!-- Rows -->
+        <!-- Precedence 2025 25.65 → 2034 143.06 -->
+        <g>
+          <text x="230" y="54" text-anchor="end" fill="#1c221d" font-size="11">Precedence Research</text>
+          <circle cx="255" cy="50" r="4" fill="#5c6b5f"/>
+          <circle cx="683" cy="50" r="5" fill="#3a4a3d"/>
+          <line x1="259" y1="50" x2="679" y2="50" stroke="#3a4a3d" stroke-width="1.5"/>
+          <text x="693" y="54" fill="#3a4a3d" font-size="11" font-weight="500">$143B (2034)</text>
+        </g>
+        <!-- Grand View 2025 24.91 → 2033 118.69 -->
+        <g>
+          <text x="230" y="94" text-anchor="end" fill="#1c221d" font-size="11">Grand View Research</text>
+          <circle cx="255" cy="90" r="4" fill="#5c6b5f"/>
+          <circle cx="636" cy="90" r="5" fill="#3a4a3d"/>
+          <line x1="259" y1="90" x2="632" y2="90" stroke="#3a4a3d" stroke-width="1.5"/>
+          <text x="646" y="94" fill="#3a4a3d" font-size="11" font-weight="500">$119B (2033)</text>
+        </g>
+        <!-- Market.us 2025 28.8 → 2034 196.6 -->
+        <g>
+          <text x="230" y="134" text-anchor="end" fill="#1c221d" font-size="11">Market.us</text>
+          <circle cx="258" cy="130" r="4" fill="#5c6b5f"/>
+          <circle cx="768" cy="130" r="5" fill="#2c3a2f"/>
+          <line x1="262" y1="130" x2="764" y2="130" stroke="#2c3a2f" stroke-width="1.5"/>
+          <text x="680" y="122" fill="#2c3a2f" font-size="11" font-weight="500">$197B (2034)</text>
+        </g>
+        <!-- MarketsandMarkets HW 2025 26.14 → 2030 58.9 -->
+        <g>
+          <text x="230" y="174" text-anchor="end" fill="#1c221d" font-size="11">MarketsandMarkets <tspan fill="#a0522d">(HW only)</tspan></text>
+          <circle cx="256" cy="170" r="4" fill="#5c6b5f"/>
+          <circle cx="355" cy="170" r="5" fill="#a0522d"/>
+          <line x1="260" y1="170" x2="351" y2="170" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="365" y="174" fill="#a0522d" font-size="11" font-weight="500">$59B (2030)</text>
+        </g>
+        <!-- Research and Markets 2025 11.8 → 2030 56.8 -->
+        <g>
+          <text x="230" y="214" text-anchor="end" fill="#1c221d" font-size="11">Research and Markets</text>
+          <circle cx="250" cy="210" r="4" fill="#5c6b5f"/>
+          <circle cx="343" cy="210" r="5" fill="#a0522d"/>
+          <line x1="254" y1="210" x2="339" y2="210" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="353" y="214" fill="#a0522d" font-size="11" font-weight="500">$57B (2030)</text>
+        </g>
+        <g fill="#6a6f69" font-size="10" text-anchor="middle">
+          <text x="256" y="247">2025 TAM ($24-$29B band)</text>
+          <text x="780" y="247" text-anchor="end">→ 2030s horizon</text>
+        </g>
+        <text x="510" y="268" fill="#1c221d" font-size="11" text-anchor="middle" font-style="italic">Horizon estimates span a factor of 3.5×. Directional only.</text>
+      </svg>
+      <div class="chart-footnote">Caveat for the reader: sell-side firms use divergent SAM definitions (hardware-only vs full stack) and incompatible horizons. We present the range for orientation, not for sizing a position. Primary sources: Precedence Research, Grand View Research, MarketsandMarkets, Market.us, Research and Markets (2025 releases). Accessed April 2026.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>The European slice of that pie is harder to read. No one publishes a clean timeseries labelled "European edge AI VC." The numbers below are reconstructed from Dealroom's Future of Compute category, Sifted's hardware-funding briefings and Atomico's State of European Tech, triangulated against individual round announcements. The trend is unambiguous. 2025 was the year the line finally turned up, with around $5.5 to $6 billion deployed into European edge-AI-adjacent startups, more than doubling 2024. The first two months of 2026 already contain two of the largest single rounds on record: Axelera AI's >$250 million in February and Wayve's $1.2 billion Series D the same week.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">European Edge-AI-adjacent VC funding, 2015-2025</div>
+      <div class="chart-sub">Reconstructed from Dealroom, Sifted, Atomico · $ bn, approximate</div>
+      <svg viewBox="0 0 800 320" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:11px;">
+        <!-- Axes -->
+        <line x1="70" y1="270" x2="770" y2="270" stroke="#d8d1c2"/>
+        <line x1="70" y1="30" x2="70" y2="270" stroke="#d8d1c2"/>
+        <!-- Y ticks -->
+        <g fill="#6a6f69">
+          <line x1="70" y1="230" x2="770" y2="230" stroke="#ece7d8"/>
+          <text x="60" y="234" text-anchor="end">1</text>
+          <line x1="70" y1="190" x2="770" y2="190" stroke="#ece7d8"/>
+          <text x="60" y="194" text-anchor="end">2</text>
+          <line x1="70" y1="150" x2="770" y2="150" stroke="#ece7d8"/>
+          <text x="60" y="154" text-anchor="end">3</text>
+          <line x1="70" y1="110" x2="770" y2="110" stroke="#ece7d8"/>
+          <text x="60" y="114" text-anchor="end">4</text>
+          <line x1="70" y1="70" x2="770" y2="70" stroke="#ece7d8"/>
+          <text x="60" y="74" text-anchor="end">5</text>
+          <line x1="70" y1="30" x2="770" y2="30" stroke="#ece7d8"/>
+          <text x="60" y="34" text-anchor="end">6</text>
+        </g>
+        <!-- Bars for 2015-25 -->
+        <!-- 2015: 0.3 -->
+        <rect x="90" y="258" width="50" height="12" fill="#5c6b5f"/>
+        <text x="115" y="253" text-anchor="middle" fill="#1c221d">0.3</text>
+        <!-- 2016: 0.35 -->
+        <rect x="150" y="256" width="50" height="14" fill="#5c6b5f"/>
+        <text x="175" y="251" text-anchor="middle" fill="#1c221d">0.4</text>
+        <!-- 2017: 0.45 -->
+        <rect x="210" y="252" width="50" height="18" fill="#5c6b5f"/>
+        <text x="235" y="247" text-anchor="middle" fill="#1c221d">0.5</text>
+        <!-- 2018: 0.6 -->
+        <rect x="270" y="246" width="50" height="24" fill="#5c6b5f"/>
+        <text x="295" y="241" text-anchor="middle" fill="#1c221d">0.6</text>
+        <!-- 2019: 0.8 -->
+        <rect x="330" y="238" width="50" height="32" fill="#5c6b5f"/>
+        <text x="355" y="233" text-anchor="middle" fill="#1c221d">0.8</text>
+        <!-- 2020: 1.0 -->
+        <rect x="390" y="230" width="50" height="40" fill="#5c6b5f"/>
+        <text x="415" y="225" text-anchor="middle" fill="#1c221d">1.0</text>
+        <!-- 2021: 1.5 -->
+        <rect x="450" y="210" width="50" height="60" fill="#3a4a3d"/>
+        <text x="475" y="205" text-anchor="middle" fill="#1c221d">1.5</text>
+        <!-- 2022: 1.8 -->
+        <rect x="510" y="198" width="50" height="72" fill="#3a4a3d"/>
+        <text x="535" y="193" text-anchor="middle" fill="#1c221d">1.8</text>
+        <!-- 2023: 2.0 -->
+        <rect x="570" y="190" width="50" height="80" fill="#3a4a3d"/>
+        <text x="595" y="185" text-anchor="middle" fill="#1c221d">2.0</text>
+        <!-- 2024: 2.5 -->
+        <rect x="630" y="170" width="50" height="100" fill="#3a4a3d"/>
+        <text x="655" y="165" text-anchor="middle" fill="#1c221d">2.5</text>
+        <!-- 2025: 5.7 -->
+        <rect x="690" y="42" width="50" height="228" fill="#2c3a2f"/>
+        <text x="715" y="37" text-anchor="middle" fill="#2c3a2f" font-weight="700">5.7</text>
+        <!-- X labels -->
+        <g fill="#6a6f69" text-anchor="middle" font-size="10">
+          <text x="115" y="290">2015</text><text x="175" y="290">2016</text><text x="235" y="290">2017</text>
+          <text x="295" y="290">2018</text><text x="355" y="290">2019</text><text x="415" y="290">2020</text>
+          <text x="475" y="290">2021</text><text x="535" y="290">2022</text><text x="595" y="290">2023</text>
+          <text x="655" y="290">2024</text><text x="715" y="290">2025</text>
+        </g>
+        <!-- Arrow callout -->
+        <path d="M740,50 L760,30" stroke="#8b3a3a" stroke-width="1"/>
+        <text x="763" y="28" fill="#8b3a3a" font-weight="600">+128% YoY</text>
+      </svg>
+      <div class="chart-footnote">Approximations. European Edge AI has no single source-of-truth taxonomy; figures reconstruct from Dealroom's Future of Compute, Sifted hardware briefings, Atomico State of European Tech and individual round announcements. 2026 year-to-date (not shown) already includes Axelera &gt;$250M and Wayve $1.2B.</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-big">~6 %</div>
+        <div class="stat-label">Europe's share of global AI-chip VC, cumulative 2022-2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">$14 bn</div>
+        <div class="stat-label">total European AI VC 2025 · against $146 bn in the US</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">$8.7 bn</div>
+        <div class="stat-label">European Defense, Security &amp; Resilience VC 2025, a record; AI was 44% of it</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">44 %</div>
+        <div class="stat-label">AI's share of DSR funding, per Dealroom × NATO Innovation Fund</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Six percent of global AI-chip VC is below Europe's weight by population or GDP. It also understates reality. The listed incumbents (Arm, STMicroelectronics, Infineon, NXP, ASML, Kalray) and the non-VC public capital (grants, guarantees, EIB loans) do not clear through Crunchbase. Europe punches closer to its weight at the edge than it ever did in cloud AI, and 2025-26 is the inflection.</p>
+
+    <p>The composition of European Deep Tech VC has shifted just as hard. In 2016, defense and resilience was 23 percent of the category. By 2025 it was 43 percent. AI inside defense-security-resilience was 44 percent of that. The pattern is a direct consequence of Ukraine and of an EU that has started spending on its own edge.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Defense, Security &amp; Resilience share of European Deep Tech VC</div>
+      <div class="chart-sub">Percentage of European Deep Tech VC funding going to DSR startups · 2016-2025</div>
+      <svg viewBox="0 0 800 260" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:11px;">
+        <line x1="70" y1="210" x2="770" y2="210" stroke="#d8d1c2"/>
+        <g fill="#6a6f69">
+          <line x1="70" y1="170" x2="770" y2="170" stroke="#ece7d8"/>
+          <text x="60" y="174" text-anchor="end">20%</text>
+          <line x1="70" y1="130" x2="770" y2="130" stroke="#ece7d8"/>
+          <text x="60" y="134" text-anchor="end">30%</text>
+          <line x1="70" y1="90" x2="770" y2="90" stroke="#ece7d8"/>
+          <text x="60" y="94" text-anchor="end">40%</text>
+          <line x1="70" y1="50" x2="770" y2="50" stroke="#ece7d8"/>
+          <text x="60" y="54" text-anchor="end">50%</text>
+        </g>
+        <!-- Bars 2016-2025, values: 23, 12, 20, 15, 23, 23, 21, 25, 33, 43 -->
+        <rect x="95"  y="118" width="50" height="92" fill="#5c6b5f"/><text x="120" y="113" text-anchor="middle" fill="#1c221d">23</text>
+        <rect x="165" y="162" width="50" height="48" fill="#5c6b5f"/><text x="190" y="157" text-anchor="middle" fill="#1c221d">12</text>
+        <rect x="235" y="130" width="50" height="80" fill="#5c6b5f"/><text x="260" y="125" text-anchor="middle" fill="#1c221d">20</text>
+        <rect x="305" y="150" width="50" height="60" fill="#5c6b5f"/><text x="330" y="145" text-anchor="middle" fill="#1c221d">15</text>
+        <rect x="375" y="118" width="50" height="92" fill="#5c6b5f"/><text x="400" y="113" text-anchor="middle" fill="#1c221d">23</text>
+        <rect x="445" y="118" width="50" height="92" fill="#5c6b5f"/><text x="470" y="113" text-anchor="middle" fill="#1c221d">23</text>
+        <rect x="515" y="126" width="50" height="84" fill="#5c6b5f"/><text x="540" y="121" text-anchor="middle" fill="#1c221d">21</text>
+        <rect x="585" y="110" width="50" height="100" fill="#3a4a3d"/><text x="610" y="105" text-anchor="middle" fill="#1c221d">25</text>
+        <rect x="655" y="78"  width="50" height="132" fill="#3a4a3d"/><text x="680" y="73" text-anchor="middle" fill="#1c221d">33</text>
+        <rect x="725" y="38"  width="40" height="172" fill="#2c3a2f"/><text x="745" y="33" text-anchor="middle" fill="#2c3a2f" font-weight="700">43</text>
+        <g fill="#6a6f69" text-anchor="middle" font-size="10">
+          <text x="120" y="230">2016</text><text x="190" y="230">2017</text><text x="260" y="230">2018</text>
+          <text x="330" y="230">2019</text><text x="400" y="230">2020</text><text x="470" y="230">2021</text>
+          <text x="540" y="230">2022</text><text x="610" y="230">2023</text><text x="680" y="230">2024</text>
+          <text x="745" y="230">2025</text>
+        </g>
+      </svg>
+      <div class="chart-footnote">Source: Dealroom × NATO Innovation Fund, "Defence, Security &amp; Resilience in Europe Report 2026." DSR defined as defense, space, quantum, nuclear energy, critical materials, biodefense.</div>
+    </div>
+  </div>
+
+  <!-- ===== Decomposition: stats we ran ourselves against the 81-company dataset ===== -->
+  <div class="prose" style="margin-top:5rem;">
+    <hr class="divider">
+    <div class="section-label" style="margin-top:3rem;">III.b · Decomposed</div>
+    <h2 class="h-section" style="margin-top:1rem;">Patterns the headline <em>doesn't surface</em>.</h2>
+    <p class="lede">The numbers below come from our own companion dataset: 81 European edge-AI companies, $10.4 billion of disclosed 2024-2026 VC and acquisition value, listed incumbents excluded. Currency normalised to April 2026 spot. Everything here is reproducible from <code>companies.csv</code>.</p>
+  </div>
+
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-big">53 %</div>
+        <div class="stat-label">of disclosed European edge-AI VC went to the <em>Models &amp; Runtimes</em> segment. Even building the on-device thesis, Europe still follows the cloud-AI funding pattern.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">3.5×</div>
+        <div class="stat-label">Average model-lab round ($429 M) versus average silicon round ($122 M). For the edge thesis to hold, silicon round size has to close this gap.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">75 %</div>
+        <div class="stat-label">France + Germany + UK share of disclosed capital. FR 27% · DE 26% · UK 23%. Everything else is long-tail.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-big">$159 /cap</div>
+        <div class="stat-label">Finland's edge-AI VC per capita in 2024-2026. Roughly 5× France, Germany and the UK. Silo AI + ICEYE + ReOrbit. Almost nobody writes about this.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Average round size by segment, 2024-2026</div>
+      <div class="chart-sub">Latest disclosed round per company, USD millions, n=81 companies</div>
+      <svg viewBox="0 0 900 400" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:Inter,sans-serif;font-size:12px;">
+        <!-- Scale: Models $429M = 650px -->
+        <g font-size="11">
+          <!-- Models -->
+          <text x="130" y="55" text-anchor="end" fill="#1c221d" font-weight="600">Models &amp; Runtimes</text>
+          <rect x="140" y="36" width="650" height="28" fill="#2c3a2f"/>
+          <text x="798" y="56" fill="#2c3a2f" font-family="Fraunces" font-size="22" font-weight="500">$429 M</text>
+          <text x="130" y="78" text-anchor="end" fill="#6a6f69" font-size="10">13 cos</text>
+          <!-- Defense -->
+          <text x="130" y="105" text-anchor="end" fill="#1c221d" font-weight="600">Defence edge</text>
+          <rect x="140" y="86" width="230" height="28" fill="#3a4a3d"/>
+          <text x="378" y="106" fill="#3a4a3d" font-family="Fraunces" font-size="20" font-weight="500">$152 M</text>
+          <text x="130" y="128" text-anchor="end" fill="#6a6f69" font-size="10">10 cos</text>
+          <!-- Silicon -->
+          <text x="130" y="155" text-anchor="end" fill="#1c221d" font-weight="600">Silicon</text>
+          <rect x="140" y="136" width="185" height="28" fill="#3a4a3d"/>
+          <text x="333" y="156" fill="#3a4a3d" font-family="Fraunces" font-size="20" font-weight="500">$122 M</text>
+          <text x="130" y="178" text-anchor="end" fill="#6a6f69" font-size="10">12 cos</text>
+          <!-- Automotive -->
+          <text x="130" y="205" text-anchor="end" fill="#1c221d" font-weight="600">Automotive</text>
+          <rect x="140" y="186" width="155" height="28" fill="#5c6b5f"/>
+          <text x="303" y="206" fill="#5c6b5f" font-family="Fraunces" font-size="20" font-weight="500">$102 M</text>
+          <text x="130" y="228" text-anchor="end" fill="#6a6f69" font-size="10">2 cos · Tier-1 capex invisible here, see note</text>
+          <!-- Robotics -->
+          <text x="130" y="255" text-anchor="end" fill="#1c221d" font-weight="600">Robotics</text>
+          <rect x="140" y="236" width="127" height="28" fill="#5c6b5f"/>
+          <text x="275" y="256" fill="#5c6b5f" font-family="Fraunces" font-size="20" font-weight="500">$84 M</text>
+          <text x="130" y="278" text-anchor="end" fill="#6a6f69" font-size="10">8 cos</text>
+          <!-- Space -->
+          <text x="130" y="305" text-anchor="end" fill="#1c221d" font-weight="600">Space</text>
+          <rect x="140" y="286" width="121" height="28" fill="#5c6b5f"/>
+          <text x="269" y="306" fill="#5c6b5f" font-family="Fraunces" font-size="20" font-weight="500">$80 M</text>
+          <text x="130" y="328" text-anchor="end" fill="#6a6f69" font-size="10">12 cos</text>
+          <!-- Industrial -->
+          <text x="130" y="355" text-anchor="end" fill="#1c221d" font-weight="600">Industrial</text>
+          <rect x="140" y="336" width="16" height="28" fill="#a0522d"/>
+          <text x="164" y="356" fill="#a0522d" font-family="Fraunces" font-size="20" font-weight="500">$10 M</text>
+          <text x="130" y="378" text-anchor="end" fill="#6a6f69" font-size="10">4 cos disclosed · public incumbents dominate here, see note</text>
+        </g>
+      </svg>
+      <div class="chart-footnote">Calculated from <code>companies.csv</code>. Listed incumbents excluded (their "round" column records revenue, not VC). Acquisitions included at deal value. 1X's "targeting $1 B" round excluded because it has not closed.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Two data points sit underneath that chart that deserve their own sentences.</p>
+
+    <p><strong>The Ukraine paradox.</strong> Three funded Ukrainian edge-AI companies in our dataset (Swarmer, Airlogix, Kvertus) add up to roughly $21 million in disclosed 2024-2026 VC. That is 0.2 percent of the continental total. Those same three, plus Ukrspecsystems, are the largest combat-tested edge-drone cluster in Europe, flying across six NATO member states. The validation is there; the capital is not. Ukraine's edge AI gets paid by defence ministry contracts, not by VC rounds. For a fund manager looking for non-consensus entry points, this is the clearest one in the dataset.</p>
+
+    <p><strong>The automotive blindspot.</strong> Two disclosed automotive rounds in the dataset (Oxa $103 M, Einride $100 M) excluding Wayve, which we bucket under Models. The real European automotive edge-AI spend sits inside Tier-1 capex, which never clears through VC. Bosch Mobility has invested roughly €10 billion cumulatively in AD/AI. ZF's ProAI is in volume series production. Valeo ships Mercedes DRIVE PILOT. None of that shows up in Dealroom. If you trust the VC tracker alone, you will miss the largest European edge-AI market on the continent, which ships on several million new vehicles a year.</p>
+
+    <p><strong>Concentration (HHI = 730).</strong> Top round in the window is 18 percent of the total. Top five rounds are 50 percent. Top ten are 67 percent. HHI under 1,500 is classified unconcentrated under the US DOJ scale; Europe at 730 is well below. Compare: US AI funding where three labs (OpenAI, Anthropic, xAI) represent over 80 percent. Europe's edge-AI ecosystem is structurally more distributed. A portfolio thesis that depends on backing several winners, not picking one, is empirically supported by the data.</p>
+
+    <p><strong>Exit base rate: n = 2.</strong> Two clean edge-AI exits in the window. Silo AI to AMD returned roughly 3.3x on invested capital. Generational lab lost. Graphcore to SoftBank returned roughly 0.7-0.8x, which is a meaningful loss. The sample is too small for a statistical claim, but the distribution is bimodal, and European silicon in particular has a "miss" prior until Axelera or SiPearl ships the counter-evidence.</p>
+
+    <p>Graphcore is the base rate worth remembering. The IPU startup peaked at a $2.77 billion valuation at its $222 million Series E in December 2020, having raised approximately $767 million across six rounds between 2016 and 2020. Four years later it ended in a SoftBank deal whose price was not publicly disclosed but is widely reported in the $500-$600 million range. The implicated factors were familiar: tapeout schedules that slipped, a compiler ecosystem that did not compound commercial design-wins at speed, and the long gap between first tape-out and shipping customer product. Axelera's >$250 million Series C in February 2026 is the strongest evidence to date that the European silicon model can break that base rate. It is also one round in a single quarter.</p>
+
+    <div class="note">Dataset caveat. 81 companies profiled, not a census. "Disclosed VC" means most-recent priced equity round or acquisition value where announced. Currency normalised to April 2026 USD at €1.08 and £1.27. Public listed incumbents (ST, NXP, Arm, Bosch, ZF, Valeo, Continental, Siemens, Schneider, ABB, Infineon, Kalray, Hensoldt) excluded because the column in our CSV records revenue, not VC flow. Reconstruction is directional, not a census.</div>
+  </div>
+</section>
+
+<!-- ================ GEOGRAPHY ================ -->
+<section class="section" id="geography">
+  <div class="prose">
+    <div class="section-label">IV · Geography</div>
+    <h2 class="h-section">Edge AI Europe has <em>many capitals</em>, and each has its specialty.</h2>
+    <p class="lede">There is no Silicon Valley here. Munich is the defense-tech and space capital. London is the autonomy and model capital. Grenoble is where the chips get fabbed. Kyiv is where they get combat-tested.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">European edge AI hubs, on the map</div>
+      <div class="chart-sub">Simplified country polygons (203 polygons, public-domain GeoJSON). Hub dots sized by edge-AI density. Red = combat-deployed cluster.</div>
+      <svg viewBox="0 0 900 780" xmlns="http://www.w3.org/2000/svg" style="width:100%; margin-top:12px; font-family:Inter,sans-serif;">
+  <!-- Real simplified Europe geography: 203 polygons, 36 countries, from leakyMirror/map-of-europe geojson -->
+  <g>
+    <path d="M537.1,633.2L540.0,614.1L535.9,613.1L536.5,606.8L534.4,604.9L542.2,593.2L543.4,597.6L548.3,595.7L556.3,604.2L558.1,610.3L555.8,625.9L560.0,635.9L564.4,636.3L565.5,644.3L561.0,647.6L558.9,655.7L552.6,658.3L554.4,662.1L552.6,664.9L546.9,665.8L544.6,657.2L534.5,647.9L537.9,649.6L537.5,644.4L534.8,642.4L538.6,636.0L537.1,633.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M505.6,587.7L505.6,583.7L499.4,578.2L498.7,573.8L479.0,555.8L478.7,548.5L471.8,540.8L473.4,531.2L476.9,531.0L481.6,536.3L485.8,530.8L492.6,529.8L509.2,535.0L523.0,534.2L527.0,539.7L536.0,539.0L531.3,552.0L540.3,559.4L538.7,561.6L533.6,560.4L538.0,566.4L537.9,571.1L528.6,572.5L530.7,579.0L527.9,576.3L524.1,578.8L523.2,583.9L520.2,585.9L522.0,593.4L519.8,595.6L505.6,587.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M686.1,588.9L686.4,592.2L683.5,592.1L678.5,597.9L683.0,599.6L688.5,609.8L680.6,611.6L674.7,606.7L663.9,610.0L659.3,616.4L654.3,616.4L655.4,625.1L640.2,627.8L622.3,619.8L611.2,624.5L598.9,625.4L600.3,615.2L588.8,601.5L592.2,597.7L590.2,589.3L595.5,587.6L600.1,580.3L591.9,573.5L588.8,564.8L594.4,555.1L600.8,558.8L597.2,562.9L599.4,565.1L642.3,569.8L658.3,559.9L675.4,557.4L698.5,566.8L698.0,574.1L689.9,576.0L686.1,588.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M397.3,296.7L399.8,294.8L403.3,300.2L396.3,301.8L388.1,297.6L391.1,293.6L397.3,296.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M406.6,295.1L408.9,296.4L405.3,303.2L400.7,294.0L406.6,295.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M415.7,293.4L407.9,294.8L411.4,291.6L415.7,293.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M381.4,293.7L379.4,292.3L381.7,291.4L381.4,293.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M366.9,290.7L371.8,295.6L364.1,291.3L366.9,290.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M383.9,297.9L382.5,298.5L382.6,294.7L387.3,288.6L383.9,297.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M459.7,292.6L453.2,290.1L454.3,285.3L461.3,289.1L459.7,292.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M383.7,280.7L384.4,289.5L379.4,291.8L373.3,290.4L364.9,280.3L376.1,277.5L379.0,281.8L381.5,277.4L383.7,280.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M416.1,279.1L416.6,275.5L417.9,278.1L416.1,279.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M381.7,271.4L379.9,273.8L379.8,268.6L381.7,271.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M415.9,268.3L416.5,275.3L409.2,280.8L414.0,285.5L406.1,288.6L409.1,289.6L407.2,293.3L401.1,291.0L401.1,287.5L392.6,287.6L389.8,276.3L386.0,274.6L392.0,275.5L397.2,271.4L393.1,268.3L401.7,269.0L400.1,272.7L402.3,276.4L404.4,269.8L406.9,274.4L404.7,276.6L406.9,276.6L406.6,270.0L403.4,268.9L411.0,265.0L415.9,268.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M351.6,245.7L348.8,251.3L344.3,250.2L346.8,246.4L351.6,245.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M370.1,242.0L376.1,244.2L376.0,249.9L368.2,252.3L376.6,251.2L373.9,256.7L376.0,254.0L384.5,255.1L387.5,257.3L386.8,259.7L380.2,265.7L376.8,263.4L379.6,261.7L377.7,261.0L374.4,264.6L373.9,272.3L368.2,271.9L371.4,272.6L370.5,275.3L362.6,275.3L367.4,277.8L363.3,282.2L365.1,287.7L361.0,289.5L365.8,292.8L366.0,296.7L363.8,294.2L359.0,297.2L347.4,295.0L347.2,289.7L343.4,289.5L347.5,289.2L346.3,282.1L336.8,279.1L338.6,274.4L337.5,268.5L338.6,272.8L342.3,270.6L339.8,266.1L337.2,267.7L338.2,252.2L348.1,256.4L347.3,253.0L354.3,248.4L355.6,251.0L354.0,254.3L357.8,252.8L358.6,255.3L358.3,251.1L355.9,251.6L356.1,245.8L370.1,242.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M378.2,229.3L380.2,238.1L376.5,244.0L370.7,241.6L355.0,242.5L347.1,245.1L342.6,251.6L345.7,251.4L345.1,253.9L339.5,250.9L346.2,240.8L359.8,240.1L369.7,229.5L382.0,225.8L378.2,229.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M18.3,316.4L18.4,319.9L12.9,317.5L18.3,316.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M63.4,293.6L60.8,298.3L54.2,299.8L57.3,302.4L49.9,305.6L56.1,312.0L64.8,314.1L70.1,306.7L77.2,315.9L82.3,314.1L86.4,316.8L81.5,318.1L86.8,327.5L84.3,332.6L88.0,342.6L84.5,352.5L79.4,356.9L81.9,361.2L72.3,361.6L70.7,358.7L70.5,362.3L60.4,363.2L60.2,365.8L50.0,370.7L45.5,368.5L47.4,372.0L31.2,378.3L20.9,379.1L24.8,375.1L20.4,376.6L27.3,373.2L25.8,371.7L15.3,375.5L25.1,368.7L11.7,370.9L13.0,365.9L21.9,362.0L9.8,363.4L9.4,361.2L14.7,358.6L22.2,359.7L20.5,356.4L23.8,351.9L38.5,349.4L34.8,347.8L32.3,350.6L18.8,352.1L26.7,346.1L30.6,337.6L36.4,337.8L36.3,334.8L24.6,335.6L25.4,331.9L21.4,334.1L19.3,333.5L21.1,331.1L14.5,331.3L14.4,327.8L23.0,326.7L19.2,325.5L19.3,322.8L25.4,320.3L18.7,320.1L21.4,318.3L17.5,311.5L15.5,314.5L15.7,311.3L29.4,309.1L33.0,313.0L34.6,309.9L44.6,310.2L41.1,308.4L47.9,305.3L49.6,301.4L38.8,300.0L47.4,295.7L44.8,294.0L47.3,289.8L56.6,286.6L58.3,290.2L56.6,287.3L59.0,285.8L61.3,289.6L58.6,293.8L62.7,291.2L60.9,287.4L63.6,283.3L71.8,286.8L63.4,293.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M599.8,204.8L605.9,208.6L588.8,214.0L585.9,219.7L582.2,221.3L585.9,215.8L579.7,212.6L582.5,210.8L579.4,207.1L599.8,204.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M606.4,206.5L601.0,204.5L604.4,203.0L606.4,206.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M604.9,195.9L602.0,194.4L606.9,195.0L604.9,195.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M595.6,195.0L600.8,199.0L591.7,202.6L589.1,197.8L583.1,196.5L592.5,193.3L595.6,195.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M649.1,179.7L691.4,185.5L678.1,199.8L680.2,209.3L679.0,214.2L685.1,222.6L680.2,223.8L677.2,230.7L668.8,228.3L662.5,231.0L640.5,217.3L623.2,222.5L627.5,211.4L623.6,209.9L619.6,213.7L608.8,205.3L609.3,201.3L615.4,200.6L608.5,199.6L607.6,196.5L611.3,195.7L607.2,194.5L608.3,189.8L618.1,188.0L618.3,185.5L621.4,186.6L623.8,183.5L630.4,184.0L631.4,181.2L642.2,183.2L643.7,178.8L649.1,179.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M438.2,444.3L444.4,448.6L453.5,449.0L455.5,444.1L458.1,443.8L459.3,438.3L478.3,444.8L487.9,443.9L492.7,446.0L491.3,454.2L497.1,462.8L495.1,470.2L484.0,471.1L489.1,474.2L484.4,477.4L485.5,487.3L481.8,487.2L476.3,493.6L456.5,496.9L450.8,501.9L413.7,495.0L408.7,489.3L409.2,485.2L391.3,488.3L388.5,493.0L379.4,491.0L377.5,487.4L372.5,491.1L363.5,485.9L362.4,480.8L364.8,477.8L362.9,474.3L366.7,473.0L374.7,478.2L373.6,480.8L378.9,476.9L379.0,473.1L389.9,477.8L400.3,473.2L418.9,470.8L423.8,476.0L425.3,471.8L422.0,469.9L423.7,466.7L419.3,460.1L430.5,454.2L431.3,449.3L436.3,450.6L438.2,444.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M453.5,449.0L444.4,448.6L419.8,430.4L413.9,421.8L415.5,416.4L409.5,411.8L407.5,406.5L411.6,409.3L415.0,404.8L423.3,404.2L446.7,392.9L446.6,388.7L454.7,394.4L461.9,389.6L465.5,395.4L483.0,398.7L484.4,400.4L480.1,403.9L487.7,411.7L494.2,409.1L492.2,403.7L501.8,407.8L506.9,406.6L507.6,409.4L504.7,410.5L508.9,414.6L512.7,413.0L522.0,416.5L526.6,424.2L515.5,431.7L513.9,436.7L507.5,441.8L497.4,441.9L493.2,448.0L486.1,443.3L478.3,444.8L459.3,438.3L458.1,443.8L455.5,444.1L453.5,449.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M575.3,168.2L573.3,167.8L576.3,166.8L575.3,168.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M596.9,165.1L595.3,170.6L590.6,170.6L590.3,165.3L596.9,165.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M582.0,162.7L578.6,161.5L579.0,159.3L582.0,162.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M566.1,90.6L572.2,92.7L569.1,94.0L566.1,90.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M630.6,50.1L627.4,48.1L635.9,47.9L630.6,50.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M691.2,-71.0L707.6,-66.0L711.2,-60.6L702.7,-54.4L702.1,-51.7L705.1,-50.0L695.9,-46.2L702.7,-45.0L696.3,-37.3L700.5,-29.1L712.2,-26.4L724.0,-16.9L707.2,2.5L721.9,21.3L725.9,31.2L720.3,32.8L719.1,40.4L716.4,42.7L721.3,45.8L717.0,47.2L717.1,50.5L726.0,54.3L727.0,57.3L723.1,59.0L724.5,63.3L733.7,67.7L734.0,72.0L723.4,79.4L745.1,92.1L751.6,99.6L745.8,109.5L709.7,140.1L683.6,158.2L674.4,156.4L669.9,159.9L661.7,159.7L663.4,156.0L666.2,156.7L664.6,154.8L660.4,161.1L653.8,160.2L653.7,163.5L650.1,160.8L651.5,164.7L647.0,161.8L628.3,167.7L626.2,170.8L623.5,168.9L607.5,171.7L609.5,168.9L604.5,174.5L598.4,175.4L606.0,170.1L601.9,172.5L604.6,169.8L597.8,167.1L601.5,162.2L592.5,165.5L590.2,164.7L593.5,161.1L578.9,158.9L579.3,155.5L575.1,158.3L572.3,156.7L570.5,149.5L574.5,138.7L572.9,132.8L576.5,132.9L569.7,123.1L571.3,115.5L565.8,107.3L572.5,96.5L576.8,96.9L573.5,92.4L588.3,90.8L585.7,86.2L605.6,75.6L606.8,71.9L610.6,71.6L623.7,60.4L627.2,53.6L636.8,50.9L640.9,53.2L641.7,51.1L638.6,49.6L643.2,49.7L640.0,44.6L640.8,36.3L629.5,32.8L627.4,29.8L629.8,26.9L620.8,29.5L616.4,21.1L612.7,19.4L611.3,13.7L615.5,10.8L617.8,4.9L610.1,-3.8L613.5,-10.1L607.6,-11.3L608.5,-21.0L611.6,-23.2L596.9,-33.8L583.2,-36.1L557.3,-50.2L565.8,-49.6L565.3,-53.9L570.4,-56.7L576.7,-55.7L589.4,-41.7L603.6,-39.7L617.2,-44.7L634.1,-38.5L639.1,-44.3L648.7,-48.5L647.9,-55.0L652.0,-65.2L660.9,-71.4L671.8,-70.9L686.5,-75.3L691.2,-71.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M360.8,592.8L362.7,606.6L356.1,624.9L349.2,620.1L351.6,617.0L347.7,615.2L349.1,611.2L345.7,610.3L348.4,608.1L345.7,605.2L347.4,602.8L345.5,600.0L348.0,595.4L355.0,591.6L358.1,592.9L359.2,584.9L361.1,585.3L360.8,592.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M155.3,487.1L156.3,489.8L153.8,487.0L155.3,487.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M239.0,387.8L240.9,394.5L245.3,397.2L249.8,395.2L252.3,401.6L267.6,407.5L267.3,414.9L273.7,415.7L279.4,410.3L280.1,419.3L290.8,426.5L307.3,427.2L312.9,434.7L325.1,434.4L339.3,439.6L331.8,449.1L327.9,460.2L328.0,473.3L324.4,477.0L317.5,475.4L315.5,478.7L317.1,480.4L302.3,497.4L302.1,505.4L299.4,506.9L302.7,508.1L304.3,503.2L308.7,500.8L314.2,501.4L313.8,508.3L318.3,513.5L314.3,518.5L320.4,527.0L318.8,530.8L310.9,533.6L313.2,538.2L318.2,540.4L315.5,551.4L330.1,558.7L327.0,565.8L314.0,574.7L311.3,580.5L302.9,583.8L288.8,579.6L288.0,576.1L283.0,576.5L286.5,573.6L282.9,571.4L283.1,574.3L279.5,575.5L277.0,570.9L278.3,575.9L276.2,576.2L264.1,571.8L248.5,583.3L246.4,589.0L250.2,598.7L246.2,597.7L241.2,601.0L234.2,598.7L229.7,600.8L224.5,597.0L224.8,594.4L219.6,594.7L206.8,588.4L206.0,592.6L194.0,592.7L188.7,588.7L184.2,590.3L180.9,585.8L168.8,583.9L169.6,578.6L162.7,576.2L168.6,569.4L172.8,545.4L175.8,544.2L173.5,541.7L172.1,544.5L175.0,522.5L180.0,527.5L184.6,538.8L180.4,525.0L172.2,519.1L175.3,514.1L174.4,504.2L162.6,500.0L156.5,491.4L159.1,486.7L155.8,484.4L156.5,480.7L163.6,482.4L149.3,480.3L151.7,477.6L150.1,475.5L152.5,475.2L143.5,474.3L146.5,472.0L139.0,472.9L139.3,476.0L137.3,471.6L123.8,465.8L117.1,467.9L115.8,463.8L110.7,462.1L118.5,460.3L115.7,457.3L113.7,458.9L113.7,454.9L120.2,455.8L110.1,455.0L109.8,450.7L117.3,446.7L130.9,446.7L131.7,443.0L137.3,441.9L146.7,450.9L153.4,446.6L159.2,450.6L159.0,446.4L170.0,447.4L166.5,444.9L165.7,433.5L162.1,429.5L159.9,421.1L171.8,422.1L171.2,425.7L174.5,429.8L190.1,431.8L201.6,427.7L195.4,425.9L197.8,421.2L219.9,411.3L222.4,405.4L222.8,393.0L239.0,387.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M321.9,324.1L320.0,324.0L323.8,323.7L321.9,324.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M441.2,315.3L445.0,320.1L438.1,320.4L442.2,317.2L438.7,316.9L436.9,313.0L441.2,315.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M351.1,305.6L349.7,304.7L352.2,304.2L351.1,305.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M393.8,307.0L388.3,305.6L391.5,304.2L393.8,307.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M430.3,301.3L435.5,303.1L433.7,305.8L436.4,310.2L432.5,308.5L430.5,311.5L425.6,308.7L428.2,307.6L426.1,303.6L432.4,304.9L430.1,302.0L427.8,303.2L427.8,300.9L430.3,301.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M387.9,307.6L389.9,312.1L384.0,315.6L386.2,317.3L385.0,319.6L389.9,316.5L395.5,318.8L400.2,313.2L408.2,312.2L415.2,305.3L422.2,306.5L414.1,307.2L412.4,310.4L424.0,307.1L431.6,314.5L436.2,312.7L437.9,320.6L446.0,324.2L448.1,337.7L443.8,344.6L452.5,351.7L450.6,356.0L454.6,363.9L451.8,370.0L454.2,377.1L458.4,379.3L458.2,388.8L455.3,394.4L446.6,388.7L446.7,392.9L423.3,404.2L415.0,404.8L411.6,409.3L407.5,406.5L409.5,411.8L415.5,416.4L413.9,421.8L417.8,428.4L436.6,441.6L438.0,448.1L436.3,450.6L431.3,449.3L430.5,454.2L419.3,460.1L423.7,466.7L422.0,469.9L425.3,471.8L423.7,476.1L418.9,470.8L400.3,473.2L389.9,477.8L379.0,473.1L378.9,476.9L373.6,480.8L374.7,478.2L367.3,473.0L351.0,471.6L345.3,467.8L342.5,470.3L346.2,471.4L345.5,473.1L328.6,473.8L326.7,470.4L327.9,460.2L331.8,449.1L339.3,439.6L325.1,434.4L312.9,434.7L309.5,428.4L306.4,427.6L309.3,419.0L302.0,412.9L303.1,408.7L307.0,406.5L306.6,403.6L300.2,395.9L301.4,392.1L297.6,388.9L301.7,386.8L303.9,381.1L299.3,370.3L313.2,367.9L314.7,366.3L313.4,362.8L318.6,359.8L317.5,354.4L312.2,352.2L318.6,349.9L321.3,335.3L324.1,334.0L318.0,332.2L321.7,325.0L335.4,323.9L338.2,327.9L337.0,330.4L340.4,331.0L339.6,327.0L341.3,326.3L344.0,327.7L344.2,332.6L343.8,324.4L347.3,319.4L357.9,320.3L363.1,326.8L367.6,328.2L358.7,320.4L351.2,318.3L350.0,316.1L353.2,314.8L349.9,313.1L350.9,309.7L345.9,308.7L353.3,304.9L345.5,295.7L340.6,295.9L340.4,298.9L342.2,291.2L343.4,294.9L369.1,297.6L371.2,303.3L368.3,305.8L383.1,309.4L387.9,307.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M615.2,767.3L620.7,765.6L619.5,768.1L623.3,771.4L648.8,771.8L647.8,775.8L649.6,777.4L658.3,773.1L658.1,776.8L655.1,780.2L630.9,781.4L630.4,777.8L624.7,775.4L609.2,773.0L610.7,765.1L612.7,767.6L613.2,763.3L615.2,767.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M673.4,769.1L671.8,765.3L674.6,759.9L673.4,769.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M600.9,752.3L598.5,750.8L598.8,746.4L601.9,749.7L600.9,752.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M684.5,758.3L683.3,751.6L692.2,744.6L690.4,751.1L684.5,758.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M659.0,743.3L657.6,741.2L661.1,741.0L659.0,743.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M685.7,742.8L684.1,741.6L685.8,739.8L685.7,742.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M624.9,739.5L623.8,737.4L627.3,737.1L624.9,739.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M649.9,736.6L648.3,736.5L652.5,734.3L649.9,736.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M670.0,739.0L671.7,735.2L676.8,734.4L670.0,739.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M670.2,733.1L668.7,729.4L671.4,731.4L670.2,733.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M639.7,731.0L637.0,730.6L640.0,727.9L639.7,731.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M643.4,733.2L641.3,729.4L644.9,726.4L645.5,730.9L643.4,733.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M641.6,721.3L640.8,719.4L643.5,719.8L641.6,721.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M639.3,718.2L634.9,714.8L639.5,716.1L639.3,718.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M653.3,718.7L654.1,715.8L659.3,714.5L653.3,718.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M609.1,714.4L607.5,712.7L610.0,712.7L609.1,714.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M671.8,713.9L667.4,715.7L663.0,713.4L666.2,711.5L671.8,713.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M562.9,711.6L564.6,714.2L561.7,715.5L558.0,710.3L559.4,708.6L562.9,711.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M631.6,706.9L634.6,710.0L634.6,714.5L630.2,710.0L631.6,706.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M608.2,709.8L607.7,707.2L609.5,707.2L608.2,709.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M557.9,697.3L561.0,705.4L553.1,702.6L556.6,695.4L557.9,697.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M653.4,702.6L650.5,701.0L652.8,698.5L650.5,692.6L655.8,693.6L655.8,699.5L653.4,702.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M558.4,692.7L556.7,693.1L556.9,690.2L559.4,686.5L558.4,692.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M629.7,687.4L627.4,688.1L625.7,683.4L629.7,687.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M608.2,686.1L620.4,691.1L622.0,701.2L627.7,703.3L627.6,707.2L624.5,707.0L618.5,697.3L611.3,696.7L610.6,693.0L603.5,686.6L597.0,686.7L605.2,681.6L608.2,686.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M659.6,675.8L663.8,682.2L654.5,680.7L657.6,677.6L654.1,680.4L650.0,678.0L656.9,673.2L659.6,675.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M545.8,663.1L544.4,666.7L549.0,673.7L544.9,671.6L540.7,664.4L545.8,663.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M643.1,658.0L641.6,663.3L639.9,660.2L639.2,663.0L636.3,661.5L636.2,658.4L643.1,658.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M645.9,648.4L643.1,646.5L647.6,646.8L645.9,648.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M631.3,642.7L626.6,642.1L629.0,638.7L631.3,642.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M658.1,616.5L663.0,618.8L664.2,625.0L658.7,628.0L659.3,634.8L654.8,640.1L637.7,633.5L631.8,637.4L624.7,635.3L619.1,640.7L612.8,639.9L615.4,648.2L624.6,654.2L612.8,649.6L613.7,653.3L617.5,655.4L617.4,659.3L607.3,651.3L606.5,654.6L613.2,659.9L606.7,658.3L605.4,652.5L598.2,648.5L598.4,642.5L592.8,646.5L592.9,657.8L606.1,678.2L601.0,680.2L603.9,678.0L598.9,673.8L596.9,677.5L601.3,681.6L591.6,686.0L605.6,691.1L605.9,693.8L619.0,702.1L618.9,714.4L616.8,714.9L609.1,705.9L599.8,709.8L602.9,716.2L607.2,716.9L609.1,720.8L603.1,724.2L601.2,722.5L602.3,720.3L595.2,717.4L603.5,745.1L593.5,736.0L591.0,746.2L585.0,730.7L581.2,731.5L580.3,738.1L577.1,735.8L574.7,727.5L577.0,723.8L576.2,720.5L566.6,710.6L571.5,701.7L575.5,703.2L581.6,698.8L597.7,708.4L599.6,707.3L597.4,706.0L604.0,703.1L589.5,696.0L589.0,698.7L581.4,696.9L574.1,699.3L570.9,696.3L567.3,699.5L564.5,690.5L560.0,687.3L560.8,684.2L566.2,685.8L567.2,682.1L561.6,679.7L560.0,683.7L555.5,675.8L552.2,674.5L550.4,667.4L547.2,665.7L551.0,666.7L554.3,662.6L552.6,658.3L558.9,655.7L561.0,647.6L565.4,644.4L564.4,637.3L575.3,636.9L582.0,630.5L595.1,630.3L596.5,625.3L611.2,624.5L622.1,619.9L640.2,627.8L652.6,626.0L656.4,623.0L654.3,616.4L658.1,616.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M491.0,586.0L497.4,587.0L487.6,585.5L491.0,586.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M499.4,584.8L518.8,594.4L521.0,599.7L509.6,590.7L494.2,583.9L499.4,584.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M486.4,579.4L497.5,581.9L483.1,580.3L486.4,579.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M456.0,545.8L463.2,552.6L461.0,553.0L454.1,543.6L456.0,545.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M454.5,541.0L456.4,543.4L452.8,541.3L454.5,541.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M449.2,538.5L449.9,545.8L446.4,538.5L448.2,538.3L446.7,532.0L449.2,538.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M454.5,537.7L448.7,534.3L450.7,530.4L454.5,537.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M486.6,500.3L505.9,515.9L519.2,518.0L526.2,514.0L528.7,517.3L527.7,522.3L531.2,523.7L529.1,527.0L536.9,530.7L532.3,531.1L528.7,539.8L523.0,534.2L516.2,532.9L509.2,535.0L492.6,529.8L485.8,530.8L481.6,536.3L476.7,530.9L472.7,532.1L471.8,540.8L478.7,548.5L479.0,555.8L498.7,573.8L499.4,578.2L505.9,586.0L484.7,571.9L476.3,572.7L475.4,568.3L461.5,555.8L463.6,552.6L468.2,554.2L457.0,543.8L456.0,533.5L446.9,527.6L444.1,536.7L439.5,541.8L432.3,524.3L448.2,524.4L451.8,519.8L455.6,524.9L461.9,525.9L463.7,525.0L464.3,517.9L471.1,515.7L470.4,506.5L481.2,501.7L481.6,498.9L486.6,500.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M526.2,514.0L519.2,518.0L505.9,515.9L485.9,499.5L482.6,491.2L478.4,490.7L485.5,487.3L484.4,477.4L489.1,474.2L484.0,471.1L495.1,470.2L496.0,463.8L498.3,462.5L508.0,469.3L523.6,469.0L526.8,467.6L525.2,465.4L526.7,461.9L537.7,461.0L540.5,457.4L545.6,460.0L552.7,456.6L556.6,450.0L561.4,449.1L572.5,449.1L578.4,454.8L587.1,453.2L589.0,457.1L598.0,462.1L596.0,467.1L587.2,469.7L582.6,475.0L567.8,504.7L561.5,505.2L558.1,508.7L539.3,507.7L534.5,512.1L526.2,514.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M408.1,487.5L413.7,495.0L436.2,499.0L430.3,504.7L435.3,507.5L432.0,511.6L434.7,512.1L434.1,516.5L439.8,520.7L436.2,521.7L437.7,521.3L433.2,517.1L430.5,519.9L425.8,517.4L425.0,520.8L410.8,524.8L408.7,529.8L415.4,537.2L410.2,543.2L413.2,555.9L434.5,571.5L441.5,593.0L454.2,607.3L461.8,611.2L479.0,611.5L479.8,614.7L474.7,618.7L475.3,622.1L512.0,642.4L520.8,654.8L517.9,663.2L512.5,659.7L509.3,651.2L497.7,648.2L499.7,646.0L492.6,647.3L485.1,663.8L496.8,673.0L497.1,683.4L487.0,687.4L486.6,696.4L477.6,708.7L470.0,706.6L470.0,701.2L473.1,699.7L475.1,694.2L473.5,691.3L479.6,688.7L480.4,684.7L470.6,657.4L465.2,658.2L457.8,652.4L458.7,648.4L454.9,641.7L447.0,644.2L449.3,640.0L442.5,638.1L436.1,627.6L424.1,627.5L402.9,608.7L399.2,602.0L390.0,599.8L391.0,595.8L380.0,583.9L372.5,560.4L348.5,550.2L336.5,563.2L327.0,565.9L329.3,556.5L323.8,557.4L315.5,551.4L318.2,540.4L313.2,538.2L310.9,533.6L318.8,530.8L320.4,527.0L314.4,515.8L327.1,512.3L332.7,513.8L343.0,500.6L343.2,505.9L349.9,509.5L353.6,515.8L352.9,512.4L357.8,504.7L358.2,499.6L362.5,504.4L369.6,502.6L372.9,506.3L371.5,498.7L374.7,496.3L378.8,498.6L378.9,490.6L388.5,493.0L391.5,488.2L410.0,485.5L408.1,487.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M378.4,588.8L378.1,592.1L372.4,590.5L378.4,588.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M362.0,630.2L364.1,634.0L361.8,635.7L363.8,635.7L367.5,645.3L363.9,651.9L365.5,657.1L363.0,678.8L353.3,676.0L353.7,681.4L350.5,685.4L346.7,685.2L344.2,681.0L342.5,683.5L341.8,673.4L345.1,661.4L342.3,660.5L343.4,652.6L341.8,646.1L337.8,643.7L338.7,635.9L345.9,637.5L356.0,627.8L362.0,630.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M468.2,703.5L460.4,719.6L464.4,731.0L461.4,733.4L460.3,739.8L450.9,736.6L445.5,729.7L439.1,728.8L426.3,719.3L417.5,717.6L413.3,711.8L415.7,705.4L418.8,703.5L422.3,706.2L429.1,701.6L437.1,707.6L470.3,700.3L468.2,703.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M565.9,257.5L565.7,247.7L571.6,243.2L572.1,236.7L577.6,229.7L593.1,225.3L593.6,229.4L602.4,234.9L604.6,241.4L613.9,244.5L624.8,237.5L623.2,222.5L640.5,217.3L662.2,231.0L668.8,228.3L680.2,230.7L679.9,233.1L685.8,236.4L683.0,245.8L687.2,248.0L692.4,261.5L681.2,273.2L670.4,272.2L663.4,276.0L647.6,265.3L637.0,263.2L633.5,257.1L620.5,261.8L583.5,257.9L565.6,266.2L564.6,255.7L565.9,257.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M663.8,276.1L670.4,272.2L681.2,273.2L690.4,264.0L693.7,266.9L699.6,265.8L701.5,269.2L713.2,269.2L712.2,273.3L714.6,275.7L722.6,271.7L732.2,273.0L739.9,277.8L740.1,282.8L737.9,285.4L741.7,291.4L737.3,297.5L743.0,301.1L742.7,304.7L747.0,311.1L756.1,315.3L754.7,321.7L767.3,323.8L766.6,327.2L771.8,329.9L771.6,332.5L761.2,339.1L748.3,336.5L745.9,340.7L751.4,346.1L750.0,348.8L751.5,357.9L755.0,363.0L740.2,363.8L733.5,374.3L734.9,381.9L733.3,383.9L726.6,378.0L711.9,380.9L708.0,374.5L701.5,380.0L699.3,376.2L692.8,373.9L685.6,374.9L683.8,378.7L683.1,375.5L675.5,375.4L674.1,371.5L649.0,367.1L624.6,368.4L618.4,375.1L611.8,374.4L610.0,376.9L611.3,363.7L602.9,358.7L616.6,347.4L616.5,340.9L608.9,318.2L624.5,319.6L643.6,309.4L644.7,313.3L649.2,313.0L648.0,308.9L645.0,308.8L648.8,302.8L649.2,295.7L667.4,285.6L661.0,284.2L663.8,276.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M565.5,284.5L563.7,285.5L566.3,275.0L565.5,284.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M635.3,260.9L647.6,265.3L663.8,276.1L661.0,284.2L667.4,285.6L649.2,295.7L648.8,302.8L645.0,308.8L648.0,308.9L649.2,313.0L644.7,313.3L643.6,309.4L624.5,319.6L608.9,318.2L606.2,311.1L596.2,308.0L595.0,300.0L597.7,296.8L593.0,291.4L583.4,291.8L569.4,286.4L565.5,271.0L565.6,266.2L570.8,262.4L583.5,257.9L620.5,261.8L633.5,257.1L635.3,260.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M498.6,462.5L491.3,454.1L494.9,444.3L507.5,441.8L521.8,426.7L532.3,429.0L537.8,424.1L543.4,428.8L543.0,433.7L548.4,434.5L553.4,429.2L563.2,431.5L566.0,428.4L575.6,428.1L592.2,436.8L584.1,453.9L577.5,454.5L572.5,449.1L558.7,449.4L546.0,459.8L540.5,457.4L537.7,461.0L526.7,461.9L525.2,465.4L526.8,467.6L523.3,469.0L508.0,469.3L498.6,462.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M561.5,636.0L557.7,631.5L555.1,621.0L557.1,612.4L560.0,612.7L561.3,607.2L588.1,600.6L597.0,608.7L600.6,616.0L599.3,625.0L596.0,625.8L595.2,630.2L582.0,630.5L575.3,636.9L561.5,636.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M270.0,383.6L269.2,380.9L272.3,381.2L273.2,378.3L281.1,380.3L283.0,378.1L286.6,383.6L297.4,386.3L293.7,393.3L294.6,395.8L304.7,399.2L307.0,406.5L302.4,411.3L299.5,410.3L296.0,415.6L297.6,424.8L290.8,426.5L280.1,419.3L279.4,410.3L273.7,415.7L267.3,414.9L267.6,407.5L252.3,401.6L249.7,395.1L245.3,397.2L240.9,394.5L239.0,387.8L253.6,380.9L255.0,384.1L263.0,385.0L268.9,381.5L270.0,383.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M300.5,410.0L304.4,417.2L309.3,419.0L306.4,427.6L296.6,425.6L298.2,422.6L295.5,416.6L300.5,410.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M519.8,595.6L522.0,593.4L520.2,585.9L523.2,583.9L524.1,578.8L527.9,576.3L530.6,579.1L529.5,571.5L553.8,589.0L547.3,591.0L548.3,595.7L543.9,597.9L542.7,593.7L540.8,594.3L534.4,604.9L536.5,606.8L535.9,613.1L519.8,595.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M260.5,381.6L268.9,381.5L262.9,385.0L254.8,384.0L253.6,380.9L260.5,381.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M295.8,355.5L289.9,359.2L284.7,356.4L293.7,351.0L297.5,352.4L295.8,355.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M289.8,350.1L290.2,353.1L283.3,356.0L283.0,350.2L289.8,350.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M281.6,335.5L280.2,336.0L284.2,333.9L281.6,335.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M315.4,331.1L321.3,335.3L321.4,341.2L318.5,350.1L313.6,349.7L312.2,352.2L317.5,354.4L318.6,359.8L313.4,362.8L314.7,366.3L313.2,367.9L299.3,370.3L303.9,378.6L301.7,386.8L297.6,388.9L301.4,392.1L300.2,395.9L293.7,393.9L297.3,386.2L286.6,383.6L283.1,378.1L281.1,380.3L273.3,378.3L271.6,381.3L254.8,377.0L261.8,375.2L269.8,379.1L264.5,375.7L268.0,375.0L259.2,372.7L267.7,373.3L262.3,370.1L265.8,369.0L264.9,366.1L275.0,354.4L289.8,359.6L297.8,353.2L292.9,349.6L295.0,345.2L288.9,344.2L288.8,339.5L284.1,342.5L287.7,348.4L282.9,350.2L282.9,356.5L274.9,354.1L277.8,342.2L283.9,342.3L298.1,331.9L315.4,331.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M287.4,189.7L285.1,191.4L285.6,185.0L287.4,189.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M287.0,175.5L288.4,177.8L285.7,176.9L285.0,180.8L284.2,173.9L287.0,175.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M289.6,176.7L287.2,171.4L290.6,173.4L289.6,176.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M291.6,173.2L288.7,170.8L294.0,168.8L291.6,173.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M284.3,166.1L281.4,164.6L281.3,160.2L284.3,166.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M292.1,160.1L288.7,157.9L294.3,154.0L294.4,159.1L292.1,160.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M282.1,143.7L278.9,145.2L278.6,142.7L282.1,143.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M281.2,127.4L278.9,125.8L286.3,125.6L281.2,127.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M283.6,123.8L282.5,121.5L284.6,122.1L283.6,123.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M293.8,117.3L291.3,116.4L296.6,115.2L293.8,117.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M297.2,116.0L296.6,112.9L299.6,111.9L300.4,113.9L297.2,116.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M304.5,112.3L300.4,111.3L305.9,111.8L304.5,112.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M313.0,105.6L311.5,105.3L316.2,104.6L313.0,105.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M315.6,102.9L313.7,101.3L316.6,101.3L315.6,102.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M327.3,98.8L324.1,97.6L328.3,95.2L330.2,97.4L327.3,98.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M331.9,96.9L329.6,96.1L333.8,95.6L331.9,96.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M336.4,94.0L334.0,93.3L338.6,93.8L336.4,94.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M342.2,93.6L340.1,91.0L345.5,92.9L342.2,93.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M344.3,89.7L342.9,89.4L347.2,89.1L344.3,89.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M338.2,88.7L331.4,87.6L336.9,86.1L338.2,88.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M344.0,87.1L340.2,86.2L352.0,81.6L356.1,83.7L344.0,87.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M349.6,77.7L349.3,80.5L340.1,81.0L349.6,77.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M396.2,60.6L391.3,60.8L388.9,57.8L396.2,60.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M399.5,47.2L397.6,47.3L401.9,46.0L399.5,47.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M408.6,47.5L405.6,46.9L409.1,43.7L411.4,46.1L408.6,47.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M407.2,43.6L410.4,34.7L414.8,39.2L407.2,43.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M405.4,33.5L401.6,33.7L404.0,31.6L405.4,33.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M415.5,26.9L413.2,27.0L421.8,24.2L415.5,26.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M412.1,23.8L415.8,19.1L417.5,21.8L412.1,23.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M419.9,19.1L418.5,18.3L421.2,17.6L419.9,19.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M445.7,-3.2L444.6,0.0L441.0,-1.9L445.7,-3.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M462.4,-21.9L457.6,-22.5L464.2,-22.4L462.4,-21.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M420.7,-19.7L422.5,-24.5L426.3,-26.4L425.9,-23.2L420.7,-19.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M431.3,-27.1L426.4,-24.7L428.8,-28.0L431.3,-27.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M440.6,-30.2L443.6,-30.2L431.5,-26.0L433.6,-30.8L440.6,-30.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M459.3,-33.0L444.7,-28.1L450.7,-34.1L461.8,-35.4L459.3,-33.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M483.6,-34.4L478.1,-34.0L482.2,-37.4L484.7,-35.8L483.6,-34.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M496.2,-42.7L490.8,-42.1L494.1,-45.2L496.2,-42.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M498.4,-43.6L495.6,-46.6L501.8,-45.5L498.4,-43.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M476.3,-42.7L471.9,-37.2L479.6,-45.1L484.3,-44.9L486.4,-40.3L475.3,-33.4L464.6,-32.4L468.4,-36.7L458.6,-30.4L464.7,-36.2L462.0,-37.1L466.8,-42.2L471.4,-41.4L466.8,-43.0L470.0,-47.4L474.9,-47.7L474.2,-43.5L476.3,-42.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M486.0,-45.8L481.1,-47.9L487.1,-47.4L486.0,-45.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M465.6,-45.0L465.8,-40.9L459.9,-38.3L455.4,-39.4L461.5,-42.6L450.0,-39.0L447.7,-41.0L452.3,-44.5L461.4,-44.2L458.9,-47.6L460.4,-48.9L465.6,-45.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M468.0,-46.5L466.3,-48.1L468.7,-51.1L479.1,-55.7L468.0,-46.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M505.4,-61.3L509.0,-63.1L513.1,-59.3L509.6,-54.6L511.8,-53.4L503.3,-53.4L495.8,-48.8L496.5,-50.6L490.2,-50.3L497.2,-53.5L491.9,-54.1L496.6,-54.8L492.3,-56.1L495.9,-56.5L492.9,-58.3L502.8,-59.0L497.4,-60.7L499.8,-61.7L504.5,-59.8L502.4,-63.3L505.4,-61.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M527.5,-65.6L524.8,-62.3L511.7,-63.1L516.5,-63.8L515.2,-66.0L522.9,-65.6L518.6,-68.1L525.0,-65.4L524.0,-70.3L530.4,-67.9L527.5,-65.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M559.1,-68.5L556.9,-69.5L560.1,-70.8L559.1,-68.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M720.5,-67.2L718.5,-67.4L720.7,-70.9L724.4,-68.9L720.5,-67.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M539.4,-69.5L537.5,-69.3L545.3,-72.4L539.4,-69.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M562.8,-73.9L566.5,-73.2L560.4,-72.9L562.8,-73.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M534.7,-73.8L541.6,-73.0L532.6,-68.1L524.5,-71.5L533.3,-75.5L534.7,-73.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M525.6,-75.8L529.5,-75.2L523.8,-73.0L525.6,-75.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M561.7,-77.9L560.9,-74.5L553.9,-75.5L557.3,-78.8L561.7,-77.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M532.7,-76.1L530.0,-77.1L533.5,-79.3L532.7,-76.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M549.0,-75.7L543.0,-74.7L538.9,-79.2L549.0,-75.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M578.3,-79.6L577.0,-82.4L579.6,-81.7L578.3,-79.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M597.1,-81.2L600.4,-79.4L588.9,-81.3L597.1,-81.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M610.5,-87.2L611.4,-83.8L604.1,-79.9L597.4,-83.0L606.9,-88.2L610.5,-87.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M615.4,-85.6L611.2,-90.1L619.9,-88.1L615.4,-85.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M608.0,-92.2L596.2,-85.8L585.0,-84.4L587.1,-87.7L581.5,-88.9L596.8,-88.8L596.2,-91.5L599.7,-89.2L605.8,-94.2L608.0,-92.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M618.7,-95.3L615.5,-97.3L622.0,-96.3L618.7,-95.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M631.8,-98.1L628.9,-99.0L632.7,-99.7L631.8,-98.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M288.3,131.8L281.3,129.8L289.6,124.0L313.5,125.1L285.0,124.5L289.5,121.5L284.0,119.1L285.0,116.7L290.5,121.7L292.0,120.0L290.0,117.4L306.3,120.5L298.6,116.6L305.4,112.8L309.5,119.3L306.9,112.9L312.5,111.0L315.6,111.8L317.7,115.7L316.6,119.1L318.4,119.8L318.1,115.3L325.0,116.2L317.2,114.3L313.8,110.2L304.5,110.9L311.5,109.7L304.4,107.9L319.2,106.1L327.2,109.7L331.4,107.9L324.9,106.7L337.9,105.1L324.1,104.2L328.7,102.5L316.9,104.3L318.3,98.3L335.1,98.2L345.0,105.9L333.2,97.2L336.9,94.9L344.7,101.4L342.6,98.6L347.0,97.9L341.9,98.2L338.1,94.6L351.9,92.5L343.7,90.3L353.0,86.1L360.5,88.3L356.5,88.5L355.6,85.7L364.4,82.3L375.1,91.1L371.4,87.6L386.7,86.5L384.0,85.1L386.9,82.9L382.2,84.1L396.3,78.3L389.8,76.1L396.9,72.7L393.6,70.3L380.7,77.9L389.6,77.1L387.2,79.5L371.4,85.4L366.9,81.4L372.3,78.9L362.8,81.4L362.5,78.9L373.9,74.8L370.3,73.4L373.5,68.5L382.1,64.5L379.3,62.8L385.5,64.1L382.2,62.2L387.7,58.5L393.1,62.1L392.1,65.4L401.1,59.0L397.3,59.3L396.0,55.8L409.8,50.3L392.4,55.2L394.8,53.5L393.0,52.7L400.6,51.2L393.5,51.6L416.9,45.5L422.5,41.2L414.3,45.5L412.3,44.8L417.9,42.6L410.3,43.2L415.4,39.5L414.4,37.9L417.1,38.5L412.2,33.0L414.9,31.0L419.8,33.2L415.6,30.5L417.7,26.4L426.6,28.1L422.8,23.3L417.8,22.7L433.2,18.6L433.2,21.9L443.8,16.5L424.0,19.8L433.0,17.0L423.9,16.5L426.6,14.5L423.0,11.7L436.3,9.7L427.7,11.1L427.0,8.2L433.0,8.9L427.6,7.0L441.0,5.3L433.2,1.8L451.7,-0.7L445.9,-1.9L447.4,-3.7L454.5,-3.0L451.3,-4.7L457.5,-5.0L458.6,-2.2L459.1,-4.9L463.3,-4.5L467.6,-1.6L465.6,-4.9L471.9,-4.2L460.0,-6.0L461.5,-7.5L447.6,-5.7L452.2,-10.2L457.5,-10.3L454.0,-12.0L459.5,-13.9L461.6,-13.0L457.7,-11.5L466.6,-11.5L470.1,-6.5L468.4,-11.6L474.7,-13.6L463.3,-12.7L462.0,-15.0L464.1,-17.5L473.6,-16.8L465.5,-19.4L454.6,-15.7L459.5,-18.0L454.6,-19.6L474.2,-22.5L475.8,-24.7L463.8,-25.2L473.9,-26.6L476.0,-30.4L480.3,-21.6L485.2,-19.4L480.1,-24.4L485.6,-23.2L482.9,-25.2L489.1,-26.0L482.5,-26.1L485.1,-28.9L478.3,-31.1L490.7,-27.6L480.3,-32.8L482.1,-33.3L496.6,-33.3L500.4,-28.6L501.4,-30.3L497.7,-33.3L504.3,-33.1L500.6,-34.4L504.3,-34.7L503.9,-37.1L495.1,-35.0L484.6,-36.8L493.5,-41.5L506.1,-40.3L498.3,-42.8L508.1,-42.8L502.4,-44.6L509.0,-45.8L501.6,-46.4L505.4,-51.3L514.5,-52.5L511.7,-55.6L516.3,-60.6L523.8,-55.1L529.5,-55.6L519.8,-59.7L526.9,-62.2L536.1,-56.4L532.4,-54.8L537.2,-54.3L536.8,-57.3L529.3,-60.0L533.4,-62.5L528.4,-63.7L533.8,-67.6L542.8,-68.5L538.7,-58.5L541.4,-59.2L544.0,-66.2L552.0,-72.5L554.6,-69.9L552.0,-60.3L545.6,-55.1L555.3,-62.8L562.1,-60.7L555.6,-64.3L566.3,-71.8L562.8,-69.5L565.5,-67.9L570.1,-73.6L584.1,-66.8L578.8,-73.9L584.1,-75.9L577.7,-74.5L568.3,-78.1L573.8,-80.5L587.6,-80.0L587.3,-77.5L592.1,-76.0L588.1,-77.3L589.4,-79.3L599.4,-78.1L587.4,-74.1L597.9,-75.7L605.5,-71.7L609.5,-73.5L603.1,-75.3L611.6,-83.4L623.9,-84.2L620.4,-87.0L624.1,-89.9L630.5,-88.3L622.0,-92.1L624.4,-94.2L628.8,-92.0L629.3,-96.8L635.6,-96.7L640.2,-92.7L641.6,-96.8L651.7,-94.2L636.7,-85.5L640.1,-83.0L636.8,-81.8L635.3,-74.6L640.0,-75.6L644.6,-80.0L643.2,-81.6L663.0,-96.0L665.8,-95.6L665.1,-91.1L659.0,-88.7L664.5,-88.7L661.9,-82.0L671.1,-84.7L671.6,-88.0L675.3,-87.2L672.9,-91.1L680.6,-92.7L673.0,-96.5L682.1,-100.3L698.0,-96.7L692.7,-92.3L684.2,-92.4L690.6,-90.9L682.0,-87.9L693.4,-90.5L685.6,-84.8L694.2,-85.4L688.9,-74.6L692.3,-77.2L692.2,-82.6L697.5,-90.8L703.3,-94.6L710.4,-93.6L712.0,-89.3L719.7,-91.0L718.0,-88.1L725.3,-90.4L729.7,-87.7L723.6,-86.2L733.8,-86.3L740.2,-84.1L742.6,-80.2L725.2,-74.8L698.7,-77.1L717.7,-72.3L712.3,-69.6L718.9,-70.8L714.5,-64.7L726.9,-65.5L726.5,-70.0L728.7,-70.2L730.9,-67.5L729.5,-65.0L731.8,-68.6L740.2,-65.6L737.6,-61.7L725.0,-64.7L726.8,-63.0L725.3,-61.0L711.4,-56.4L710.4,-51.7L707.0,-49.5L702.0,-52.4L711.2,-60.5L707.8,-65.9L694.9,-68.9L686.9,-75.2L681.2,-74.9L671.8,-70.9L661.2,-71.5L652.6,-65.9L647.9,-55.0L648.7,-48.5L639.1,-44.3L634.1,-38.5L617.2,-44.7L603.6,-39.7L589.4,-41.7L576.7,-55.7L570.4,-56.7L565.3,-53.9L565.8,-49.6L548.8,-49.8L553.2,-43.5L546.3,-37.6L550.8,-36.1L546.0,-32.6L513.4,-36.8L514.5,-28.4L509.7,-23.0L498.9,-26.6L489.3,-21.9L485.4,-14.8L478.0,-10.0L482.8,-5.8L482.7,-0.4L465.2,12.7L467.1,17.5L450.1,21.1L452.4,28.6L449.9,41.1L435.2,58.9L443.2,61.7L443.9,68.6L441.0,72.7L427.6,70.9L417.9,73.9L408.3,83.3L409.3,85.7L404.8,90.9L408.9,97.1L406.4,100.1L406.7,107.5L411.1,115.5L408.1,128.5L421.0,137.4L417.1,144.8L409.6,146.2L416.5,159.8L414.0,169.1L402.6,174.4L404.2,177.7L400.0,180.5L402.3,189.0L399.2,197.3L395.9,197.7L394.5,192.4L384.1,189.6L380.4,177.2L381.9,174.1L383.6,175.4L382.6,173.0L378.9,174.4L381.4,180.3L379.6,182.2L374.5,177.3L377.6,180.6L374.8,181.6L379.7,187.4L374.7,194.1L368.4,196.1L362.5,192.2L365.2,195.4L339.0,216.6L317.9,219.7L310.5,217.7L313.5,213.6L300.2,210.1L290.4,201.2L292.1,194.2L303.0,199.1L301.0,197.7L302.1,196.1L311.0,193.7L300.6,197.5L297.6,193.2L308.2,187.3L299.9,187.0L308.3,181.5L304.6,180.8L298.8,186.5L298.1,184.2L302.7,183.4L296.6,183.6L294.0,185.2L297.5,186.6L292.5,185.7L291.4,188.3L285.5,182.6L290.9,177.2L290.5,182.3L292.3,178.5L305.4,174.4L299.8,176.7L294.7,174.7L299.5,171.6L303.6,163.4L311.3,160.6L309.2,168.8L311.6,161.5L319.6,158.6L317.7,156.3L303.9,160.6L295.5,171.0L292.0,167.0L295.3,161.2L289.6,167.5L284.9,162.2L287.5,157.8L294.8,159.5L294.7,153.7L287.0,157.1L281.1,151.2L290.0,155.3L286.5,151.8L291.8,149.4L283.5,150.4L282.5,145.3L310.4,142.6L316.8,144.2L319.7,149.7L320.6,147.6L317.7,143.9L325.2,141.8L323.0,139.1L327.8,134.6L323.1,137.4L322.6,142.4L310.0,140.9L312.4,136.5L308.8,143.1L289.4,144.6L281.5,139.9L293.5,137.5L283.1,138.5L281.5,136.2L296.6,135.2L284.7,133.4L288.3,131.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M649.9,-99.9L656.8,-98.3L645.6,-95.6L640.3,-98.0L649.9,-99.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M526.8,426.1L522.0,416.5L512.7,413.0L509.7,414.9L505.7,411.7L506.9,406.6L501.8,407.8L492.2,403.7L494.2,409.1L487.8,411.7L480.1,404.0L484.4,400.4L482.5,398.3L465.5,395.4L461.9,389.6L455.8,393.3L459.5,383.4L451.8,370.0L454.6,363.9L450.6,356.0L452.5,351.7L443.8,344.6L448.1,337.7L446.0,324.2L450.4,325.1L452.0,321.4L447.1,321.6L445.2,318.6L479.6,310.6L486.1,303.6L512.7,296.5L525.4,300.6L526.4,302.4L518.9,298.8L521.9,306.1L525.1,307.8L540.9,305.8L533.9,310.1L543.5,306.2L572.0,308.9L597.5,306.9L608.1,312.6L616.5,340.9L616.6,347.8L607.0,353.1L602.9,358.7L611.3,363.7L609.5,375.6L612.9,384.8L620.2,393.7L616.9,394.5L619.6,399.1L617.6,404.3L612.4,405.2L594.3,424.9L594.7,434.7L598.0,438.7L575.6,428.1L566.0,428.4L563.2,431.5L553.4,429.2L548.4,434.5L543.0,433.7L543.4,428.8L537.8,424.1L532.3,429.0L526.8,426.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M49.3,612.4L63.1,613.7L68.1,609.5L77.7,610.5L78.7,617.2L84.9,619.6L71.8,633.3L74.0,636.8L74.2,645.3L73.0,651.5L70.1,653.5L72.9,657.6L70.3,666.0L61.2,666.2L66.3,677.3L71.4,681.9L65.9,689.7L64.9,695.9L69.0,702.6L71.8,701.8L70.5,706.2L66.1,707.2L61.3,717.8L63.3,726.7L54.7,731.0L41.3,728.6L35.6,730.8L38.9,720.5L38.8,697.7L41.1,696.8L39.4,694.3L32.0,696.6L30.4,690.6L34.0,691.5L36.7,688.2L35.6,683.8L33.2,689.5L26.6,687.7L29.0,673.6L33.8,667.5L41.3,641.4L37.4,613.2L41.6,608.3L49.4,605.7L51.5,608.1L49.3,612.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M559.9,507.6L567.8,504.7L587.1,469.9L593.9,468.6L602.6,460.6L608.5,463.7L627.5,464.3L633.9,470.2L641.0,465.2L655.6,463.6L658.5,458.6L665.4,456.7L670.6,459.3L675.9,471.4L689.7,488.0L692.7,501.3L689.8,510.0L691.2,519.9L689.5,522.0L694.3,528.6L700.5,530.9L709.9,525.8L715.0,526.3L717.4,528.3L717.5,533.5L715.6,540.6L707.1,540.6L706.7,536.2L703.6,537.6L705.0,540.6L702.0,544.6L705.8,544.0L701.6,545.6L701.6,548.0L704.6,545.6L699.4,553.0L698.5,566.8L689.1,564.7L686.8,560.5L671.2,557.0L655.5,561.0L648.9,567.8L642.6,569.8L626.6,566.4L620.8,568.3L607.4,564.1L601.1,565.4L597.2,563.3L600.7,558.6L590.5,549.6L595.0,545.9L590.1,543.2L584.6,548.9L582.2,545.1L571.7,541.5L571.2,539.6L574.6,538.8L571.2,536.0L573.8,532.6L561.3,524.6L561.2,517.6L551.7,509.1L559.9,507.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M690.3,491.0L675.9,471.4L670.6,459.3L664.4,455.9L683.9,452.1L689.8,457.5L702.4,460.0L705.7,464.7L708.4,463.5L710.4,468.8L709.1,476.7L713.2,480.5L716.1,479.5L716.0,488.8L722.6,492.0L721.7,499.0L725.9,501.9L716.9,502.9L714.3,499.9L709.8,503.0L709.5,498.6L705.8,500.2L705.4,511.7L701.6,512.9L701.7,515.6L697.5,518.9L697.5,523.6L692.0,525.3L689.5,522.0L691.2,519.9L689.8,510.0L692.7,501.3L690.3,491.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M436.2,499.0L450.8,501.9L456.5,496.9L474.1,494.3L480.6,490.5L487.2,500.3L481.6,498.9L481.2,501.7L470.4,506.5L471.1,515.7L464.3,517.9L463.7,525.0L461.9,525.9L455.6,524.9L451.8,519.8L448.4,524.3L435.9,525.4L433.9,523.6L439.8,520.7L434.1,516.5L434.7,512.1L432.0,511.6L435.3,507.5L430.3,504.6L436.2,499.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M221.1,683.7L218.3,686.6L215.5,685.0L220.9,679.6L222.6,681.8L221.1,683.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M251.4,664.6L255.5,665.2L248.2,676.1L243.3,673.6L241.7,669.0L235.8,669.0L246.8,660.3L251.4,664.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M269.5,659.1L269.6,662.8L261.1,657.7L269.5,659.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M55.5,566.5L62.4,567.3L69.8,573.0L90.8,569.2L114.4,575.3L130.8,572.6L138.5,576.4L145.8,574.6L153.6,577.8L162.6,575.4L169.6,578.6L168.8,583.9L180.9,585.8L184.4,590.4L188.7,588.7L193.2,592.5L206.0,592.6L206.8,588.4L218.1,591.9L219.8,598.6L224.5,597.0L229.7,600.8L234.2,598.7L239.0,601.3L247.9,597.8L252.7,601.5L249.1,604.0L250.6,612.0L246.0,616.2L234.2,622.5L231.4,626.8L211.6,632.6L206.5,638.3L210.0,640.6L203.7,644.3L188.5,670.1L190.9,681.8L197.9,688.4L185.1,699.0L178.9,713.8L181.5,716.5L170.7,717.6L165.1,722.2L156.5,737.8L152.6,735.1L145.3,739.1L116.5,738.0L112.4,743.2L102.8,745.6L95.1,755.5L87.3,750.9L83.6,744.2L85.2,743.1L80.6,738.6L82.0,734.6L78.0,730.8L71.3,725.8L63.6,726.8L61.3,717.8L66.1,707.2L70.5,706.2L71.8,701.8L69.0,702.6L64.9,695.9L66.0,689.1L71.3,681.1L66.3,677.3L61.2,666.2L70.3,666.0L72.9,657.6L70.1,653.5L73.0,651.5L74.2,645.3L74.0,636.8L71.8,633.3L84.9,619.6L78.7,617.2L77.7,610.5L68.2,609.5L63.3,613.7L58.4,611.7L50.5,614.0L49.1,611.5L51.5,608.1L49.4,605.7L37.6,612.4L37.1,606.6L42.7,600.8L37.6,603.2L41.4,598.9L36.9,598.0L40.2,592.3L34.7,596.6L36.9,590.0L33.8,591.3L32.0,586.2L30.1,586.9L32.3,580.5L47.1,575.2L48.3,571.5L55.5,566.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M491.2,248.0L483.9,263.0L483.9,253.8L496.0,235.3L491.2,248.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M515.4,245.9L513.9,230.8L523.8,221.5L529.5,221.6L526.0,226.6L524.3,237.9L518.8,240.5L515.4,245.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M398.7,221.0L397.1,218.5L401.2,218.4L398.7,221.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M402.5,216.4L395.3,216.2L400.2,212.4L402.5,216.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M507.1,187.8L508.5,188.2L503.3,184.8L507.1,187.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M579.0,-38.3L596.9,-33.8L611.8,-23.0L608.5,-21.0L607.6,-11.3L613.5,-10.1L610.1,-3.8L617.8,4.9L615.5,10.8L611.4,13.4L611.7,16.8L620.6,28.9L604.4,29.2L601.4,31.7L593.7,26.7L594.0,30.4L588.2,28.5L586.7,33.3L589.5,35.7L578.2,31.1L585.9,35.5L579.8,35.8L582.9,37.5L581.1,39.0L573.0,39.5L576.3,42.8L569.3,40.5L575.7,45.3L565.3,53.0L570.0,54.5L570.1,57.0L566.7,56.3L575.0,62.4L564.0,69.7L560.8,76.3L545.3,82.7L541.9,87.0L537.0,84.1L537.8,86.5L534.5,86.3L530.6,93.1L527.5,90.8L516.9,97.6L522.0,98.6L515.4,102.9L506.4,97.7L511.7,104.1L509.6,105.8L512.6,107.2L506.0,111.2L499.9,110.0L500.7,114.0L505.7,116.2L503.1,116.3L500.3,123.2L502.9,130.8L496.6,128.7L498.9,129.6L495.9,131.6L498.0,135.5L495.9,136.6L497.9,138.3L496.8,147.6L500.8,155.5L504.9,155.2L507.0,158.6L510.9,156.1L515.8,162.6L522.5,164.8L517.3,163.1L526.2,168.3L530.7,173.3L527.0,175.5L530.7,176.9L516.5,183.4L517.6,185.4L513.8,184.0L513.4,186.8L507.6,185.2L509.0,182.0L504.6,179.0L504.6,175.3L502.0,178.5L503.7,181.0L503.2,177.8L505.0,177.2L504.0,178.7L508.0,181.9L507.0,184.2L500.9,179.0L501.4,183.6L486.2,180.1L484.8,182.9L476.8,182.9L492.2,185.7L488.7,183.5L491.3,183.1L500.7,189.0L500.3,187.1L520.0,186.9L519.4,184.4L523.2,187.2L516.7,187.4L517.3,191.8L512.1,194.0L509.9,198.4L505.8,190.9L505.2,197.4L500.3,201.0L494.7,201.1L496.6,202.4L492.6,204.3L479.9,204.1L493.0,207.6L483.8,207.8L490.1,210.4L491.0,214.5L487.3,219.7L490.1,222.2L485.2,219.7L488.8,225.7L483.9,222.0L489.0,226.6L488.7,232.3L484.7,237.0L486.8,242.7L474.1,265.9L469.4,263.4L453.5,264.2L454.7,267.4L450.9,266.8L445.0,272.3L447.8,279.4L444.6,283.1L423.2,282.7L422.0,278.7L424.6,275.6L413.9,260.9L420.2,262.5L416.9,258.1L421.8,257.0L421.5,252.6L412.1,245.8L407.6,233.3L404.4,233.9L403.9,226.8L400.7,226.9L400.0,223.1L403.9,214.2L402.3,211.6L397.5,213.8L392.4,210.9L392.3,198.8L390.1,196.2L393.8,192.5L395.9,197.7L399.2,197.3L402.3,189.0L400.0,180.5L404.2,177.7L402.6,174.4L414.3,168.8L416.6,158.9L409.6,146.2L417.1,144.8L421.0,137.4L408.1,128.5L411.1,115.5L406.7,107.5L406.4,100.1L408.9,97.1L404.8,90.9L409.3,85.7L408.3,83.3L422.4,71.8L441.0,72.7L443.9,68.6L443.2,61.7L435.2,58.9L449.9,41.1L452.4,28.6L450.1,21.1L467.1,17.5L465.2,12.7L482.7,-0.4L482.8,-5.8L478.0,-10.0L485.4,-14.8L489.3,-21.9L498.9,-26.6L509.7,-23.0L514.5,-28.4L513.4,-36.8L546.1,-32.7L550.8,-36.1L546.3,-37.6L553.2,-43.5L548.8,-49.8L562.0,-49.0L562.9,-46.2L579.0,-38.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M330.0,474.3L345.5,473.1L346.2,471.4L342.5,470.3L345.3,467.8L351.0,471.6L357.5,471.3L364.5,476.4L361.3,486.1L368.4,487.0L372.5,491.1L377.7,487.5L379.0,498.2L372.7,497.0L371.4,500.9L373.7,505.2L372.0,506.5L369.7,502.6L363.2,504.6L358.0,499.7L352.9,516.0L349.9,509.5L343.2,505.9L343.0,500.6L332.7,513.8L319.4,514.7L313.8,508.3L314.2,501.4L311.2,500.6L305.2,502.3L304.3,506.6L299.9,508.3L302.8,502.9L302.3,497.4L317.1,480.4L315.5,478.7L317.5,475.4L322.0,477.2L330.0,474.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M175.4,397.6L171.5,400.3L166.4,398.3L171.2,395.6L175.4,397.6Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M120.8,335.7L116.4,338.2L113.5,331.8L122.7,333.9L120.8,335.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M82.0,286.7L87.1,287.8L93.7,297.2L89.9,302.1L96.4,301.0L97.7,307.5L93.4,303.9L96.0,310.0L90.6,311.4L87.5,316.1L82.3,314.1L77.3,316.0L70.1,306.7L64.8,314.1L56.1,312.0L49.9,305.6L57.3,302.4L54.2,299.8L60.8,298.3L64.8,291.4L82.0,286.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M104.1,281.8L99.9,280.9L99.2,276.2L103.1,275.9L104.1,281.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M86.1,271.1L86.9,276.7L82.5,278.2L83.6,273.5L79.2,275.9L80.4,271.7L86.1,271.1Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M89.2,272.3L87.1,272.9L86.8,270.4L93.6,264.5L89.2,272.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M92.1,255.7L94.4,257.5L91.6,260.4L81.8,260.6L87.9,259.0L84.8,259.3L88.2,256.1L82.6,253.4L85.9,252.2L92.1,255.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M77.8,254.0L75.9,254.0L80.2,251.4L77.8,254.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M82.6,245.4L80.3,243.6L83.6,242.8L82.6,245.4Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M62.3,245.2L60.7,244.7L62.8,242.4L62.3,245.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M66.7,235.5L66.8,241.1L63.9,241.1L63.1,234.4L66.7,235.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M65.8,234.0L63.4,232.4L67.0,232.5L65.8,234.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M85.7,229.9L86.0,236.3L94.2,238.8L88.0,243.2L87.7,239.4L82.7,239.9L79.7,236.4L82.8,236.3L74.4,232.9L77.0,229.0L81.6,231.0L82.1,227.1L85.7,229.9Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M67.3,227.0L69.4,228.3L67.9,231.3L61.0,229.3L67.3,227.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M84.6,210.7L82.4,213.6L85.2,214.3L77.3,217.4L81.2,216.8L79.9,220.8L76.5,221.2L77.8,218.2L76.2,218.0L75.3,223.6L71.1,226.1L68.4,223.8L73.6,221.8L68.6,219.8L69.9,213.7L73.0,216.8L75.1,214.6L74.2,212.0L83.5,206.9L84.6,210.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M120.8,335.8L135.2,332.8L139.4,335.2L137.8,331.9L140.1,331.2L143.2,334.3L146.4,332.8L142.0,332.5L139.3,327.8L143.0,323.6L140.3,322.6L140.2,319.2L144.5,311.4L137.2,314.5L130.0,304.4L134.5,295.3L140.8,293.2L131.1,292.7L124.1,298.2L116.6,294.7L116.7,300.4L108.5,295.7L106.6,297.4L108.4,301.5L106.9,301.1L102.8,292.5L112.7,280.4L107.4,275.5L108.0,269.7L115.0,270.0L108.4,268.5L108.9,265.4L106.3,271.4L100.5,271.8L100.4,267.9L107.3,261.5L105.3,262.5L98.3,267.9L99.2,274.2L96.8,283.7L92.2,285.3L95.8,267.2L93.9,268.3L96.9,263.7L95.3,264.2L95.8,260.2L104.0,255.7L98.8,256.5L103.8,248.2L93.9,256.1L88.1,252.6L96.2,251.3L84.1,250.6L94.2,246.9L89.6,246.5L91.4,243.6L96.7,243.8L92.0,242.5L93.1,241.0L98.8,241.2L94.4,239.8L98.7,238.2L95.3,235.7L97.9,233.5L91.4,234.9L91.1,229.8L96.9,230.7L91.6,228.2L91.5,223.7L95.2,225.0L95.1,221.2L104.1,223.0L97.8,217.5L100.9,217.4L99.0,213.1L104.6,212.9L102.8,210.8L105.8,204.2L111.1,205.8L110.2,208.6L113.6,205.3L140.7,203.6L137.5,212.0L123.3,222.6L116.6,221.7L127.5,223.0L115.8,229.7L122.7,228.1L120.1,231.9L132.6,226.5L157.5,226.7L162.8,232.6L149.5,254.0L136.3,259.4L143.2,257.1L148.5,261.6L134.2,267.9L128.4,267.5L140.2,269.5L147.7,266.8L165.3,278.3L171.2,298.3L184.2,305.2L192.8,314.1L190.3,316.5L196.2,327.5L189.3,323.3L181.4,324.2L188.9,323.9L198.3,331.5L200.1,338.9L194.1,344.2L200.5,346.6L203.7,342.1L216.7,343.0L223.7,347.4L225.0,354.5L222.0,363.8L217.6,367.4L214.6,365.1L216.9,368.6L215.7,370.3L206.5,372.5L210.6,372.0L210.9,375.2L200.9,379.0L218.6,380.5L218.7,386.2L211.3,391.7L198.4,396.4L189.6,394.2L180.1,396.7L173.7,393.8L158.1,396.5L159.6,399.8L151.9,398.7L151.2,401.2L142.5,396.5L133.5,399.6L128.5,409.3L116.8,405.5L105.0,410.2L102.5,415.5L97.6,411.3L93.3,413.1L109.7,399.9L113.8,395.2L114.3,389.6L118.2,389.9L119.5,385.4L140.7,385.0L141.9,380.9L152.1,371.6L135.1,380.8L126.3,374.9L118.6,376.4L122.2,373.5L113.4,372.1L106.9,375.5L105.0,374.9L107.9,371.8L101.5,372.2L104.1,371.0L101.7,367.7L121.2,357.5L121.2,343.3L110.1,346.4L120.8,335.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M142.6,201.5L140.5,199.4L143.2,199.1L142.6,201.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M137.1,200.5L133.8,197.3L138.8,199.9L137.1,200.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M144.8,196.2L137.7,197.2L135.1,195.8L135.0,192.4L139.8,192.0L144.8,196.2Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M171.2,158.7L175.8,159.8L173.0,164.1L174.3,167.0L171.7,174.3L169.8,173.0L171.3,164.7L168.6,166.9L164.2,163.8L170.8,161.9L165.7,159.1L166.8,157.6L171.1,155.1L171.2,158.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M176.0,158.5L173.5,157.8L174.7,152.8L176.6,153.1L176.0,158.5Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M179.7,153.8L177.1,153.9L178.6,150.0L180.7,150.7L179.7,153.8Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M761.8,508.3L751.5,505.7L750.0,502.9L761.8,508.3Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M783.8,357.0L791.3,356.8L801.5,370.3L795.8,374.1L800.9,383.6L813.1,384.6L814.8,388.7L818.3,389.0L817.2,391.0L820.3,397.8L818.7,398.9L822.5,405.4L831.9,404.0L840.7,409.2L855.2,403.7L865.1,416.7L870.1,412.6L881.4,419.1L885.8,417.4L896.4,425.3L902.6,424.5L900.9,427.1L902.9,432.7L894.7,438.2L895.9,441.1L901.4,441.8L896.5,443.2L893.9,448.1L897.4,449.5L900.0,455.9L895.8,467.3L879.8,466.5L878.0,470.8L870.7,472.8L867.1,486.1L857.0,485.3L852.8,490.0L827.8,496.0L812.0,510.1L817.9,503.2L815.3,501.1L803.8,512.3L801.2,511.5L803.7,507.3L796.9,505.0L796.3,509.0L788.3,506.6L796.6,513.4L797.3,511.0L800.4,511.4L800.5,514.8L805.3,513.3L802.2,517.5L811.5,520.8L814.0,528.3L817.8,528.1L805.9,509.6L808.7,510.2L812.7,520.3L820.2,529.2L831.9,525.0L840.0,525.9L840.6,528.0L837.0,529.5L837.2,534.7L826.9,536.6L821.0,533.4L813.3,541.3L806.8,540.9L796.3,550.1L789.0,551.0L782.9,546.4L786.3,545.4L786.2,533.7L767.3,526.6L790.1,513.6L787.0,508.1L784.2,510.8L779.9,507.9L767.8,510.0L755.1,504.9L759.9,502.2L750.1,497.7L765.1,500.7L770.2,496.2L759.2,496.5L758.5,487.3L754.4,481.3L758.4,489.4L757.2,496.1L749.6,496.5L751.6,492.3L748.5,496.7L738.2,498.5L728.0,514.9L723.0,515.7L719.1,521.2L717.1,516.2L716.4,522.7L719.2,525.3L718.8,530.8L711.6,525.5L698.4,530.3L692.0,525.0L697.5,523.6L697.5,518.9L701.7,515.6L701.6,512.9L705.4,511.7L705.3,500.6L709.5,498.6L709.8,503.0L714.3,499.9L716.9,502.9L725.9,501.9L721.7,499.0L722.6,492.0L716.0,488.8L716.1,479.5L713.2,480.5L709.1,476.7L710.4,468.8L708.4,463.5L705.7,464.7L702.4,460.0L689.8,457.5L680.2,451.7L665.3,454.7L658.5,458.6L655.6,463.6L641.0,465.2L633.9,470.2L627.5,464.3L608.5,463.7L603.0,460.5L598.2,464.2L596.4,460.3L593.3,460.6L585.0,453.1L585.2,449.0L592.3,436.7L598.0,438.7L594.7,434.7L594.4,424.8L619.6,400.6L616.8,394.8L620.2,393.5L612.1,383.0L611.5,374.5L617.5,375.6L624.6,368.4L649.0,367.1L674.1,371.5L675.5,375.4L683.1,375.5L683.8,378.7L685.6,374.9L692.8,373.9L699.3,376.2L701.5,380.0L708.0,374.5L711.9,380.9L726.6,378.0L733.3,383.9L734.9,381.9L733.5,374.3L740.4,363.7L761.0,364.6L764.2,362.9L765.8,357.5L775.1,359.6L783.8,357.0Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+    <path d="M548.3,595.7L546.7,591.8L553.2,587.8L540.8,580.6L533.4,572.5L538.4,568.4L533.6,560.4L540.4,559.4L531.3,552.0L536.0,539.0L529.5,538.6L532.3,531.1L536.9,530.7L529.1,527.0L531.2,523.7L527.7,522.3L528.7,517.3L526.2,514.0L534.5,512.1L539.5,507.6L550.6,508.2L561.1,517.5L561.3,524.6L573.8,532.6L571.2,536.0L574.6,538.8L571.1,540.6L576.0,544.5L582.2,545.1L584.9,548.9L590.1,543.2L595.0,545.9L590.5,548.9L594.6,554.2L588.8,564.8L591.9,573.5L600.1,580.3L595.5,587.6L590.2,589.3L592.2,597.5L590.5,600.5L566.8,604.4L561.0,607.4L559.6,612.9L557.5,612.2L556.3,604.1L548.3,595.7Z" fill="#e8e4d6" stroke="#c8bfa8" stroke-width="0.7" />
+  </g>
+  <circle cx="236" cy="442" r="22" fill="#3a4a3d" opacity="0.92"/>
+  <circle cx="236" cy="442" r="36" fill="none" stroke="#3a4a3d" stroke-width="1.5" opacity="0.32"/>
+  <line x1="236" y1="442" x2="110" y2="423" stroke="#3a4a3d" stroke-width="1" opacity="0.55"/>
+  <text x="50" y="445" fill="#2c3a2f" font-family="Fraunces" font-size="24" font-weight="500">Paris</text>
+  <text x="50" y="463" fill="#6a6f69" font-size="12">Mistral · Kyutai · Wandercraft</text>
+  <text x="50" y="479" fill="#6a6f69" font-size="12">SiPearl · Pruna · H Company</text>
+  <circle cx="192" cy="378" r="22" fill="#3a4a3d" opacity="0.92"/>
+  <circle cx="192" cy="378" r="36" fill="none" stroke="#3a4a3d" stroke-width="1.5" opacity="0.32"/>
+  <line x1="192" y1="378" x2="85" y2="328" stroke="#3a4a3d" stroke-width="1" opacity="0.55"/>
+  <text x="25" y="350" fill="#2c3a2f" font-family="Fraunces" font-size="24" font-weight="500">London</text>
+  <text x="25" y="368" fill="#6a6f69" font-size="12">Wayve · Open Cosmos · SatVu</text>
+  <text x="25" y="384" fill="#6a6f69" font-size="12">ElevenLabs · Nothing</text>
+  <circle cx="291" cy="379" r="18" fill="#3a4a3d" opacity="0.92"/>
+  <circle cx="291" cy="379" r="32" fill="none" stroke="#3a4a3d" stroke-width="1.5" opacity="0.32"/>
+  <line x1="291" y1="379" x2="110" y2="268" stroke="#3a4a3d" stroke-width="1" opacity="0.55"/>
+  <text x="50" y="290" fill="#2c3a2f" font-family="Fraunces" font-size="24" font-weight="500">Eindhoven</text>
+  <text x="50" y="308" fill="#6a6f69" font-size="12">ASML · NXP · Axelera</text>
+  <text x="50" y="324" fill="#6a6f69" font-size="12">Euclyd · Innatera</text>
+  <circle cx="398" cy="460" r="26" fill="#2c3a2f" opacity="0.92"/>
+  <circle cx="398" cy="460" r="40" fill="none" stroke="#2c3a2f" stroke-width="1.5" opacity="0.32"/>
+  <line x1="398" y1="460" x2="530" y2="478" stroke="#2c3a2f" stroke-width="1" opacity="0.55"/>
+  <text x="470" y="500" fill="#2c3a2f" font-family="Fraunces" font-size="24" font-weight="500">Munich</text>
+  <text x="470" y="518" fill="#6a6f69" font-size="12">Helsing · Quantum Systems</text>
+  <text x="470" y="534" fill="#6a6f69" font-size="12">STARK · Isar · Agile Robots</text>
+  <circle cx="295" cy="532" r="14" fill="#3a4a3d" opacity="0.92"/>
+  <circle cx="295" cy="532" r="28" fill="none" stroke="#3a4a3d" stroke-width="1.5" opacity="0.32"/>
+  <line x1="295" y1="532" x2="110" y2="533" stroke="#3a4a3d" stroke-width="1" opacity="0.55"/>
+  <text x="50" y="555" fill="#2c3a2f" font-family="Fraunces" font-size="24" font-weight="500">Grenoble</text>
+  <text x="50" y="573" fill="#6a6f69" font-size="12">CEA-Leti · STMicro · Kalray</text>
+  <text x="50" y="589" fill="#6a6f69" font-size="12">GreenWaves</text>
+  <circle cx="733" cy="403" r="22" fill="#8b3a3a" opacity="0.92"/>
+  <circle cx="733" cy="403" r="36" fill="none" stroke="#8b3a3a" stroke-width="1.5" opacity="0.32"/>
+  <line x1="733" y1="403" x2="660" y2="308" stroke="#8b3a3a" stroke-width="1" opacity="0.55"/>
+  <text x="600" y="330" fill="#8b3a3a" font-family="Fraunces" font-size="24" font-weight="500">Kyiv</text>
+  <text x="600" y="348" fill="#6a6f69" font-size="12">Swarmer · Airlogix · Kvertus</text>
+  <text x="600" y="364" fill="#6a6f69" font-size="12">Ukrspecsystems</text>
+  <text x="600" y="382" fill="#8b3a3a" font-size="11" font-style="italic">combat-tested edge-drone cluster</text>
+  <circle cx="345" cy="478" r="6" fill="#5c6b5f"/>
+  <text x="355" y="481" fill="#6a6f69" font-size="10.5">Zurich</text>
+  <circle cx="431" cy="353" r="6" fill="#5c6b5f"/>
+  <text x="441" y="356" fill="#6a6f69" font-size="10.5">Berlin</text>
+  <circle cx="437" cy="389" r="6" fill="#5c6b5f"/>
+  <text x="447" y="392" fill="#6a6f69" font-size="10.5">Dresden</text>
+  <circle cx="356" cy="444" r="6" fill="#5c6b5f"/>
+  <text x="366" y="447" fill="#6a6f69" font-size="10.5">Stuttgart</text>
+  <circle cx="634" cy="167" r="6" fill="#5c6b5f"/>
+  <text x="644" y="170" fill="#6a6f69" font-size="10.5">Helsinki</text>
+  <circle cx="196" cy="361" r="6" fill="#5c6b5f"/>
+  <text x="206" y="364" fill="#6a6f69" font-size="10.5">Cambridge</text>
+  <circle cx="631" cy="185" r="6" fill="#5c6b5f"/>
+  <text x="641" y="188" fill="#6a6f69" font-size="10.5">Tallinn</text>
+  <circle cx="394" cy="549" r="6" fill="#5c6b5f"/>
+  <text x="404" y="552" fill="#6a6f69" font-size="10.5">Bologna</text>
+  <circle cx="232" cy="625" r="6" fill="#5c6b5f"/>
+  <text x="242" y="628" fill="#6a6f69" font-size="10.5">Barcelona</text>
+  <circle cx="606" cy="592" r="6" fill="#5c6b5f"/>
+  <text x="616" y="595" fill="#6a6f69" font-size="10.5">Sofia</text>
+  <g transform="translate(40, 740)">
+    <text x="0" y="0" fill="#6a6f69" font-size="11" letter-spacing="1" font-weight="600">CIRCLE SIZE =</text>
+    <circle cx="100" cy="-4" r="5" fill="#5c6b5f"/>
+    <text x="112" y="0" fill="#6a6f69" font-size="11">minor hub</text>
+    <circle cx="190" cy="-4" r="10" fill="#3a4a3d"/>
+    <text x="208" y="0" fill="#6a6f69" font-size="11">major hub</text>
+    <circle cx="280" cy="-4" r="14" fill="#2c3a2f"/>
+    <text x="302" y="0" fill="#6a6f69" font-size="11">densest cluster</text>
+    <text x="430" y="0" fill="#8b3a3a" font-size="11" font-weight="500">red = combat-deployed cluster</text>
+  </g>
+</svg>
+      <div class="chart-footnote">Geography from leakyMirror/map-of-europe (public domain). Hubs at real geographic coordinates.</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hub-grid">
+      <div class="hub"><div class="rank">01</div><div class="name">Munich</div><div class="country">Germany</div><div class="focus">Helsing, Quantum Systems, STARK, Isar Aerospace, Exploration Company, Reflex Aerospace, Agile Robots, Codasip. Defense + space + humanoid core. TUM + Fraunhofer.</div></div>
+      <div class="hub"><div class="rank">02</div><div class="name">London / Harwell</div><div class="country">United Kingdom</div><div class="focus">Wayve, Open Cosmos, SatVu, Tekever UK, ElevenLabs, Humanoid, Nothing. AI = 33% of UK VC 2025; £17 bn total.</div></div>
+      <div class="hub"><div class="rank">03</div><div class="name">Paris</div><div class="country">France</div><div class="focus">Mistral, Kyutai, Wandercraft, Prophesee, SiPearl, Pruna, H Company, Comand AI, Exotrail. Hugging Face's founding team and significant engineering. Anthropic opened its Paris EMEA office in 2025.</div></div>
+      <div class="hub"><div class="rank">04</div><div class="name">Grenoble</div><div class="country">France</div><div class="focus">CEA-Leti, STMicroelectronics, Kalray, Soitec, GreenWaves. The "Silicon Valley of Europe" for edge chips, by density.</div></div>
+      <div class="hub"><div class="rank">05</div><div class="name">Zurich / Lausanne</div><div class="country">Switzerland</div><div class="focus">ETH + EPFL + Swiss AI Initiative, ANYbotics, Daedalean (acquired by Destinus Aug 2025), Flexion Robotics.</div></div>
+      <div class="hub"><div class="rank">06</div><div class="name">Eindhoven / Delft</div><div class="country">Netherlands</div><div class="focus">ASML, NXP, Axelera AI, Euclyd, Innatera. TU Delft Embedded AI &amp; 6G Lab.</div></div>
+      <div class="hub"><div class="rank">07</div><div class="name">Dresden</div><div class="country">Germany</div><div class="focus">Silicon Saxony, GlobalFoundries, Infineon, SpiNNcloud (35k-chip neuromorphic supercomputer), Wandelbots.</div></div>
+      <div class="hub"><div class="rank">08</div><div class="name">Stuttgart</div><div class="country">Germany</div><div class="focus">Bosch, Mercedes, Porsche, ZF, Q.ANT (€62 M Jul 2025 photonic processor, Europe's largest).</div></div>
+      <div class="hub"><div class="rank">09</div><div class="name">Berlin</div><div class="country">Germany</div><div class="focus">Helsing office, Reflex office, Vsquared Ventures, Auterion engineering, defense-tech capital of the public square.</div></div>
+      <div class="hub"><div class="rank">10</div><div class="name">Helsinki / Espoo</div><div class="country">Finland</div><div class="focus">ICEYE, ReOrbit (€45 M Sep 2025), DataCrunch, Aalto. Plus AMD via the Silo AI acquisition.</div></div>
+      <div class="hub"><div class="rank">11</div><div class="name">Cambridge</div><div class="country">United Kingdom</div><div class="focus">Arm, Graphcore alumni network, CamGraPhIC, plenty of doctoral overflow from QRT Labs.</div></div>
+      <div class="hub"><div class="rank">12</div><div class="name">Oulu</div><div class="country">Finland</div><div class="focus">6G Flagship at the University of Oulu, Nokia RF-edge heritage, a quiet hub for low-level radio-AI work.</div></div>
+      <div class="hub"><div class="rank">13</div><div class="name">Tallinn</div><div class="country">Estonia</div><div class="focus">Defence Estonia, DIANA site, EstMil, Defence Business Lab. Small but fastest-growing defense-edge scene.</div></div>
+      <div class="hub"><div class="rank">14</div><div class="name">Bologna</div><div class="country">Italy</div><div class="focus">Benini's PULP platform, University of Bologna, STMicro presence. Forty-plus RISC-V ML prototypes in ten years.</div></div>
+      <div class="hub"><div class="rank">15</div><div class="name">Kyiv</div><div class="country">Ukraine</div><div class="focus">Swarmer, Airlogix, Kvertus, Ukrspecsystems. The largest combat-tested edge-drone cluster in Europe, full stop.</div></div>
+      <div class="hub"><div class="rank">16</div><div class="name">Barcelona</div><div class="country">Spain</div><div class="focus">Barcelona Supercomputing Center (coordinating €240 M DARE), i2CAT, PAL Robotics.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ STACK ================ -->
+<section class="section" id="stack">
+  <div class="prose">
+    <div class="section-label">V · The stack</div>
+    <h2 class="h-section">Eight layers. <em>What ships</em>, and who funded it.</h2>
+    <p class="lede">Eight segments, each with the European companies we track and the last disclosed round as a reality check. Where ownership or HQ has flipped, we flag it in red.</p>
+  </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Eight layers. What ships, and who funded it.</div>
+      <div class="chart-sub">Applications on top, infrastructure on the bottom. Colour weight = how load-bearing the layer is for the on-device thesis.</div>
+      <svg viewBox="0 0 900 720" xmlns="http://www.w3.org/2000/svg" style="width:100%; margin-top:20px; font-family:Inter,sans-serif;">
+    <!-- Stack layers, top = applications, bottom = silicon -->
+    <!-- Space -->
+    <g transform="translate(20,0)">
+      <rect x="0" y="0" width="860" height="78" fill="#e8e4d6" stroke="#c8bfa8"/>
+      <text x="24" y="34" fill="#3a4a3d" font-size="14" letter-spacing="2" font-weight="700">SPACE · ON-ORBIT</text>
+      <text x="24" y="62" fill="#1c221d" font-family="Fraunces" font-size="19" font-weight="500">ICEYE · D-Orbit · Constellr · ReOrbit · SatVu · Reflex · Aerospacelab · EnduroSat</text>
+    </g>
+    <!-- Defense -->
+    <g transform="translate(20,82)">
+      <rect x="0" y="0" width="860" height="78" fill="#ddd7c4" stroke="#c8bfa8"/>
+      <text x="24" y="34" fill="#3a4a3d" font-size="14" letter-spacing="2" font-weight="700">DEFENCE EDGE</text>
+      <text x="24" y="54" fill="#1c221d" font-family="Fraunces" font-size="17" font-weight="500"><tspan x="24">Helsing · Tekever · Quantum Systems · STARK · ARX</tspan><tspan x="24" dy="20">Swarmer · Airlogix · Kvertus · Delian</tspan></text>
+    </g>
+    <!-- Industrial -->
+    <g transform="translate(20,164)">
+      <rect x="0" y="0" width="860" height="78" fill="#e8e4d6" stroke="#c8bfa8"/>
+      <text x="24" y="34" fill="#3a4a3d" font-size="14" letter-spacing="2" font-weight="700">INDUSTRIAL &amp; VISION</text>
+      <text x="24" y="62" fill="#1c221d" font-family="Fraunces" font-size="19" font-weight="500">MVTec · Robovision · OnRobot · audEERING · Siemens · Schneider · ABB</text>
+    </g>
+    <!-- Automotive -->
+    <g transform="translate(20,246)">
+      <rect x="0" y="0" width="860" height="78" fill="#ddd7c4" stroke="#c8bfa8"/>
+      <text x="24" y="34" fill="#3a4a3d" font-size="14" letter-spacing="2" font-weight="700">AUTOMOTIVE &amp; MOBILITY</text>
+      <text x="24" y="62" fill="#1c221d" font-family="Fraunces" font-size="19" font-weight="500">Wayve · Oxa · Valeo · Bosch · ZF · Continental · Einride</text>
+    </g>
+    <!-- Robotics -->
+    <g transform="translate(20,328)">
+      <rect x="0" y="0" width="860" height="78" fill="#e8e4d6" stroke="#c8bfa8"/>
+      <text x="24" y="34" fill="#3a4a3d" font-size="14" letter-spacing="2" font-weight="700">ROBOTICS &amp; EMBODIED</text>
+      <text x="24" y="62" fill="#1c221d" font-family="Fraunces" font-size="19" font-weight="500">Neura · Agile Robots · Wandercraft · ANYbotics · Flexion · PAL · Wandelbots · Humanoid</text>
+    </g>
+    <!-- Sovereign platforms -->
+    <g transform="translate(20,410)">
+      <rect x="0" y="0" width="860" height="78" fill="#3a4a3d"/>
+      <text x="24" y="34" fill="#d7ccab" font-size="14" letter-spacing="2" font-weight="700">SOVEREIGN PLATFORMS (on-prem / air-gapped)</text>
+      <text x="24" y="62" fill="#faf6ee" font-family="Fraunces" font-size="19" font-weight="500">Aleph Alpha PhariaAI · Mistral Le Chat Enterprise · OpenEuroLLM</text>
+    </g>
+    <!-- Models & Runtimes -->
+    <g transform="translate(20,492)">
+      <rect x="0" y="0" width="860" height="78" fill="#3a4a3d"/>
+      <text x="24" y="34" fill="#d7ccab" font-size="14" letter-spacing="2" font-weight="700">MODELS &amp; RUNTIMES</text>
+      <text x="24" y="62" fill="#faf6ee" font-family="Fraunces" font-size="18" font-weight="500">Mistral · Kyutai · Black Forest Labs · Pruna · EuroLLM · Hugging Face · ggml/llama.cpp</text>
+    </g>
+    <!-- Silicon -->
+    <g transform="translate(20,574)">
+      <rect x="0" y="0" width="860" height="92" fill="#2c3a2f"/>
+      <text x="24" y="36" fill="#d7ccab" font-size="14" letter-spacing="2" font-weight="700">SILICON · NPU · NEUROMORPHIC · PHOTONIC · IP</text>
+      <text x="24" y="64" fill="#faf6ee" font-family="Fraunces" font-size="19" font-weight="500">Axelera · SiPearl · Q.ANT · Innatera · Prophesee · SpiNNcloud · Euclyd</text>
+      <text x="24" y="86" fill="#d7ccab" font-family="Fraunces" font-size="17" font-weight="400">GreenWaves · Kalray · ST · Infineon · NXP · Arm · Codasip · Imagination</text>
+    </g>
+  </svg>
+      <div class="chart-footnote">~85 companies profiled in the cards below.</div>
+    </div>
+  </div>
+
+  <!-- V.A SILICON -->
+  <div class="container">
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.a</div>
+        <div>
+          <h3>Silicon. NPUs, neuromorphic cores, photonic processors and the IP beneath them.</h3>
+          <div class="stack-funding">≈ $0.55 bn in 2024-26 disclosed rounds · >$250 M single round in Feb 2026</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Axelera AI</h4><div class="meta">Eindhoven, NL · 2021 · imec spin-off</div><div class="desc">Metis and Europa AIPU (Oct 2025, 629 INT8 TOPS). 500th customer in defense, industrial, retail, robotics. Titania chiplet funded by €61.6 M EuroHPC DARE grant.</div><div class="funding">Feb 2026 · >$250 M Series C · Innovation Industries + BlackRock</div></div>
+        <div class="card"><h4>SiPearl</h4><div class="meta">Maisons-Laffitte, FR · 2019 · EPI spin-off</div><div class="desc">Rhea1 HPC CPU taped out 2025 at TSMC, sampling 2026. JUPITER exascale anchor. Series B €200 M planned 2026-28.</div><div class="funding">Jul 2025 · €130 M Series A final close · EIC Fund</div></div>
+        <div class="card"><h4>GreenWaves Technologies</h4><div class="meta">Grenoble, FR · 2014</div><div class="desc">GAP9 ultra-low-power RISC-V (50 GOPS at 50 mW) for hearables and battery-powered edge AI. Quiet between rounds.</div><div class="funding">Feb 2023 · €20 M · Innovacom + Thales + Definvest</div></div>
+        <div class="card"><h4>Innatera</h4><div class="meta">Delft, NL · 2018 · TU Delft spin-off</div><div class="desc">T1 Spiking Neural Processor, an analog mixed-signal neuromorphic chip for sensor-edge. Pulsar hardware platform Jul 2025. First consumer audio design-in via Joya Design.</div><div class="funding">Jun 2024 · $21 M Series A · Innavest + Invest-NL</div></div>
+        <div class="card"><h4>Prophesee</h4><div class="meta">Paris, FR · 2014 (as Chronocam)</div><div class="desc">Event-based Metavision neuromorphic vision sensors. GenX320 (36 µW, 320×320) for mobile/AR/VR. Sony partnership on stacked IMX636/IMX646.</div><div class="funding">Sep 2022 · $49.5 M Series C · plus €15 M (2024)</div></div>
+        <div class="card"><h4>Q.ANT</h4><div class="meta">Stuttgart, DE · 2018 · TRUMPF spin-off</div><div class="desc">Photonic Native Processing Unit. First-gen photonic AI processor live at the Leibniz Supercomputing Centre since July 2025. The largest photonic round on the continent.</div><div class="funding">Jul 2025 · €62 M Series A · Cherry Ventures + UVC Partners + imec.xpand</div></div>
+        <div class="card"><h4>SpiNNcloud Systems</h4><div class="meta">Dresden, DE · TU Dresden spin-off</div><div class="desc">SpiNNaker2 neuromorphic chip, Arm-based. Commercial neuromorphic supercomputer live at TU Dresden with 35,000 chips and 5 million-plus cores.</div><div class="funding">Jun 2025 · €10 M blended · EIC Accelerator GenAI4EU</div></div>
+        <div class="card"><h4>Euclyd</h4><div class="meta">Eindhoven, NL · 2024</div><div class="desc">CRAFTWERK multi-chiplet AI inference system, first silicon 2028. Founded by ex-ASML director Bernardo Kastrup; backed by Peter Wennink (ex-ASML CEO), Federico Faggin (inventor of the microprocessor) and Steven Schuurman.</div><div class="funding">Apr 2026 · €100 M target · in market</div></div>
+        <div class="card"><h4>Kalray</h4><div class="meta">Grenoble, FR · 2008 · CEA spin-off · public (ALKAL)</div><div class="desc">MPPA-based DPUs; strategy refocused 2025 onto DPU licensing and co-development. Semiconductor-only revenue grew 4x year-over-year. Positive EBITDA FY25.</div><div class="funding">Public · €16.5 M FY25 revenue</div></div>
+        <div class="card"><h4>STMicroelectronics</h4><div class="meta">Geneva / Agrate Brianza · public (STM)</div><div class="desc">Neural-ART Accelerator across STM32N6 MCUs and Stellar P3E automotive MCU (Feb 2026), the first automotive MCU to integrate an NPU. Mass production Q4 2026.</div><div class="funding">Public · €16.6 bn FY25 revenue</div></div>
+        <div class="card"><h4>Infineon</h4><div class="meta">Neubiberg, DE · public (IFX)</div><div class="desc">PSOC Edge E83/E84 (Cortex-M55 + Ethos-U55 + proprietary NNLite). NVIDIA TAO integration, DEEPCRAFT AI Hub launched with embedUR in October 2025.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>NXP</h4><div class="meta">Eindhoven, NL · public (NXPI)</div><div class="desc">eIQ Neutron NPU across i.MX 95/94 applications processors and i.MX RT700 crossover MCU (up to 172x AI acceleration vs prior gen). Closed Kinara acquisition October 2025.</div><div class="funding">Public · $307 M on Kinara</div></div>
+        <div class="card"><h4>Arm <span class="flag">majority SoftBank</span></h4><div class="meta">Cambridge, UK · NASDAQ: ARM</div><div class="desc">Ethos-U85 NPU (Apr 2024), Corstone-320 reference platform, ExecuTorch 1.0. Licensed by Infineon, NXP and most of the AIoT SoC universe. Engineering and HQ are UK; NASDAQ-listed with SoftBank as majority holder, which is where the "European silicon sovereignty" story gets complicated.</div><div class="funding">Public · 90% SoftBank</div></div>
+        <div class="card"><h4>Imagination Technologies <span class="flag">Canyon Bridge owned</span></h4><div class="meta">Kings Langley, UK · private</div><div class="desc">IMG Series4 NNA for ADAS. E-Series GPU with dedicated neural cores (2025), DXTP GPU shipping with first design-ins. Taken private in 2017 by Canyon Bridge, a US-China-linked PE fund; a reminder that "UK edge silicon" and "European-controlled" are not the same thing.</div><div class="funding">Private · foreign-owned</div></div>
+        <div class="card"><h4>Codasip</h4><div class="meta">Munich, DE + Brno, CZ · 2006</div><div class="desc">European RISC-V IP provider. Selected by DARE in March 2025 to design the high-end general-purpose RISC-V processor for EU HPC and AI. EIC Accelerator grant recipient.</div><div class="funding">Private · EU DARE anchor</div></div>
+        <div class="card"><h4>XMOS</h4><div class="meta">Bristol, UK · 2005</div><div class="desc">xcore.ai SoC combining AI accelerator, DSP, MCU and flexible I/O. XCORE-VOICE stack for far-field keyword detection. "2025 Edge AI MCU Excellence" recognition.</div><div class="funding">2019 · $19 M · Harbert European Growth Capital</div></div>
+      </div>
+    </div>
+
+    <!-- V.B MODELS -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.b</div>
+        <div>
+          <h3>Models and runtimes. The software that lets AI leave the cloud.</h3>
+          <div class="stack-funding">≈ $3.7 bn in disclosed rounds · from Mistral through Wayve through the one person who maintains llama.cpp</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Mistral AI</h4><div class="meta">Paris, FR · May 2023</div><div class="desc">Ministral 3B and 8B (Oct 2024) are the explicit edge line: Apache-2.0 weights, GGUF quants on HF, runs on llama.cpp, Ollama, MLX. Mistral NeMo 12B with NVIDIA, Mixtral, Codestral Mamba.</div><div class="funding">Sep 9 2025 · €1.7 B Series C · ASML-led (€1.3 B) · €11.7 B post-money · NVIDIA + a16z + Bpifrance + DST participating</div></div>
+        <div class="card"><h4>Black Forest Labs</h4><div class="meta">Freiburg, DE · 2024</div><div class="desc">FLUX.1 [schnell] Apache-2.0, 12 B params, 4-step image model. Runs on consumer GPUs at 4/8-bit quant. Team are the original Stable Diffusion authors.</div><div class="funding">Aug 2024 · $31 M seed · a16z</div></div>
+        <div class="card"><h4>Kyutai</h4><div class="meta">Paris, FR · Nov 2023 · nonprofit lab</div><div class="desc">Moshi (Sep 2024) is a 7 B real-time full-duplex speech LLM, CC-BY-4.0. Hibiki (Feb 2025) is real-time speech-to-speech translation; a 2 B variant runs on-device with MLX on iPhone.</div><div class="funding">€300 M endowment · Niel / CMA CGM / Schmidt Futures</div></div>
+        <div class="card"><h4>Wayve</h4><div class="meta">London, UK · 2017</div><div class="desc">End-to-end "AV2.0" embedded driving model. GAIA-1 world model, LINGO-1/2 vision-language, PRISM-1 embedded driver. Nissan shipping in 2027.</div><div class="funding">Feb 2026 · $1.2 B Series D · NVIDIA / Uber / Mercedes / Nissan / Stellantis (+$60 M extension Apr 2026 from AMD, Arm, Qualcomm)</div></div>
+        <div class="card"><h4>ElevenLabs</h4><div class="meta">London, UK · 2022 · Polish founders</div><div class="desc">Voice AI with on-device enterprise models in early access; general availability targeted for H1 2026. Locally-deployed models for regulated low-latency workloads.</div><div class="funding">Jan 2025 · $180 M Series C · a16z / ICONIQ · $3.3 B</div></div>
+        <div class="card"><h4>Silo AI (AMD)</h4><div class="meta">Helsinki, FI · 2017</div><div class="desc">Built Poro 34 B and the Viking 7/13/33 B Nordic-language line (Apache-2.0). Acquired by AMD for $665 M in July 2024; now part of AMD's ROCm/MI300 effort.</div><div class="funding">Jul 2024 · $665 M acquisition · AMD</div></div>
+        <div class="card"><h4>Aleph Alpha</h4><div class="meta">Heidelberg, DE · 2019</div><div class="desc">Pivoted in 2024 from frontier LLMs to a sovereign on-prem stack. Pharia-1 LLM 7 B and PhariaAI OS deployed inside Schwarz Group and the Bundeswehr.</div><div class="funding">Nov 2023 · €500 M · Schwarz + Bosch + SAP</div></div>
+        <div class="card"><h4>Stability AI</h4><div class="meta">London, UK · 2019</div><div class="desc">Stable Diffusion 3 / 3.5 Medium (2 B), SD Turbo and SDXL Turbo that run real-time on M-series Macs. Stable LM 2 1.6 B. Stable Audio Open. Recapitalized late 2024.</div><div class="funding">Cumulative ~$200 M+ · private</div></div>
+        <div class="card"><h4>Pruna AI</h4><div class="meta">Paris, FR / Munich · 2023</div><div class="desc">Open-source `pruna` Python package (Apache-2.0) for quantization, pruning, caching, compilation of diffusion and LLMs. 2 to 5x speedup on FLUX and SDXL.</div><div class="funding">Mar 2025 · $6.5 M seed · EQT Ventures</div></div>
+        <div class="card"><h4>OpenEuroLLM consortium</h4><div class="meta">EU-wide · Feb 2025</div><div class="desc">Horizon-funded consortium coordinated by Charles University Prague and AMD / Silo AI. 20+ partners including Aleph Alpha, CSC Finland, BSC, CINECA. Goal: open multilingual foundation models covering every EU official language. Training on LUMI and Leonardo.</div><div class="funding">Feb 2025 · €37.4 M · EU Horizon</div></div>
+        <div class="card"><h4>EuroLLM</h4><div class="meta">Edinburgh / Lisbon / Unbabel</div><div class="desc">Separate, earlier project. EuroLLM-1.7 B (Sep 2024) and EuroLLM-9 B (Dec 2024), Apache-2.0, 35 languages. The 1.7 B model is genuinely edge-friendly.</div><div class="funding">Academic · open weights</div></div>
+        <div class="card"><h4>ggml / llama.cpp</h4><div class="meta">Sofia, BG · Georgi Gerganov</div><div class="desc">The dominant open runtime for on-device LLM inference outside mobile-OS stacks. GGUF is the canonical format for local LLM deployment on Linux, Mac and Windows (Apple Core ML, Qualcomm QNN and MediaTek NeuroPilot own the mobile-OS layer). Incorporated as ggml.ai in 2023 with seed funding from Nat Friedman and Daniel Gross. A European open-source infrastructure asset that gets less recognition than its usage warrants.</div><div class="funding">Private · open source</div></div>
+        <div class="card"><h4>Hugging Face <span class="flag">French-founded · US-HQ</span></h4><div class="meta">NYC (HQ) + significant Paris ops · founded 2016</div><div class="desc">Founded by Clément Delangue, Julien Chaumond and Thomas Wolf. The Hub is where most European open-weights work (Mistral, Kyutai, BFL, EuroLLM, Stability) ships. Ships Transformers, Optimum (edge-optimised ONNX/OpenVINO/Qualcomm pipelines), transformers.js (browser), SafeTensors. Delaware-registered, so flagged.</div><div class="funding">Aug 2023 · $235 M Series D · $4.5 B · Salesforce / Google / Amazon / NVIDIA / Intel / AMD / IBM / Qualcomm</div></div>
+        <div class="card"><h4>Candle</h4><div class="meta">Hugging Face · Rust framework</div><div class="desc">Rust-native ML framework, ~12 k GitHub stars. Minimalist inference, WASM-capable. The production path many edge-Rust deployments run on, including heydict's intent router.</div><div class="funding">Open source · Apache-2.0</div></div>
+        <div class="card"><h4>Edge Impulse</h4><div class="meta">UK / US · founded 2019 · Dutch founders</div><div class="desc">End-to-end tinyML platform: data collection, training, deployment to MCUs and MPUs (Cortex-M, ESP32, Syntiant, Himax). Acquired by Qualcomm in March 2025.</div><div class="funding">Mar 2025 · Acquisition · Qualcomm</div></div>
+      </div>
+    </div>
+
+    <!-- V.C SOVEREIGN -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.c</div>
+        <div>
+          <h3>Sovereign platforms. Where "Edge AI" meets "not in Oracle Cloud Ashburn."</h3>
+          <div class="stack-funding">On-prem, air-gapped, inside data-residency zones. Everything the AI Act wants.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Mistral Le Chat Enterprise</h4><div class="meta">Paris, FR</div><div class="desc">Enterprise tier offers on-prem deployment on customer infrastructure. The explicit French sovereign-AI commercial vehicle.</div><div class="funding">Product line</div></div>
+        <div class="card"><h4>Aleph Alpha PhariaAI</h4><div class="meta">Heidelberg, DE</div><div class="desc">The operating system for sovereign AI. Runs in customer data centres, air-gapped possible. Deployed in Schwarz Group retail and the Bundeswehr.</div><div class="funding">Part of €500 M cumulative</div></div>
+        <div class="card"><h4>OpenEuroLLM</h4><div class="meta">EU-wide consortium</div><div class="desc">Horizon-funded open-weights line covering every EU official language, trained on LUMI and Leonardo. A policy instrument as much as a research project.</div><div class="funding">€37.4 M · EU Horizon</div></div>
+        <div class="card"><h4>France's AI campus</h4><div class="meta">Paris region</div><div class="desc">MGX × Bpifrance × Mistral × NVIDIA joint venture, targeting 1.4 GW. The physical substrate for French sovereign inference. Announced alongside the €109 bn plan, Paris AI Action Summit, Feb 2025.</div><div class="funding">Public · €109 bn envelope</div></div>
+      </div>
+    </div>
+
+    <!-- V.D ROBOTICS -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.d</div>
+        <div>
+          <h3>Robotics and embodied AI. The applied end of on-device inference.</h3>
+          <div class="stack-funding">Disclosed 2024-26 rounds around $1 bn. The reported Neura / Tether round (~€1 bn, March 2026) is unclosed and excluded from this total. 1X left.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Neura Robotics</h4><div class="meta">Metzingen, DE · 2019</div><div class="desc">4NE-1 cognitive humanoid. ~$1 bn of orders disclosed with Kawasaki and Omron. Schaeffler partnership to deploy thousands of Neura units on factory lines by 2035.</div><div class="funding">Jan 2025 · €120 M Series B · Lingotto · (reported: ~€1 bn Tether round Mar 2026)</div></div>
+        <div class="card"><h4>Agile Robots SE</h4><div class="meta">Munich, DE · 2018 · DLR spin-off</div><div class="desc">First German robot unicorn, 2,300+ staff. Plans industrial humanoid Agile ONE from Bavaria starting 2026. Acquired audEERING in March 2025, putting on-device voice AI inside a German humanoid stack.</div><div class="funding">Oct 2021 · $220 M Series C · SoftBank · ~$384 M total</div></div>
+        <div class="card"><h4>Wandercraft</h4><div class="meta">Paris, FR · 2012</div><div class="desc">Self-balancing medical exoskeletons. Calvin-40 industrial humanoid built for Renault. Renault is both investor and first customer; Nvidia is a technology partner.</div><div class="funding">Jun 2025 · $75 M Series D · Renault + Bpifrance PSIM</div></div>
+        <div class="card"><h4>ANYbotics</h4><div class="meta">Zurich, CH · 2016 · ETH spin-off</div><div class="desc">ANYmal quadruped for hazardous industrial inspection (oil &amp; gas, chemicals). Customers: Shell, Petronas, BASF. Fully autonomous on-robot navigation and anomaly detection.</div><div class="funding">Dec 2024 · $60 M Series C + ~$20 M Sep 2025 · Qualcomm Ventures / Supernova · >$150 M total</div></div>
+        <div class="card"><h4>Flexion Robotics</h4><div class="meta">Zurich, CH · Jan 2025</div><div class="desc">Ex-Nvidia founding team building humanoid autonomy stack: VLA models, manipulation, locomotion. Onboard control runs on the robot.</div><div class="funding">Nov 2025 · $50 M Series A · DST Global + NVentures + Prosus</div></div>
+        <div class="card"><h4>PAL Robotics</h4><div class="meta">Barcelona, ES · 2004</div><div class="desc">TALOS humanoid (1.75 m, 100 kg, 32-DoF) and the TIAGo mobile manipulator line. Industrial pilots, research labs. Self-funded under Grupo PAL.</div><div class="funding">Private · no disclosed VC</div></div>
+        <div class="card"><h4>Wandelbots</h4><div class="meta">Dresden, DE · 2017 · TU Dresden spin-out</div><div class="desc">NOVA robot-agnostic OS and NOVA Cloud. Abstracts brand-specific robot controllers. Runs on factory-edge hardware.</div><div class="funding">Jan 2022 · $84 M Series C · Insight Partners · ~$126 M total</div></div>
+        <div class="card"><h4>Humanoid</h4><div class="meta">London, UK · 2024</div><div class="desc">HMND 01 Alpha, a 220 cm dual-arm mobile manipulator with 15 kg bimanual payload. Robotics-as-a-service commercial model. First commercial product targeted 2027.</div><div class="funding">~$50 M founder-led · no priced round yet</div></div>
+        <div class="card"><h4>1X Technologies <span class="flag">HQ moved</span></h4><div class="meta">Moss, NO → Palo Alto, CA · Jul 2025</div><div class="desc">NEO home humanoid. Originally Norwegian (Halodi), relocated HQ to Palo Alto in July 2025; manufacturing stayed in Moss. Reportedly raising $1 bn Series C at $10 bn.</div><div class="funding">Jan 2024 · $100 M Series B · EQT Ventures · Series C targeting $1 B</div></div>
+      </div>
+    </div>
+
+    <!-- V.E AUTOMOTIVE -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.e</div>
+        <div>
+          <h3>Automotive and mobility. The biggest edge AI deployment in the world, one vehicle at a time.</h3>
+          <div class="stack-funding">Wayve alone: $2.25 bn across two rounds. Plus Bosch, Valeo, Continental, ZF running at industrial scale.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Wayve</h4><div class="meta">London, UK · 2017</div><div class="desc">End-to-end neural driving with no hand-coded rules. Nissan producing from 2027. Uber committed $300 M for multi-year robotaxi deployment. Chipmakers AMD, Arm and Qualcomm all now invested.</div><div class="funding">Feb 2026 · $1.2 B Series D · + $60 M ext · ~$1.5 B round total · $8.6 B valuation</div></div>
+        <div class="card"><h4>Oxa</h4><div class="meta">Oxford, UK · 2014 (as Oxbotica)</div><div class="desc">Self-driving software retrofitted into industrial, airport and mining vehicles. UK National Wealth Fund participation rumored. NVIDIA NVentures in the March 2026 round.</div><div class="funding">Mar 2026 · $103 M · NVIDIA NVentures · > £180 M cumulative</div></div>
+        <div class="card"><h4>Valeo</h4><div class="meta">Paris, FR · public</div><div class="desc">Valeo.ai labs in Paris and Prague. SCALA Gen 3 LiDAR at 25 fps and 200 m in production. Mercedes DRIVE PILOT uses the only serially approved L3 sensor set on the market.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Bosch Mobility</h4><div class="meta">Stuttgart, DE · public</div><div class="desc">~€10 bn cumulative AD/AI investment. NVIDIA DRIVE AGX Thor integrated into next-gen ADAS. Strategic ADAS collaboration with Qualcomm expanded April 2026. Bosch's AIShield secures AI models on-device.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>ZF Friedrichshafen</h4><div class="meta">Friedrichshafen, DE · public</div><div class="desc">ProAI central compute family up to 1,500 TOPS in top configuration; high-performance version entered series production end 2024. Configurable across L2+ through L4.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Continental / Aumovio</h4><div class="meta">Hanover, DE · public</div><div class="desc">Modular ADAS on Ambarella CV3 5 nm. Radar-based parking replacing ultrasonics. Automotive unit being spun off and rebranded as Aumovio.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Einride</h4><div class="meta">Stockholm, SE · 2016</div><div class="desc">Autonomous electric freight; Pod cabless truck. Operating in the US and Europe. Pure edge inference on-vehicle for safety-critical control.</div><div class="funding">Oct 2025 · $100 M growth</div></div>
+      </div>
+    </div>
+
+    <!-- V.F INDUSTRIAL -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.f</div>
+        <div>
+          <h3>Industrial vision, manufacturing, and IoT edge. The boring money.</h3>
+          <div class="stack-funding">Where the incumbents run most of the world's deployed edge AI in SCADA and shop-floor PCs.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>MVTec Software</h4><div class="meta">Munich, DE · 1996</div><div class="desc">HALCON, the de-facto machine-vision standard. HALCON 25.11 (Nov 2025) introduced "Continual Learning", incremental deep-learning retraining on the edge with few-shot data. Deep-learning 3D bin picking in HALCON 26.05.</div><div class="funding">Private · founders and management</div></div>
+        <div class="card"><h4>Robovision</h4><div class="meta">Ghent, BE · 2010</div><div class="desc">No-code Vision AI platform. Integrated with 1,000+ robots across 40 countries in agtech and industrial inspection. Models export to edge devices next to the robots.</div><div class="funding">Mar 2024 · $42 M Series A · Astanor + Target Global</div></div>
+        <div class="card"><h4>audEERING (Agile Robots)</h4><div class="meta">Gilching / Munich, DE · TUM spin-off</div><div class="desc">devAIce SDK for on-device audio emotion and paralinguistic analysis. openSMILE open-source toolkit. Acquired March 2025 by Agile Robots; now the voice layer of a German humanoid stack.</div><div class="funding">Mar 2025 · Acquired by Agile Robots</div></div>
+        <div class="card"><h4>OnRobot</h4><div class="meta">Odense, DK · 2015</div><div class="desc">Full end-of-arm tooling portfolio plus D:PLOY zero-programming deployment platform (2024). VGP30 30 kg vacuum gripper integrated with D:PLOY in 2025.</div><div class="funding">Private</div></div>
+        <div class="card"><h4>Siemens Industrial Edge</h4><div class="meta">Munich, DE · public</div><div class="desc">Industrial Automation DataCenter unveiled at Hannover Messe 2026, an AI-ready edge platform integrating NVIDIA accelerated compute and Palo Alto security into Xcelerator.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Schneider Electric EcoStruxure</h4><div class="meta">Rueil-Malmaison, FR · public</div><div class="desc">Automate 2025 launched Automation Copilot (with Azure AI Foundry), Modicon M660 IPC motion controller, and Modicon Edge I/O NTS. Three-layer edge architecture. FY25 €40 bn revenue.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>ABB Robotics</h4><div class="meta">Zurich, CH · public</div><div class="desc">OmniCore unified controller plus OmniCore EyeMotion vision. Visual SLAM on the Flexley Mover P603 AMR. LandingAI partnership cutting vision-AI training time 80%.</div><div class="funding">Public</div></div>
+        <div class="card"><h4>Nothing</h4><div class="meta">London, UK · 2020 · founder Carl Pei</div><div class="desc">Phone (3), launched July 2025 at $799. Essential Space and Essential Search run on-device AI via Qualcomm NPU. AI-native OS teased for 2026 (no Phone (4) planned for 2026).</div><div class="funding">Private</div></div>
+      </div>
+    </div>
+
+    <!-- V.G DEFENSE -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.g</div>
+        <div>
+          <h3>Defense edge. Ukraine is the R&amp;D lab; Germany is the factory floor.</h3>
+          <div class="stack-funding">43% of European Deep Tech VC in 2025 went to Defence, Security &amp; Resilience; AI is 44% of that.</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card"><h4>Helsing</h4><div class="meta">Munich, DE · 2021</div><div class="desc">Altra battlefield management AI fusing drone, vehicle and soldier sensors. Centaur autonomy stack flying on Saab Gripen E and on the CA-1 Europa uncrewed combat aircraft. HF-1 strike drone, SG-1 Fathom underwater glider.</div><div class="funding">Jun 2025 · €600 M Series D · Prima Materia (Daniel Ek) · €12 B · ~€1.37 B cumulative</div></div>
+        <div class="card"><h4>Quantum Systems</h4><div class="meta">Gilching, DE · 2015</div><div class="desc">Vector AI VTOL fixed-wing ISR drone with dual Jetson on-board for GPS-denied navigation and real-time ISR fusion. Combat-deployed in Ukraine.</div><div class="funding">2025 · €340 M across Series C + ext · Balderton · €3 B valuation</div></div>
+        <div class="card"><h4>Tekever</h4><div class="meta">Lisbon, PT / UK · unicorn May 2025</div><div class="desc">AR3 and AR5 ISTAR drones with on-board analytics, more than 10,000 combat flight hours in Ukraine. Portugal's first defense unicorn.</div><div class="funding">May 2025 · $500 M · Ventura Capital + Baillie Gifford + NATO Innovation Fund</div></div>
+        <div class="card"><h4>STARK</h4><div class="meta">Munich, DE · 2024</div><div class="desc">Founded by Florian Seibel (ex-Quantum Systems). OWE-V Virtus loitering munition. Minerva C2 running on rugged laptops / vehicle servers with offline ML. November 2025 share of €900 M Bundeswehr kamikaze-drone framework with Helsing and Rheinmetall. <span class="flag">caveat: reportedly failed four of four Bundeswehr trial strikes Oct 2025</span>.</div><div class="funding">Aug 2025 · $62 M · Sequoia · $500 M</div></div>
+        <div class="card"><h4>ARX Robotics</h4><div class="meta">Oberding, DE · 2022</div><div class="desc">Gereon UGV plus Mithra OS, an AI operating system to retrofit legacy military ground vehicles. Deployed across six European armies including Ukraine.</div><div class="funding">Apr-Jul 2025 · €42 M Series A · HV Capital + Speedinvest + NIF</div></div>
+        <div class="card"><h4>Destinus</h4><div class="meta">Payerne, CH → NL · pivoting</div><div class="desc">Pivoted from hypersonic passenger aircraft to AI-driven uncrewed systems. In August 2025 acquired Zurich's Daedalean (AI autonomy) for CHF 180 M. HQ partly flipping to Netherlands.</div><div class="funding">~€400 M cumulative</div></div>
+        <div class="card"><h4>Swarmer</h4><div class="meta">Kyiv, UA</div><div class="desc">Styx AI, Minas, Trident. Drone swarms with on-board autonomy. The $15 M Series A was the largest publicly announced Ukrainian defense-tech round since 2022.</div><div class="funding">Sep 2025 · $15 M Series A · US investors</div></div>
+        <div class="card"><h4>Airlogix</h4><div class="meta">Kyiv, UA</div><div class="desc">Gor reconnaissance UAV; Anubis and Seth-X strike drones with AI targeting. February 2026: JV with Auterion (Munich) with a Bundeswehr contract for "thousands" of systems. Production moves to Germany from 2026.</div><div class="funding">Feb 2026 · German MoD contract via Auterion JV</div></div>
+        <div class="card"><h4>Kvertus</h4><div class="meta">Kyiv, UA</div><div class="desc">Electronic warfare and anti-drone. Launched Atlas, a £103.7 M front-line anti-drone wall project, with £5 M self-funded.</div><div class="funding">Self-funded + Atlas program</div></div>
+        <div class="card"><h4>Delian Alliance Industries</h4><div class="meta">Athens, GR</div><div class="desc">Autonomous surveillance towers, GPS-denied navigation modules, Interceptigon loitering munitions plus interceptor UAVs. Founder Dimitrios Kottas is ex-Apple robotics.</div><div class="funding">Jul 2025 · $14 M Series A · Air Street Capital</div></div>
+        <div class="card"><h4>Hensoldt</h4><div class="meta">Taufkirchen, DE · public</div><div class="desc">TRML-4D radar with AI target recognition. Aiona modular AI platform. Strategic partnership with Helsing on CA-1 Europa. SPEXER 2000 radars into Rheinmetall air defense.</div><div class="funding">Public</div></div>
+      </div>
+    </div>
+
+    <!-- V.H SPACE -->
+    <div class="stack-section">
+      <div class="stack-header">
+        <div class="stack-num">V.h</div>
+        <div>
+          <h3>Space edge. On-orbit inference moves from slide deck to silicon.</h3>
+          <div class="stack-funding">Only the data you actually need gets downlinked. The rest is inferred before it ever leaves the satellite.</div>
+        </div>
+      </div>
+      <p style="margin-bottom:1.5rem;">The EU's IRIS² sovereign LEO/MEO constellation (€10.6 bn budget, SpaceRISE consortium awarded December 2024) is the policy backdrop; 264 LEO plus 18 MEO satellites, deployment 2029-2030.</p>
+      <div class="cards">
+        <div class="card"><h4>ICEYE</h4><div class="meta">Espoo, FI</div><div class="desc">SAR satellites. Rheinmetall JV won an approximately $2 bn German SAR constellation contract in December 2025 with AI-driven image evaluation. Finnish MoD SAR contract signed September 2025.</div><div class="funding">Dec 2025 · €150 M Series E · General Catalyst · €2.4 B</div></div>
+        <div class="card"><h4>Open Cosmos</h4><div class="meta">Harwell, UK</div><div class="desc">On-board AI for hyperspectral payloads. November 2025 launched 6GStarLab and an Open Constellation node on SpaceX Falcon 9. £5.15 M DSTL space-situational-awareness contract 2025.</div><div class="funding">Raising ~$200 M for LEO constellation</div></div>
+        <div class="card"><h4>D-Orbit</h4><div class="meta">Fino Mornasco, IT</div><div class="desc">Jan 2026 Series D led by Azimut. April 2025 business combination with Planetek for in-orbit AI data processing. Now positioning explicitly as "Orbital Edge AI".</div><div class="funding">Jan 2026 · $53 M Series D · Azimut · (~€150 M prior Series C)</div></div>
+        <div class="card"><h4>Isar Aerospace</h4><div class="meta">Munich, DE</div><div class="desc">Launch vehicle Spectrum. Not an edge-AI company directly, but the key sovereign-launch option for European edge-AI payloads. In talks to raise another €250 M pre-launch.</div><div class="funding">Jun 2025 · €150 M Eldridge convertible</div></div>
+        <div class="card"><h4>Aerospacelab</h4><div class="meta">Charleroi, BE</div><div class="desc">€94 M Series B in August 2025 plus €37.5 M EIB financing in September. Megafactory targeting 500 sats per year by 2027. Picked by Redwire to build Belgium's first national-security satellite.</div><div class="funding">Aug 2025 · €94 M Series B</div></div>
+        <div class="card"><h4>ReOrbit</h4><div class="meta">Helsinki, FI</div><div class="desc">€45 M Series A in September 2025, the largest all-equity Series A in Finland. Software-defined satellites: Silta communications platform, Ukko ISR. Software-defined is the edge-AI story.</div><div class="funding">Sep 2025 · €45 M Series A · Springvest</div></div>
+        <div class="card"><h4>EnduroSat</h4><div class="meta">Sofia, BG</div><div class="desc">Approximately $150 M raised across 2025: €43 M in May (Founders Fund-led) and $104 M in October. New 188,000 sq ft Sofia Space Center opened October 2025.</div><div class="funding">2025 · ~$150 M across two rounds</div></div>
+        <div class="card"><h4>Reflex Aerospace</h4><div class="meta">Munich + Berlin, DE</div><div class="desc">€50 M Series A in November 2025, labelled the largest European New Space Series A. Praetora platform for optical, SAR, SDA and SIGINT ISR sats. First satellite flew January 2025.</div><div class="funding">Nov 2025 · €50 M Series A · Human Element + Alpine Space</div></div>
+        <div class="card"><h4>Constellr</h4><div class="meta">Freiburg, DE</div><div class="desc">Thermal Earth observation. €37 M Series A in February 2026 (Alpine Space + Lakestar); €75 M total. SkyBee-1 and SkyBee-2 on orbit. Pivoting to defense-grade thermal intelligence.</div><div class="funding">Feb 2026 · €37 M Series A</div></div>
+        <div class="card"><h4>SatVu</h4><div class="meta">London, UK</div><div class="desc">Thermal intelligence. £30 M round in February 2026, led by NATO Innovation Fund. £60 M total equity. HotSat-2 and HotSat-3 planned for 2026. Edge AI on HotSats on the roadmap.</div><div class="funding">Feb 2026 · £30 M · NATO Innovation Fund</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ ROUNDS ================ -->
+<section class="section" id="rounds">
+  <div class="prose">
+    <div class="section-label">VI · Top rounds</div>
+    <h2 class="h-section">Twelve rounds that <em>tell the story</em> of the last two years.</h2>
+    <p class="lede">This is not a complete list. It is the list you would need to know to understand where European edge AI sits today.</p>
+  </div>
+
+  <div class="container">
+    <table class="tbl">
+      <thead>
+        <tr><th>#</th><th>Company</th><th>HQ</th><th>Round</th><th>Date</th><th class="num">Amount</th><th>Segment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Wayve</strong></td><td>London, UK</td><td>Series D (+ext)</td><td>Feb / Apr 2026</td><td class="num">~$1.5 B</td><td>Automotive</td></tr>
+        <tr><td>2</td><td><strong>Wayve</strong></td><td>London, UK</td><td>Series C</td><td>May 2024</td><td class="num">$1.05 B</td><td>Automotive</td></tr>
+        <tr><td>3</td><td><strong>Neura Robotics</strong></td><td>Metzingen, DE</td><td>reported</td><td>Mar 2026</td><td class="num">~€1.0 B <span class="flag">not closed</span></td><td>Humanoid</td></tr>
+        <tr><td>4</td><td><strong>Helsing</strong></td><td>Munich, DE</td><td>Series D</td><td>Jun 2025</td><td class="num">€600 M</td><td>Defense</td></tr>
+        <tr><td>5</td><td><strong>Tekever</strong></td><td>Lisbon, PT</td><td>unicorn round</td><td>May 2025</td><td class="num">$500 M</td><td>Defense (ISR)</td></tr>
+        <tr><td>6</td><td><strong>Quantum Systems</strong></td><td>Gilching, DE</td><td>Series C + ext</td><td>May + Nov 2025</td><td class="num">€160M + €180M</td><td>Defense (drones)</td></tr>
+        <tr><td>7</td><td><strong>Axelera AI</strong></td><td>Eindhoven, NL</td><td>Series C</td><td>Feb 2026</td><td class="num">>$250 M</td><td>Edge AI silicon</td></tr>
+        <tr><td>8</td><td><strong>Black Semiconductor</strong></td><td>Aachen, DE</td><td>Series A + IPCEI</td><td>Jun 2024</td><td class="num">€254 M</td><td>Graphene chip interconnect</td></tr>
+        <tr><td>9</td><td><strong>ICEYE</strong></td><td>Espoo, FI</td><td>Series E</td><td>Dec 2025</td><td class="num">€150 M</td><td>Space (SAR)</td></tr>
+        <tr><td>10</td><td><strong>Isar Aerospace</strong></td><td>Munich, DE</td><td>convertible</td><td>Jun 2025</td><td class="num">€150 M</td><td>Launch</td></tr>
+        <tr><td>11</td><td><strong>SiPearl</strong></td><td>Maisons-Laffitte, FR</td><td>Series A final close</td><td>Jul 2025</td><td class="num">€130 M</td><td>HPC / AI processor</td></tr>
+        <tr><td>12</td><td><strong>Neura Robotics</strong></td><td>Metzingen, DE</td><td>Series B</td><td>Jan 2025</td><td class="num">€120 M</td><td>Humanoid</td></tr>
+        <tr><td>13</td><td><strong>Oxa</strong></td><td>Oxford, UK</td><td>growth</td><td>Mar 2026</td><td class="num">$103 M</td><td>Automotive (industrial)</td></tr>
+        <tr><td>14</td><td><strong>Einride</strong></td><td>Stockholm, SE</td><td>growth</td><td>Oct 2025</td><td class="num">$100 M</td><td>Automotive (freight)</td></tr>
+        <tr><td>15</td><td><strong>Euclyd</strong></td><td>Eindhoven, NL</td><td>raising</td><td>Apr 2026</td><td class="num">€100 M</td><td>Edge AI silicon</td></tr>
+        <tr><td>16</td><td><strong>Wandercraft</strong></td><td>Paris, FR</td><td>Series D</td><td>Jun 2025</td><td class="num">$75 M</td><td>Humanoid / exo</td></tr>
+        <tr><td>17</td><td><strong>Axelera AI</strong></td><td>Eindhoven, NL</td><td>Series B</td><td>Jun 2024</td><td class="num">$68 M</td><td>Edge AI silicon</td></tr>
+        <tr><td>18</td><td><strong>Q.ANT</strong></td><td>Stuttgart, DE</td><td>Series A</td><td>Jul 2025</td><td class="num">€62 M</td><td>Photonic silicon</td></tr>
+        <tr><td>19</td><td><strong>STARK</strong></td><td>Munich, DE</td><td>Series A</td><td>Aug 2025</td><td class="num">$62 M</td><td>Defense</td></tr>
+        <tr><td>20</td><td><strong>ANYbotics</strong></td><td>Zurich, CH</td><td>Series C + ext</td><td>Dec 2024 / Sep 2025</td><td class="num">$80 M</td><td>Quadruped robotics</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================ CHALLENGES ================ -->
+<section class="section" id="challenges">
+  <div class="prose">
+    <div class="section-label">VII · Challenges</div>
+    <h2 class="h-section">The ecosystem is here. The <em>exit path</em> is not.</h2>
+    <p class="lede">Four things still do not work. Fund managers underwriting a European edge-AI thesis should price them in explicitly.</p>
+
+    <p><strong>The cap-table drain.</strong> Dealroom's read for late-stage European Deep Tech is that roughly 70 percent of mega-round funding comes from non-European investors. Partly this is success (Europe's best startups are attractive enough that US, Asian and Middle Eastern capital crowds in) but the pattern biases future exits toward US acquirers and US listings. When Silo AI sold to AMD for $665 million in July 2024, Finland lost a generational AI-lab.</p>
+
+    <p><strong>The HQ flip.</strong> In July 2025, 1X Technologies relocated its global headquarters from Moss, Norway to Palo Alto. Manufacturing stayed. Capital moved. The pattern is not yet epidemic (Helsing, Quantum Systems, Wayve, Axelera and Neura are still European-registered) but it is a real signal. US chipmakers (AMD, Arm, Qualcomm, NVIDIA) and US VCs (Sequoia, Andreessen, DST) sit on most top cap tables. A Series D priced at $8.6 billion that accepts strategic money from three US chipmakers and a US ride-hail giant will, eventually, go where those investors can realise.</p>
+
+    <p><strong>The M&amp;A vacuum.</strong> In 2024 and 2025 alone: Qualcomm acquired Edge Impulse, Foundries.io (Cambridge) and Arduino (Italy); NXP bought Kinara for $307M; SoftBank took Graphcore; AMD bought Silo AI. If you build edge-AI infrastructure in Europe and miss escape velocity before Series C, the credible acquirers are US-listed industrial buyers. Europe has almost no listed strategic buyers of comparable scale. ASML, STMicro, Infineon and Arm exist, but ASML bought Cymer in 2013 and the rest rarely acquire at this scale. This is the single problem the Chips Act 2.0, scheduled for H1 2026, has to solve.</p>
+
+    <p><strong>The NVIDIA dependency.</strong> The sovereign-AI thesis most European governments are now funding runs on silicon designed in Santa Clara. France's AI campus JV names NVIDIA in the headline. Wayve's Series D is NVIDIA-led. Bosch's next-generation ADAS runs DRIVE AGX Thor. Mistral's €1.7 billion Series C (9 Sep 2025, €11.7 billion post-money) is ASML-led with NVIDIA among the participants. Any report that sells "European edge sovereignty" without naming NVIDIA as the counterparty on most sovereign rounds is selling an incomplete product. DARE's AIPU, SiPearl's Rhea1 and Axelera's Europa are the medium-term answers; none of them ships at production volume in 2026.</p>
+
+    </div>
+
+  <div class="container">
+    <div class="chart-wrap">
+      <div class="chart-title">Where the capital actually comes from</div>
+      <div class="chart-sub">European Deep Tech VC by investor HQ, share of total round value · 2024-2025</div>
+      <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:420px; font-family:Inter,sans-serif;">
+  <!-- Title line chart -->
+  <text x="0" y="30" fill="#1c221d" font-family="Fraunces" font-size="18" font-weight="500">Late-stage European Deep Tech VC, by investor HQ</text>
+  <text x="0" y="52" fill="#6a6f69" font-size="12" font-style="italic">Share by round size, 2024-2025 · Dealroom 2026 European Deep Tech Report</text>
+
+  <!-- Pre-Seed row -->
+  <g transform="translate(0,90)">
+    <text x="0" y="16" fill="#3a4a3d" font-size="12" letter-spacing="1" font-weight="600">PRE-SEED · $0-1M</text>
+    <rect x="0" y="24" width="639" height="22" fill="#2c3a2f"/><text x="320" y="40" text-anchor="middle" fill="#faf6ee" font-size="12" font-weight="600">71% domestic</text>
+    <rect x="639" y="24" width="198" height="22" fill="#5c6b5f"/><text x="738" y="40" text-anchor="middle" fill="#faf6ee" font-size="12">22% intra-EU</text>
+    <rect x="837" y="24" width="45" height="22" fill="#a0522d"/><text x="859" y="40" text-anchor="middle" fill="#faf6ee" font-size="11">5%</text>
+    <rect x="882" y="24" width="18" height="22" fill="#8b3a3a"/>
+  </g>
+
+  <!-- Series A row -->
+  <g transform="translate(0,140)">
+    <text x="0" y="16" fill="#3a4a3d" font-size="12" letter-spacing="1" font-weight="600">SERIES A · $4-15M</text>
+    <rect x="0" y="24" width="495" height="22" fill="#2c3a2f"/><text x="248" y="40" text-anchor="middle" fill="#faf6ee" font-size="12" font-weight="600">55% domestic</text>
+    <rect x="495" y="24" width="243" height="22" fill="#5c6b5f"/><text x="616" y="40" text-anchor="middle" fill="#faf6ee" font-size="12">27% intra-EU</text>
+    <rect x="738" y="24" width="108" height="22" fill="#a0522d"/><text x="792" y="40" text-anchor="middle" fill="#faf6ee" font-size="11">12% US</text>
+    <rect x="846" y="24" width="54" height="22" fill="#8b3a3a"/>
+  </g>
+
+  <!-- Series C row -->
+  <g transform="translate(0,190)">
+    <text x="0" y="16" fill="#3a4a3d" font-size="12" letter-spacing="1" font-weight="600">SERIES C · $40-100M</text>
+    <rect x="0" y="24" width="342" height="22" fill="#2c3a2f"/><text x="171" y="40" text-anchor="middle" fill="#faf6ee" font-size="12" font-weight="600">38% domestic</text>
+    <rect x="342" y="24" width="243" height="22" fill="#5c6b5f"/><text x="463" y="40" text-anchor="middle" fill="#faf6ee" font-size="12">27% intra-EU</text>
+    <rect x="585" y="24" width="234" height="22" fill="#a0522d"/><text x="702" y="40" text-anchor="middle" fill="#faf6ee" font-size="12">26% US</text>
+    <rect x="819" y="24" width="81" height="22" fill="#8b3a3a"/><text x="859" y="40" text-anchor="middle" fill="#faf6ee" font-size="10">9%</text>
+  </g>
+
+  <!-- Mega row -->
+  <g transform="translate(0,240)">
+    <text x="0" y="16" fill="#3a4a3d" font-size="12" letter-spacing="1" font-weight="600">MEGA ROUNDS · $250M+</text>
+    <rect x="0" y="24" width="90" height="22" fill="#2c3a2f"/><text x="45" y="40" text-anchor="middle" fill="#faf6ee" font-size="11" font-weight="600">10% dom.</text>
+    <rect x="90" y="24" width="180" height="22" fill="#5c6b5f"/><text x="180" y="40" text-anchor="middle" fill="#faf6ee" font-size="12">20% intra-EU</text>
+    <rect x="270" y="24" width="549" height="22" fill="#a0522d"/><text x="544" y="40" text-anchor="middle" fill="#faf6ee" font-size="13" font-weight="600">61% US-led</text>
+    <rect x="819" y="24" width="81" height="22" fill="#8b3a3a"/><text x="859" y="40" text-anchor="middle" fill="#faf6ee" font-size="10">7% asia</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(0,310)">
+    <rect x="0" y="0" width="20" height="14" fill="#2c3a2f"/><text x="28" y="12" fill="#1c221d" font-size="12">Domestic</text>
+    <rect x="120" y="0" width="20" height="14" fill="#5c6b5f"/><text x="148" y="12" fill="#1c221d" font-size="12">Intra-European</text>
+    <rect x="280" y="0" width="20" height="14" fill="#a0522d"/><text x="308" y="12" fill="#1c221d" font-size="12">US</text>
+    <rect x="350" y="0" width="20" height="14" fill="#8b3a3a"/><text x="378" y="12" fill="#1c221d" font-size="12">Asia + Rest of world</text>
+  </g>
+
+  <!-- Callout -->
+  <g transform="translate(0,360)">
+    <text x="0" y="14" fill="#a0522d" font-size="13" font-weight="600">At $250M+, 61% of every euro comes from the US. Up from 12% at Series A.</text>
+  </g>
+</svg>
+      <div class="chart-footnote">Source: Dealroom 2026 European Deep Tech Report. "Domestic" = same-country investor. US share grows monotonically with round size.</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <div class="pullquote">
+      France's €109 billion AI investment is the equivalent for France of what the United States announced with Stargate.
+      <cite>Emmanuel Macron · Paris AI Action Summit · 10 February 2025</cite>
+    </div>
+    <p>The Macron framing is the political promise. The dataset above is the gap between that promise and where private capital actually sits today. The next two years decide whether Europe closes it or accepts being the sovereign-sounding customer of somebody else's silicon.</p>
+  </div>
+</section>
+
+<!-- ================ POV (ENTROPORA) ================ -->
+<section class="pov" id="pov">
+  <div class="prose">
+    <div class="section-label">VIII · Notes from a shipping product</div>
+    <h2 class="h-section">What the seven sections above look like <em>from inside heydict</em>.</h2>
+    <p class="lede">Entropora builds heydict, a desktop voice-action agent where the audio stays on the user's machine.</p>
+  </div>
+
+  <div class="container">
+    <div style="background:rgba(244,239,230,.04); border:1px solid rgba(244,239,230,.18); padding:2rem; margin-top:2rem;">
+      <div style="font-family:'Fraunces',serif; font-size:1.25rem; color:var(--bg); font-weight:400; margin-bottom:1rem;">heydict, April 2026</div>
+      <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" style="width:100%; margin-top:36px; font-family:Inter,sans-serif;">
+    <defs>
+      <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L8,5 L0,10" fill="none" stroke="#d7ccab" stroke-width="2"/>
+      </marker>
+    </defs>
+    <!-- On-device zone box -->
+    <rect x="20" y="50" width="660" height="340" fill="none" stroke="#d7ccab" stroke-width="1.2" stroke-dasharray="6,4" rx="6"/>
+    <text x="40" y="82" fill="#d7ccab" font-size="16" letter-spacing="2" font-weight="700">ON-DEVICE · AUDIO NEVER LEAVES</text>
+    <!-- Mic -->
+    <g transform="translate(44,140)">
+      <rect x="0" y="0" width="130" height="90" fill="#2c3a2f" stroke="#d7ccab" stroke-width="1.5"/>
+      <text x="65" y="40" text-anchor="middle" fill="#faf6ee" font-family="Fraunces" font-size="22" font-weight="600">Mic</text>
+      <text x="65" y="64" text-anchor="middle" fill="#d7ccab" font-size="16">cpal</text>
+    </g>
+    <!-- arrow -->
+    <path d="M180,185 L208,185" stroke="#d7ccab" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- STT -->
+    <g transform="translate(214,140)">
+      <rect x="0" y="0" width="150" height="90" fill="#d7ccab"/>
+      <text x="75" y="38" text-anchor="middle" fill="#2c3a2f" font-family="Fraunces" font-size="22" font-weight="700">STT</text>
+      <text x="75" y="60" text-anchor="middle" fill="#2c3a2f" font-size="15">Parakeet (NVIDIA)</text>
+      <text x="75" y="78" text-anchor="middle" fill="#2c3a2f" font-size="12" font-style="italic">+ Moonshine, Whisper</text>
+    </g>
+    <!-- arrow -->
+    <path d="M370,185 L398,185" stroke="#d7ccab" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- Router -->
+    <g transform="translate(404,140)">
+      <rect x="0" y="0" width="150" height="90" fill="#d7ccab"/>
+      <text x="75" y="38" text-anchor="middle" fill="#2c3a2f" font-family="Fraunces" font-size="22" font-weight="700">Router</text>
+      <text x="75" y="62" text-anchor="middle" fill="#2c3a2f" font-size="16">Candle</text>
+      <text x="75" y="80" text-anchor="middle" fill="#2c3a2f" font-size="13" font-style="italic">Hugging Face, Paris</text>
+    </g>
+    <!-- arrow -->
+    <path d="M560,185 L588,185" stroke="#d7ccab" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- Action -->
+    <g transform="translate(594,140)">
+      <rect x="0" y="0" width="76" height="90" fill="#2c3a2f" stroke="#d7ccab" stroke-width="1.5"/>
+      <text x="38" y="40" text-anchor="middle" fill="#faf6ee" font-family="Fraunces" font-size="20" font-weight="600">Action</text>
+      <text x="38" y="64" text-anchor="middle" fill="#d7ccab" font-size="14">enigo</text>
+    </g>
+    <!-- Optional cloud bridge: dashed line up from Router -->
+    <path d="M479,140 L479,100 L720,100" stroke="#a0522d" stroke-width="1.2" fill="none" stroke-dasharray="5,4"/>
+    <!-- Optional cloud sidebar (right of on-device box) -->
+    <g transform="translate(700,120)">
+      <rect x="0" y="0" width="180" height="180" fill="none" stroke="#a0522d" stroke-width="1.2" stroke-dasharray="5,4" rx="6"/>
+      <text x="90" y="26" text-anchor="middle" fill="#a0522d" font-size="13" letter-spacing="1.5" font-weight="700">OPTIONAL CLOUD</text>
+      <text x="90" y="62" text-anchor="middle" fill="#faf6ee" font-family="Fraunces" font-size="18" font-weight="500">Cloud LLM</text>
+      <text x="90" y="84" text-anchor="middle" fill="#a0522d" font-size="13">for complex rewrites</text>
+      <text x="90" y="118" text-anchor="middle" fill="#faf6ee" font-size="14">OpenAI · Anthropic</text>
+      <text x="90" y="138" text-anchor="middle" fill="#faf6ee" font-size="14">Groq · OpenRouter</text>
+      <text x="90" y="165" text-anchor="middle" fill="#a0522d" font-size="12" font-style="italic">disabled for enterprise</text>
+    </g>
+  </svg>
+    </div>
+  </div>
+
+  <div class="prose">
+
+    <p>European open source in this stack is thinner than we'd like. heydict's primary STT is Parakeet, NVIDIA's NeMo transducer running via ONNX, because nothing European matches its speed-accuracy point at 0.6B. Candle (our intent router, using a small BERT from Hugging Face) is the one structurally European piece in production. Silero VAD is Russian-origin open source. The sovereignty gap does not just live in policy papers. It lives in our STT weights.</p>
+
+    <p>The cloud fallback adds a second US layer. heydict's LLM options for complex rewrites are OpenAI, Anthropic, Groq, OpenRouter. Every European edge-AI vendor hits the same wall. No European provider matches the price, quality, API surface, and latency triangle at production. Enterprise customers disable the cloud path and run dictation-only. That is the compliant default, not the full product.</p>
+
+    <p>The silicon inflection is real but early. Axelera's >$250 million Series C, Q.ANT's photonic processor live at the Leibniz Supercomputing Centre, SpiNNcloud's 35,000-chip neuromorphic system at TU Dresden, SiPearl's Rhea1 taped out at TSMC. None ships enterprise design-wins at volume in 2026. Graphcore remains the base rate.</p>
+
+    <p>The NPU abstraction layer across Qualcomm, Arm, Apple, MediaTek, ST and the new European accelerators is a patchwork. A credible open runtime across those vendors, not another ONNX dialect, would move more production teams than several of the silicon rounds in this report. And the sovereign-AI spend most European governments are now funding still buys training silicon from NVIDIA. Wayve, Bosch, Mistral's €1.7 billion Series C confirm the pattern.</p>
+
+    <p>The road-map bet: Chips Act 2.0 shipping with a real scale-up envelope in H1 2026, European public procurement moving from grants to production contracts, one European acquirer at Qualcomm scale before the next Silo-AI exit. Two land by 2028. One slips.</p>
+
+    <div class="sig">
+      <div class="name">Andrii Shylenko &amp; Lorenz Sauer</div>
+      <div class="title">Co-founders, <a href="https://entropora.com" style="color:inherit;text-decoration:underline;">Entropora, Inc.</a> · <a href="mailto:as@entropora.com" style="color:inherit;text-decoration:underline;">as@entropora.com</a> / <a href="mailto:ls@entropora.com" style="color:inherit;text-decoration:underline;">ls@entropora.com</a> · <a href="https://linkedin.com/in/shylenko" style="color:inherit;text-decoration:underline;">in/shylenko</a> · <a href="https://linkedin.com/in/lorenz-sauer" style="color:inherit;text-decoration:underline;">in/lorenz-sauer</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ METHODOLOGY ================ -->
+<section class="sources" id="methodology" style="background:var(--bg);border-top:1px solid var(--rule);">
+  <div class="container">
+    <h3 class="serif" style="margin-bottom:1.5rem;">How we built this</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;font-size:14px;color:var(--ink-soft);line-height:1.6;">
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Scope rules.</strong>
+        "European" means HQ in the EU27, UK, Switzerland, Norway, Iceland or Ukraine. Listed incumbents (Arm, ST, Infineon, NXP) are included where material; HQ flips (1X Technologies) are flagged in red. Foundation-model labs are included only when they ship an on-device artifact (Mistral Ministral is in; H Company is not).
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Data hygiene.</strong>
+        Funding figures are as disclosed by companies or primary reporting. The European Edge-AI VC timeseries in Section III is reconstructed from Dealroom Future-of-Compute, Sifted hardware briefings and Atomico's State of European Tech; it is directional, not a census, and the chart caveats this explicitly. Sell-side TAM forecasts are shown as a range, not a point estimate.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">What we left out.</strong>
+        Fintech and AdTech ML, even when deployed on customer hardware. Cloud-first "AI platform" companies that do not ship an edge variant. Retail and consumer-internet AI. Mobile OS vendors' own on-device AI (Apple Intelligence, Google Gemini Nano, Samsung Galaxy AI) except as a reference point. Inference-as-a-service providers are noted only where they compete directly with on-prem.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Known gaps (v1).</strong>
+        We underweight compiler and runtime research (Apache TVM, MLIR, the European MLPerf Tiny contributors). We underweight academic silicon in Fraunhofer IIS/IMS, imec, KU Leuven MICAS. We have no direct-quoted commentary from practitioners beyond the Draghi pull quote; external named quotes are queued for v2 via the outreach list published alongside this report.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Companion dataset.</strong>
+        A CSV of every company cited in this report (<code>companies.csv</code>, ~85 rows: name, HQ, country, segment, founded, last round, source URL) is published alongside the HTML. Cite, fork, correct.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Corrections.</strong>
+        Email <a href="mailto:as@entropora.com">as@entropora.com</a> with the specific line and the corrected source. Accepted corrections ship as dated addenda at the bottom of this page.
+      </div>
+      <div>
+        <strong style="color:var(--ink);display:block;margin-bottom:0.5rem;">Cut-off.</strong>
+        Coverage window closes 19 April 2026. Q1 2026 rounds are included. The 2026 European Deep Tech Report by Dealroom × Lakestar × Walden Catalyst (March 2026) is a structural reference.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ SOURCES ================ -->
+<section class="sources" id="sources">
+  <div class="container">
+    <h3 class="serif">Sources</h3>
+    <p style="margin-bottom:2rem;color:var(--ink-muted);font-size:14px;max-width:60ch;">Where a number appears in the body, its primary source sits here. Accessed April 2026 unless otherwise noted.</p>
+
+    <ul>
+      <li><strong>Reports &amp; data.</strong></li>
+      <li><a href="https://dealroom.co/reports">Dealroom.co, 2026 European Deep Tech Report</a> (with Lakestar &amp; Walden Catalyst, Mar 2026)</li>
+      <li><a href="https://sifted.eu/articles/state-european-tech-report-2025">Atomico / Sifted, State of European Tech 2025</a></li>
+      <li><a href="https://sifted.eu/articles/2025-in-data">Sifted, European tech's 2025 in data</a></li>
+      <li><a href="https://www.precedenceresearch.com/edge-ai-market">Precedence Research, Edge AI market</a></li>
+      <li><a href="https://www.grandviewresearch.com/industry-analysis/edge-ai-market-report">Grand View Research, Edge AI market</a></li>
+      <li><a href="https://www.marketsandmarkets.com/Market-Reports/edge-ai-hardware-market-158498281.html">MarketsandMarkets, Edge AI Hardware</a></li>
+      <li><a href="https://market.us/report/edge-ai-market/">Market.us, Edge AI</a></li>
+      <li><a href="https://newmarketpitch.com/blogs/news/edge-ai-funding-trends">NewMarketPitch, Edge AI funding trends</a></li>
+      <li><a href="https://www.nif.fund/news/dealroom-and-nato-innovation-fund-european-defence-security-resilience-startups-smash-record-with-8-7b-raised-in-2025/">NATO Innovation Fund &amp; Dealroom, European DSR 2025 record</a></li>
+      <li><strong>Policy &amp; public capital.</strong></li>
+      <li><a href="https://commission.europa.eu/topics/competitiveness/draghi-report_en">Mario Draghi, The Future of European Competitiveness (Sept 2024)</a></li>
+      <li><a href="https://www.elysee.fr/en/sommet-pour-l-action-sur-l-ia">Paris AI Action Summit (Feb 2025)</a></li>
+      <li><a href="https://www.gov.uk/government/publications/ai-opportunities-action-plan/ai-opportunities-action-plan">UK AI Opportunities Action Plan (Jan 2025)</a></li>
+      <li><a href="https://www.ki-strategie-deutschland.de/files/downloads/Fortschreibung_KI-Strategie_engl.pdf">Germany AI Strategy (Jul 2025)</a></li>
+      <li><a href="https://artificialintelligenceact.eu/implementation-timeline/">EU AI Act implementation timeline</a></li>
+      <li><a href="https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf">EDPB Opinion 28/2024</a></li>
+      <li><a href="https://www.chips-ju.europa.eu/">Chips Joint Undertaking</a></li>
+      <li><a href="https://www.eurohpc-ju.europa.eu/advancing-european-sovereignty-hpc-risc-v-2025-03-06_en">EuroHPC DARE project (Mar 2025, €240 M)</a></li>
+      <li><a href="https://www.eurohpc-ju.europa.eu/ai-factories_en">EuroHPC AI Factories</a></li>
+      <li><a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20251029-2">Eurostat H1 2025 industrial electricity prices</a></li>
+      <li><strong>Company announcements (selected).</strong></li>
+      <li><a href="https://axelera.ai/news/axelera-ai-secures-more-than-250-million-funding-on-global-commercial-growth">Axelera AI &gt;$250 M Series C (Feb 2026)</a></li>
+      <li><a href="https://wayve.ai/press/series-d/">Wayve $1.2 B Series D (Feb 2026)</a></li>
+      <li><a href="https://helsing.ai/newsroom/helsing-raises-eur600m-to-invest-in-european-technological-sovereignty">Helsing €600 M Series D (Jun 2025)</a></li>
+      <li><a href="https://quantum-systems.com/blog/2025/05/05/quantum-systems-raises-euro160m/">Quantum Systems €160 M Series C (May 2025)</a></li>
+      <li><a href="https://insidehpc.com/2025/07/sipearl-tapes-out-hpc-and-ai-chip-rhea1-closes-e130m-series-a-for-european-tech-sovereignty/">SiPearl €130 M Series A (Jul 2025)</a></li>
+      <li><a href="https://qant.com/press-releases/qant-raises-62-million-euro-to-transform-the-future-of-computing-with-photonic-processing/">Q.ANT €62 M Series A (Jul 2025)</a></li>
+      <li><a href="https://neura-robotics.com/neura-robotics-secures-euro-120-million-series-b/">Neura Robotics €120 M (Jan 2025)</a></li>
+      <li><a href="https://www.wandercraft.eu/articles/wandercraft-announces-series-d-round-bringing-75m-in-total-funding-secured-for-global-acceleration-of-ai-powered-robotics">Wandercraft $75 M Series D (Jun 2025)</a></li>
+      <li><a href="https://www.eu-startups.com/2025/11/zurichs-flexion-raises-e50-million-to-build-the-brains-behind-humanoids/">Flexion Robotics €50 M Series A (Nov 2025)</a></li>
+      <li><a href="https://mistral.ai/news/ministraux">Mistral Ministral 3B/8B release (Oct 2024)</a></li>
+      <li><a href="https://kyutai.org/">Kyutai (Moshi, Hibiki)</a></li>
+      <li><a href="https://elevenlabs.io/blog/enterprise-voice-ai-deployed-locally">ElevenLabs on-device enterprise voice</a></li>
+      <li><a href="https://huggingface.co/utter-project/EuroLLM-9B">EuroLLM-9B on Hugging Face</a></li>
+      <li><a href="https://openeurollm.eu/">OpenEuroLLM consortium</a></li>
+      <li><a href="https://tech.eu/2026/03/24/the-2026-european-deeptech-report-sector-reaches-690b-as-vc-share-hits-record/">Tech.eu coverage of the 2026 Deep Tech Report</a></li>
+    </ul>
+  </div>
+</section>
+
+<section style="background:var(--green-deep); color:var(--bg); padding:3.5rem 2rem; border-top:1px solid #1a221c;">
+  <div class="inner" style="text-align:center; max-width:700px; margin:0 auto;">
+    <p style="font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:rgba(244,239,230,.82); margin-bottom:1.75rem;">Prefer it as a PDF?</p>
+    <a href="carousel.pdf" download style="display:inline-block; padding:0.9rem 1.5rem; background:#d7ccab; color:var(--green-deep); text-decoration:none; font-weight:500; font-size:14px; letter-spacing:0.04em;">Download the report (PDF) →</a>
+    <p style="margin-top:1.25rem; font-size:12px; color:rgba(244,239,230,.5);"><a href="companies.csv" style="color:rgba(244,239,230,.72); border-bottom:1px solid rgba(215,204,171,.3);">companies.csv</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="brand-mark">Entropora</div>
+  <div>Hardware + applied AI. Building heydict, on-device voice for regulated industries.</div>
+  <div style="margin-top:0.5rem;font-size:12px;"><a href="https://entropora.com" style="color:inherit;">entropora.com</a> · <a href="mailto:as@entropora.com" style="color:inherit;">as@entropora.com</a> / <a href="mailto:ls@entropora.com" style="color:inherit;">ls@entropora.com</a> · <a href="https://linkedin.com/in/shylenko" style="color:inherit;">in/shylenko</a> · <a href="https://linkedin.com/in/lorenz-sauer" style="color:inherit;">in/lorenz-sauer</a></div>
+  <div style="margin-top:1.5rem;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(244,239,230,.4);">Report published April 2026. All figures as disclosed by subjects or public filings.</div>
+</footer>
+
+</body>
+</html>
