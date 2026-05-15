@@ -8,16 +8,36 @@ import { site } from '../data/site';
       <img src={site.avatar} alt="" width="34" height="34" />
       <span>{site.name}</span>
     </a>
-    <nav aria-label="Main navigation">
-      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
-    </nav>
+    <div class="header-actions">
+      <nav aria-label="Main navigation">
+        {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span aria-hidden="true">Aa</span>
+      </button>
+    </div>
   </div>
+  <script>
+    const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+    const updatePressed = () => {
+      button?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    };
+
+    button?.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem('theme', nextTheme);
+      updatePressed();
+    });
+
+    updatePressed();
+  </script>
 </header>
 
 <style>
   .site-header {
     border-bottom: 1px solid var(--border);
-    background: color-mix(in srgb, var(--bg) 92%, white);
+    background: var(--header-bg);
   }
 
   .header-inner {
@@ -41,9 +61,19 @@ import { site } from '../data/site';
     border-radius: 5px;
   }
 
+  .header-actions,
   nav {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    gap: 16px;
+    justify-content: flex-end;
+  }
+
+  nav {
     gap: 16px;
     flex-wrap: wrap;
   }
@@ -59,11 +89,36 @@ import { site } from '../data/site';
     color: var(--text);
   }
 
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 44px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
+
   @media (max-width: 560px) {
     .header-inner {
       align-items: flex-start;
       flex-direction: column;
       padding-block: 16px;
+    }
+
+    .header-actions {
+      justify-content: flex-start;
     }
   }
 </style>

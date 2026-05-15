@@ -5,7 +5,7 @@ function themeChange(){
     let button = document.querySelector('.nav-slider-night');
 
     // Add an event listener for a click
-    button.addEventListener('click', function(e){
+    button.addEventListener('click', function(){
         // Check the current data-theme value
         let currentTheme = document.documentElement.getAttribute('data-theme');
         if(currentTheme === 'light') {

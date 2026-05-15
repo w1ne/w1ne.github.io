@@ -14,7 +14,7 @@ const description = Astro.props.description ?? site.description;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,6 +27,13 @@ const description = Astro.props.description ?? site.description;
     <link rel="icon" href="/images/logoAS_blue_white.png" />
     <link rel="alternate" type="application/rss+xml" href="/rss.xml" title={`${site.name} RSS`} />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = stored || preferred;
+      })();
+    </script>
   </head>
   <body>
     <div class="site-shell">

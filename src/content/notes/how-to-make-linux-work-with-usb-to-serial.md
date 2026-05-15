@@ -9,7 +9,7 @@ tags:
   - USB
   - arduino
 legacyUrl: /usb-to-serial-linux/
-featured: false
+featured: true
 draft: false
 ---
 I am using [SourceRabbit G-code sender](https://www.sourcerabbit.com/) to control my "Miyazaki" drawing bot.

@@ -11,7 +11,7 @@ tags:
   - TDD
   - c
 legacyUrl: /ceedling-under-ntlm-proxy/
-featured: false
+featured: true
 draft: false
 ---
 [Ceedling](http://www.throwtheswitch.org/ceedling) is the build system for C based projects. Ceedling combines CMock, Unity, and CException in one open source package for producing quality C code.

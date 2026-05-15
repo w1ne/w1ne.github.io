@@ -12,7 +12,7 @@ tags:
   - programming
   - Ruby
 legacyUrl: /jekyll-github-pages-locally/
-featured: false
+featured: true
 draft: false
 ---
 I'm an enthusiastic admirer of Jekyll, which I use for all my static websites and this blog. The official GitHub documentation doesn't help much as a guide to running Jekyll on my local machine. Here is how to run it in Ubuntu 22.04.

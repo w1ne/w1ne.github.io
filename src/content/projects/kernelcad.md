@@ -1,31 +1,31 @@
 ---
 name: kernelCAD
-summary: CAD and engineering tooling for practical product development.
-status: Public project
-repoUrl: https://github.com/w1ne/kernelCAD
+summary: Headless-first CAD platform for AI agents and human visual review.
+status: Open-source project
+repoUrl: https://github.com/w1ne/kernelCAD-web
 topics:
   - CAD
-  - engineering tools
-  - product development
+  - AI agents
+  - TypeScript
 proofPoints:
-  - Demonstrates interest in tools that bridge design and implementation.
-  - Shows ability to shape engineering workflows into software.
-  - Supports the broader product-builder identity.
+  - Scriptable geometry generation with OpenCASCADE.
+  - Visual debugger for reviewing generated 3D models.
+  - STEP/STL export from deterministic code.
 featuredNotes: []
 ---
 
 ## What it is
 
-kernelCAD is a CAD-oriented public project area for engineering tools and product-development workflows. It represents work around the practical bridge between design artifacts and implementation work.
+kernelCAD is a headless-first CAD platform for AI agents. Agents use a scriptable API to generate, analyze, and modify 3D geometry, while humans can review the output in a web-based visual debugger.
 
 ## Why it matters
 
-CAD and product-development tools are most valuable when they reduce friction between an idea, a model, and the engineering decisions needed to make that model useful. kernelCAD keeps the focus on tooling that supports practical product development rather than presentation alone.
+The project treats CAD as deterministic code first, not manual clicking. That makes generated geometry easier to inspect, test, export, and revise.
 
 ## Technical judgment
 
-The project demonstrates interest in shaping engineering workflows into software. It also shows judgment about where tooling can help: at the boundary between design intent, implementation detail, and repeatable engineering process.
+The platform is built around OpenCASCADE via Replicad, with a TypeScript/Node API, web workers, and a React Three Fiber viewer.
 
 ## Code and related work
 
-The public repository is linked from this page: [w1ne/kernelCAD](https://github.com/w1ne/kernelCAD). Related public work appears in the notes about practical builds, 3D printing, and engineering workflow decisions.
+The public repository is linked from this page: [w1ne/kernelCAD-web](https://github.com/w1ne/kernelCAD-web).

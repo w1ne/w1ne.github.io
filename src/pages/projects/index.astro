@@ -6,11 +6,11 @@ import ProjectCard from '../../components/ProjectCard.astro';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
 
-<BaseLayout title="Projects" description="Selected project and expertise areas in embedded systems, tools, and connected products.">
+<BaseLayout title="Projects" description="Selected open-source and technical project pages.">
   <section class="content projects-head">
     <p class="eyebrow">Projects</p>
-    <h1>Selected tools, protocols, and product work.</h1>
-    <p>Public project areas and expertise signals around embedded systems, engineering workflows, and connected products.</p>
+    <h1>Open-source and technical work.</h1>
+    <p>Project pages for public work and selected technical areas. Descriptions stay factual and source-backed.</p>
   </section>
   <section class="container grid two projects-list" aria-label="Projects">
     {projects.map((project) => <ProjectCard project={project} />)}

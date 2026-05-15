@@ -1,51 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NoteCard from '../components/NoteCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { site } from '../data/site';
-import { featuredNotes } from '../lib/notes';
 
-const notes = featuredNotes(await getCollection('notes'), 4);
 const projects = await getCollection('projects');
 ---
 
 <BaseLayout>
   <section class="hero container">
     <div class="hero-copy">
-      <p class="eyebrow">Embedded systems and IoT architecture</p>
-      <h1>Practical notes from building connected systems.</h1>
+      <p class="eyebrow">Founder / embedded systems / applied AI</p>
+      <h1>Andrii Shylenko</h1>
       <p>
-        I write about firmware architecture, validation, industrial IoT, and productization from prototype to field.
+        I build connected systems, AI tools, and embedded products that survive the jump from prototype to field.
       </p>
       <div class="actions">
         <a class="button" href={`mailto:${site.email}`}>Discuss a project</a>
-        <a class="button secondary" href="/notes/">Read notes</a>
+        <a class="button secondary" href="/projects/">See projects</a>
       </div>
     </div>
-    <aside class="proof card" aria-label="Proof points">
-      <h2>Useful for teams shipping connected products</h2>
-      <ul>
-        {site.proofPoints.map((point) => <li>{point}</li>)}
-      </ul>
-    </aside>
   </section>
 
   <section class="container section-block">
     <div class="section-head">
-      <p class="eyebrow">Featured notes</p>
-      <h2>Engineering judgment in public.</h2>
-      <a href="/notes/">All notes</a>
-    </div>
-    <div class="grid two">
-      {notes.map((note) => <NoteCard note={note} />)}
-    </div>
-  </section>
-
-  <section class="container section-block">
-    <div class="section-head">
-      <p class="eyebrow">Project proof</p>
-      <h2>Open-source work and focus areas.</h2>
+      <p class="eyebrow">Projects</p>
+      <h2>My projects.</h2>
       <a href="/projects/">All projects</a>
     </div>
     <div class="grid two">
@@ -56,7 +36,7 @@ const projects = await getCollection('projects');
   <section class="container contact-band">
     <div>
       <p class="eyebrow">Contact</p>
-      <h2>Working on embedded/IoT architecture or productization?</h2>
+      <h2>Building a connected product, AI tool, or embedded platform?</h2>
     </div>
     <a class="button" href={`mailto:${site.email}`}>Email Andrii</a>
   </section>
@@ -71,8 +51,7 @@ const projects = await getCollection('projects');
 
   @media (min-width: 860px) {
     .hero {
-      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
-      align-items: end;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
@@ -94,17 +73,6 @@ const projects = await getCollection('projects');
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 24px;
-  }
-
-  .proof h2 {
-    margin-top: 0;
-    font-size: 1.1rem;
-  }
-
-  .proof ul {
-    margin-bottom: 0;
-    padding-left: 20px;
-    color: var(--muted);
   }
 
   .section-block {

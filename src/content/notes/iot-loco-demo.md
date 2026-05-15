@@ -16,7 +16,7 @@ tags:
   - 3d printing
   - hobby
 legacyUrl: /iot-train/
-featured: true
+featured: false
 draft: false
 heroImage: /images/img/2022-12-02-iot-train/feature-image-train_alt-min.png
 ---

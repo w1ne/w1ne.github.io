@@ -12,7 +12,7 @@ tags:
   - bootstrapping
   - build in public
 legacyUrl: /ship-till-you-dead/
-featured: true
+featured: false
 draft: false
 heroImage: /images/img/2023-07-21-Ship-till-you-dead/ship-till-you-dead.png
 ---
