@@ -1,0 +1,140 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  featuredNotes?: CollectionEntry<'notes'>[];
+}
+
+const { project, featuredNotes = [] } = Astro.props;
+---
+
+<BaseLayout title={project.data.name} description={project.data.summary}>
+  <article class="content project-page">
+    <p class="eyebrow">{project.data.status}</p>
+    <h1>{project.data.name}</h1>
+    <p class="lede">{project.data.summary}</p>
+
+    <p class="actions">
+      {project.data.repoUrl && <a class="button" href={project.data.repoUrl}>View repository</a>}
+      <a class="button secondary" href="/projects/">All projects</a>
+    </p>
+
+    {project.data.topics.length > 0 && (
+      <div class="topics" aria-label="Topics">
+        {project.data.topics.map((topic) => <span>{topic}</span>)}
+      </div>
+    )}
+
+    {project.data.proofPoints.length > 0 && (
+      <section aria-labelledby="proof-points">
+        <h2 id="proof-points">Proof points</h2>
+        <ul class="proof-points">
+          {project.data.proofPoints.map((point) => <li>{point}</li>)}
+        </ul>
+      </section>
+    )}
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    {featuredNotes.length > 0 && (
+      <section aria-labelledby="project-notes">
+        <h2 id="project-notes">Existing articles</h2>
+        <div class="note-links">
+          {featuredNotes.map((note) => (
+            <a class="note-link" href={`/notes/${note.slug}/`}>
+              <span>{note.data.title}</span>
+              <time datetime={note.data.date.toISOString()}>{note.data.date.toLocaleDateString('en', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              })}</time>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .project-page {
+    padding-block: 56px 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  h2 {
+    margin: 34px 0 12px;
+    font-size: 1.45rem;
+    line-height: 1.25;
+  }
+
+  .lede {
+    margin: 18px 0 22px;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  .actions {
+    margin: 0 0 24px;
+  }
+
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .topics span {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 9px;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  .proof-points {
+    margin: 0 0 30px;
+    padding-left: 1.2em;
+  }
+
+  .note-links {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .note-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-block: 1px solid var(--border);
+    padding: 12px 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .note-link time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 560px) {
+    .note-link {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+</style>

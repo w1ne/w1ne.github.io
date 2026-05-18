@@ -1,0 +1,193 @@
+---
+import { site } from '../data/site';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <img src={site.avatar} alt="" width="34" height="34" />
+      <span>{site.name}</span>
+    </a>
+    <div class="header-actions">
+      <nav aria-label="Main navigation">
+        {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <a class="search-link" href="/search/" aria-label="Search" title="Search">
+        <span aria-hidden="true"></span>
+      </a>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-bulb" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+  <script>
+    const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+    const updatePressed = () => {
+      button?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    };
+
+    button?.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem('theme', nextTheme);
+      updatePressed();
+    });
+
+    updatePressed();
+  </script>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--header-bg);
+  }
+
+  .header-inner {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .brand img {
+    border-radius: 5px;
+  }
+
+  .header-actions,
+  nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    gap: 16px;
+    justify-content: flex-end;
+  }
+
+  nav {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--text);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 44px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .search-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 44px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .search-link:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .search-link span {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+  }
+
+  .search-link span::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    width: 8px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
+
+  .theme-bulb {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 22px;
+  }
+
+  .theme-bulb::before {
+    content: "";
+    position: absolute;
+    inset: 1px 3px 7px;
+    border: 2px solid currentColor;
+    border-radius: 999px 999px 7px 7px;
+  }
+
+  .theme-bulb::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    bottom: 1px;
+    width: 6px;
+    height: 7px;
+    border-top: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+  }
+
+  :global(html[data-theme='dark']) .theme-bulb::before {
+    background: currentColor;
+  }
+
+  @media (max-width: 560px) {
+    .header-inner {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-block: 16px;
+    }
+
+    .header-actions {
+      justify-content: flex-start;
+    }
+  }
+</style>

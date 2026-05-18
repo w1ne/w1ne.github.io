@@ -1,0 +1,192 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, tagPath } from '../../lib/notes';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((note) => {
+    const others = notes.filter((candidate) => candidate.slug !== note.slug);
+    const tagged = others
+      .map((candidate) => ({
+        note: candidate,
+        score: candidate.data.tags.filter((tag) => note.data.tags.includes(tag)).length
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score || b.note.data.date.getTime() - a.note.data.date.getTime())
+      .map(({ note }) => note);
+
+    const recent = [...others].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+    const seen = new Set(tagged.map((n) => n.slug));
+    const relatedNotes = [...tagged, ...recent.filter((n) => !seen.has(n.slug))].slice(0, 3);
+
+    return { params: { slug: note.slug }, props: { note, relatedNotes } };
+  });
+}
+
+const { note, relatedNotes } = Astro.props;
+const { Content, headings } = await render(note);
+const contents = headings.filter((heading) => heading.depth < 4);
+---
+
+<BaseLayout title={note.data.title} description={note.data.description}>
+  <article class="content article">
+    <p class="eyebrow"><time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time></p>
+    <h1>{note.data.title}</h1>
+    {note.data.description && <p class="lede">{note.data.description}</p>}
+    {note.data.heroImage && <img class="hero-image" src={note.data.heroImage} alt="" />}
+    {note.data.tags.length > 0 && (
+      <div class="meta-tags" aria-label="Tags">
+        {note.data.tags.map((tag) => <a href={tagPath(tag)}>{tag}</a>)}
+      </div>
+    )}
+    {contents.length > 0 && (
+      <nav class="contents" aria-labelledby="contents-title">
+        <h2 id="contents-title">Contents</h2>
+        <ol>
+          {contents.map((heading) => (
+            <li class={`depth-${heading.depth}`}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+    <div class="prose">
+      <Content />
+    </div>
+    {relatedNotes.length > 0 && (
+      <section class="related" aria-labelledby="related-title">
+        <h2 id="related-title">Related articles</h2>
+        <div class="related-list">
+          {relatedNotes.map((related) => (
+            <a class="related-link" href={`/notes/${related.slug}/`}>
+              <span>{related.data.title}</span>
+              <time datetime={related.data.date.toISOString()}>{formatDate(related.data.date)}</time>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    padding-block: 56px 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .lede {
+    margin: 18px 0 24px;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  .hero-image {
+    margin: 16px 0 22px;
+    border-radius: 8px;
+  }
+
+  .meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .meta-tags a {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 9px;
+    color: var(--muted);
+    font-size: 0.86rem;
+    text-decoration: none;
+  }
+
+  .contents {
+    border-block: 1px solid var(--border);
+    margin: 28px 0 34px;
+    padding: 18px 0;
+  }
+
+  .contents h2,
+  .related h2 {
+    margin: 0 0 12px;
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .contents ol {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding-left: 1.25em;
+  }
+
+  .contents li.depth-3 {
+    margin-left: 18px;
+  }
+
+  .contents li.depth-2 {
+    margin-left: 10px;
+  }
+
+  .contents a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .contents a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .related {
+    border-top: 1px solid var(--border);
+    margin-top: 44px;
+    padding-top: 22px;
+  }
+
+  .related-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .related-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .related-link time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 560px) {
+    .related-link {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+
+  :global(.youtube-embed) {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 8px;
+  }
+</style>

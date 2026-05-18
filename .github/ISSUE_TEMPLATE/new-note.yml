@@ -1,0 +1,29 @@
+name: New note
+description: Draft a blog post from your phone. Opens a PR with a markdown file ready to merge.
+title: "note: "
+labels: ["new-note"]
+body:
+  - type: input
+    id: description
+    attributes:
+      label: One-line description
+      description: Optional. Appears under the title in lists. Leave blank to skip.
+      placeholder: e.g. Why deterministic firmware simulation matters more than fast CI.
+    validations:
+      required: false
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated. Leave blank to skip.
+      placeholder: rust, embedded, simulation
+    validations:
+      required: false
+  - type: textarea
+    id: body
+    attributes:
+      label: Body
+      description: Markdown. Headings, lists, code fences all work.
+      placeholder: Write the post here.
+    validations:
+      required: true

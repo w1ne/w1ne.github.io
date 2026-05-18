@@ -1,0 +1,45 @@
+---
+import ProseLayout from '../layouts/ProseLayout.astro';
+import { site } from '../data/site';
+---
+
+<ProseLayout
+  title="About"
+  eyebrow="Andrii Shylenko"
+  description="Embedded software engineer and independent consultant focused on connected products, firmware architecture, validation, and practical product development."
+>
+  <p>
+    I help teams design, build, and validate firmware for connected products. My work sits between embedded software,
+    industrial systems, architecture decisions, and the practical details that decide whether a product survives outside
+    the lab.
+  </p>
+
+  <p>
+    My background includes aircraft structural engineering, industrial automation, embedded software, IoT devices,
+    locomotive interfaces, ultrasonic water meters, and independent consulting for companies building digital devices.
+  </p>
+
+  <h2>Work I am useful for</h2>
+  <ul>
+    <li>Firmware architecture for embedded and IoT products.</li>
+    <li>Validation strategy from prototype through manufacturing readiness.</li>
+    <li>Industrial communication, diagnostics, and connected-device behavior.</li>
+    <li>Productization work where engineering choices need to survive real deployment.</li>
+  </ul>
+
+  <h2>Education</h2>
+  <ul>
+    <li>National Aerospace University KhAI, Master's degree in aircraft and helicopter structure and design.</li>
+    <li>Opole University of Technology, Master's degree in control systems in automatics and robotics.</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>
+    The best way to reach me is by email:
+    <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+  <p>
+    You can also find me on <a href="https://github.com/w1ne">GitHub</a> and
+    <a href="https://www.linkedin.com/in/andrewshylenko/">LinkedIn</a>.
+  </p>
+</ProseLayout>

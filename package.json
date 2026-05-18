@@ -1,0 +1,26 @@
+{
+  "name": "w1ne-github-io",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build && node scripts/copy-static-assets.mjs",
+    "preview": "astro preview",
+    "migrate:posts": "node scripts/migrate-posts.mjs",
+    "generate:redirects": "node scripts/create-redirect-pages.mjs",
+    "new": "node scripts/new-note.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "^4.0.11",
+    "astro": "^5.0.0",
+    "gray-matter": "^4.0.3",
+    "typescript": "^5.6.3"
+  },
+  "overrides": {
+    "yaml-language-server": {
+      "yaml": "^2.9.0"
+    }
+  },
+  "devDependencies": {}
+}

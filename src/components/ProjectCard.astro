@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card card">
+  <h2><a href={`/projects/${project.slug}/`}>{project.data.name}</a></h2>
+  <p>{project.data.summary}</p>
+  {project.data.proofPoints.length > 0 && (
+    <ul aria-label="Proof points">
+      {project.data.proofPoints.slice(0, 2).map((point) => <li>{point}</li>)}
+    </ul>
+  )}
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-card > * {
+    margin: 0;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  h2 a {
+    color: var(--text);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+</style>

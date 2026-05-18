@@ -1,0 +1,38 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+}
+---
+
+<BaseLayout title={Astro.props.title} description={Astro.props.description}>
+  <article class="content prose-page">
+    {Astro.props.eyebrow && <p class="eyebrow">{Astro.props.eyebrow}</p>}
+    <h1>{Astro.props.title}</h1>
+    {Astro.props.description && <p class="lede">{Astro.props.description}</p>}
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-page {
+    padding-block: 56px 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .lede {
+    margin: 18px 0 32px;
+    color: var(--muted);
+    font-size: 1.2rem;
+  }
+</style>

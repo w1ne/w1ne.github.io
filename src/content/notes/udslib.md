@@ -1,0 +1,56 @@
+---
+title: UDSLib. Engineered Safety
+description: ISO-14229 Unified Diagnostic Services stack focused on safe dispatch, transport boundaries, and debugging tools.
+date: '2026-02-05'
+tags:
+  - UDS
+  - ISO-14229
+  - automotive
+  - embedded
+legacyUrl: https://n1n3.net/2026/02/05/udslib.html
+featured: true
+draft: false
+---
+
+Mechanics use Unified Diagnostic Services (UDS) to talk to cars and vehicles. It's how they read fault codes, update firmware, and recalibrate sensors. I got familiar with the protocol while working on Telematics devices made by [Proemion](https://proemion.com/). We were doing updates od the devices, and I learned that manufacturers do not care about following the standard, but more about following their tools.
+
+After learning UDS internals I built **UDSLib** to enforce safety by design and release process.
+
+> **Source Code**: [github.com/w1ne/udslib](https://github.com/w1ne/udslib)
+
+# ISO-14229-1 Compliance
+
+Getting the error codes right is hard. The standard has a strict **Negative Response Code (NRC) Priority**. If a request is wrong for two reasons (e.g., wrong length AND security locked), you must return the specific error code the standard demands.
+
+`UDSLib` uses a table-driven dispatcher that follows the rules.
+
+| NRC | Meaning |
+|:---:|---|
+| **0x7F** | Service Not Supported |
+| **0x12** | SubFunction Not Supported |
+| **0x13** | Incorrect Message Length |
+| **0x33** | Security Access Denied |
+| **0x22** | Conditions Not Correct (The Safety Gate) |
+
+
+# Transport Layer, Zephyr vs Bare Metal
+
+UDS is implemented on top of ISO-TP (ISO 15765-2), which handles breaking large messages into CAN frames.
+
+`UDSLib` uses a **Spliced Transport Architecture**:
+*   **Native Mode**: On **Zephyr**, it uses the kernel's native ISO-TP sockets. Saves RAM and CPU.
+*   **Fallback Mode**: On **Bare Metal**, it uses its own static buffers. It also handles **CAN-FD**.
+
+# Tooling Ecosystem
+
+You can't fix what you can't see. I built tools to help me debug it:
+
+*   **Wireshark Dissector**
+    A LUA script that decodes traffic, showing which service logic is executing.
+*   **HTML Dashboard**
+    A log analyzer that generates a visual timeline of the session. It highlights P2 timer violations and security changes.
+    ![UDSLib Dashboard](/images/uds_dashboard_screenshot.png)
+*   **Python Bindings**
+    I wrapped the C library with `ctypes`, so I can fuzz-test the parser with thousands of malformed packets.
+
+Safety in automotive firmware is about code quality, CI /CD, and architecture. And `UDSLib` enforces all of them.
