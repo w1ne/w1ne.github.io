@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FlowStun | Humane Fish Slaughter Research Proposal</title>
+  <meta name="description" content="Interactive grant proposal microsite for FlowStun, an inline closed-loop electrical stunning system for high-throughput humane slaughter of small pelagic fish." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b9aa5'/%3E%3Cpath d='M7 17h7l-2 5 12-9h-7l2-5z' fill='%23fff'/%3E%3C/svg%3E" />
+  <script type="importmap">
+  { "imports": { "three": "./vendor/three.module.js" } }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <aside class="sidebar" aria-label="Proposal navigation">
+    <a class="brand" href="#overview" aria-label="FlowStun home">
+      <span class="brand-title">FlowStun</span>
+      <span class="brand-wave" aria-hidden="true"></span>
+      <span class="brand-subtitle">Humane fish slaughter system</span>
+    </a>
+    <nav class="nav-list">
+      <a href="#overview" class="nav-link active">Overview</a>
+      <a href="#plain" class="nav-link">In plain words</a>
+      <a href="#problem" class="nav-link">Problem</a>
+      <a href="#solution" class="nav-link">Solution</a>
+      <a href="#engineering" class="nav-link">Engineering</a>
+      <a href="#verification" class="nav-link">Verification</a>
+      <a href="#plan" class="nav-link">Plan</a>
+      <a href="#deployment" class="nav-link">Deployment</a>
+      <a href="#risks" class="nav-link">Risks</a>
+      <a href="#impact-budget" class="nav-link">Impact & Budget</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#appendix" class="nav-link">Appendix</a>
+    </nav>
+    <div class="sidebar-card">
+      <span class="eyebrow">Grant opportunity</span>
+      <strong>Farm Animal Welfare RFP</strong>
+      <span>Humane Fish Slaughter Research</span>
+      <span>Request: $440k / 12 months</span>
+      <span>LOI v3 · welfare-weighted budget</span>
+    </div>
+  </aside>
+
+  <header class="mobile-header">
+    <a class="mobile-brand" href="#overview">FlowStun</a>
+    <nav class="mobile-nav" aria-label="Mobile proposal navigation">
+      <a href="#problem">Problem</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#verification">Validation</a>
+      <a href="#impact-budget">Budget</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page">
+    <section id="overview" class="hero section-dark">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="section-inner hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Interactive LOI microsite</p>
+          <h1>FlowStun</h1>
+          <p class="hero-subtitle">Closed-loop electrical stunning for high-throughput humane slaughter of small pelagic fish.</p>
+          <p class="hero-text">A compact inline system for limited vessel power and deck space, with biologically validated stunning envelopes and engineering-grade exposure control.</p>
+          <div class="hero-badges" aria-label="Core proposal claims">
+            <span><b>Inline</b> high-throughput module</span>
+            <span><b>Closed-loop</b> electrical control</span>
+            <span><b>Validated</b> humane envelope</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="docs/FlowStun_LOI_v3_FINAL.docx">Download LOI (v3)</a>
+            <a class="button ghost" href="#plain">How it works</a>
+            <a class="button ghost" href="#engineering">View engineering</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <figure class="viewer" aria-label="Interactive 3D model of the FlowStun device">
+            <div id="device3d" class="viewer-canvas" role="img" aria-label="Rotatable 3D model of the FlowStun inline stunning module"></div>
+            <div class="viewer-hint">Drag to rotate · scroll to zoom</div>
+            <div class="viewer-controls" role="group" aria-label="3D view modes">
+              <button type="button" class="vbtn active" data-mode="orbit">Rotate</button>
+              <button type="button" class="vbtn" data-mode="explode">Exploded</button>
+              <button type="button" class="vbtn" data-mode="cutaway">Cut-away</button>
+              <button type="button" class="vbtn active" data-flow="1">Fish flow</button>
+            </div>
+            <figcaption class="viewer-cad">Live model — designed in <a href="https://app.kernelcad.com/p/ORYPRsET" target="_blank" rel="noopener">kernelCAD</a></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="snapshot section-light" aria-labelledby="snapshotTitle">
+      <div class="section-inner">
+        <div class="section-header compact">
+          <p class="eyebrow">Reviewer snapshot</p>
+          <h2 id="snapshotTitle">What this proposal is actually trying to build</h2>
+          <p>Not a generic test rig. The website reframes the submission as a field-deployable slaughter intervention, with the lab work used to define the operating envelope.</p>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card">
+            <span class="metric-label">Target use case</span>
+            <strong>High-volume small pelagic fisheries</strong>
+            <span>Primary model species: European anchovy. Backup: European pilchard/sardine.</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">Core intervention</span>
+            <strong>Inline stunning chamber</strong>
+            <span>Controlled electrical field, modular electrodes, residence-time control, and fail-safe bypass.</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">Validation logic</span>
+            <strong>Lab proof, field assurance</strong>
+            <span>Biology defines the humane envelope; embedded controls verify delivery inside that envelope.</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">Funding request</span>
+            <strong>$440,000 / 12 months</strong>
+            <span>Budget weighted to welfare validation, not founder labour: welfare lab is the single largest line.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="plain" class="section-tint">
+      <div class="section-inner">
+        <div class="section-header compact">
+          <p class="eyebrow">In plain words</p>
+          <h2>How it works — no engineering background needed</h2>
+          <p>The whole idea in four steps, then one honest line about what it does not claim.</p>
+        </div>
+        <div class="plain-steps">
+          <article class="plain-step">
+            <span class="plain-num">1</span>
+            <h3>The fish are already moving</h3>
+            <p>On a fishing boat, small fish like anchovies are pumped through pipes in water, by the thousand. FlowStun is just a short, smart section of that pipe — nothing has to be handled one by one.</p>
+          </article>
+          <article class="plain-step">
+            <span class="plain-num">2</span>
+            <h3>A gentle electric field, for a moment</h3>
+            <p>As the fish pass through, the unit sends a controlled electrical field through the water — the same idea already used to stun farmed salmon humanely, re-engineered for fast-moving small fish.</p>
+          </article>
+          <article class="plain-step">
+            <span class="plain-num">3</span>
+            <h3>They stop feeling, at once</h3>
+            <p>Done right, the fish become unconscious immediately and stay that way until the next step — chilling or bleeding — ends their life. No thrashing, no slow suffocation on ice.</p>
+          </article>
+          <article class="plain-step">
+            <span class="plain-num">4</span>
+            <h3>The machine checks itself</h3>
+            <p>Sensors confirm every fish got the right dose. If anything drifts, it raises a flag or safely lets fish pass straight through, so the boat's work never stops.</p>
+          </article>
+        </div>
+        <p class="plain-honest"><strong>What it does <em>not</em> do:</strong> it never claims a sensor can read a fish's mind. Scientists in a welfare lab prove the fish are genuinely unconscious; the machine's job is to deliver that proven recipe to every fish — and keep a record proving it did.</p>
+      </div>
+    </section>
+
+    <section id="problem" class="section-light">
+      <div class="section-inner two-col">
+        <div>
+          <p class="eyebrow">Problem definition</p>
+          <h2>Mass handling creates a welfare bottleneck.</h2>
+          <p>Small pelagic fish are handled in dense, fast-moving flows. Existing slaughter and capture handling practices often prioritize speed, chilling, and deck logistics over controlled pre-death insensibility.</p>
+          <p>The main engineering problem is not simply producing an electric pulse. It is producing a reliable exposure in saltwater, under vessel constraints, at throughput, across variable fish density, size, orientation, water conductivity, and equipment fouling.</p>
+        </div>
+        <div class="card-stack">
+          <article class="problem-card">
+            <span class="icon">▦</span>
+            <h3>Huge volumes</h3>
+            <p>One-at-a-time handling does not fit high-volume pelagic operations. The intervention needs continuous flow or scalable parallel lanes.</p>
+          </article>
+          <article class="problem-card accent-orange">
+            <span class="icon">△</span>
+            <h3>Welfare uncertainty</h3>
+            <p>Motion cessation, chilling, and apparent immobility are not sufficient proof of insensibility. A valid solution needs biological endpoints.</p>
+          </article>
+          <article class="problem-card">
+            <span class="icon">≋</span>
+            <h3>Vessel constraints</h3>
+            <p>Power quality, saltwater, washdown, deck footprint, corrosion, motion, crew load, and process interruptions are central constraints.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="section-tint">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">Proposed solution</p>
+          <h2>FlowStun: closed-loop exposure, not open-loop shocking.</h2>
+          <p>The design combines marine-grade power electronics, an inline chamber, modular electrode cassette geometries, real-time sensing, and batch-level traceability.</p>
+        </div>
+        <div class="solution-flow" aria-label="FlowStun functional pipeline">
+          <div class="solution-node">
+            <span class="node-icon">▣</span>
+            <h3>Inline chamber</h3>
+            <p>Aligns fish inside a compact wet flow path.</p>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="solution-node">
+            <span class="node-icon">ϟ</span>
+            <h3>Power stage</h3>
+            <p>Isolated AC/DC and HF inverter stage for waveform delivery.</p>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="solution-node">
+            <span class="node-icon">◎</span>
+            <h3>Closed-loop control</h3>
+            <p>Adjusts voltage, current, frequency, duty, and exposure time.</p>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="solution-node">
+            <span class="node-icon">⌁</span>
+            <h3>Delivery verification</h3>
+            <p>Confirms exposure inside the validated operating envelope.</p>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="solution-node">
+            <span class="node-icon">☷</span>
+            <h3>Data log</h3>
+            <p>Records quality, faults, operating limits, and traceability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="engineering" class="section-light">
+      <div class="section-inner">
+        <div class="section-header split-header">
+          <div>
+            <p class="eyebrow">Engineering concept</p>
+            <h2>Interactive technical figures</h2>
+            <p>Switch views to review the chamber, control architecture, process integration, and validation signals.</p>
+          </div>
+          <div class="tab-controls" role="tablist" aria-label="Engineering diagram tabs">
+            <button class="tab-button active" role="tab" aria-selected="true" aria-controls="panel-cutaway" id="tab-cutaway" data-tab="cutaway">Cutaway</button>
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel-architecture" id="tab-architecture" data-tab="architecture">Architecture</button>
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel-process" id="tab-process" data-tab="process">Process</button>
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel-waveforms" id="tab-waveforms" data-tab="waveforms">Waveforms</button>
+          </div>
+        </div>
+
+        <div class="tab-panels">
+          <article class="tab-panel active" id="panel-cutaway" role="tabpanel" aria-labelledby="tab-cutaway" data-panel="cutaway">
+            <div class="diagram-card wide">
+              <h3>Inline flow chamber — cutaway</h3>
+              <p class="diagram-note">Design intent: uniform wet exposure with low injury risk, serviceable electrodes, and fast cleaning.</p>
+              <svg class="cutaway-svg" viewBox="0 0 1120 560" role="img" aria-label="Cutaway diagram of inline stunning chamber">
+                <defs>
+                  <linearGradient id="chamberBody" x1="0" x2="1"><stop offset="0" stop-color="#d7e3e8"/><stop offset="0.5" stop-color="#6b7e89"/><stop offset="1" stop-color="#e6eef2"/></linearGradient>
+                  <linearGradient id="windowFill" x1="0" x2="1"><stop offset="0" stop-color="#0b93a7" stop-opacity="0.12"/><stop offset="0.5" stop-color="#9cf6ff" stop-opacity="0.38"/><stop offset="1" stop-color="#0d6f88" stop-opacity="0.16"/></linearGradient>
+                  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#0c6f82"/></marker>
+                </defs>
+                <rect x="176" y="176" width="760" height="188" rx="74" fill="url(#chamberBody)" stroke="#244b5b" stroke-width="5"/>
+                <rect x="286" y="148" width="430" height="244" rx="28" fill="url(#windowFill)" stroke="#2fa9bb" stroke-width="4"/>
+                <ellipse cx="176" cy="270" rx="92" ry="112" fill="#b7c8d1" stroke="#244b5b" stroke-width="5"/>
+                <ellipse cx="176" cy="270" rx="54" ry="70" fill="#0a2936" stroke="#d9e7ed" stroke-width="8"/>
+                <ellipse cx="936" cy="270" rx="92" ry="112" fill="#b7c8d1" stroke="#244b5b" stroke-width="5"/>
+                <ellipse cx="936" cy="270" rx="54" ry="70" fill="#0a2936" stroke="#d9e7ed" stroke-width="8"/>
+                <g stroke="#f58a2a" stroke-width="10" stroke-linecap="round">
+                  <line x1="390" y1="178" x2="390" y2="362"/>
+                  <line x1="488" y1="178" x2="488" y2="362"/>
+                  <line x1="586" y1="178" x2="586" y2="362"/>
+                  <line x1="684" y1="178" x2="684" y2="362"/>
+                </g>
+                <g fill="#115f71" opacity="0.92">
+                  <path d="M338 254 q20 -18 42 0 q-22 20 -42 0Z"/><circle cx="345" cy="252" r="3" fill="#e9fbff"/>
+                  <path d="M515 298 q22 -20 46 0 q-24 21 -46 0Z"/><circle cx="523" cy="296" r="3" fill="#e9fbff"/>
+                  <path d="M622 238 q20 -18 44 0 q-24 20 -44 0Z"/><circle cx="630" cy="236" r="3" fill="#e9fbff"/>
+                </g>
+                <g stroke="#0ea5b7" stroke-width="4" opacity="0.7" fill="none" marker-end="url(#arrow)">
+                  <path d="M215 244 C320 202, 458 236, 570 218 C690 198, 800 234, 906 238"/>
+                  <path d="M212 296 C340 342, 444 306, 554 324 C678 344, 790 318, 906 304"/>
+                </g>
+                <g class="callouts" font-family="system-ui, sans-serif" font-size="17" fill="#173340">
+                  <line x1="236" y1="130" x2="188" y2="60" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="70" y="38" font-weight="700">Inlet manifold</text><text x="70" y="62">reduces turbulence</text>
+                  <line x1="358" y1="170" x2="340" y2="76" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="292" y="36" font-weight="700">Flow alignment</text><text x="292" y="60">guide vanes orient fish</text>
+                  <line x1="486" y1="184" x2="500" y2="78" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="486" y="36" font-weight="700">Electrode cassette</text><text x="486" y="60">swappable geometry</text>
+                  <line x1="755" y1="210" x2="838" y2="80" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="802" y="38" font-weight="700">Outlet diffuser</text><text x="802" y="62">laminar exit path</text>
+                  <line x1="408" y1="362" x2="320" y2="488" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="170" y="500" font-weight="700">Insulating housing</text><text x="170" y="524">food-grade, corrosion-resistant</text>
+                  <line x1="560" y1="392" x2="570" y2="488" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="492" y="500" font-weight="700">Inspection window</text><text x="492" y="524">service and diagnostics</text>
+                  <line x1="740" y1="360" x2="810" y2="488" stroke="#0c6f82" stroke-width="2"/>
+                  <text x="778" y="500" font-weight="700">Drain / CIP ports</text><text x="778" y="524">washdown and cleaning</text>
+                </g>
+              </svg>
+            </div>
+          </article>
+
+          <article class="tab-panel" id="panel-architecture" role="tabpanel" aria-labelledby="tab-architecture" data-panel="architecture" hidden>
+            <div class="diagram-card wide">
+              <h3>System architecture — block diagram</h3>
+              <p class="diagram-note">The controller regulates delivered exposure and trips to bypass on out-of-envelope, safety, or flow faults.</p>
+              <div class="block-diagram" aria-label="Power electronics and control architecture">
+                <div class="block source">AC input<br><small>vessel generator</small></div>
+                <div class="block">EMI / surge<br><small>marine protection</small></div>
+                <div class="block critical">Power stage<br><small>AC/DC + HF inverter</small></div>
+                <div class="block output">Electrode chamber<br><small>field delivery</small></div>
+                <div class="block sensor">Voltage sensing</div>
+                <div class="block sensor">Current sensing</div>
+                <div class="block sensor">Impedance sensing</div>
+                <div class="block sensor">Temp / salinity</div>
+                <div class="block mcu">Control MCU<br><small>real-time control + safety</small></div>
+                <div class="block safety">Ground-fault<br>protection</div>
+                <div class="block safety">Door / flow<br>interlocks</div>
+                <div class="block safety">Bypass relay<br>fail-safe path</div>
+                <div class="block log">Data logging<br><small>SD / local export</small></div>
+                <svg class="block-lines" viewBox="0 0 1000 460" aria-hidden="true">
+                  <defs><marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#0b4860"/></marker></defs>
+                  <path d="M94 90 H255"/><path d="M360 90 H522"/><path d="M650 90 H830"/>
+                  <path d="M192 288 H410"/><path d="M192 336 H410"/><path d="M192 384 H410"/><path d="M192 432 H410"/>
+                  <path d="M500 288 V172"/><path d="M610 288 V172"/>
+                  <path d="M660 340 H835"/><path d="M660 384 H835"/><path d="M660 428 H835"/>
+                  <path d="M535 428 V395"/>
+                </svg>
+              </div>
+            </div>
+          </article>
+
+          <article class="tab-panel" id="panel-process" role="tabpanel" aria-labelledby="tab-process" data-panel="process" hidden>
+            <div class="diagram-card wide">
+              <h3>Process integration — from intake to bleed/chill</h3>
+              <p class="diagram-note">The system should fit an existing wet transfer path rather than add dry handling or manual sorting.</p>
+              <div class="process-map">
+                <div class="process-step"><span>1</span><h4>Fish intake</h4><p>Wet transfer from pump, chute, or receiving line.</p></div>
+                <div class="process-step"><span>2</span><h4>Flow alignment</h4><p>Guide vanes and residence-time geometry reduce exposure variance.</p></div>
+                <div class="process-step highlight"><span>3</span><h4>Controlled exposure</h4><p>Closed-loop electrical delivery inside validated limits.</p></div>
+                <div class="process-step"><span>4</span><h4>Proxy confirmation</h4><p>Voltage, current, impedance, flow, and time logged per batch.</p></div>
+                <div class="process-step"><span>5</span><h4>Bleed / chill transfer</h4><p>Rapid downstream transfer while insensibility persists.</p></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="tab-panel" id="panel-waveforms" role="tabpanel" aria-labelledby="tab-waveforms" data-panel="waveforms" hidden>
+            <div class="diagram-card wide wave-grid">
+              <div>
+                <h3>Waveform test view</h3>
+                <p class="diagram-note">Example only. Final parameters must be species-, size-, water-conductivity-, and endpoint-specific.</p>
+                <svg class="chart-svg" viewBox="0 0 520 320" role="img" aria-label="Example biphasic waveform chart">
+                  <g class="chart-grid"><path d="M60 30 V270 H490"/><path d="M60 90 H490 M60 150 H490 M60 210 H490"/></g>
+                  <path class="chart-wave" d="M60 150 C90 15,120 15,150 150 S210 285,240 150 S300 15,330 150 S390 285,420 150 S480 15,510 150"/>
+                  <text x="62" y="294">time</text><text x="8" y="46" transform="rotate(-90 18 50)">voltage</text>
+                  <text x="64" y="25" class="chart-title">Biphasic waveform envelope</text>
+                </svg>
+              </div>
+              <div>
+                <h3>Impedance response</h3>
+                <p class="diagram-note">Impedance is a delivery-quality proxy; it is not proof of consciousness state by itself.</p>
+                <svg class="chart-svg" viewBox="0 0 520 320" role="img" aria-label="Example impedance response chart">
+                  <g class="chart-grid"><path d="M60 30 V270 H490"/><path d="M60 90 H490 M60 150 H490 M60 210 H490"/></g>
+                  <path class="chart-line good" d="M70 72 C120 92,160 118,204 122 C248 128,286 156,330 164 C384 174,420 198,482 214"/>
+                  <path class="chart-line bad" d="M70 52 C116 130,156 150,206 170 C260 192,306 210,350 232 C392 252,438 260,482 266"/>
+                  <g class="legend"><rect x="330" y="46" width="14" height="14"/><text x="352" y="58">inside envelope</text><rect x="330" y="72" width="14" height="14" class="badbox"/><text x="352" y="84">under-dose</text></g>
+                  <text x="62" y="294">time</text><text x="8" y="46" transform="rotate(-90 18 50)">impedance</text>
+                  <text x="64" y="25" class="chart-title">Dose-quality separation</text>
+                </svg>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="verification" class="section-tint">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">Validation strategy</p>
+          <h2>Separate scientific proof from field assurance.</h2>
+          <p>This is the core credibility distinction. The deployed system should not claim that sensors alone prove insensibility.</p>
+        </div>
+        <div class="validation-grid">
+          <article class="validation-card lab">
+            <h3>Lab validation</h3>
+            <p class="tag">Scientific proof</p>
+            <ul>
+              <li>Controlled live-fish studies determine insensibility and absence of recovery.</li>
+              <li>Behavioral, neurophysiological, and physiological endpoints are specified by a qualified welfare partner.</li>
+              <li>The humane operating envelope is species-, size-, water-, and condition-specific.</li>
+            </ul>
+          </article>
+          <article class="validation-card distinction">
+            <h3>Important distinction</h3>
+            <p>Motion cessation and impedance changes alone do not prove consciousness has been abolished.</p>
+            <p>Lab studies generate the evidence. The deployed system verifies that exposure stayed inside the validated envelope.</p>
+          </article>
+          <article class="validation-card field">
+            <h3>Field proxy verification</h3>
+            <p class="tag">Delivery assurance</p>
+            <ul>
+              <li>Current, voltage, impedance, residence time, water conductivity, and faults are logged.</li>
+              <li>Out-of-envelope events trigger alarms, auto-adjustment, or bypass.</li>
+              <li>Batch logs support auditability and continuous improvement.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="plan" class="section-light">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">Experimental plan</p>
+          <h2>Twelve months, four gated phases.</h2>
+          <p>The plan intentionally gates biology-sensitive work behind electrical characterization, welfare-protocol design, and prototype safety testing.</p>
+        </div>
+        <div class="timeline" aria-label="Project timeline">
+          <article class="phase phase-one">
+            <span class="phase-dot"></span>
+            <h3>Phase 1 — Non-live engineering characterization</h3>
+            <p class="phase-time">Months 1–3</p>
+            <ul>
+              <li>Map water conductivity and load ranges.</li>
+              <li>Build electrode cassette and bench flow chamber.</li>
+              <li>Validate sensing, isolation, control loops, and fault response.</li>
+              <li>Select two or three electrode geometries for biological testing.</li>
+            </ul>
+          </article>
+          <article class="phase phase-two">
+            <span class="phase-dot"></span>
+            <h3>Phase 2 — Partner protocol and reduced live-search space</h3>
+            <p class="phase-time">Months 4–6</p>
+            <ul>
+              <li>Primary species: European anchovy.</li>
+              <li>Backup species: European pilchard/sardine.</li>
+              <li>Define endpoints, sample sizes, stopping rules, animal-use approvals, and downstream death method.</li>
+              <li>Narrow the live-trial matrix to pre-specified exposure envelopes.</li>
+            </ul>
+          </article>
+          <article class="phase phase-three">
+            <span class="phase-dot"></span>
+            <h3>Phase 3 — Controlled live-fish validation</h3>
+            <p class="phase-time">Months 7–9</p>
+            <ul>
+              <li>Test pre-specified envelopes only in an approved facility.</li>
+              <li>Measure immediate insensibility, recovery risk, handling harm, and engineering stability.</li>
+              <li>Stop if no humane envelope emerges inside safe and practical limits.</li>
+            </ul>
+          </article>
+          <article class="phase phase-four">
+            <span class="phase-dot"></span>
+            <h3>Phase 4 — Vessel-realistic pilot design</h3>
+            <p class="phase-time">Months 10–12</p>
+            <ul>
+              <li>Harden the module for washdown, corrosion, vibration, mounting, connector abuse, and cleaning.</li>
+              <li>Target a 1–2 tonne/hour/lane pilot concept with parallel-lane scaling.</li>
+              <li>Deliver BOM, SOPs, risk register, cost model, and full-proposal plan.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="deployment" class="section-tint">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">Deployment and adoption</p>
+          <h2>Design for operators, not just reviewers.</h2>
+          <p>Adoption depends on fitting the existing process without adding fragile manual labor, unsafe electrical exposure, or downtime.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card"><span>□</span><h3>Compact footprint</h3><p>Inline chamber mounts into a wet transfer path; multiple lanes scale capacity.</p></article>
+          <article class="feature-card"><span>◌</span><h3>Washdown-ready</h3><p>IP-rated enclosure, sealed connectors, food-grade surfaces, and drain/CIP ports.</p></article>
+          <article class="feature-card"><span>▣</span><h3>Electrical safety</h3><p>Galvanic isolation, current limiting, interlocks, ground-fault detection, and discharge paths.</p></article>
+          <article class="feature-card"><span>↻</span><h3>Fail-safe bypass</h3><p>Maintains fish flow when power, control, or safety alarms occur.</p></article>
+          <article class="feature-card"><span>☰</span><h3>Low crew burden</h3><p>Simple HMI, operating envelope alerts, and minimal manual tuning.</p></article>
+          <article class="feature-card"><span>▦</span><h3>Scalable architecture</h3><p>Parallel lanes and standardized cassettes support higher throughput.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="risks" class="section-light">
+      <div class="section-inner">
+        <div class="section-header split-header">
+          <div>
+            <p class="eyebrow">Risk analysis</p>
+            <h2>The hard parts are explicit.</h2>
+            <p>Use the filters to inspect major failure modes. A serious proposal should name them rather than bury them.</p>
+          </div>
+          <div class="risk-controls" aria-label="Risk filters">
+            <button class="risk-filter active" data-risk="all">All</button>
+            <button class="risk-filter" data-risk="welfare">Welfare</button>
+            <button class="risk-filter" data-risk="engineering">Engineering</button>
+            <button class="risk-filter" data-risk="adoption">Adoption</button>
+          </div>
+        </div>
+        <div class="risk-grid">
+          <article class="risk-card" data-risk="welfare"><span class="severity high">High</span><h3>Sensor overclaim</h3><p>Mitigation: explicitly use sensors as delivery proxies only; lab endpoints define humane envelope.</p></article>
+          <article class="risk-card" data-risk="engineering"><span class="severity high">High</span><h3>Nonuniform exposure</h3><p>Mitigation: electrode cassette testing, CFD/flow studies, residence-time sensing, and batch-level fault logging.</p></article>
+          <article class="risk-card" data-risk="engineering"><span class="severity medium">Med</span><h3>Saltwater safety and corrosion</h3><p>Mitigation: isolation, sealed connectors, ground-fault detection, marine-rated materials, and washdown testing.</p></article>
+          <article class="risk-card" data-risk="welfare"><span class="severity medium">Med</span><h3>Recovery before death</h3><p>Mitigation: validation includes duration of insensibility and downstream timing to bleed/chill.</p></article>
+          <article class="risk-card" data-risk="adoption"><span class="severity high">High</span><h3>Operator rejects downtime</h3><p>Mitigation: bypass mode, low pressure drop, easy electrode replacement, and cleaning-time constraints.</p></article>
+          <article class="risk-card" data-risk="adoption"><span class="severity medium">Med</span><h3>No named partner</h3><p>Mitigation: secure fish welfare lab and process/vessel contact before final submission.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact-budget" class="section-tint">
+      <div class="section-inner">
+        <div class="section-header split-header">
+          <div>
+            <p class="eyebrow">Impact and budget</p>
+            <h2>Budget tied to validation and deployment risk.</h2>
+            <p>The budget is intentionally weighted toward welfare validation and hardware that resolves real vessel constraints.</p>
+          </div>
+          <div class="budget-toggle" role="tablist" aria-label="Budget view selector">
+            <button class="budget-button active" data-budget="category">By category</button>
+            <button class="budget-button" data-budget="phase">By phase</button>
+          </div>
+        </div>
+        <div class="impact-budget-grid">
+          <article class="impact-card">
+            <h3>Impact hypothesis</h3>
+            <p>If adopted across high-volume pelagic fisheries, FlowStun could improve welfare outcomes for very large numbers of fish by reducing the time conscious during capture-to-slaughter handling.</p>
+            <ul>
+              <li>Rapid, repeatable pre-death insensibility.</li>
+              <li>Validated envelope rather than visual guesswork.</li>
+              <li>Traceable operating logs for audit and improvement.</li>
+              <li>Compatibility with future multi-lane throughput scaling.</li>
+            </ul>
+          </article>
+          <article class="budget-card">
+            <div class="donut" id="budgetDonut" aria-hidden="true"></div>
+            <div>
+              <h3 id="budgetTitle">Budget summary — by category</h3>
+              <p class="budget-total">$440,000 total request</p>
+              <ul class="budget-list" id="budgetList">
+                <li><span class="swatch blue"></span> Fish-welfare lab subcontract — $150k</li>
+                <li><span class="swatch teal"></span> Engineering lead (full-time) — $90k</li>
+                <li><span class="swatch orange"></span> Prototype + marine fabrication — $85k</li>
+                <li><span class="swatch navy"></span> Power / test equipment — $45k</li>
+                <li><span class="swatch gray"></span> Compliance, logistics, contingency — $70k</li>
+              </ul>
+            </div>
+          </article>
+          <article class="leverage-card">
+            <h3>Why this is fundable</h3>
+            <p>It targets a concrete welfare bottleneck, makes the biological uncertainty explicit, and uses engineering controls to turn a validated humane envelope into repeatable field delivery.</p>
+            <button class="button small" id="copyPitch" data-copy-target="summaryPitch">Copy reviewer summary</button>
+            <p id="summaryPitch" class="visually-hidden">FlowStun is an inline, vessel-compatible electrical stunning module for high-volume small pelagic fish. The project separates lab proof of insensibility from field proxy verification: a qualified welfare partner defines the humane operating envelope, and the deployed system verifies voltage, current, impedance, flow, and exposure time inside that envelope.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="section-light">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">Team and partner plan</p>
+          <h2>Engineering-led, biology-validated.</h2>
+          <p>The applicant’s embedded/control background is useful, but the submission should not pretend that firmware expertise substitutes for fish welfare science.</p>
+        </div>
+        <div class="team-grid">
+          <article class="team-card"><h3>Electrical & control engineering</h3><p>Power electronics, current sensing, impedance estimation, real-time firmware, safety logic, HMI, data logging.</p></article>
+          <article class="team-card"><h3>Mechanical / marine design</h3><p>Chamber geometry, electrode cassette, flow alignment, washdown enclosure, serviceability, vessel mounting.</p></article>
+          <article class="team-card required"><h3>Required welfare partner</h3><p>Fish biologist, veterinarian, or aquatic welfare lab to define endpoints, protocols, ethics, and interpretation.</p></article>
+          <article class="team-card required"><h3>Required operator contact</h3><p>Fishery, vessel, processor, or aquaculture process contact for realistic integration and adoption constraints.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="appendix" class="section-dark appendix">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">Appendix</p>
+          <h2>Submission package</h2>
+          <p>The site is designed to accompany the LOI, not replace the formal text unless the funder explicitly permits alternate formats.</p>
+        </div>
+        <div class="appendix-grid">
+          <details open>
+            <summary>Formal LOI files</summary>
+            <p><a href="docs/FlowStun_LOI_v3_FINAL.docx">Download the current LOI (v3, $440k)</a></p>
+            <p><a href="docs/FlowStun_Roast_QA_v2_FINAL.docx">Download the QA / roast memo</a></p>
+            <p><a href="https://app.kernelcad.com/p/ORYPRsET" target="_blank" rel="noopener">Open the engineering CAD model (kernelCAD)</a></p>
+          </details>
+          <details>
+            <summary>Pre-submission gaps</summary>
+            <ul>
+              <li>Name the welfare validation partner.</li>
+              <li>Name a process/vessel/operator contact or at least a realistic interview pipeline.</li>
+              <li>Replace placeholder team language with your specific embedded systems track record.</li>
+              <li>Confirm the exact RFP submission format before sending a website link as supplemental material.</li>
+            </ul>
+          </details>
+          <details>
+            <summary>What the site deliberately does not claim</summary>
+            <p>It does not claim that impedance or motion data prove consciousness state. It claims that field instrumentation can verify delivery inside a biologically validated operating envelope.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="section-inner footer-grid">
+        <div>
+          <h2>Engineering-led humane slaughter infrastructure for high-volume fisheries.</h2>
+          <p>Better science. Smarter engineering. Humane by design.</p>
+        </div>
+        <a class="button primary" href="#overview">Back to top</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script type="module" src="three-device.js"></script>
+</body>
+</html>
