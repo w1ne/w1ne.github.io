@@ -45,9 +45,10 @@ function initViewer(mount) {
   scene.add(new THREE.HemisphereLight(0xdfeefc, 0x141e26, 0.5));
 
   // ---- Materials ----
-  const steel = new THREE.MeshStandardMaterial({ color: 0xcfd9e0, metalness: 0.92, roughness: 0.26 });
+  // DoubleSide so open tubes (body + pipe stubs) show their inner walls — i.e. real holes.
+  const steel = new THREE.MeshStandardMaterial({ color: 0xcfd9e0, metalness: 0.92, roughness: 0.26, side: THREE.DoubleSide });
   const steelDark = new THREE.MeshStandardMaterial({ color: 0x8493a0, metalness: 0.9, roughness: 0.38 });
-  const bore = new THREE.MeshStandardMaterial({ color: 0x0a2230, metalness: 0.5, roughness: 0.6 });
+  const bore = new THREE.MeshStandardMaterial({ color: 0x07151d, metalness: 0.3, roughness: 0.7, side: THREE.DoubleSide });
   const glass = new THREE.MeshPhysicalMaterial({
     color: 0xbdf3ff, metalness: 0, roughness: 0.06,
     transmission: 0.92, thickness: 0.4, ior: 1.45,
@@ -115,12 +116,19 @@ function initViewer(mount) {
     const flange = new THREE.Mesh(new THREE.CylinderGeometry(R * 1.34, R * 1.34, 0.16, 48), steel);
     flange.rotation.z = Math.PI / 2;
     flange.position.x = sign * (L / 2);
-    const pipe = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.74, R * 0.74, 0.9, 40), steel);
+    // Open pipe stub (no end caps) so you can see straight down the bore.
+    const pipe = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.74, R * 0.74, 0.9, 40, 1, true), steel);
     pipe.rotation.z = Math.PI / 2;
     pipe.position.x = sign * (L / 2 + 0.5);
-    const mouth = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.6, R * 0.6, 0.92, 36), bore);
-    mouth.rotation.z = Math.PI / 2;
-    mouth.position.x = sign * (L / 2 + 0.5);
+    // Dark bore tunnel behind the opening.
+    const tunnel = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.58, R * 0.58, 1.1, 36, 1, true), bore);
+    tunnel.rotation.z = Math.PI / 2;
+    tunnel.position.x = sign * (L / 2 + 0.45);
+    // Steel rim ring at the mouth — shows wall thickness, frames the hole.
+    const rimRing = new THREE.Mesh(new THREE.RingGeometry(R * 0.58, R * 0.74, 40), steel);
+    rimRing.position.x = sign * (L / 2 + 0.95);
+    rimRing.rotation.y = Math.PI / 2;
+    rimRing.material.clippingPlanes = [clip];
     // bolt circle
     for (let i = 0; i < 8; i++) {
       const a = (i / 8) * Math.PI * 2;
@@ -129,7 +137,7 @@ function initViewer(mount) {
       bolt.position.set(sign * (L / 2), Math.cos(a) * R * 1.08, Math.sin(a) * R * 1.08);
       g.add(bolt);
     }
-    g.add(flange, pipe, mouth);
+    g.add(flange, pipe, tunnel, rimRing);
     return g;
   }
   const endL = endAssembly(-1); addPart(endL, new THREE.Vector3(-1, 0, 0));
