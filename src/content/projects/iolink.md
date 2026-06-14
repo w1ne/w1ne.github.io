@@ -9,22 +9,12 @@ topics:
   - IO-Link
   - Zephyr
   - bare metal
-proofPoints:
-  - Keeps protocol logic hardware-independent behind a PHY abstraction.
-  - Uses a virtual PHY and Python master simulation for CI tests.
-  - Targets static allocation and bounded execution for embedded systems.
 featuredNotes:
   - iolinki
 ---
 
-## What it is
+iolinki is an IO-Link Device stack built around hardware independence and testability, targeting Zephyr and bare-metal systems. The protocol logic sits behind a PHY abstraction, so the same code runs against real hardware or a virtual PHY — which means I can test it in CI against a Python master simulation before any silicon is involved.
 
-iolinki is an IO-Link Device stack designed around hardware independence and testability. It targets Zephyr RTOS and bare-metal embedded systems through a clean PHY abstraction.
-
-## Why it matters
-
-The project focuses on portable protocol behavior, mock-based tests, virtual verification before hardware integration, and static memory for predictable embedded execution.
-
-## Links
+It sticks to static allocation and bounded execution, which is what you want on a constrained embedded target where surprises at runtime are not welcome.
 
 - [Repository](https://github.com/w1ne/iolinki)

@@ -11,23 +11,13 @@ topics:
   - RISC-V
   - CI
   - AI agents
-proofPoints:
-  - Boots ELF firmware on virtual ARM Cortex-M or RISC-V targets.
-  - Runs headless in CI and produces reproducible traces.
-  - Exposes standard GDB and Debug Adapter Protocol workflows.
 featuredNotes:
   - labwired-core
 ---
 
-## What it is
+LabWired Core is a Rust engine that boots firmware on a virtual ARM Cortex-M or RISC-V target, with no board plugged in. You hand it an ELF and a bit of YAML describing the peripherals, and it runs the firmware deterministically — same input, same trace, every time.
 
-LabWired Core is a Rust execution engine for deterministic firmware simulation. It boots an ELF on a virtual target, drives peripherals from YAML, and makes firmware behavior reproducible without a physical board attached.
-
-## Why it matters
-
-Hardware-dependent firmware work is hard to put in CI and hard for AI tools to inspect. LabWired gives both engineers and agents a repeatable execution environment with traces, reports, and debugger access.
-
-## Links
+The reason it exists is that hardware-dependent firmware is painful to put in CI and painful for AI tools to look at. With a virtual target you get reproducible traces and reports, plus the usual GDB and Debug Adapter Protocol access when you want to step through something by hand.
 
 - [Website and docs](https://labwired.com)
 - [Repository](https://github.com/w1ne/labwired-core)

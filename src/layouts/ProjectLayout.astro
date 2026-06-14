@@ -27,15 +27,6 @@ const { project, featuredNotes = [] } = Astro.props;
       </div>
     )}
 
-    {project.data.proofPoints.length > 0 && (
-      <section aria-labelledby="proof-points">
-        <h2 id="proof-points">Proof points</h2>
-        <ul class="proof-points">
-          {project.data.proofPoints.map((point) => <li>{point}</li>)}
-        </ul>
-      </section>
-    )}
-
     <div class="prose">
       <slot />
     </div>
@@ -100,11 +91,6 @@ const { project, featuredNotes = [] } = Astro.props;
     padding: 3px 9px;
     color: var(--muted);
     font-size: 0.86rem;
-  }
-
-  .proof-points {
-    margin: 0 0 30px;
-    padding-left: 1.2em;
   }
 
   .note-links {

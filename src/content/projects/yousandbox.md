@@ -8,20 +8,9 @@ topics:
   - Linux
   - browser tooling
   - developer environments
-proofPoints:
-  - Reduces setup friction for Linux workflows.
-  - Fits the portfolio theme of practical developer tools.
 featuredNotes: []
 ---
 
-## What it is
-
-yousandbox.com is a zero-install, local-first Linux environment that runs in a browser tab.
-
-## Why it matters
-
-Developer environments often fail before the actual work starts. yousandbox.com focuses on reducing setup friction by making a Linux workspace available directly in the browser.
-
-## Links
+yousandbox.com is a zero-install Linux environment that runs in a browser tab. The idea is simple: a lot of dev setups break before you've done any real work, so this gives you a Linux workspace that's just there, locally, without an install step.
 
 - [Repository](https://github.com/w1ne/yousandbox.com)
