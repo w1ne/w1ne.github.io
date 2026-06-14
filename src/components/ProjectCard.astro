@@ -29,6 +29,7 @@ const href = `/projects/${project.slug}/`;
 
 <style>
   .project-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
@@ -94,6 +95,14 @@ const href = `/projects/${project.slug}/`;
   h2 a {
     color: var(--text);
     text-decoration: none;
+  }
+
+  /* Stretch the title link over the whole card so every part is clickable. */
+  h2 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
   }
 
   .project-card:hover h2 a {
