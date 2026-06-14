@@ -57,6 +57,10 @@ exclude:
   - docs
   - TODO
   - ciFirmware.bin
+  # FlowStun proposal docs: kept in the repo for archival, but NOT published to
+  # the site (no public download URL). Repo is public, so they remain reachable
+  # via the GitHub source tree — move to a private repo if that matters.
+  - flowstun/docs
   - astro.config.mjs
   - tsconfig.json
   - package.json

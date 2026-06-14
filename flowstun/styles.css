@@ -290,6 +290,9 @@ section, .footer { scroll-margin-top: 20px; }
 .block.safety { grid-column: 4; }
 .block.log { grid-column: 2 / 4; grid-row: 5; }
 .block-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+/* Architecture diagram — single responsive SVG, scrolls on small screens */
+.arch-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+.arch-svg { display: block; width: 100%; height: auto; min-width: 560px; }
 .block-lines path { fill: none; stroke: #0b4860; stroke-width: 3; marker-end: url(#arrow2); opacity: .6; }
 
 .process-map { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 24px; }

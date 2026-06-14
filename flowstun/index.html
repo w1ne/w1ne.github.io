@@ -294,27 +294,70 @@
             <div class="diagram-card wide">
               <h3>System architecture — block diagram</h3>
               <p class="diagram-note">The controller regulates delivered exposure and trips to bypass on out-of-envelope, safety, or flow faults.</p>
-              <div class="block-diagram" aria-label="Power electronics and control architecture">
-                <div class="block source">AC input<br><small>vessel generator</small></div>
-                <div class="block">EMI / surge<br><small>marine protection</small></div>
-                <div class="block critical">Power stage<br><small>AC/DC + HF inverter</small></div>
-                <div class="block output">Electrode chamber<br><small>field delivery</small></div>
-                <div class="block sensor">Voltage sensing</div>
-                <div class="block sensor">Current sensing</div>
-                <div class="block sensor">Impedance sensing</div>
-                <div class="block sensor">Temp / salinity</div>
-                <div class="block mcu">Control MCU<br><small>real-time control + safety</small></div>
-                <div class="block safety">Ground-fault<br>protection</div>
-                <div class="block safety">Door / flow<br>interlocks</div>
-                <div class="block safety">Bypass relay<br>fail-safe path</div>
-                <div class="block log">Data logging<br><small>SD / local export</small></div>
-                <svg class="block-lines" viewBox="0 0 1000 460" aria-hidden="true">
-                  <defs><marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#0b4860"/></marker></defs>
-                  <path d="M94 90 H255"/><path d="M360 90 H522"/><path d="M650 90 H830"/>
-                  <path d="M192 288 H410"/><path d="M192 336 H410"/><path d="M192 384 H410"/><path d="M192 432 H410"/>
-                  <path d="M500 288 V172"/><path d="M610 288 V172"/>
-                  <path d="M660 340 H835"/><path d="M660 384 H835"/><path d="M660 428 H835"/>
-                  <path d="M535 428 V395"/>
+              <div class="arch-wrap">
+                <svg class="arch-svg" viewBox="0 0 720 470" role="img" aria-label="Power and control architecture: AC input through EMI protection and the power stage to the electrode chamber, with a control MCU reading sensors, driving safety interlocks, and logging data.">
+                  <defs>
+                    <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#0c6f82"/></marker>
+                  </defs>
+                  <style>
+                    .ab{fill:#fff;stroke:#5b7d8b;stroke-width:2}
+                    .ao{fill:#fde7d3;stroke:#f58a2a;stroke-width:2.5}
+                    .at{fill:#e3f7fa;stroke:#0b9aa5;stroke-width:2.5}
+                    .am{fill:#d4f1f5;stroke:#0b7a82;stroke-width:3}
+                    .t{font-family:system-ui,sans-serif;fill:#143240;font-weight:700;font-size:14px;text-anchor:middle}
+                    .s{font-weight:400;font-size:11px;fill:#5b7d8b}
+                    .grp{font-family:system-ui,sans-serif;fill:#0b7a82;font-weight:800;font-size:11px;letter-spacing:.08em;text-anchor:middle}
+                    .ln{stroke:#0c6f82;stroke-width:2;fill:none;marker-end:url(#ah)}
+                  </style>
+
+                  <!-- power path (top) -->
+                  <text class="grp" x="76" y="22">POWER PATH</text>
+                  <rect class="ab" x="16" y="32" width="120" height="56" rx="10"/>
+                  <text class="t" x="76" y="58">AC input<tspan class="s" x="76" dy="16">vessel generator</tspan></text>
+                  <rect class="ab" x="160" y="32" width="120" height="56" rx="10"/>
+                  <text class="t" x="220" y="58">EMI / surge<tspan class="s" x="220" dy="16">marine protection</tspan></text>
+                  <rect class="ao" x="304" y="32" width="128" height="56" rx="10"/>
+                  <text class="t" x="368" y="58">Power stage<tspan class="s" x="368" dy="16">AC/DC + HF inverter</tspan></text>
+                  <rect class="at" x="456" y="32" width="140" height="56" rx="10"/>
+                  <text class="t" x="526" y="58">Electrode chamber<tspan class="s" x="526" dy="16">field delivery</tspan></text>
+                  <path class="ln" d="M136 60 H158"/>
+                  <path class="ln" d="M280 60 H302"/>
+                  <path class="ln" d="M432 60 H454"/>
+                  <path class="ln" d="M596 60 H694"/>
+                  <text class="s" x="645" y="50" text-anchor="middle">to chill / bleed</text>
+
+                  <!-- sensing (left) -->
+                  <text class="grp" x="81" y="180">SENSING</text>
+                  <rect class="ab" x="16" y="192" width="130" height="38" rx="9"/><text class="t" x="81" y="216" font-size="13">Voltage</text>
+                  <rect class="ab" x="16" y="240" width="130" height="38" rx="9"/><text class="t" x="81" y="264" font-size="13">Current</text>
+                  <rect class="ab" x="16" y="288" width="130" height="38" rx="9"/><text class="t" x="81" y="312" font-size="13">Impedance</text>
+                  <rect class="ab" x="16" y="336" width="130" height="38" rx="9"/><text class="t" x="81" y="360" font-size="13">Temp / salinity</text>
+                  <path class="ln" d="M146 211 L268 270"/>
+                  <path class="ln" d="M146 259 L268 284"/>
+                  <path class="ln" d="M146 307 L268 300"/>
+                  <path class="ln" d="M146 355 L268 314"/>
+
+                  <!-- control MCU (centre) -->
+                  <rect class="am" x="270" y="250" width="190" height="84" rx="12"/>
+                  <text class="t" x="365" y="288" font-size="15">Control MCU<tspan class="s" x="365" dy="18" font-size="12">real-time control + safety logic</tspan></text>
+
+                  <!-- drive up to power stage -->
+                  <path class="ln" d="M366 248 L367 92"/>
+                  <text class="s" x="386" y="175" text-anchor="middle">drive</text>
+
+                  <!-- safety (right) -->
+                  <text class="grp" x="630" y="180">SAFETY</text>
+                  <rect class="ab" x="560" y="192" width="140" height="42" rx="9"/><text class="t" x="630" y="217" font-size="13">Ground-fault</text>
+                  <rect class="ab" x="560" y="250" width="140" height="42" rx="9"/><text class="t" x="630" y="275" font-size="13">Interlocks</text>
+                  <rect class="ab" x="560" y="308" width="140" height="42" rx="9"/><text class="t" x="630" y="333" font-size="13">Bypass relay</text>
+                  <path class="ln" d="M460 274 L558 213"/>
+                  <path class="ln" d="M460 292 L558 271"/>
+                  <path class="ln" d="M460 312 L558 329"/>
+
+                  <!-- data log (bottom) -->
+                  <rect class="ab" x="270" y="396" width="190" height="46" rx="10"/>
+                  <text class="t" x="365" y="420" font-size="13">Data logging<tspan class="s" x="365" dy="15">every batch, exportable</tspan></text>
+                  <path class="ln" d="M365 334 L365 394"/>
                 </svg>
               </div>
             </div>
