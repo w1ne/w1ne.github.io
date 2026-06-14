@@ -50,13 +50,13 @@ function initViewer(mount) {
   const steelDark = new THREE.MeshStandardMaterial({ color: 0x8493a0, metalness: 0.9, roughness: 0.38 });
   const bore = new THREE.MeshStandardMaterial({ color: 0x07151d, metalness: 0.3, roughness: 0.7, side: THREE.DoubleSide });
   const glass = new THREE.MeshPhysicalMaterial({
-    color: 0xbdf3ff, metalness: 0, roughness: 0.06,
-    transmission: 0.92, thickness: 0.4, ior: 1.45,
-    transparent: true, opacity: 0.34, clearcoat: 1, clearcoatRoughness: 0.08,
+    color: 0xe6fbff, metalness: 0, roughness: 0.03,
+    transmission: 1.0, thickness: 0.12, ior: 1.5,
+    transparent: true, opacity: 0.16, clearcoat: 1, clearcoatRoughness: 0.04,
   });
   const interiorMat = new THREE.MeshStandardMaterial({
-    color: 0x0bd1ec, emissive: 0x0bbfe0, emissiveIntensity: 1.0,
-    transparent: true, opacity: 0.30, roughness: 0.4,
+    color: 0x16d8f0, emissive: 0x16d8f0, emissiveIntensity: 1.7,
+    transparent: true, opacity: 0.5, roughness: 0.4,
   });
   const electrodeMat = new THREE.MeshStandardMaterial({
     color: 0xff9e35, emissive: 0xff7a18, emissiveIntensity: 1.1, metalness: 0.4, roughness: 0.35,
@@ -80,9 +80,21 @@ function initViewer(mount) {
   const parts = [];
   const addPart = (obj, dir) => { obj.userData.base = obj.position.clone(); obj.userData.dir = dir; parts.push(obj); root.add(obj); };
 
-  // Main body
-  const body = new THREE.Mesh(new THREE.CylinderGeometry(R, R, L, 64, 1, true), steel);
-  body.rotation.z = Math.PI / 2;
+  // Main body — tube with a real slot cut in the top so the window sees inside.
+  const body = new THREE.Group();
+  const winLen = L * 0.62;
+  const endLen = (L - winLen) / 2;
+  const gap = 1.05; // radians of top opening (centred on +Y)
+  const mid = new THREE.Mesh(
+    new THREE.CylinderGeometry(R, R, winLen, 64, 1, true, gap / 2, Math.PI * 2 - gap), steel);
+  mid.rotation.z = Math.PI / 2;
+  body.add(mid);
+  [-1, 1].forEach((s) => {
+    const end = new THREE.Mesh(new THREE.CylinderGeometry(R, R, endLen, 64, 1, true), steel);
+    end.rotation.z = Math.PI / 2;
+    end.position.x = s * (winLen / 2 + endLen / 2);
+    body.add(end);
+  });
   addPart(body, new THREE.Vector3(0, 0, 0));
 
   // Interior glow volume
