@@ -1,5 +1,6 @@
 ---
 name: LabWired
+order: 1
 image: /images/projects/labwired.png
 summary: Deterministic firmware simulation for Cortex-M and RISC-V targets, built for CI, local debugging, and AI-assisted firmware work.
 status: Open-source project

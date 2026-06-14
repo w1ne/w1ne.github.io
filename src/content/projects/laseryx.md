@@ -1,5 +1,6 @@
 ---
 name: Laseryx
+image: /images/projects/laseryx.png
 summary: Browser-based GRBL control for laser cutters and engravers.
 status: Open-source project
 repoUrl: https://github.com/w1ne/Laseryx

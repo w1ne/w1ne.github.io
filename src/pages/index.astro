@@ -5,7 +5,9 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { site } from '../data/site';
 import { sortNotes, publishedNotes, formatDate } from '../lib/notes';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const projects = (await getCollection('projects')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99) || a.data.name.localeCompare(b.data.name)
+);
 const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slice(0, 6);
 ---
 

@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const projects = (await getCollection('projects')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99) || a.data.name.localeCompare(b.data.name)
+);
 ---
 
 <BaseLayout title="Projects" description="Selected open-source and technical project pages.">
