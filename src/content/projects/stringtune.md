@@ -10,10 +10,6 @@ topics:
   - utility
 ---
 
-## What it is
-
-A browser-based utility for tuning string instruments.
-
-## Links
+A small browser tuner for string instruments — open the page, play a string, tune it. One of the older things on here.
 
 - [stringtune.com](https://stringtune.com)

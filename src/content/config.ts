@@ -24,7 +24,6 @@ const projects = defineCollection({
     image: z.string().optional(),
     order: z.number().optional(),
     topics: z.array(z.string()).default([]),
-    proofPoints: z.array(z.string()).default([]),
     featuredNotes: z.array(z.string()).default([])
   })
 });

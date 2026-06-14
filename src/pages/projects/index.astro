@@ -12,7 +12,7 @@ const projects = (await getCollection('projects')).sort(
   <section class="content projects-head">
     <p class="eyebrow">Projects</p>
     <h1>Open-source and technical work.</h1>
-    <p>Project pages for public work and selected technical areas. Descriptions stay factual and source-backed.</p>
+    <p>A few things I've built — mostly open source, mostly developer and embedded tooling.</p>
   </section>
   <section class="container grid two projects-list" aria-label="Projects">
     {projects.map((project) => <ProjectCard project={project} />)}
