@@ -40,6 +40,25 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
+# Exclude non-Jekyll sources from the build. The repo carries a parallel Astro
+# app (src/, astro.config.mjs) plus tooling; Jekyll must not try to render them
+# (src/components/SiteFooter.astro broke the legacy Pages build). The first block
+# preserves Jekyll's built-in defaults so node_modules/vendor are not processed.
+exclude:
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - src
+  - scripts
+  - astro.config.mjs
+  - tsconfig.json
+  - package.json
+  - package-lock.json
+
 # Defaults
 defaults:
   # _posts
