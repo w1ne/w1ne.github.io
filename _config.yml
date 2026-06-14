@@ -54,6 +54,9 @@ exclude:
   - vendor
   - src
   - scripts
+  - docs
+  - TODO
+  - ciFirmware.bin
   - astro.config.mjs
   - tsconfig.json
   - package.json
