@@ -1,17 +1,18 @@
-name: Deploy site (Astro — manual only)
+name: Deploy site
 
-# DISABLED auto-run 2026-06-14. This Astro build is incomplete (npm run build
-# fails on type errors) and, if it ever succeeded, actions/deploy-pages would
-# REPLACE the live Jekyll site (and delete project folders like /flowstun/).
-# The live publisher is the legacy Jekyll Pages build. Trigger this manually
-# only once the Astro migration is actually finished.
+# Astro is the publisher for shylenko.com. astro check is scoped to src/ (see
+# tsconfig.json) so the committed Jekyll vendor/ gems no longer break the build,
+# and copy-static-assets.mjs ships the static project folders (incl. flowstun/).
 on:
+  push:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+  issues: write
 
 concurrency:
   group: pages
@@ -32,6 +33,18 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Open an issue if the build failed
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sha = context.sha.slice(0, 7);
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const title = '🚨 shylenko.com (Astro) build FAILED — site not updating';
+            const body = `The Astro build broke on \`${sha}\`. The live site keeps serving the last good deploy, so it is easy to miss.\n\nRun: ${run}`;
+            const open = await github.rest.issues.listForRepo({ owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'deploy-failure' });
+            if (open.data.length) await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: open.data[0].number, body });
+            else await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['deploy-failure'] });
       - name: Copy CNAME
         run: cp CNAME dist/CNAME
       - name: Setup Pages

@@ -4,7 +4,7 @@ import process from 'node:process';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
-const staticDirs = ['images', 'files', 'edge-ai-2026'];
+const staticDirs = ['images', 'files', 'edge-ai-2026', 'flowstun'];
 
 async function pathExists(filePath) {
   try {
@@ -27,4 +27,11 @@ for (const directory of staticDirs) {
   await fs.cp(source, destination, { recursive: true });
 
   console.log(`Copied ${directory}/ to ${path.relative(root, destination)}`);
+}
+
+// FlowStun proposal docs stay in the repo for archival but must NOT be published.
+const flowstunDocs = path.join(distDir, 'flowstun', 'docs');
+if (await pathExists(flowstunDocs)) {
+  await fs.rm(flowstunDocs, { recursive: true, force: true });
+  console.log('Removed flowstun/docs/ from build output (kept in repo, not served)');
 }

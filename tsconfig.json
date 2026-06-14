@@ -5,5 +5,7 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "include": [".astro/types.d.ts", "src/**/*"],
+  "exclude": ["dist", "node_modules", "vendor", "flowstun", "edge-ai-2026", "js", "assets", "files", "scripts"]
 }
