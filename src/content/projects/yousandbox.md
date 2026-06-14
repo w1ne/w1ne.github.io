@@ -1,5 +1,6 @@
 ---
-name: yousandbox.com
+name: YouSandbox
+image: /images/projects/yousandbox.png
 summary: Zero-install, local-first Linux environment in any browser tab.
 status: Open-source project
 repoUrl: https://github.com/w1ne/yousandbox.com

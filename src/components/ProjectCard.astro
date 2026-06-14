@@ -6,56 +6,116 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const { name, summary, status, image } = project.data;
+const href = `/projects/${project.slug}/`;
 ---
 
-<article class="project-card card">
-  <h2><a href={`/projects/${project.slug}/`}>{project.data.name}</a></h2>
-  <p>{project.data.summary}</p>
-  {project.data.proofPoints.length > 0 && (
-    <ul aria-label="Proof points">
-      {project.data.proofPoints.slice(0, 2).map((point) => <li>{point}</li>)}
-    </ul>
-  )}
+<article class="project-card">
+  <a class="shot" href={href} aria-label={name}>
+    {image ? (
+      <img src={image} alt={`${name} screenshot`} loading="lazy" width="640" height="360" />
+    ) : (
+      <span class="shot-fallback">{name.charAt(0)}</span>
+    )}
+  </a>
+  <div class="body">
+    <div class="title-row">
+      <h2><a href={href}>{name}</a></h2>
+      <span class="status">{status}</span>
+    </div>
+    <p>{summary}</p>
+  </div>
 </article>
 
 <style>
   .project-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
 
-  .project-card > * {
-    margin: 0;
+  .project-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+    box-shadow: 0 14px 30px color-mix(in srgb, var(--text) 12%, transparent);
   }
 
-  .meta {
-    color: var(--muted);
-    font-size: 0.9rem;
+  .shot {
+    display: block;
+    aspect-ratio: 16 / 9;
+    background:
+      radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+      var(--surface-muted);
+    overflow: hidden;
+  }
+
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .shot-fallback {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+    font-weight: 800;
+    color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 18px 20px;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   h2 {
-    font-size: 1.25rem;
-    line-height: 1.25;
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.2;
   }
 
   h2 a {
     color: var(--text);
+    text-decoration: none;
   }
 
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
-    padding: 0;
+  .project-card:hover h2 a {
+    color: var(--accent);
   }
 
-  li {
+  .status {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 2px 8px;
+    padding: 2px 9px;
+  }
+
+  .body p {
+    margin: 0;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.96rem;
+    line-height: 1.5;
   }
 </style>

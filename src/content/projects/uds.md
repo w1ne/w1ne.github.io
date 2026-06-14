@@ -1,5 +1,6 @@
 ---
 name: LibUDS
+image: /images/projects/uds.png
 summary: Portable ISO-14229 UDS stack for embedded systems.
 status: Open-source/commercial project
 repoUrl: https://github.com/w1ne/udslib

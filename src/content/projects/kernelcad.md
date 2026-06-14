@@ -1,5 +1,6 @@
 ---
 name: kernelCAD
+image: /images/projects/kernelcad.png
 summary: Headless-first CAD platform for AI agents and human visual review.
 status: Open-source project
 repoUrl: https://github.com/w1ne/kernelCAD-web

@@ -1,5 +1,5 @@
 ---
-name: darktable-mcp
+name: Darktable MCP
 summary: MCP server for darktable photo management and editing.
 status: Open-source project
 repoUrl: https://github.com/w1ne/darktable-mcp

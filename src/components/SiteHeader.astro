@@ -12,12 +12,15 @@ import { site } from '../data/site';
       <nav aria-label="Main navigation">
         {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
-      <a class="search-link" href="/search/" aria-label="Search" title="Search">
-        <span aria-hidden="true"></span>
-      </a>
-      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <span class="theme-bulb" aria-hidden="true"></span>
-      </button>
+      <span class="divider" aria-hidden="true"></span>
+      <div class="icon-group">
+        <a class="icon-btn" href="/search/" aria-label="Search" title="Search">
+          <span class="i-search" aria-hidden="true"></span>
+        </a>
+        <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="theme-bulb" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </div>
   <script>
@@ -68,23 +71,21 @@ import { site } from '../data/site';
   nav {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
   }
 
   .header-actions {
-    gap: 16px;
+    gap: 14px;
     justify-content: flex-end;
   }
 
   nav {
-    gap: 16px;
-    flex-wrap: wrap;
+    gap: 20px;
   }
 
   nav a {
     color: var(--muted);
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
   }
 
@@ -92,61 +93,58 @@ import { site } from '../data/site';
     color: var(--text);
   }
 
-  .theme-toggle {
+  .divider {
+    width: 1px;
+    height: 22px;
+    background: var(--border);
+  }
+
+  .icon-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    min-width: 44px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface);
-    color: var(--text);
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
     cursor: pointer;
-  }
-
-  .search-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    min-width: 44px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface);
-    color: var(--text);
     text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
   }
 
-  .search-link:hover {
-    border-color: var(--accent);
+  .icon-btn:hover {
+    background: var(--surface-muted);
     color: var(--text);
   }
 
-  .search-link span {
+  .i-search {
     position: relative;
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border: 2px solid currentColor;
     border-radius: 999px;
   }
 
-  .search-link span::after {
+  .i-search::after {
     content: "";
     position: absolute;
-    right: -5px;
-    bottom: -5px;
-    width: 8px;
+    right: -4px;
+    bottom: -4px;
+    width: 7px;
     height: 2px;
     border-radius: 999px;
     background: currentColor;
     transform: rotate(45deg);
     transform-origin: center;
-  }
-
-  .theme-toggle:hover {
-    border-color: var(--accent);
   }
 
   .theme-bulb {
@@ -181,13 +179,19 @@ import { site } from '../data/site';
 
   @media (max-width: 560px) {
     .header-inner {
-      align-items: flex-start;
-      flex-direction: column;
-      padding-block: 16px;
+      flex-wrap: wrap;
+      row-gap: 10px;
+      padding-block: 14px;
     }
 
     .header-actions {
-      justify-content: flex-start;
+      width: 100%;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .divider {
+      display: none;
     }
   }
 </style>

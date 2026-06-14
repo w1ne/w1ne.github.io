@@ -1,5 +1,6 @@
 ---
 name: BodyScope
+image: /images/projects/bodyscope.png
 summary: Free 3D human anatomy atlas for Android — 1,600+ structures, fully offline.
 status: Live on Google Play
 topics:
