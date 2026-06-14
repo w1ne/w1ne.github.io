@@ -145,13 +145,6 @@ function initViewer(mount) {
   ctrl.position.set(0.2, R + 0.55, -0.62);
   addPart(ctrl, new THREE.Vector3(0, 1.2, -0.4));
 
-  // Nameplate on the body side
-  const plate = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.3),
-    new THREE.MeshStandardMaterial({ map: makeNameTexture(), transparent: true, metalness: 0.3, roughness: 0.5 }));
-  plate.position.set(0.0, 0.12, R + 0.02);
-  plate.material.clippingPlanes = [clip];
-  addPart(plate, new THREE.Vector3(0, 0, 1));
-
   // Inner point lights for the glow
   const glow1 = new THREE.PointLight(0x32d6f0, 6, 4, 2); glow1.position.set(0, 0, 0); root.add(glow1);
   const glow2 = new THREE.PointLight(0xff8a3a, 3, 3, 2); glow2.position.set(0, 0.1, 0); root.add(glow2);
@@ -175,25 +168,18 @@ function initViewer(mount) {
   root.add(fish);
   let flowOn = true;
 
-  function makeNameTexture() {
-    const c = document.createElement('canvas'); c.width = 512; c.height = 140;
-    const x = c.getContext('2d');
-    x.clearRect(0, 0, 512, 140);
-    x.fillStyle = '#eafcff'; x.font = '700 92px system-ui, sans-serif'; x.textBaseline = 'middle';
-    x.fillText('FlowStun', 18, 76);
-    x.fillStyle = '#36d6f0'; x.fillRect(20, 116, 250, 7);
-    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
-  }
+  // Abstract status display — clean glowing UI, no tiny text (which pixelates).
   function makeHMITexture() {
     const c = document.createElement('canvas'); c.width = 256; c.height = 128;
     const x = c.getContext('2d');
     x.fillStyle = '#04141c'; x.fillRect(0, 0, 256, 128);
-    x.fillStyle = '#1ce0b0'; x.font = '700 22px monospace';
-    x.fillText('● IN ENVELOPE', 14, 32);
-    x.fillStyle = '#7fe9ff'; x.font = '16px monospace';
-    x.fillText('I 4.1A  V 320  Z 78Ω', 14, 64);
-    x.fillStyle = '#9fb6c4'; x.fillText('dwell 1.4s  cond 38mS', 14, 92);
-    x.strokeStyle = '#0d5366'; x.strokeRect(8, 8, 240, 112);
+    // status dot + header bar
+    x.fillStyle = '#1ce0b0'; x.beginPath(); x.arc(26, 28, 9, 0, Math.PI * 2); x.fill();
+    x.fillRect(44, 22, 120, 12);
+    // three readout bars
+    x.fillStyle = '#0d5366'; x.fillRect(20, 56, 216, 10); x.fillRect(20, 78, 216, 10); x.fillRect(20, 100, 216, 10);
+    x.fillStyle = '#7fe9ff'; x.fillRect(20, 56, 150, 10); x.fillRect(20, 78, 96, 10); x.fillRect(20, 100, 182, 10);
+    x.strokeStyle = '#0d5366'; x.lineWidth = 2; x.strokeRect(8, 8, 240, 112);
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
   }
 

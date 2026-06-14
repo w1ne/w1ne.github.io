@@ -33,7 +33,6 @@
       <a href="#risks" class="nav-link">Risks</a>
       <a href="#impact-budget" class="nav-link">Impact & Budget</a>
       <a href="#team" class="nav-link">Team</a>
-      <a href="#appendix" class="nav-link">Appendix</a>
     </nav>
     <div class="sidebar-card">
       <span class="eyebrow">Grant opportunity</span>
@@ -69,8 +68,7 @@
             <span><b>Validated</b> humane envelope</span>
           </div>
           <div class="hero-actions">
-            <a class="button primary" href="docs/FlowStun_LOI_v3_FINAL.docx">Download LOI (v3)</a>
-            <a class="button ghost" href="#plain">How it works</a>
+            <a class="button primary" href="#plain">How it works</a>
             <a class="button ghost" href="#engineering">View engineering</a>
           </div>
         </div>
@@ -93,9 +91,9 @@
     <section class="snapshot section-light" aria-labelledby="snapshotTitle">
       <div class="section-inner">
         <div class="section-header compact">
-          <p class="eyebrow">Reviewer snapshot</p>
-          <h2 id="snapshotTitle">What this proposal is actually trying to build</h2>
-          <p>Not a generic test rig. The website reframes the submission as a field-deployable slaughter intervention, with the lab work used to define the operating envelope.</p>
+          <p class="eyebrow">At a glance</p>
+          <h2 id="snapshotTitle">What we want to build</h2>
+          <p>A device that can be bolted into a real fishing operation, with the lab work setting the dose it has to hit.</p>
         </div>
         <div class="metric-grid">
           <article class="metric-card">
@@ -127,7 +125,7 @@
         <div class="section-header compact">
           <p class="eyebrow">In plain words</p>
           <h2>How it works — no engineering background needed</h2>
-          <p>The whole idea in four steps, then one honest line about what it does not claim.</p>
+          <p>The whole idea in four steps, then one honest line about what it can't claim.</p>
         </div>
         <div class="plain-steps">
           <article class="plain-step">
@@ -161,7 +159,7 @@
           <p class="eyebrow">Problem definition</p>
           <h2>Mass handling creates a welfare bottleneck.</h2>
           <p>Small pelagic fish are handled in dense, fast-moving flows. Existing slaughter and capture handling practices often prioritize speed, chilling, and deck logistics over controlled pre-death insensibility.</p>
-          <p>The main engineering problem is not simply producing an electric pulse. It is producing a reliable exposure in saltwater, under vessel constraints, at throughput, across variable fish density, size, orientation, water conductivity, and equipment fouling.</p>
+          <p>Producing an electric pulse is the easy part. The hard part is landing a reliable dose in saltwater, on a moving boat, at full throughput, while fish density, size, water conductivity and electrode fouling all keep shifting.</p>
         </div>
         <div class="card-stack">
           <article class="problem-card">
@@ -187,8 +185,8 @@
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">Proposed solution</p>
-          <h2>FlowStun: closed-loop exposure, not open-loop shocking.</h2>
-          <p>The design combines marine-grade power electronics, an inline chamber, modular electrode cassette geometries, real-time sensing, and batch-level traceability.</p>
+          <h2>It measures the load and corrects the dose as fish pass through.</h2>
+          <p>Marine-grade power electronics, an inline chamber, swappable electrode cassettes, real-time sensing, and a log for every batch.</p>
         </div>
         <div class="solution-flow" aria-label="FlowStun functional pipeline">
           <div class="solution-node">
@@ -370,8 +368,8 @@
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">Validation strategy</p>
-          <h2>Separate scientific proof from field assurance.</h2>
-          <p>This is the core credibility distinction. The deployed system should not claim that sensors alone prove insensibility.</p>
+          <h2>The lab proves it works. The machine proves it happened.</h2>
+          <p>The deployed unit never claims its sensors prove a fish is unconscious — that's the lab's job. The unit only proves the fish got the dose the lab signed off on.</p>
         </div>
         <div class="validation-grid">
           <article class="validation-card lab">
@@ -459,8 +457,8 @@
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">Deployment and adoption</p>
-          <h2>Design for operators, not just reviewers.</h2>
-          <p>Adoption depends on fitting the existing process without adding fragile manual labor, unsafe electrical exposure, or downtime.</p>
+          <h2>If a crew won't use it, it doesn't matter how humane it is.</h2>
+          <p>It has to drop into the existing process — no extra manual labour, no shock risk to the crew, no slowing the unload.</p>
         </div>
         <div class="feature-grid">
           <article class="feature-card"><span>□</span><h3>Compact footprint</h3><p>Inline chamber mounts into a wet transfer path; multiple lanes scale capacity.</p></article>
@@ -478,8 +476,8 @@
         <div class="section-header split-header">
           <div>
             <p class="eyebrow">Risk analysis</p>
-            <h2>The hard parts are explicit.</h2>
-            <p>Use the filters to inspect major failure modes. A serious proposal should name them rather than bury them.</p>
+            <h2>The ways this can fail — said out loud.</h2>
+            <p>Filter the main failure modes. Better to name them than bury them.</p>
           </div>
           <div class="risk-controls" aria-label="Risk filters">
             <button class="risk-filter active" data-risk="all">All</button>
@@ -504,8 +502,8 @@
         <div class="section-header split-header">
           <div>
             <p class="eyebrow">Impact and budget</p>
-            <h2>Budget tied to validation and deployment risk.</h2>
-            <p>The budget is intentionally weighted toward welfare validation and hardware that resolves real vessel constraints.</p>
+            <h2>Most of the money goes to the science, not to me.</h2>
+            <p>Weighted to the welfare lab and to hardware that solves real vessel problems — the welfare subcontract is bigger than my own salary.</p>
           </div>
           <div class="budget-toggle" role="tablist" aria-label="Budget view selector">
             <button class="budget-button active" data-budget="category">By category</button>
@@ -538,10 +536,8 @@
             </div>
           </article>
           <article class="leverage-card">
-            <h3>Why this is fundable</h3>
-            <p>It targets a concrete welfare bottleneck, makes the biological uncertainty explicit, and uses engineering controls to turn a validated humane envelope into repeatable field delivery.</p>
-            <button class="button small" id="copyPitch" data-copy-target="summaryPitch">Copy reviewer summary</button>
-            <p id="summaryPitch" class="visually-hidden">FlowStun is an inline, vessel-compatible electrical stunning module for high-volume small pelagic fish. The project separates lab proof of insensibility from field proxy verification: a qualified welfare partner defines the humane operating envelope, and the deployed system verifies voltage, current, impedance, flow, and exposure time inside that envelope.</p>
+            <h3>Why it's worth doing</h3>
+            <p>It goes after a real welfare bottleneck — the enormous numbers of small wild fish killed while still conscious — and it stays honest about the biology. The lab decides what counts as humane; the machine's job is to hit that mark on every fish, on a working boat.</p>
           </article>
         </div>
       </div>
@@ -551,8 +547,8 @@
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">Team and partner plan</p>
-          <h2>Engineering-led, biology-validated.</h2>
-          <p>The applicant’s embedded/control background is useful, but the submission should not pretend that firmware expertise substitutes for fish welfare science.</p>
+          <h2>I build the hardware. A welfare lab owns the biology.</h2>
+          <p>My background is embedded and control systems — that covers the machine. It is no substitute for fish-welfare science, so the biology is owned by a qualified partner, not by me.</p>
         </div>
         <div class="team-grid">
           <article class="team-card"><h3>Electrical & control engineering</h3><p>Power electronics, current sensing, impedance estimation, real-time firmware, safety logic, HMI, data logging.</p></article>
@@ -563,42 +559,11 @@
       </div>
     </section>
 
-    <section id="appendix" class="section-dark appendix">
-      <div class="section-inner">
-        <div class="section-header">
-          <p class="eyebrow">Appendix</p>
-          <h2>Submission package</h2>
-          <p>The site is designed to accompany the LOI, not replace the formal text unless the funder explicitly permits alternate formats.</p>
-        </div>
-        <div class="appendix-grid">
-          <details open>
-            <summary>Formal LOI files</summary>
-            <p><a href="docs/FlowStun_LOI_v3_FINAL.docx">Download the current LOI (v3, $440k)</a></p>
-            <p><a href="docs/FlowStun_Roast_QA_v2_FINAL.docx">Download the QA / roast memo</a></p>
-            <p><a href="https://app.kernelcad.com/p/ORYPRsET" target="_blank" rel="noopener">Open the engineering CAD model (kernelCAD)</a></p>
-          </details>
-          <details>
-            <summary>Pre-submission gaps</summary>
-            <ul>
-              <li>Name the welfare validation partner.</li>
-              <li>Name a process/vessel/operator contact or at least a realistic interview pipeline.</li>
-              <li>Replace placeholder team language with your specific embedded systems track record.</li>
-              <li>Confirm the exact RFP submission format before sending a website link as supplemental material.</li>
-            </ul>
-          </details>
-          <details>
-            <summary>What the site deliberately does not claim</summary>
-            <p>It does not claim that impedance or motion data prove consciousness state. It claims that field instrumentation can verify delivery inside a biologically validated operating envelope.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
     <footer class="footer">
       <div class="section-inner footer-grid">
         <div>
-          <h2>Engineering-led humane slaughter infrastructure for high-volume fisheries.</h2>
-          <p>Better science. Smarter engineering. Humane by design.</p>
+          <h2>A humane pre-kill step for the small wild fish that currently get none.</h2>
+          <p>FlowStun — inline electrical stunning for high-volume pelagic fisheries.</p>
         </div>
         <a class="button primary" href="#overview">Back to top</a>
       </div>
