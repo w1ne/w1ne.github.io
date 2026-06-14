@@ -56,29 +56,29 @@
   const budgetTitle = document.getElementById('budgetTitle');
   const budgetList = document.getElementById('budgetList');
   const budgetDonut = document.getElementById('budgetDonut');
-  // v3 budget — $400k total, weighted to welfare validation.
+  // v3 budget — $410,300 total, weighted to welfare validation.
   const budgetData = {
     category: {
       title: 'Budget summary — by category',
-      // 150 / 90 / 70 / 25 / 65 of 400
-      gradient: 'conic-gradient(#0b6f9e 0 37.5%, var(--teal-600) 37.5% 60%, var(--orange-500) 60% 77.5%, var(--navy-800) 77.5% 83.75%, #8da0aa 83.75% 100%)',
+      // 154 / 92 / 70 / 24.8 / 69.5 of 410.3
+      gradient: 'conic-gradient(#0b6f9e 0 37.53%, var(--teal-600) 37.53% 59.95%, var(--orange-500) 59.95% 77.01%, var(--navy-800) 77.01% 83.05%, #8da0aa 83.05% 100%)',
       rows: [
-        ['blue', 'Fish-welfare lab subcontract — $150k'],
-        ['teal', 'Engineering lead (full-time) — $90k'],
+        ['blue', 'Fish-welfare lab subcontract — $154k'],
+        ['teal', 'Engineering lead (full-time) — $92k'],
         ['orange', 'Prototype + marine fabrication — $70k'],
-        ['navy', 'Power / test equipment — $25k'],
-        ['gray', 'Compliance, logistics, contingency — $65k']
+        ['navy', 'Power / test equipment — $24.8k'],
+        ['gray', 'Compliance, logistics, contingency — $69.5k']
       ]
     },
     phase: {
       title: 'Budget summary — by phase',
-      // 85 / 110 / 135 / 70 of 400
-      gradient: 'conic-gradient(var(--teal-600) 0 21.25%, var(--orange-500) 21.25% 48.75%, #0b6f9e 48.75% 82.5%, var(--navy-800) 82.5% 100%)',
+      // 88 / 112 / 138.3 / 72 of 410.3
+      gradient: 'conic-gradient(var(--teal-600) 0 21.45%, var(--orange-500) 21.45% 48.75%, #0b6f9e 48.75% 82.46%, var(--navy-800) 82.46% 100%)',
       rows: [
-        ['teal', 'Phase 1: non-live engineering — $85k'],
-        ['orange', 'Phase 2: welfare protocol + reduction — $110k'],
-        ['blue', 'Phase 3: controlled live validation — $135k'],
-        ['navy', 'Phase 4: vessel-realistic pilot design — $70k']
+        ['teal', 'Phase 1: non-live engineering — $88k'],
+        ['orange', 'Phase 2: welfare protocol + reduction — $112k'],
+        ['blue', 'Phase 3: controlled live validation — $138.3k'],
+        ['navy', 'Phase 4: vessel-realistic pilot design — $72k']
       ]
     }
   };
