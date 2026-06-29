@@ -4,10 +4,15 @@ import { site } from '../data/site';
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; {new Date().getFullYear()} {site.name}</p>
-    <nav aria-label="Footer links">
-      {site.socials.map((item) => <a href={item.href}>{item.label}</a>)}
-      <a href="/rss.xml">RSS</a>
+    <div class="footer-brand">
+      <p>&copy; {new Date().getFullYear()} {site.name}</p>
+      <nav aria-label="Footer links">
+        {site.socials.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/rss.xml">RSS</a>
+      </nav>
+    </div>
+    <nav class="network-links" aria-label="Project network">
+      {site.network.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
   </div>
 </footer>
@@ -22,11 +27,18 @@ import { site } from '../data/site';
   .footer-inner {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 24px;
     padding-block: 28px;
   }
 
-  .footer-inner p {
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-brand p {
     margin: 0;
   }
 
@@ -34,6 +46,10 @@ import { site } from '../data/site';
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
+  }
+
+  .network-links {
+    justify-content: flex-end;
   }
 
   nav a {
@@ -44,6 +60,10 @@ import { site } from '../data/site';
   @media (max-width: 640px) {
     .footer-inner {
       flex-direction: column;
+    }
+
+    .network-links {
+      justify-content: flex-start;
     }
   }
 </style>
