@@ -16,11 +16,5 @@ export const site = {
     { href: 'https://www.linkedin.com/in/andrewshylenko/', label: 'LinkedIn' },
     { href: 'https://twitter.com/AndriiShylenko', label: 'Twitter' },
     { href: 'mailto:andrii@shylenko.com', label: 'Email' }
-  ],
-  network: [
-    { href: 'https://proto.cat', label: 'proto.cat' },
-    { href: 'https://kernel.cad', label: 'kernel.cad' },
-    { href: 'https://labwired.com', label: 'labwired.com' },
-    { href: 'https://shylenko.com', label: 'shylenko.com' }
   ]
 } as const;
