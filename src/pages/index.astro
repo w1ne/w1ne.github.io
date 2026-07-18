@@ -17,13 +17,22 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
       <p class="eyebrow">Founder / embedded systems / applied AI</p>
       <h1>Andrii Shylenko</h1>
       <p>
-        I build connected systems, AI tools, and embedded products that survive the jump from prototype to field.
+        I build connected systems, AI tools, and hardware &mdash; from prototype to field.
       </p>
       <div class="actions">
         <a class="button" href={`mailto:${site.email}`}>Discuss a project</a>
         <a class="button secondary" href="/projects/">See projects</a>
       </div>
     </div>
+    <figure class="hero-photo">
+      <img
+        src="/images/andrii-studio-session.jpg"
+        alt="Andrii Shylenko presenting to a team during a working session"
+        width="1825"
+        height="1216"
+        loading="eager"
+      />
+    </figure>
   </section>
 
   <section class="container section-block">
@@ -85,6 +94,25 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 24px;
+  }
+
+  .hero-photo {
+    margin: 8px 0 0;
+  }
+
+  .hero-photo img {
+    width: 100%;
+    aspect-ratio: 21 / 8;
+    object-fit: cover;
+    object-position: center 28%;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+
+  @media (max-width: 560px) {
+    .hero-photo img {
+      aspect-ratio: 4 / 3;
+    }
   }
 
   .section-block {

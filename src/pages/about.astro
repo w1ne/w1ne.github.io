@@ -8,6 +8,19 @@ import { site } from '../data/site';
   eyebrow="Andrii Shylenko"
   description="Embedded software engineer and independent consultant focused on connected products, firmware architecture, validation, and practical product development."
 >
+  <figure class="portrait">
+    <div class="frame">
+      <img
+        src="/images/andrii-portrait.jpg"
+        alt="Portrait of Andrii Shylenko"
+        width="608"
+        height="760"
+        loading="eager"
+      />
+    </div>
+    <figcaption>ANDRII SHYLENKO</figcaption>
+  </figure>
+
   <p>
     I help teams design, build, and validate firmware for connected products. My work sits between embedded software,
     industrial systems, architecture decisions, and the practical details that decide whether a product survives outside
@@ -43,3 +56,43 @@ import { site } from '../data/site';
     <a href="https://www.linkedin.com/in/andrewshylenko/">LinkedIn</a>.
   </p>
 </ProseLayout>
+
+<style>
+  .portrait {
+    margin: 8px 0 40px;
+    max-width: 320px;
+  }
+
+  .frame {
+    position: relative;
+    padding: 0;
+  }
+
+  .frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    transform: translate(14px, 14px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .frame img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .portrait figcaption {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+  }
+</style>
