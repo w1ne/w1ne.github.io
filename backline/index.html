@@ -128,7 +128,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
   <div class="shot"><div class="screen">
     <div class="bar"><span class="logo"><i></i>Backline</span><span class="pill live">live · bar 12</span></div>
     <div class="readout">
-      <div><small>Tempo</small><strong>112</strong></div>
+      <div><small>Tempo · <span style="color:var(--accent)">locked</span> / follow</small><strong>112</strong></div>
       <div><small>Key</small><strong>A min</strong></div>
       <div><small>Genre</small><strong style="font-size:18px;line-height:1.9">Lofi ▾</strong></div>
     </div>
@@ -162,9 +162,9 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
   <h2>4. In v1 / not in v1</h2>
   <div class="tbl"><table>
     <tr><th>In</th><th>Out</th></tr>
-    <tr><td>Locks tempo from 4 bars, holds it</td><td>Following tempo changes after lock</td></tr>
-    <tr><td>Detects key, plays in it</td><td>Following chord changes (first upgrade if time)</td></tr>
-    <tr><td>4 instruments on/off, 4 genres, Creativity slider, mic + MIDI</td><td>Mixer, effects, text prompts, multiplayer</td></tr>
+    <tr><td>Locks tempo from 4 bars. Two modes: Locked (holds) or Follow (tracks you, smoothly)</td><td>Chord following (first upgrade if time)</td></tr>
+    <tr><td>Detects key, plays in it. Latency under 30 ms, shown on screen</td><td>Mixer, effects, text prompts, multiplayer</td></tr>
+    <tr><td>4 instruments on/off, 4 genres, Creativity slider, mic + MIDI</td><td>Replay/export (screen C)</td></tr>
   </table></div>
 
   <h2>5. How it works</h2>
