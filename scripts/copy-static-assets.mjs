@@ -4,7 +4,7 @@ import process from 'node:process';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
-const staticDirs = ['images', 'files', 'edge-ai-2026', 'flowstun', 'backline'];
+const staticDirs = ['images', 'files', 'edge-ai-2026', 'flowstun'];
 
 async function pathExists(filePath) {
   try {
