@@ -96,7 +96,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
 </style></head><body>
 
 <div class="wrap">
-  <div class="eyebrow">Hackathon spec · draft 2 · 11 Sep 2026</div>
+  <div class="eyebrow">Hackathon spec · draft 3 · 11 Sep 2026 · <a href="https://github.com/w1ne/backline" style="color:inherit">github.com/w1ne/backline</a></div>
   <h1>Backline</h1>
   <p class="lede">You play. A band in your browser hears your tempo and key and plays along. Drums, bass, keys and a lead line, each one you can switch on or off while you play.</p>
   <div class="meta"><span>50 hours</span><span>5+ people</span><span>web browser</span><span>mic or MIDI in</span><span>paid APIs allowed</span></div>
@@ -107,7 +107,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
   <ol class="steps">
     <li><span><b>Pick input and genre</b>Mic or MIDI. Lofi, funk, rock, jazz.</span></li>
     <li><span><b>Play four bars</b>App locks: "112 BPM · A minor".</span></li>
-    <li><span><b>Tap instruments in and out</b>Changes land on the next bar.</span></li>
+    <li><span><b>Tap instruments in and out, set Creativity</b>Changes land on the next bar.</span></li>
     <li><span><b>Stop, replay, download</b>Mix plus one file per instrument.</span></li>
   </ol>
 
@@ -132,6 +132,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
       <div><small>Key</small><strong>A min</strong></div>
       <div><small>Genre</small><strong style="font-size:18px;line-height:1.9">Lofi ▾</strong></div>
     </div>
+    <div class="panel" style="margin-bottom:14px;display:flex;align-items:center;gap:12px"><span style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ui-dim)">CREATIVITY</span><span style="flex:1;height:4px;background:var(--ui-line);border-radius:2px;position:relative"><span style="position:absolute;left:0;top:0;height:100%;width:35%;background:var(--accent);border-radius:2px"></span><span style="position:absolute;left:35%;top:-6px;width:16px;height:16px;border-radius:50%;background:var(--ui-text);margin-left:-8px"></span></span><span style="font-family:var(--mono);font-size:12px">0.35</span></div>
     <div class="you"><span style="font-family:var(--mono);font-size:11px;color:var(--ui-dim)">YOU</span>
       <div class="wave"><i style="height:10px"></i><i style="height:22px"></i><i style="height:30px"></i><i style="height:14px"></i><i style="height:26px"></i><i style="height:34px"></i><i style="height:18px"></i><i style="height:8px"></i><i style="height:20px"></i><i style="height:28px"></i><i style="height:12px"></i><i style="height:24px"></i><i style="height:32px"></i><i style="height:16px"></i><i style="height:10px"></i><i style="height:26px"></i><i style="height:20px"></i><i style="height:14px"></i><i style="height:30px"></i><i style="height:22px"></i></div>
       <span class="pill">A · C · E</span></div>
@@ -142,7 +143,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
       <div class="l"><span class="dot"></span><span class="name">Lead</span><span class="st">off<span class="meter"><i style="width:0"></i></span></span></div>
     </div>
     <div class="foot"><span class="btn ghost">Stop</span><span style="color:var(--ui-dim);font-family:var(--mono);font-size:12px">latency 38 ms</span></div>
-  </div><p class="cap">Four tiles, tap to toggle. Tempo and key readable from the stage.</p></div>
+  </div><p class="cap">Four tiles, tap to toggle. Creativity 0 plays the written patterns; higher adds fills, passing notes and busier leads. Tempo and key readable from the stage.</p></div>
 
   <h3>Screen C · After the jam</h3>
   <div class="shot"><div class="screen">
@@ -163,7 +164,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--paper-2);padding:1p
     <tr><th>In</th><th>Out</th></tr>
     <tr><td>Locks tempo from 4 bars, holds it</td><td>Following tempo changes after lock</td></tr>
     <tr><td>Detects key, plays in it</td><td>Following chord changes (first upgrade if time)</td></tr>
-    <tr><td>4 instruments on/off, 4 genres, mic + MIDI</td><td>Mixer, effects, text prompts, multiplayer</td></tr>
+    <tr><td>4 instruments on/off, 4 genres, Creativity slider, mic + MIDI</td><td>Mixer, effects, text prompts, multiplayer</td></tr>
   </table></div>
 
   <h2>5. How it works</h2>
