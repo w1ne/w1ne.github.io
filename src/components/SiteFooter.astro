@@ -10,6 +10,15 @@ import { site } from '../data/site';
       <a href="/rss.xml">RSS</a>
     </nav>
   </div>
+  <div class="container stack-row">
+    <span>part of the engineer stack</span>
+    <nav aria-label="Sister sites">
+      <a href="https://labwired.com">LabWired</a>
+      <a href="https://kernelcad.com">kernelCAD</a>
+      <a href="https://koamtachi.com">koamtachi</a>
+      <a href="https://shylenko.com">shylenko.com</a>
+    </nav>
+  </div>
 </footer>
 
 <style>
@@ -23,7 +32,18 @@ import { site } from '../data/site';
     display: flex;
     justify-content: space-between;
     gap: 24px;
-    padding-block: 28px;
+    padding-block: 28px 16px;
+  }
+
+  .stack-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 28px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    font-size: 0.9rem;
   }
 
   .footer-inner p {
@@ -42,7 +62,8 @@ import { site } from '../data/site';
   }
 
   @media (max-width: 640px) {
-    .footer-inner {
+    .footer-inner,
+    .stack-row {
       flex-direction: column;
     }
   }
