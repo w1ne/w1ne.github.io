@@ -3,6 +3,7 @@ name: Komatachi K0
 order: 5
 summary: A two-arm robot for home chores, built in Europe. It drives around the house, reaches from the floor to the top shelf, and learns a chore when you show it once.
 status: Reservations open
+image: /images/projects/komatachi.png
 topics:
   - robotics
   - home robots

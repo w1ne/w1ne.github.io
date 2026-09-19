@@ -10,6 +10,7 @@ tags:
   - LeRobot
 featured: false
 draft: false
+heroImage: /images/notes/komatachi-k0/hero.png
 ---
 
 I started **Komatachi** this August, after years of checking robot prices and closing the tab. At the bottom there are open kits around €1,000 that assume a workshop and a pile of spare time. At the top, research platforms from €25,000. Nothing in between is a finished robot you can bring home.
