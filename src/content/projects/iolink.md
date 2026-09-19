@@ -1,6 +1,6 @@
 ---
 name: iolinki
-order: 3
+order: 4
 image: /images/projects/iolink.png
 summary: Hardware-agnostic IO-Link Device stack for Zephyr and bare-metal systems.
 status: Open-source/commercial project

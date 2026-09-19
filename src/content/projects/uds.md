@@ -1,6 +1,6 @@
 ---
 name: LibUDS
-order: 4
+order: 5
 image: /images/projects/uds.png
 summary: Portable ISO-14229 UDS stack for embedded systems.
 status: Open-source/commercial project
