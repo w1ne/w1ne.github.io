@@ -34,7 +34,7 @@ The audio code uses [CMSIS-DSP](https://github.com/ARM-software/CMSIS-DSP), and 
 
 ### Try it
 
-Open [the web updater](https://w1ne.github.io/fb200-tools/flash.html) in Chrome or Edge on Windows, macOS or Linux. It takes the latest release and guides you step by step. There is also a command-line tool.
+Open [the web updater](https://shylenko.com/fb200-tools/flash.html) in Chrome or Edge on Windows, macOS or Linux. It takes the latest release and guides you step by step. There is also a command-line tool.
 
 Flashing custom firmware is at your own risk. This is a community project. It is not made or supported by FLAMMA.
 
