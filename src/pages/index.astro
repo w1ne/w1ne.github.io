@@ -20,7 +20,7 @@ const recentNotes = sortNotes(publishedNotes(await getCollection('notes'))).slic
         I build connected systems, AI tools, and hardware &mdash; from prototype to field.
       </p>
       <div class="actions">
-        <a class="button" href="/contact/">Discuss a project</a>
+        <a class="button" href={`mailto:${site.email}`}>Discuss a project</a>
         <a class="button secondary" href="/projects/">See projects</a>
       </div>
     </div>
