@@ -15,3 +15,5 @@ An Android app for recording video with two DJI Mic Mini mics. Each mic gets its
 Pair the mics, open the app and tap Record. Stop saves the video.
 
 - [GitHub](https://github.com/w1ne/stereo-bridge)
+
+- [Google Play](https://play.google.com/store/apps/details?id=app.stereobridge)
