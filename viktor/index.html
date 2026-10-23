@@ -73,6 +73,9 @@
   #call[data-active="1"] { background: #c0412f; }
   #call[data-active="1"] svg { transform: rotate(135deg); }
   #call svg { width: 30px; height: 30px; transition: transform .2s; }
+  /* tapped while Viktor is still waking: call goes through as soon as he is ready */
+  #call[data-pending="1"] { animation: pending 1.4s ease-in-out infinite; }
+  @keyframes pending { 50% { box-shadow: 0 0 0 12px rgb(63 143 91 / .25); } }
 </style>
 </head>
 <body>
@@ -96,6 +99,6 @@
   window.VIKTOR_BACKEND = "https://4zak5wb112lys2-7860.proxy.runpod.net";
   window.VIKTOR_WAKE = "https://viktor-wake.shylenkoa.workers.dev";
 </script>
-<script type="module" src="app.bundle.js?v=02e74160"></script>
+<script type="module" src="app.bundle.js?v=ca6f3d5d"></script>
 </body>
 </html>
