@@ -13,7 +13,7 @@ export const site = {
   ],
   socials: [
     { href: 'https://github.com/w1ne', label: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/andrewshylenko/', label: 'LinkedIn' },
+    { href: 'https://www.linkedin.com/in/shylenko/', label: 'LinkedIn' },
     { href: 'https://twitter.com/AndriiShylenko', label: 'Twitter' },
     { href: 'mailto:andrii@shylenko.com', label: 'Email' }
   ]
