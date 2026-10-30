@@ -9,7 +9,7 @@ tags:
   - drug discovery
   - Dia Health One
 featured: false
-draft: true
+draft: false
 heroImage: /images/notes/dia-health-one/hero.png
 ---
 
