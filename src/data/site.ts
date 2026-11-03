@@ -9,6 +9,7 @@ export const site = {
   nav: [
     { href: '/', label: 'Home' },
     { href: '/projects/', label: 'Projects' },
+    { href: '/memory-sourcing/', label: 'RAM sourcing' },
     { href: '/about/', label: 'About' }
   ],
   socials: [
